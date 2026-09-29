@@ -1,196 +1,22 @@
--- ======================================================================================
--- [[ CRIMSON OBSIDIAN GLASSMORPHIC 2 UI ENGINE - MASTER SPECIFICATION & BLUEPRINT ]]
--- Edition: PAYOMBØYZ HUB MASTER SPECIFICATION (Universal Reference & Code Template)
--- Document Version: 2.5.0 (High-Voltage Crimson Lightning & Fondamento Gothic Edition)
--- ======================================================================================
--- 📖 PURPOSE FOR DEVELOPERS & AI ASSISTANTS:
--- This document serves as the absolute ground truth specification and self-contained code
--- template for the "Crimson Obsidian Glassmorphic 2" design system. Any AI or developer
--- must use this exact blueprint to port, convert, or generate any script hub / game map UI
--- so that visual dimensions, colors, Gothic typography, Intro sequence, Crimson Lightning,
--- Draggable Toggle Capsule, and Logout mechanisms match PAYOMBØYZ HUB with 100% precision.
--- ======================================================================================
-
------------------------------------------------------------------------------------------
--- 🎨 SECTION 1: COLOR PALETTE SPECIFICATION (โทนสีเทา-ดำ ดุดัน แดงดุ / CRIMSON OBSIDIAN)
------------------------------------------------------------------------------------------
---[[
-    TOKEN NAME          HEX CODE   RGB VALUES                  DESCRIPTION & USAGE
-    --------------------------------------------------------------------------------------
-    backdrop            #060103    Color3.fromRGB(6, 1, 3)     Full-screen ambient dark void ground
-    shell               #0C0306    Color3.fromRGB(12, 3, 6)    Main Window background base (Dark Obsidian)
-    shellStroke         #FF1432    Color3.fromRGB(255, 20, 50) Glowing laser crimson border stroke
-    glass               #14050A    Color3.fromRGB(20, 5, 10)   Intermediate smoky glass container
-    glassDeep           #0F0307    Color3.fromRGB(15, 3, 7)    Deep sunken widget backing & metric box
-    glassRaised         #230810    Color3.fromRGB(35, 8, 16)   Elevated panels, borders & card separators
-    userPanel           #120408    Color3.fromRGB(18, 4, 8)    Left sidebar background (User Profile/Tabs)
-    surface             #1C060C    Color3.fromRGB(28, 6, 12)   Inactive widget surface base
-    surfaceRaised       #300A14    Color3.fromRGB(48, 10, 20)  Active/Interactive widget buttons & badges
-    surfaceHover        #48101E    Color3.fromRGB(72, 16, 30)  Hover state on buttons & tab selectors
-    surfacePressed      #16050A    Color3.fromRGB(22, 5, 10)   Pressed/Click state on buttons
-    input               #0C0306    Color3.fromRGB(12, 3, 6)    Text input background box (Dark carbon)
-    inputFocus          #1E060E    Color3.fromRGB(30, 6, 14)   Text input focused state border glow
-    divider             #8C142D    Color3.fromRGB(140, 20, 45) Thin laser separator lines (1px)
-    primary             #FF1432    Color3.fromRGB(255, 20, 50) Blazing Neon Crimson (Action/Active Toggles)
-    primaryHover        #FF3C5A    Color3.fromRGB(255, 60, 90) Hover state for primary buttons
-    primaryPressed      #B90C23    Color3.fromRGB(185, 12, 35) Pressed state for primary buttons
-    secondary           #280A12    Color3.fromRGB(40, 10, 18)  Secondary action buttons
-    secondaryHover      #3A0F1A    Color3.fromRGB(58, 15, 26)  Secondary button hover state
-    secondaryPressed    #1A060C    Color3.fromRGB(26, 6, 12)   Secondary button pressed state
-    text                #FFFFFF    Color3.fromRGB(255, 255, 255) Primary titles, values & pure white text
-    textMuted           #F5C8D4    Color3.fromRGB(245, 200, 212) Subtitles, descriptions & secondary labels
-    textFaint           #C38796    Color3.fromRGB(195, 135, 150) Timestamps, metadata & inactive icons
-    cyan                #FF1E41    Color3.fromRGB(255, 30, 65) High-voltage electric crimson highlight
-    lightningCore       #FFE1EB    Color3.fromRGB(255, 225, 235) Core hot white-pink plasma for lightning
-    lightningGlow       #FF1437    Color3.fromRGB(255, 20, 55) Outer electric aura glow for lightning
-    success             #2EE08C    Color3.fromRGB(46, 224, 140) Active indicators, status checkmarks & online
-    warning             #FFB946    Color3.fromRGB(255, 185, 70) Cautionary alerts & VVIP redirection notices
-    danger              #FF2D41    Color3.fromRGB(255, 45, 65) Logout button, error text & invalid key badges
-    disabled            #280C12    Color3.fromRGB(40, 12, 18)  Disabled buttons and controls
---]]
-
------------------------------------------------------------------------------------------
--- 📐 SECTION 2: TYPOGRAPHY & BRANDING SPECIFICATION (ระบบฟอนต์โกธิก และเอกลักษณ์แบรนด์)
------------------------------------------------------------------------------------------
---[[
-    1. BRAND NAME RULE:
-       - Must ALWAYS use: "PAYOMBØYZ HUB" (with Scandinavian 'Ø' character).
-       - Never write plain "PayomboyZ" in main titles or headers.
-
-    2. HEADER & INTRO TITLE FONT (GOTHIC / MEDIEVAL STYLE):
-       - Font Family    : Enum.Font.Fondamento (Gothic calligraphy style)
-       - Text Size      : 26px - 28px
-       - Text Color     : Color3.fromRGB(255, 35, 60) (#FF233C Fiery Hot Neon Red)
-       - Text UIStroke  : Color3.fromRGB(80, 0, 15) (#50000F Dark Blood Crimson), Thickness = 1.8px
-       - Text Alignment : Left-aligned for headers, Centered for banners
-
-    3. STANDARD INTERFACE FONTS:
-       - Subtitles / Badges    : Enum.Font.GothamBold, Size 9 - 11, Color #FF1E41 or #FFFFFF
-       - Profile Name          : Enum.Font.GothamBold, Size 13 - 14, Color #FFFFFF
-       - Profile Username      : Enum.Font.Gotham, Size 10, Color #F5C8D4
-       - Metric Counters       : Enum.Font.GothamBold, Size 10, Color #FF1E41
-       - Section Titles        : Enum.Font.GothamBold, Size 13 - 14, Color #FF1E41
-       - Widget Control Titles : Enum.Font.GothamBold, Size 13 - 14, Color #FFFFFF
-       - Widget Descriptions   : Enum.Font.Gotham, Size 11, Color #F5C8D4
-       - Button Labels         : Enum.Font.GothamBold, Size 11 - 12, Color #FFFFFF
---]]
-
------------------------------------------------------------------------------------------
--- 🎬 SECTION 3: MASTER INTRO SPLASH & MORPH EXPANSION (จาก INTRO.MD)
------------------------------------------------------------------------------------------
---[[
-    The Intro sequence is a 4-phase cinematic morph animation that introduces the script hub
-    before expanding into the full interface:
-
-    ASSETS:
-    - High-Res Logo URL : https://raw.githubusercontent.com/aslamdunk7/PayomboyZKnowledge/main/nobg_Gemini_Generated_Image_mgkp6ymgkp6ymgkp.png
-    - Local Cache File  : payomboyz_intro_logo.png (Stored via writefile/readfile with getcustomasset)
-    - Fallback Asset ID : rbxassetid://10723346959 or Roblox Avatar HeadShot
-
-    INITIAL STATE (INTRO CARD):
-    - MainShell starts at: UDim2.fromOffset(520, 150), Centered (0.5, 0.5)
-    - BackgroundColor3   : Color3.fromRGB(255, 255, 255) (White Glass)
-    - BackgroundTransp.  : 0.92 (Ultra-transparent)
-    - Corner Radius      : 18px
-    - UIStroke           : Color3.fromRGB(255, 255, 255), Thickness = 1.5px, Transparency = 0.40
-    - IntroOverlay       : Frame containing Logo (115x115), Fondamento Title (28px), Subtitle (11px)
-    - Content Containers : userPanel.Visible = false, mainPanel.Visible = false
-
-    TIMELINE PHASES:
-    1. Phase 1: Fade-In (0.45s, Quart Out)
-       - introLogo.ImageTransparency -> 0
-       - introTitle.TextTransparency -> 0
-       - introSub.TextTransparency -> 0.2
-    2. Hold Stage (1.5s)
-       - Displays the glowing Gothic title and logo.
-    3. Phase 2: Fade-Out (0.30s, Quart In)
-       - introLogo.ImageTransparency -> 1
-       - introTitle.TextTransparency -> 1
-       - introSub.TextTransparency -> 1
-       - Delay 0.35s -> introOverlay.Visible = false
-    4. Phase 3: Window Morph & Expand (0.65s, Exponential Out)
-       - shell.Size -> UDim2.fromOffset(920, 600) (Target Full Window Size)
-       - shell.BackgroundColor3 -> COLORS.shell (Color3.fromRGB(12, 3, 6))
-       - shell.BackgroundTransparency -> 0.12 - 0.20
-       - shellStroke.Color -> Color3.fromRGB(255, 25, 55)
-       - shellStroke.Transparency -> 0.15
-    5. Phase 4: Content Reveal
-       - userPanel.Visible = true
-       - mainPanel.Visible = true
---]]
-
------------------------------------------------------------------------------------------
--- ⚡ SECTION 4: CRIMSON LIGHTNING & ELECTRIC ARCS ENGINE (แทนที่หิมะตกถาวร)
------------------------------------------------------------------------------------------
---[[
-    Replaces legacy snowflakes with high-voltage crimson lightning, fork branches, and erratic plasma sparks:
-
-    1. Z-Index & Hierarchy Rule (CRITICAL FOR VISIBILITY):
-       - ambientLightningFlash: ZIndex = 80, Active = false (directly inside shell/shellChrome)
-       - lightningLayer: ZIndex = 85, Active = false, ClipsDescendants = true
-       - MUST be positioned in front of all panels, cards, and buttons (ZIndex > 50) so bolts
-         and plasma sparks are 100% visible across the UI and never hidden underneath cards!
-       - Active = false ensures mouse clicks and touch events pass straight through to buttons.
-       - NEVER disable or skip on mobile! (Sparks: 32 on PC, 16 on Mobile; Capsule: 12 on PC, 6 on Mobile)
-
-    2. Ambient Flash (ambientLightningFlash):
-       - Full-canvas frame with BackgroundColor3 = Color3.fromRGB(255, 20, 50), Transparency = 1
-       - Instantly flashes to Transparency = 0.82 on lightning strike, then tweens to 1 in 0.18s
-
-    3. Procedural Lightning Bolt Generator (strikeLightning(targetFrame, numSegments)):
-       - Spawns a jagged high-voltage electric bolt across the shell every 1.6s to 3.2s randomly
-       - Generates 6 to 9 connected zig-zag segments between randomized coordinates
-       - Secondary Fork: Automatically generates 1-2 jagged fork branches shooting from mid-points
-       - Main Segment: Thickness 3.2px, Core Color #FFF8FC with glowing UIStroke #FF1230 (3.2px thickness)
-       - Fork Segment: Thickness 2.2px, Core Color #FFDCEB with glowing UIStroke #FF1E41 (2.5px thickness)
-       - Multi-stage electric crackle flicker (0.00s spawn -> 0.06s flicker -> 0.12s crackle -> 0.28s destroy)
-
-    4. Continuous Erratic Electric Plasma Sparks (32 on PC, 16 on Mobile - Replaces Falling Snow):
-       - Floating sparks moving downwards like embers, but jittering erratically side-to-side
-       - Electrostatic Jitter: Every 3-12 frames, sparks randomly snap position (+-12px) and flicker opacity
-       - Visual: 3-4px rounded square with glowing crimson UIStroke (#FF1232, 1.2px) and hot core (#FFF2F8)
-
-    5. Interactive High-Voltage Strikes:
-       - Strike immediately on UI spawn (0.4s)
-       - Strike during Intro sequence on Gothic title reveal (0.18s) and on Morph Expand (0.25s)
-       - Strike on tab switching and verify key button interaction
---]]
-
------------------------------------------------------------------------------------------
--- 🔒 SECTION 5: LOGOUT & TERMINATION ENGINE (จาก LOGOUT.TXT)
------------------------------------------------------------------------------------------
---[[
-    Provides clean logout, key wiping, and script termination without leaving lingering threads:
-
-    1. UI Placement:
-       - Sits inside userPanel directly beside username: Position = UDim2.new(1, -74, 0, 20)
-       - Size = UDim2.fromOffset(62, 24), Corner = 6px
-       - BackgroundColor3 = COLORS.surfacePressed (#16050A)
-       - UIStroke = COLORS.danger (#FF2D41, 1px)
-       - Text = "Log out" (GothamBold, 11px, TextColor3 = #FF2D41)
-       - Hover Tweens: Background -> #FF2D41 (Trans 0.15), Stroke -> Trans 0, Text -> #FFFFFF
-
-    2. Logout Actions on Click:
-       Step 1: Terminate all script operations (stopAllScriptOperations):
-               - Call cleanup callbacks (_G.ScriptCleanup, _G.PayomboyZCleanup)
-               - Disable all active options/toggles in ObsidianGlassEngine.Options
-       Step 2: Wipe all saved key files from disk (performLogoutKeyClear):
-               - Files: PayomboyZ_LuarmorKey.txt, PayomboyZ_VVIPKey.txt, PayomboyZ_SavedKey.txt
-               - Using delfile / deletefile or writefile("", "")
-       Step 3: Clear environment keys and set logout flag:
-               - getgenv().script_key = nil
-               - getgenv().PayomboyZ_InputKey = nil
-               - getgenv().PayomboyZ_LoggedOut = true (Prevents auto-login loop!)
-               - _G.script_key = nil, shared.script_key = nil
-       Step 4: Destroy GUI (gui:Destroy())
-       Step 5: Redirect to Start script via loadstring:
-               loadstring(game:HttpGet("https://raw.githubusercontent.com/Payomboyz0028/Yaranikaaaa/refs/heads/main/Start"))()
---]]
-
------------------------------------------------------------------------------------------
--- 💻 SECTION 6: COMPLETE UNIVERSAL SOURCE CODE (FULL SELF-CONTAINED LUAU TEMPLATE)
------------------------------------------------------------------------------------------
-
+-- PAYOMBØYZ UI LIBRARY
+-- Version: 4.1.0 | Runtime: Roblox Luau | Delivery: single self-contained module
+--
+-- Brand direction: ink-black panels, scarlet action color, white readable type,
+-- manga-inspired framing, restrained electric effects, and touch-friendly controls.
+--
+-- Public entry points:
+--   Library:CreateWindow(config)
+--   window:AddTab({ Title, Icon })
+--   tab:CreateSection({ Name, Description, Icon, Expanded })
+--   section:CreateToggle / CreateSlider / CreateDropdown / CreateMultiDropdown /
+--           CreateInput / CreateKeybind / CreateColorPicker / CreateRadioGroup /
+--           CreateProgressBar / CreateStatCard / CreateBarChart / CreateCallout /
+--           CreateButton / CreateText / CreateLabel / CreateDivider
+--   window:CreateAppearanceTab() | window:CreateCommandPalette(commands) | window:SetLogo(source)
+--   window:CreateConfigManager() | window:Search(query) | window:SetTheme(name)
+--   Library:Notify({ Type, Title, Content, Duration, Action }) | window:Unload()
+--
+-- See README.md and Example.lua in this folder for the developer guide.
 local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer or Players.PlayerAdded:Wait()
@@ -199,6 +25,7 @@ local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local Stats = game:GetService("Stats")
 local SoundService = game:GetService("SoundService")
+local HttpService = game:GetService("HttpService")
 
 local COLORS = {
     backdrop = Color3.fromRGB(9, 10, 13),
@@ -221,9 +48,9 @@ local COLORS = {
     secondary = Color3.fromRGB(28, 30, 38),
     secondaryHover = Color3.fromRGB(42, 44, 56),
     secondaryPressed = Color3.fromRGB(17, 18, 23),
-    text = Color3.fromRGB(245, 245, 250),
-    textMuted = Color3.fromRGB(190, 193, 204),
-    textFaint = Color3.fromRGB(150, 155, 170),
+    text = Color3.fromRGB(255, 255, 255),
+    textMuted = Color3.fromRGB(235, 235, 240),
+    textFaint = Color3.fromRGB(200, 203, 212),
     cyan = Color3.fromRGB(255, 42, 84),
     lightningCore = Color3.fromRGB(255, 225, 235),
     lightningGlow = Color3.fromRGB(255, 42, 84),
@@ -234,14 +61,299 @@ local COLORS = {
 }
 
 local ObsidianGlassEngine = { Options = {} }
-local Fluent = ObsidianGlassEngine
+ObsidianGlassEngine.Version = "4.1.0"
 
--- Trackers for clean memory leak prevention and anti-cheat compliance
-local trackedConnections = {}
-local trackedThreads = {}
+local THEME_PRESETS = {
+    ["ดำทมิฬ"] = {
+        Accent = Color3.fromRGB(181, 190, 208), Bright = Color3.fromRGB(233, 238, 248), Deep = Color3.fromRGB(79, 88, 108), Tint = Color3.fromRGB(43, 48, 61),
+        Particle = { Glyph = "◇", Style = "Ash", Direction = 1, Speed = 0.018, Drift = 0.006, Sway = 0.004, Spin = 12, Colors = { Color3.fromRGB(226, 233, 245), Color3.fromRGB(130, 145, 170) } },
+    },
+    ["แดงเปลวเพลิง"] = {
+        Accent = Color3.fromRGB(255, 35, 60), Bright = Color3.fromRGB(255, 105, 112), Deep = Color3.fromRGB(166, 12, 35), Tint = Color3.fromRGB(89, 15, 29),
+        Particle = { Glyph = "✦", Style = "Ember", Direction = -1, Speed = 0.045, Drift = 0.008, Sway = 0.005, Spin = 42, Colors = { Color3.fromRGB(255, 228, 193), Color3.fromRGB(255, 62, 48) } },
+    },
+    ["เขียวมรกต"] = {
+        Accent = Color3.fromRGB(62, 222, 146), Bright = Color3.fromRGB(142, 255, 196), Deep = Color3.fromRGB(23, 133, 88), Tint = Color3.fromRGB(16, 65, 49),
+        Particle = { Glyph = "❋", Style = "Leaf", Direction = 1, Speed = 0.024, Drift = 0.009, Sway = 0.017, Spin = 34, Colors = { Color3.fromRGB(193, 255, 195), Color3.fromRGB(65, 220, 137) } },
+    },
+    ["ฟ้าคลื่นทะเล"] = {
+        Accent = Color3.fromRGB(63, 190, 235), Bright = Color3.fromRGB(145, 231, 255), Deep = Color3.fromRGB(22, 111, 160), Tint = Color3.fromRGB(15, 59, 83),
+        Particle = { Glyph = "〜", Style = "Wave", Direction = 1, Speed = 0.015, Drift = 0.034, Sway = 0.012, Spin = 8, Colors = { Color3.fromRGB(189, 249, 255), Color3.fromRGB(62, 179, 236) } },
+    },
+    ["ม่วงแห่งความลึกลับ"] = {
+        Accent = Color3.fromRGB(180, 112, 255), Bright = Color3.fromRGB(220, 176, 255), Deep = Color3.fromRGB(112, 54, 178), Tint = Color3.fromRGB(53, 31, 83),
+        Particle = { Glyph = "✧", Style = "Arcane", Direction = -1, Speed = 0.022, Drift = 0.008, Sway = 0.012, Spin = 22, Colors = { Color3.fromRGB(243, 213, 255), Color3.fromRGB(160, 103, 255) } },
+    },
+    ["ทองแห่งเกียรติยศ"] = {
+        Accent = Color3.fromRGB(244, 181, 57), Bright = Color3.fromRGB(255, 224, 135), Deep = Color3.fromRGB(165, 105, 24), Tint = Color3.fromRGB(83, 58, 20),
+        Particle = { Glyph = "❀", Style = "Petal", Direction = 1, Speed = 0.018, Drift = 0.012, Sway = 0.019, Spin = 25, Colors = { Color3.fromRGB(255, 239, 183), Color3.fromRGB(230, 157, 43) } },
+    },
+    ["ขาวแห่งความบริสุทธิ์"] = {
+        Accent = Color3.fromRGB(218, 230, 244), Bright = Color3.fromRGB(255, 255, 255), Deep = Color3.fromRGB(124, 151, 181), Tint = Color3.fromRGB(50, 62, 79),
+        Particle = { Glyph = "❄", Style = "Snow", Direction = 1, Speed = 0.020, Drift = 0.008, Sway = 0.010, Spin = 10, Colors = { Color3.fromRGB(255, 255, 255), Color3.fromRGB(155, 209, 255) } },
+    },
+}
+local THEME_ALIASES = {
+    Crimson = "แดงเปลวเพลิง", Jade = "เขียวมรกต", Azure = "ฟ้าคลื่นทะเล",
+    Amethyst = "ม่วงแห่งความลึกลับ", Amber = "ทองแห่งเกียรติยศ", Violet = "ม่วงแห่งความลึกลับ",
+    Sakura = "ทองแห่งเกียรติยศ", Obsidian = "ดำทมิฬ", Purity = "ขาวแห่งความบริสุทธิ์",
+}
+local ACTIVE_THEME_PROFILE = THEME_PRESETS["แดงเปลวเพลิง"]
+local PARTICLE_STYLES = { Ash = true, Ember = true, Leaf = true, Wave = true, Arcane = true, Petal = true, Snow = true }
+
+local function normalizeParticleProfile(source, accent, bright)
+    source = type(source) == "table" and source or {}
+    local colors = {}
+    if type(source.Colors) == "table" then
+        for _, color in ipairs(source.Colors) do
+            if typeof(color) ~= "Color3" then return nil, "Particle.Colors entries must be Color3" end
+            colors[#colors + 1] = color
+            if #colors == 4 then break end
+        end
+    end
+    if #colors == 0 then colors = { bright or accent, accent or bright } end
+    local direction = tonumber(source.Direction) or -1
+    return {
+        Glyph = type(source.Glyph) == "string" and source.Glyph ~= "" and string.sub(source.Glyph, 1, 4) or "✦",
+        Style = PARTICLE_STYLES[source.Style] and source.Style or "Ember",
+        Direction = direction >= 0 and 1 or -1,
+        Speed = math.clamp(tonumber(source.Speed) or 0.025, 0.004, 0.08),
+        Drift = math.clamp(tonumber(source.Drift) or 0.008, 0, 0.08),
+        Sway = math.clamp(tonumber(source.Sway) or 0.01, 0, 0.08),
+        Spin = math.clamp(tonumber(source.Spin) or 24, 0, 180),
+        Colors = colors,
+    }
+end
+ObsidianGlassEngine.Themes = THEME_PRESETS
+ObsidianGlassEngine.CurrentTheme = "Crimson"
+
+local liveGuis = setmetatable({}, { __mode = "k" })
+local THEME_COLOR_KEYS = { "primary", "primaryHover", "primaryPressed", "cyan", "lightningGlow", "shellStroke", "divider", "surfaceHover" }
+
+local function copyThemeColors()
+    local result = {}
+    for _, key in ipairs(THEME_COLOR_KEYS) do result[key] = COLORS[key] end
+    return result
+end
+
+function ObsidianGlassEngine:GetThemes()
+    local names = {}
+    for name in pairs(THEME_PRESETS) do table.insert(names, name) end
+    table.sort(names)
+    return names
+end
+
+function ObsidianGlassEngine:GetTheme()
+    return self.CurrentTheme
+end
+
+function ObsidianGlassEngine:RegisterTheme(name, palette)
+    if type(name) ~= "string" or name == "" or type(palette) ~= "table" then
+        return false, "A theme name and palette table are required"
+    end
+    local fields = { Accent = "primary", Bright = "primaryHover", Deep = "primaryPressed", Tint = "surfaceHover" }
+    local normalized = {}
+    for publicKey, internalKey in pairs(fields) do
+        local color = palette[publicKey] or palette[internalKey]
+        if typeof(color) ~= "Color3" then
+            return false, "Theme palette requires Color3 fields: Accent, Bright, Deep, Tint"
+        end
+        normalized[publicKey] = color
+    end
+    local particle, particleError = normalizeParticleProfile(palette.Particle, normalized.Accent, normalized.Bright)
+    if not particle then return false, particleError end
+    normalized.Particle = particle
+    THEME_PRESETS[name] = normalized
+    return true
+end
+
+function ObsidianGlassEngine:RemoveTheme(name)
+    name = THEME_ALIASES[name] or name
+    if name == "แดงเปลวเพลิง" then return false, "The default theme cannot be removed" end
+    if not THEME_PRESETS[name] then return false, "Unknown theme" end
+    THEME_PRESETS[name] = nil
+    if self.CurrentTheme == name then self:SetTheme("Crimson") end
+    return true
+end
+
+function ObsidianGlassEngine:GetThemePalette(name)
+    name = name or self.CurrentTheme
+    name = THEME_ALIASES[name] or name
+    local palette = THEME_PRESETS[name]
+    if not palette then return nil end
+    return {
+        Accent = palette.Accent,
+        Bright = palette.Bright,
+        Deep = palette.Deep,
+        Tint = palette.Tint,
+        Particle = self:DeepCopy(palette.Particle),
+    }
+end
+
+function ObsidianGlassEngine:SetTheme(theme)
+    local requestedName = type(theme) == "string" and theme or nil
+    local resolvedName = requestedName and (THEME_ALIASES[requestedName] or requestedName) or nil
+    local preset = resolvedName and THEME_PRESETS[resolvedName] or theme
+    if type(preset) ~= "table" then return false, "Unknown theme" end
+
+    local oldColors = copyThemeColors()
+    local accent = preset.Accent or preset.primary
+    local bright = preset.Bright or preset.primaryHover or accent
+    local deep = preset.Deep or preset.primaryPressed or accent
+    local tint = preset.Tint or preset.surfaceHover or COLORS.surfaceHover
+    if typeof(accent) ~= "Color3" or typeof(bright) ~= "Color3" or typeof(deep) ~= "Color3" or typeof(tint) ~= "Color3" then
+        return false, "Theme Accent, Bright, Deep, and Tint values must be Color3"
+    end
+    local particle, particleError = normalizeParticleProfile(preset.Particle, accent, bright)
+    if not particle then return false, particleError end
+
+    COLORS.primary = accent
+    COLORS.primaryHover = bright
+    COLORS.primaryPressed = deep
+    COLORS.cyan = accent
+    COLORS.lightningGlow = accent
+    COLORS.shellStroke = deep
+    COLORS.divider = tint
+    COLORS.surfaceHover = tint
+    ACTIVE_THEME_PROFILE = {
+        Accent = accent,
+        Bright = bright,
+        Deep = deep,
+        Tint = tint,
+        Particle = particle,
+    }
+    self.CurrentTheme = resolvedName or "Custom"
+
+    local colorProperties = { "BackgroundColor3", "TextColor3", "TextStrokeColor3", "ImageColor3", "BorderColor3", "Color", "ScrollBarImageColor3" }
+    for gui in pairs(liveGuis) do
+        if gui and gui.Parent then
+            for _, instance in ipairs(gui:GetDescendants()) do
+                if instance:IsA("UIGradient") then
+                    local points = {}
+                    for _, point in ipairs(instance.Color.Keypoints) do
+                        local pointColor = point.Value
+                        for _, key in ipairs(THEME_COLOR_KEYS) do
+                            if pointColor == oldColors[key] then pointColor = COLORS[key]; break end
+                        end
+                        points[#points + 1] = ColorSequenceKeypoint.new(point.Time, pointColor)
+                    end
+                    pcall(function() instance.Color = ColorSequence.new(points) end)
+                end
+                for _, property in ipairs(colorProperties) do
+                    local ok, value = pcall(function() return instance[property] end)
+                    if ok then
+                        for _, key in ipairs(THEME_COLOR_KEYS) do
+                            if value == oldColors[key] then
+                                pcall(function() instance[property] = COLORS[key] end)
+                                break
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return true
+end
+ObsidianGlassEngine:SetTheme("Crimson")
+
+function ObsidianGlassEngine:SafeCall(callback, ...)
+    if type(callback) ~= "function" then return false, "Expected a function" end
+    local arguments = table.pack(...)
+    return pcall(function() return callback(table.unpack(arguments, 1, arguments.n)) end)
+end
+
+function ObsidianGlassEngine:DeepCopy(value, seen)
+    if type(value) ~= "table" then return value end
+    seen = seen or {}
+    if seen[value] then return seen[value] end
+    local copy = {}
+    seen[value] = copy
+    for key, item in pairs(value) do
+        copy[self:DeepCopy(key, seen)] = self:DeepCopy(item, seen)
+    end
+    return setmetatable(copy, getmetatable(value))
+end
+
+function ObsidianGlassEngine:CreateSignal()
+    local event = Instance.new("BindableEvent")
+    local signal = { Event = event.Event, Destroyed = false }
+    function signal:Connect(callback) return event.Event:Connect(callback) end
+    function signal:Once(callback)
+        local connection
+        connection = event.Event:Connect(function(...)
+            connection:Disconnect()
+            callback(...)
+        end)
+        return connection
+    end
+    function signal:Fire(...) if not self.Destroyed then event:Fire(...) end end
+    function signal:Wait() return event.Event:Wait() end
+    function signal:Destroy()
+        if self.Destroyed then return end
+        self.Destroyed = true
+        event:Destroy()
+    end
+    return signal
+end
+
+function ObsidianGlassEngine:CreateJanitor()
+    local janitor = { Tasks = {}, Destroyed = false }
+    function janitor:Add(item, method, key)
+        if self.Destroyed then
+            if type(item) == "function" then pcall(item)
+            elseif typeof(item) == "RBXScriptConnection" then pcall(function() item:Disconnect() end)
+            elseif typeof(item) == "Instance" then pcall(function() item:Destroy() end)
+            elseif type(item) == "thread" then pcall(task.cancel, item) end
+            return item
+        end
+        local cleanupMethod = method
+        if not cleanupMethod then
+            local itemType = typeof(item)
+            cleanupMethod = itemType == "RBXScriptConnection" and "Disconnect"
+                or itemType == "Instance" and "Destroy"
+                or type(item) == "thread" and "Cancel"
+                or type(item) == "function" and true
+        end
+        local entry = { Item = item, Method = cleanupMethod, Key = key }
+        if key then
+            self:Remove(key)
+            self.Tasks[key] = entry
+        else
+            self.Tasks[#self.Tasks + 1] = entry
+        end
+        return item
+    end
+    function janitor:Remove(key)
+        local entry = self.Tasks[key]
+        if not entry then return false end
+        self.Tasks[key] = nil
+        local item, cleanupMethod = entry.Item, entry.Method
+        if cleanupMethod == true and type(item) == "function" then pcall(item)
+        elseif cleanupMethod == "Cancel" and type(item) == "thread" then pcall(task.cancel, item)
+        elseif type(cleanupMethod) == "string" and item and type(item[cleanupMethod]) == "function" then pcall(item[cleanupMethod], item) end
+        return true
+    end
+    function janitor:Cleanup()
+        for key, entry in pairs(self.Tasks) do
+            self.Tasks[key] = nil
+            local item, cleanupMethod = entry.Item, entry.Method
+            if cleanupMethod == true and type(item) == "function" then pcall(item)
+            elseif cleanupMethod == "Cancel" and type(item) == "thread" then pcall(task.cancel, item)
+            elseif type(cleanupMethod) == "string" and item and type(item[cleanupMethod]) == "function" then pcall(item[cleanupMethod], item) end
+        end
+    end
+    function janitor:Destroy()
+        if self.Destroyed then return end
+        self:Cleanup()
+        self.Destroyed = true
+    end
+    return janitor
+end
 
 -- Helper: Click sound
 local function playClickSound()
+    if ObsidianGlassEngine.SoundsEnabled == false then return end
     pcall(function()
         local sound = Instance.new("Sound")
         sound.SoundId = "rbxassetid://6895079853"
@@ -252,47 +364,65 @@ local function playClickSound()
     end)
 end
 
--- Helper: High-Res Logo Downloader with Local Cache (from Intro.md)
-local customIntroLogoAsset = nil
-local isDownloadingIntroLogo = false
+-- Brand mark loader. Give Window.Logo a Roblox asset id or a raw image URL to override.
+local DEFAULT_BRAND_LOGO = "https://raw.githubusercontent.com/payomboyz333/Library/refs/heads/main/LogoPayomboyZ.png"
+local FALLBACK_BRAND_LOGO = "rbxassetid://10723346959"
+local brandLogoCache = {}
+local brandLogoLoading = {}
+local brandLogoWaiters = {}
 
-local function loadIntroLogoImage()
-    if customIntroLogoAsset then return customIntroLogoAsset end
-    local logoUrl = "https://raw.githubusercontent.com/aslamdunk7/PayomboyZKnowledge/main/nobg_Gemini_Generated_Image_mgkp6ymgkp6ymgkp.png"
-    local fileName = "payomboyz_intro_logo.png"
-    
-    pcall(function()
-        if typeof(isfile) == "function" and isfile(fileName) then
-            if typeof(getcustomasset) == "function" or typeof(getsynasset) == "function" then
-                local getAsset = getcustomasset or getsynasset
-                customIntroLogoAsset = getAsset(fileName)
-            end
-        end
-    end)
+local function logoCacheFile(source)
+    local hash = 5381
+    for index = 1, #source do hash = (hash * 33 + string.byte(source, index)) % 4294967296 end
+    return string.format("payomboyz_logo_%08x.png", hash)
+end
 
-    if not customIntroLogoAsset and not isDownloadingIntroLogo then
-        isDownloadingIntroLogo = true
+local function loadIntroLogoImage(source, onReady)
+    source = type(source) == "string" and source ~= "" and source or DEFAULT_BRAND_LOGO
+    if not source:match("^https?://") then
+        if type(onReady) == "function" then task.defer(onReady, source) end
+        return source
+    end
+    if brandLogoCache[source] then
+        if type(onReady) == "function" then task.defer(onReady, brandLogoCache[source]) end
+        return brandLogoCache[source]
+    end
+    if type(onReady) == "function" then
+        brandLogoWaiters[source] = brandLogoWaiters[source] or {}
+        table.insert(brandLogoWaiters[source], onReady)
+    end
+    if not brandLogoLoading[source] then
+        brandLogoLoading[source] = true
         task.spawn(function()
+            local asset
             pcall(function()
-                if typeof(writefile) == "function" and (typeof(getcustomasset) == "function" or typeof(getsynasset) == "function") then
-                    local getAsset = getcustomasset or getsynasset
-                    local ok, imageBytes = pcall(game.HttpGet, game, logoUrl)
-                    if ok and imageBytes and #imageBytes > 0 then
-                        writefile(fileName, imageBytes)
-                        if typeof(isfile) == "function" and isfile(fileName) then
-                            customIntroLogoAsset = getAsset(fileName)
-                        end
+                local getAsset = getcustomasset or getsynasset
+                local fileName = logoCacheFile(source)
+                if type(getAsset) ~= "function" then return end
+                if type(isfile) == "function" and isfile(fileName) then
+                    local ok, localAsset = pcall(getAsset, fileName)
+                    if ok then asset = localAsset; return end
+                end
+                if type(writefile) ~= "function" then return end
+                local ok, imageBytes = pcall(game.HttpGet, game, source, true)
+                if ok and type(imageBytes) == "string" and #imageBytes > 128 then
+                    writefile(fileName, imageBytes)
+                    if type(isfile) ~= "function" or isfile(fileName) then
+                        local assetOk, localAsset = pcall(getAsset, fileName)
+                        if assetOk then asset = localAsset end
                     end
                 end
             end)
-            isDownloadingIntroLogo = false
+            brandLogoLoading[source] = nil
+            if asset then brandLogoCache[source] = asset end
+            local waiters = brandLogoWaiters[source] or {}
+            brandLogoWaiters[source] = nil
+            for _, callback in ipairs(waiters) do
+                if asset then pcall(callback, asset) end
+            end
         end)
     end
-
-    if not customIntroLogoAsset then
-        customIntroLogoAsset = "rbxassetid://10723346959"
-    end
-    return customIntroLogoAsset
+    return FALLBACK_BRAND_LOGO
 end
 
 -- Helper: Get parent GUI
@@ -312,77 +442,220 @@ end
 
 -- 🔔 TOAST NOTIFICATION ENGINE
 function ObsidianGlassEngine:Notify(cfg)
-    pcall(function()
-        local title = cfg.Title or "System"
-        local content = cfg.Content or ""
-        local duration = cfg.Duration or 4
-        
+    if type(cfg) == "string" then cfg = { Content = cfg } end
+    cfg = type(cfg) == "table" and cfg or {}
+    local ok, toastOrError = pcall(function()
         local parentGui = getSafeParentGui()
-        local notifHolder = parentGui:FindFirstChild("ObsidianGlass_NotifHolder")
-        if not notifHolder then
-            notifHolder = Instance.new("ScreenGui")
-            notifHolder.Name = "ObsidianGlass_NotifHolder"
-            notifHolder.ResetOnSpawn = false
-            notifHolder.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-            notifHolder.Parent = parentGui
+        local layer = parentGui:FindFirstChild("PayomboyZ_ToastLayer")
+        if not layer then
+            layer = Instance.new("ScreenGui")
+            layer.Name = "PayomboyZ_ToastLayer"
+            layer.ResetOnSpawn = false
+            layer.IgnoreGuiInset = true
+            layer.DisplayOrder = 100000
+            layer.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+            layer.Parent = parentGui
+            local stack = Instance.new("Frame")
+            stack.Name = "Stack"
+            stack.AnchorPoint = Vector2.new(1, 0)
+            stack.Position = UDim2.new(1, -18, 0, 66)
+            stack.Size = UDim2.new(0, 326, 1, -84)
+            stack.BackgroundTransparency = 1
+            stack.Parent = layer
+            local layout = Instance.new("UIListLayout", stack)
+            layout.FillDirection = Enum.FillDirection.Vertical
+            layout.HorizontalAlignment = Enum.HorizontalAlignment.Right
+            layout.VerticalAlignment = Enum.VerticalAlignment.Top
+            layout.SortOrder = Enum.SortOrder.LayoutOrder
+            layout.Padding = UDim.new(0, 8)
         end
-        
+        local stack = layer:FindFirstChild("Stack")
+        local tones = { Default = COLORS.primary, Info = COLORS.cyan, Success = COLORS.success, Warning = COLORS.warning, Error = COLORS.danger }
+        local kind = tostring(cfg.Type or cfg.Kind or "Default")
+        local tone = tones[kind] or COLORS.primary
         local toast = Instance.new("Frame")
-        toast.Size = UDim2.new(0, 310, 0, 65)
-        toast.Position = UDim2.new(1, 20, 1, -85)
+        toast.Name = "Toast"
+        toast.Size = UDim2.new(1, 0, 0, cfg.Action and 98 or 76)
         toast.BackgroundColor3 = COLORS.glass
-        toast.BackgroundTransparency = 0.12
+        toast.BackgroundTransparency = 0.06
         toast.BorderSizePixel = 0
-        toast.Parent = notifHolder
-        
-        local corner = Instance.new("UICorner")
+        toast.ClipsDescendants = true
+        toast.LayoutOrder = -math.floor(os.clock() * 1000)
+        toast.Parent = stack
+        local corner = Instance.new("UICorner", toast)
         corner.CornerRadius = UDim.new(0, 10)
-        corner.Parent = toast
-        
-        local stroke = Instance.new("UIStroke")
-        stroke.Color = COLORS.cyan
-        stroke.Thickness = 1.4
-        stroke.Parent = toast
-        
-        local tTitle = Instance.new("TextLabel")
-        tTitle.Size = UDim2.new(1, -20, 0, 22)
-        tTitle.Position = UDim2.new(0, 10, 0, 6)
-        tTitle.BackgroundTransparency = 1
-        tTitle.Text = title
-        tTitle.TextColor3 = COLORS.cyan
-        tTitle.Font = Enum.Font.GothamBold
-        tTitle.TextSize = 13
-        tTitle.TextXAlignment = Enum.TextXAlignment.Left
-        tTitle.Parent = toast
-        
-        local tDesc = Instance.new("TextLabel")
-        tDesc.Size = UDim2.new(1, -20, 0, 32)
-        tDesc.Position = UDim2.new(0, 10, 0, 26)
-        tDesc.BackgroundTransparency = 1
-        tDesc.Text = content
-        tDesc.TextColor3 = COLORS.text
-        tDesc.Font = Enum.Font.Gotham
-        tDesc.TextSize = 11
-        tDesc.TextWrapped = true
-        tDesc.TextXAlignment = Enum.TextXAlignment.Left
-        tDesc.Parent = toast
-        
-        playClickSound()
-        TweenService:Create(toast, TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Position = UDim2.new(1, -330, 1, -85) }):Play()
-        task.delay(duration, function()
-            if toast and toast.Parent then
-                local tw = TweenService:Create(toast, TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.In), { Position = UDim2.new(1, 20, 1, -85) })
-                tw:Play()
-                tw.Completed:Connect(function() toast:Destroy() end)
+        local stroke = Instance.new("UIStroke", toast)
+        stroke.Color = tone
+        stroke.Transparency = 0.12
+        stroke.Thickness = 1.3
+        local stripe = Instance.new("Frame")
+        stripe.Size = UDim2.new(0, 3, 1, -14)
+        stripe.Position = UDim2.fromOffset(6, 7)
+        stripe.BackgroundColor3 = tone
+        stripe.BorderSizePixel = 0
+        stripe.Parent = toast
+        local icon = Instance.new("TextLabel")
+        icon.Size = UDim2.fromOffset(24, 24)
+        icon.Position = UDim2.fromOffset(15, 12)
+        icon.BackgroundColor3 = tone
+        icon.BackgroundTransparency = 0.82
+        icon.Text = tostring(cfg.Icon or (kind == "Success" and "✓" or kind == "Warning" and "!" or kind == "Error" and "×" or "✦"))
+        icon.TextColor3 = tone
+        icon.Font = Enum.Font.GothamBold
+        icon.TextSize = 14
+        icon.Parent = toast
+        local iconCorner = Instance.new("UICorner", icon)
+        iconCorner.CornerRadius = UDim.new(0, 7)
+        local title = Instance.new("TextLabel")
+        title.Name = "Title"
+        title.Size = UDim2.new(1, -76, 0, 20)
+        title.Position = UDim2.fromOffset(47, 9)
+        title.BackgroundTransparency = 1
+        title.Text = tostring(cfg.Title or (kind == "Default" and "PAYOMBØYZ" or kind))
+        title.TextColor3 = tone
+        title.Font = Enum.Font.GothamBold
+        title.TextSize = 12
+        title.TextXAlignment = Enum.TextXAlignment.Left
+        title.TextTruncate = Enum.TextTruncate.AtEnd
+        title.Parent = toast
+        local close = Instance.new("TextButton")
+        close.Size = UDim2.fromOffset(22, 22)
+        close.Position = UDim2.new(1, -29, 0, 8)
+        close.BackgroundColor3 = COLORS.surfaceRaised
+        close.BorderSizePixel = 0
+        close.Text = "×"
+        close.TextColor3 = COLORS.textMuted
+        close.Font = Enum.Font.GothamBold
+        close.TextSize = 13
+        close.Parent = toast
+        local closeCorner = Instance.new("UICorner", close)
+        closeCorner.CornerRadius = UDim.new(0, 6)
+        local description = Instance.new("TextLabel")
+        description.Name = "Content"
+        description.Size = UDim2.new(1, -62, 0, 34)
+        description.Position = UDim2.fromOffset(47, 30)
+        description.BackgroundTransparency = 1
+        description.Text = tostring(cfg.Content or cfg.Description or "")
+        description.TextColor3 = COLORS.text
+        description.Font = Enum.Font.Gotham
+        description.TextSize = 10
+        description.TextWrapped = true
+        description.TextXAlignment = Enum.TextXAlignment.Left
+        description.TextYAlignment = Enum.TextYAlignment.Top
+        description.Parent = toast
+        local lifetime = Instance.new("Frame")
+        lifetime.Name = "Lifetime"
+        lifetime.Size = UDim2.new(1, 0, 0, 2)
+        lifetime.Position = UDim2.new(0, 0, 1, -2)
+        lifetime.BackgroundColor3 = tone
+        lifetime.BorderSizePixel = 0
+        lifetime.Parent = toast
+        local result
+        local dismissed = false
+        result = { Instance = toast, Id = cfg.Id or tostring(os.clock()), Type = kind }
+        function result:Update(nextCfg)
+            if type(nextCfg) ~= "table" or dismissed then return false end
+            if nextCfg.Title ~= nil then title.Text = tostring(nextCfg.Title) end
+            if nextCfg.Content ~= nil then description.Text = tostring(nextCfg.Content) end
+            return true
+        end
+        function result:Dismiss()
+            if dismissed then return end
+            dismissed = true
+            for index, handle in ipairs(notificationHandles) do
+                if handle == result then table.remove(notificationHandles, index); break end
             end
-        end)
+            if toast.Parent then
+                local tween = TweenService:Create(toast, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
+                    BackgroundTransparency = 1,
+                    Size = UDim2.new(1, 0, 0, 0),
+                })
+                tween:Play()
+                tween.Completed:Connect(function() if toast then toast:Destroy() end end)
+            end
+        end
+        close.Activated:Connect(function() result:Dismiss() end)
+        if type(cfg.Action) == "table" and type(cfg.Action.Callback) == "function" then
+            local action = Instance.new("TextButton")
+            action.Name = "Action"
+            action.Size = UDim2.new(1, -62, 0, 20)
+            action.Position = UDim2.fromOffset(47, 64)
+            action.BackgroundColor3 = COLORS.surfaceRaised
+            action.BorderSizePixel = 0
+            action.Text = tostring(cfg.Action.Name or "Open")
+            action.TextColor3 = tone
+            action.Font = Enum.Font.GothamBold
+            action.TextSize = 9
+            action.Parent = toast
+            local actionCorner = Instance.new("UICorner", action)
+            actionCorner.CornerRadius = UDim.new(0, 5)
+            action.Activated:Connect(function()
+                pcall(cfg.Action.Callback)
+                if cfg.Action.Dismiss ~= false then result:Dismiss() end
+            end)
+        end
+        notificationHandles[#notificationHandles + 1] = result
+        while #notificationHandles > 5 do notificationHandles[1]:Dismiss() end
+        playClickSound()
+        local duration = math.max(tonumber(cfg.Duration) or 4, 0)
+        if duration > 0 then
+            TweenService:Create(lifetime, TweenInfo.new(duration, Enum.EasingStyle.Linear), {
+                Size = UDim2.new(0, 0, 0, 2),
+            }):Play()
+            task.delay(duration, function() if not dismissed then result:Dismiss() end end)
+        end
+        return result
     end)
+    if ok then return toastOrError end
+    return nil, tostring(toastOrError)
 end
 
--- 🖼️ MAIN WINDOW ENGINE
+function ObsidianGlassEngine:DismissNotifications()
+    for index = #notificationHandles, 1, -1 do
+        local handle = notificationHandles[index]
+        if handle then handle:Dismiss() end
+    end
+end
+
+function ObsidianGlassEngine:GetNotificationCount()
+    return #notificationHandles
+end
+
 function ObsidianGlassEngine:CreateWindow(cfg)
     cfg = cfg or {}
     self.Options = {}
+    local trackedConnections = {}
+    local trackedThreads = {}
+    local unloadWindow
+    local WindowObj
+    local configuredEffects = type(cfg.Effects) == "table" and cfg.Effects or {}
+    local touchOnly = UserInputService.TouchEnabled and not UserInputService.MouseEnabled
+    local effectState = {
+        Lightning = configuredEffects.Lightning ~= false and cfg.Lightning ~= false,
+        Sparks = configuredEffects.Sparks ~= false and cfg.Sparks ~= false,
+        CapsuleSparks = configuredEffects.CapsuleSparks ~= false and cfg.CapsuleSparks ~= false,
+        Intro = configuredEffects.Intro ~= false and cfg.Intro ~= false,
+        Sound = configuredEffects.Sound ~= false and cfg.Sound ~= false,
+        SparkCount = math.clamp(tonumber(configuredEffects.SparkCount or cfg.SparkCount) or (touchOnly and 3 or 5), 0, 10),
+        CapsuleSparkCount = math.clamp(tonumber(configuredEffects.CapsuleSparkCount or cfg.CapsuleSparkCount) or (touchOnly and 2 or 3), 0, 6),
+    }
+    local motionMode = cfg.Motion or "Full"
+    if motionMode ~= "Full" and motionMode ~= "Subtle" and motionMode ~= "Off" then motionMode = "Full" end
+    self.SoundsEnabled = effectState.Sound
+
+    local function animate(target, info, properties)
+        if motionMode == "Off" then
+            for property, value in pairs(properties) do pcall(function() target[property] = value end) end
+            return nil
+        end
+        local factor = motionMode == "Subtle" and 0.55 or 1
+        local scaledInfo = TweenInfo.new(info.Time * factor, info.EasingStyle, info.EasingDirection, info.RepeatCount, info.Reverses, info.DelayTime * factor)
+        local tween = TweenService:Create(target, scaledInfo, properties)
+        tween:Play()
+        return tween
+    end
+
+    if cfg.Theme then self:SetTheme(cfg.Theme) end
     local parentGui = getSafeParentGui()
     if parentGui:FindFirstChild("ObsidianGlass2_UI") then
         parentGui.ObsidianGlass2_UI:Destroy()
@@ -396,6 +669,31 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     gui.DisplayOrder = 99999
     gui.Parent = parentGui
+    liveGuis[gui] = true
+
+    local unloaded = false
+    unloadWindow = function()
+        if unloaded then return end
+        unloaded = true
+        for _, option in pairs(ObsidianGlassEngine.Options) do
+            if type(option) == "table" and option.Active == true and type(option.SetActive) == "function" then
+                pcall(option.SetActive, option, false)
+            end
+            if type(option) == "table" and option.Value == true and type(option.SetValue) == "function" then
+                pcall(option.SetValue, option, false)
+            end
+        end
+        for _, connection in ipairs(trackedConnections) do pcall(function() connection:Disconnect() end) end
+        table.clear(trackedConnections)
+        for _, thread in ipairs(trackedThreads) do pcall(task.cancel, thread) end
+        table.clear(trackedThreads)
+        if type(cfg.OnUnload) == "function" then pcall(cfg.OnUnload) end
+        liveGuis[gui] = nil
+        if gui and gui.Parent then gui:Destroy() end
+    end
+
+    local plasmaSparkFrames = {}
+    local capsuleSparkFrames = {}
 
     local uiScale = Instance.new("UIScale")
     
@@ -413,7 +711,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     end
     updateScale()
     if camera then
-        camera:GetPropertyChangedSignal("ViewportSize"):Connect(updateScale)
+        table.insert(trackedConnections, camera:GetPropertyChangedSignal("ViewportSize"):Connect(updateScale))
     end
     uiScale.Parent = gui
 
@@ -443,7 +741,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     local ambientLightningFlash = Instance.new("Frame")
     ambientLightningFlash.Name = "AmbientLightningFlash"
     ambientLightningFlash.Size = UDim2.fromScale(1, 1)
-    ambientLightningFlash.BackgroundColor3 = Color3.fromRGB(255, 20, 50)
+    ambientLightningFlash.BackgroundColor3 = COLORS.lightningGlow
     ambientLightningFlash.BackgroundTransparency = 1
     ambientLightningFlash.BorderSizePixel = 0
     ambientLightningFlash.Active = false
@@ -466,6 +764,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     -- Procedural High-Voltage Crimson Lightning Bolt Strike Function
     local function strikeLightning(targetFrame, numSegments)
+        if not effectState.Lightning then return end
         if not targetFrame or not targetFrame.Parent then return end
         local w = targetFrame.AbsoluteSize.X
         local h = targetFrame.AbsoluteSize.Y
@@ -527,7 +826,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 seg.Parent = targetFrame
 
                 local st = Instance.new("UIStroke")
-                st.Color = strokeColor or Color3.fromRGB(255, 18, 48)
+                st.Color = strokeColor or COLORS.lightningGlow
                 st.Thickness = 3.2
                 st.Transparency = 0.05
                 st.Parent = seg
@@ -537,17 +836,17 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         end
 
         -- Render primary bolt & secondary fork
-        renderSegments(pts, Color3.fromRGB(255, 248, 252), Color3.fromRGB(255, 18, 48), 3.2, 95)
+        renderSegments(pts, Color3.fromRGB(255, 248, 252), COLORS.lightningGlow, 3.2, 95)
         if #forkPts > 1 then
-            renderSegments(forkPts, Color3.fromRGB(255, 220, 235), Color3.fromRGB(255, 30, 65), 2.2, 94)
+            renderSegments(forkPts, Color3.fromRGB(255, 220, 235), COLORS.primaryHover, 2.2, 94)
         end
 
         -- Flash ambient crimson glow across entire shell
-        if ambientLightningFlash and ambientLightningFlash.Parent then
+        if effectState.Lightning and ambientLightningFlash and ambientLightningFlash.Parent then
             ambientLightningFlash.BackgroundTransparency = 0.82
             task.delay(0.05, function()
                 if ambientLightningFlash and ambientLightningFlash.Parent then
-                    TweenService:Create(ambientLightningFlash, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { BackgroundTransparency = 1 }):Play()
+        animate(ambientLightningFlash, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { BackgroundTransparency = 1 })
                 end
             end)
         end
@@ -570,7 +869,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         task.delay(0.18, function()
             for _, seg in ipairs(segFrames) do
                 if seg and seg.Parent then
-                    TweenService:Create(seg, TweenInfo.new(0.08), { BackgroundTransparency = 1 }):Play()
+                    animate(seg, TweenInfo.new(0.08), { BackgroundTransparency = 1 })
                 end
             end
         end)
@@ -583,69 +882,69 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         end)
     end
 
-    -- ⚡ DYNAMIC ELECTRIC PLASMA SPARKS ANIMATION (REPLACING SNOW WITH CRIMSON EMBERS)
+    -- Anime atmosphere particles: every theme supplies its own glyph, palette, and motion.
     task.spawn(function()
-        local isMobile = (UserInputService.TouchEnabled and not UserInputService.MouseEnabled)
-        local maxSparks = isMobile and 3 or 5
+        local maxSparks = 10
         local sparks = {}
         for i = 1, maxSparks do
-            local isCore = (i % 3 == 0)
-            local sparkSize = isCore and math.random(3, 4) or math.random(2, 3)
-            local spark = Instance.new("Frame")
-            spark.Name = "PlasmaSpark"
-            spark.Size = UDim2.fromOffset(sparkSize, sparkSize)
+            local spark = Instance.new("TextLabel")
+            spark.Name = "AnimeParticle"
+            spark.Size = UDim2.fromOffset(i % 3 == 0 and 22 or 17, i % 3 == 0 and 22 or 17)
             spark.Position = UDim2.new(math.random(), 0, math.random(), 0)
-            spark.BackgroundColor3 = isCore and Color3.fromRGB(255, 242, 248) or Color3.fromRGB(255, 30, 65)
-            spark.BackgroundTransparency = math.random(10, 50) / 100
+            spark.BackgroundTransparency = 1
+            spark.Text = (ACTIVE_THEME_PROFILE.Particle and ACTIVE_THEME_PROFILE.Particle.Glyph) or "✦"
+            spark.TextColor3 = COLORS.lightningGlow
+            spark.TextTransparency = math.random(18, 48) / 100
+            spark.TextStrokeColor3 = COLORS.lightningGlow
+            spark.TextStrokeTransparency = 0.72
+            spark.Font = Enum.Font.GothamBold
+            spark.TextSize = i % 3 == 0 and 15 or 12
+            spark.TextWrapped = true
             spark.BorderSizePixel = 0
             spark.Active = false
             spark.ZIndex = 88
+            spark.Visible = effectState.Sparks and i <= effectState.SparkCount
             spark.Parent = lightningLayer
-
-            local sc = Instance.new("UICorner")
-            sc.CornerRadius = UDim.new(1, 0)
-            sc.Parent = spark
-
-            local sst = Instance.new("UIStroke")
-            sst.Color = Color3.fromRGB(255, 18, 50)
-            sst.Thickness = 1.2
-            sst.Transparency = 0.15
-            sst.Parent = spark
-
             sparks[#sparks + 1] = {
                 frame = spark,
-                vx = math.random(-18, 18) / 10000,
-                vy = math.random(18, 42) / 10000,
-                jitterTimer = math.random(4, 16),
                 baseX = spark.Position.X.Scale,
                 baseY = spark.Position.Y.Scale,
+                phase = math.random() * math.pi * 2,
+                alpha = math.random(18, 48) / 100,
             }
         end
 
         local sparkConn
-        sparkConn = RunService.Heartbeat:Connect(function()
+        sparkConn = RunService.Heartbeat:Connect(function(deltaTime)
             if not gui or not gui.Parent then
                 if sparkConn then sparkConn:Disconnect() end
                 return
             end
-            if shell and shell.Visible then
+            if shell and shell.Visible and effectState.Sparks then
+                local profile = ACTIVE_THEME_PROFILE and ACTIVE_THEME_PROFILE.Particle or {}
+                local colors = type(profile.Colors) == "table" and #profile.Colors > 0 and profile.Colors or { COLORS.lightningGlow }
+                local style = profile.Style or "Ember"
+                local direction = tonumber(profile.Direction) or -1
+                local speed = tonumber(profile.Speed) or 0.025
+                local drift = tonumber(profile.Drift) or 0.008
+                local sway = tonumber(profile.Sway) or 0.01
+                local spin = tonumber(profile.Spin) or 24
+                local dt = math.min(tonumber(deltaTime) or 0.016, 0.08)
+                local now = os.clock()
                 for _, s in ipairs(sparks) do
-                    s.baseY = s.baseY + s.vy
-                    s.baseX = (s.baseX + s.vx) % 1.0
-                    if s.baseY > 1.05 then s.baseY = -0.05 end
-
-                    -- High-voltage erratic electrostatic jitter
-                    s.jitterTimer = s.jitterTimer - 1
-                    local jitterX = 0
-                    local jitterY = 0
-                    if s.jitterTimer <= 0 then
-                        s.jitterTimer = math.random(3, 12)
-                        jitterX = math.random(-12, 12) / 1000
-                        jitterY = math.random(-6, 6) / 1000
-                        s.frame.BackgroundTransparency = math.random(10, 60) / 100
-                    end
-
-                    s.frame.Position = UDim2.new(s.baseX + jitterX, 0, s.baseY + jitterY, 0)
+                    local colorIndex = (math.floor(s.phase * 10) % #colors) + 1
+                    s.frame.Text = profile.Glyph or "✦"
+                    s.frame.TextColor3 = colors[colorIndex]
+                    s.frame.TextStrokeColor3 = COLORS.lightningGlow
+                    s.baseY = s.baseY + (direction * speed * dt)
+                    s.baseX = (s.baseX + (drift * dt) + math.sin(now * 0.8 + s.phase) * sway * dt) % 1
+                    if direction >= 0 and s.baseY > 1.04 then s.baseY = -0.04 end
+                    if direction < 0 and s.baseY < -0.04 then s.baseY = 1.04 end
+                    local wave = style == "Wave" and math.sin(now * 1.6 + s.phase) * 0.012 or 0
+                    s.frame.Position = UDim2.new(s.baseX, 0, s.baseY + wave, 0)
+                    s.frame.Rotation = math.sin(now * 0.7 + s.phase) * spin
+                    local pulse = style == "Arcane" and (math.sin(now * 2 + s.phase) + 1) * 0.10 or 0
+                    s.frame.TextTransparency = math.clamp(s.alpha + pulse, 0.08, 0.68)
                 end
             end
         end)
@@ -655,7 +954,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         local boltThread = task.spawn(function()
             task.wait(0.4)
             while gui and gui.Parent do
-                if shell and shell.Visible then
+                if shell and shell.Visible and effectState.Lightning then
                     pcall(function()
                         strikeLightning(lightningLayer, math.random(6, 9))
                     end)
@@ -679,7 +978,9 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     introLogo.Size = UDim2.fromOffset(115, 115)
     introLogo.Position = UDim2.new(0, 24, 0.5, -57.5)
     introLogo.BackgroundTransparency = 1
-    introLogo.Image = loadIntroLogoImage()
+    introLogo.Image = loadIntroLogoImage(cfg.Logo, function(asset)
+        if introLogo.Parent then introLogo.Image = asset end
+    end)
     introLogo.ImageTransparency = 1
     introLogo.ZIndex = 1000
     introLogo.Parent = introOverlay
@@ -690,7 +991,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     introTitle.Position = UDim2.new(0, 150, 0.5, -26)
     introTitle.BackgroundTransparency = 1
     introTitle.Text = "PAYOMBØYZ HUB"
-    introTitle.TextColor3 = Color3.fromRGB(255, 35, 60)
+    introTitle.TextColor3 = COLORS.primary
     introTitle.Font = Enum.Font.Fondamento -- Gothic Style
     introTitle.TextSize = 28
     introTitle.TextXAlignment = Enum.TextXAlignment.Left
@@ -754,25 +1055,30 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     task.spawn(function()
         local sparks = {}
-        for i = 1, 0 do
-            local sp = Instance.new("Frame")
-            sp.Size = UDim2.fromOffset(math.random(2, 3), math.random(2, 3))
+        for i = 1, 6 do
+            local sp = Instance.new("TextLabel")
+            sp.Name = "CapsuleAnimeParticle"
+            sp.Size = UDim2.fromOffset(14, 14)
             sp.Position = UDim2.new(math.random(), 0, math.random(), 0)
-            sp.BackgroundColor3 = Color3.fromRGB(255, 40, 75)
-            sp.BackgroundTransparency = math.random(25, 65) / 100
+            sp.BackgroundTransparency = 1
+            sp.Text = (ACTIVE_THEME_PROFILE.Particle and ACTIVE_THEME_PROFILE.Particle.Glyph) or "✦"
+            sp.TextColor3 = COLORS.lightningGlow
+            sp.TextStrokeColor3 = COLORS.lightningGlow
+            sp.TextStrokeTransparency = 0.7
+            sp.TextTransparency = math.random(22, 60) / 100
+            sp.TextSize = 10
+            sp.Font = Enum.Font.GothamBold
             sp.BorderSizePixel = 0
             sp.ZIndex = 1
+            sp.Visible = effectState.CapsuleSparks and i <= effectState.CapsuleSparkCount
             sp.Parent = capLightningLayer
-
-            local sc = Instance.new("UICorner")
-            sc.CornerRadius = UDim.new(1, 0)
-            sc.Parent = sp
-
+            capsuleSparkFrames[#capsuleSparkFrames + 1] = sp
             sparks[#sparks + 1] = {
                 frame = sp,
                 vx = math.random(-10, 10) / 10000,
                 vy = math.random(15, 35) / 10000,
                 pos = sp.Position.Y.Scale,
+                phase = math.random() * math.pi * 2,
             }
         end
 
@@ -782,12 +1088,21 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 if capSparkConn then capSparkConn:Disconnect() end
                 return
             end
-            if toggleCapsule and toggleCapsule.Visible then
+            if toggleCapsule and toggleCapsule.Visible and effectState.CapsuleSparks then
+                local profile = ACTIVE_THEME_PROFILE and ACTIVE_THEME_PROFILE.Particle or {}
+                local colors = type(profile.Colors) == "table" and #profile.Colors > 0 and profile.Colors or { COLORS.lightningGlow }
+                local direction = tonumber(profile.Direction) or -1
+                local speedScale = math.clamp((tonumber(profile.Speed) or 0.02) / 0.02, 0.5, 2)
                 for _, d in ipairs(sparks) do
-                    d.pos = d.pos + d.vy
-                    if d.pos > 1.05 then d.pos = -0.05 end
+                    d.pos = d.pos + d.vy * speedScale * direction
+                    if direction >= 0 and d.pos > 1.05 then d.pos = -0.05 end
+                    if direction < 0 and d.pos < -0.05 then d.pos = 1.05 end
                     local newX = (d.frame.Position.X.Scale + d.vx) % 1.0
                     d.frame.Position = UDim2.new(newX, 0, d.pos, 0)
+                    d.frame.Text = profile.Glyph or "✦"
+                    d.frame.TextColor3 = colors[(math.floor(d.phase * 10) % #colors) + 1]
+                    d.frame.TextStrokeColor3 = COLORS.lightningGlow
+                    d.frame.Rotation = math.sin(os.clock() + d.phase) * (tonumber(profile.Spin) or 12)
                 end
             end
         end)
@@ -815,7 +1130,9 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     local capAvatarImg = Instance.new("ImageLabel")
     capAvatarImg.Size = UDim2.fromScale(1, 1)
     capAvatarImg.BackgroundTransparency = 1
-    capAvatarImg.Image = loadIntroLogoImage()
+    capAvatarImg.Image = loadIntroLogoImage(cfg.Logo, function(asset)
+        if capAvatarImg.Parent then capAvatarImg.Image = asset end
+    end)
     capAvatarImg.ZIndex = 4
     capAvatarImg.Parent = capAvatarFrame
 
@@ -840,7 +1157,6 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     capMetricsLabel.Size = UDim2.new(1, -48, 0, 13)
     capMetricsLabel.Position = UDim2.new(0, 45, 0, 22)
     capMetricsLabel.BackgroundTransparency = 1
-    capMetricsLabel.Text = "⚡ PAYOMBØYZ HUB • V4"
     capMetricsLabel.Text = "TAP TO OPEN / CLOSE"
     capMetricsLabel.TextColor3 = COLORS.textFaint
     capMetricsLabel.Font = Enum.Font.GothamMedium
@@ -907,13 +1223,13 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         end
     end)
 
-    UserInputService.InputChanged:Connect(function(input)
+    table.insert(trackedConnections, UserInputService.InputChanged:Connect(function(input)
         if input == tDragInput and tDragging then
             local delta = input.Position - tDragStart
             if math.abs(delta.X) > 3 or math.abs(delta.Y) > 3 then hasDragged = true end
             toggleCapsule.Position = UDim2.new(tStartPos.X.Scale, tStartPos.X.Offset + delta.X, tStartPos.Y.Scale, tStartPos.Y.Offset + delta.Y)
         end
-    end)
+    end))
 
     capBtn.MouseButton1Click:Connect(function()
         if not hasDragged then
@@ -962,7 +1278,9 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     local avatarImg = Instance.new("ImageLabel")
     avatarImg.Size = UDim2.fromScale(1, 1)
     avatarImg.BackgroundTransparency = 1
-    avatarImg.Image = loadIntroLogoImage()
+    avatarImg.Image = loadIntroLogoImage(cfg.Logo, function(asset)
+        if avatarImg.Parent then avatarImg.Image = asset end
+    end)
     avatarImg.ZIndex = 11
     avatarImg.Parent = avatarFrame
 
@@ -1007,48 +1325,6 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     usernameLabel.Parent = userPanel
 
     -- 🔒 LOGOUT BUTTON & SAFE TERMINATION SYSTEM (From logout.txt)
-    local function performLogoutKeyClear()
-        pcall(function()
-            local filesToDelete = {
-                "PayomboyZ_LuarmorKey.txt",
-                "PayomboyZ_VVIPKey.txt",
-                "PayomboyZ_SavedKey.txt"
-            }
-            local del = (type(delfile) == "function" and delfile) or (type(deletefile) == "function" and deletefile)
-            for _, file in ipairs(filesToDelete) do
-                pcall(function()
-                    if isfile and isfile(file) then
-                        if del then del(file)
-                        elseif type(writefile) == "function" then writefile(file, "") end
-                    end
-                end)
-            end
-        end)
-
-        pcall(function()
-            if getgenv then
-                getgenv().script_key = nil
-                getgenv().PayomboyZ_InputKey = nil
-                getgenv().PayomboyZ_LoggedOut = true
-            end
-            if _G then _G.script_key = nil end
-            if shared then shared.script_key = nil end
-            script_key = nil
-        end)
-    end
-
-    local function stopAllScriptOperations()
-        if _G.ScriptCleanup then pcall(_G.ScriptCleanup) end
-        if _G.PayomboyZCleanup then pcall(_G.PayomboyZCleanup) end
-        if ObsidianGlassEngine and ObsidianGlassEngine.Options then
-            for _, opt in pairs(ObsidianGlassEngine.Options) do
-                if type(opt) == "table" and opt.SetValue then
-                    pcall(function() opt:SetValue(false) end)
-                end
-            end
-        end
-    end
-
     local logoutBtn = Instance.new("TextButton")
     logoutBtn.Name = "LogoutButton"
     logoutBtn.Size = UDim2.fromOffset(62, 24)
@@ -1073,30 +1349,26 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     loStroke.Parent = logoutBtn
 
     logoutBtn.MouseEnter:Connect(function()
-        TweenService:Create(logoutBtn, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.danger, BackgroundTransparency = 0.15 }):Play()
-        TweenService:Create(loStroke, TweenInfo.new(0.2), { Transparency = 0 }):Play()
+        animate(logoutBtn, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.danger, BackgroundTransparency = 0.15 })
+        animate(loStroke, TweenInfo.new(0.2), { Transparency = 0 })
         logoutBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
     end)
 
     logoutBtn.MouseLeave:Connect(function()
-        TweenService:Create(logoutBtn, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.surfacePressed, BackgroundTransparency = 0.20 }):Play()
-        TweenService:Create(loStroke, TweenInfo.new(0.2), { Transparency = 0.4 }):Play()
+        animate(logoutBtn, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.surfacePressed, BackgroundTransparency = 0.20 })
+        animate(loStroke, TweenInfo.new(0.2), { Transparency = 0.4 })
         logoutBtn.TextColor3 = COLORS.danger
     end)
 
     logoutBtn.MouseButton1Click:Connect(function()
         playClickSound()
-        stopAllScriptOperations()
-        performLogoutKeyClear()
-        if gui then pcall(function() gui:Destroy() end) end
-        pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/Payomboyz0028/Yaranikaaaa/refs/heads/main/Start"))()
-        end)
+        if type(cfg.OnLogout) == "function" then pcall(cfg.OnLogout) end
+        if unloadWindow then unloadWindow() elseif gui and gui.Parent then gui:Destroy() end
     end)
 
     -- Session Time & Ping Metrics Box
     local metricsBox = Instance.new("Frame")
-    metricsBox.Size = UDim2.new(1, -28, 0, 24)
+    metricsBox.Size = UDim2.new(1, -28, 0, 112)
     metricsBox.Position = UDim2.new(0, 14, 0, 64)
     metricsBox.BackgroundColor3 = COLORS.glassDeep
     metricsBox.BorderSizePixel = 0
@@ -1108,14 +1380,59 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     mCorner.Parent = metricsBox
 
     local metricsLabel = Instance.new("TextLabel")
-    metricsLabel.Size = UDim2.fromScale(1, 1)
+    metricsLabel.Size = UDim2.new(1, -16, 0, 22)
+    metricsLabel.Position = UDim2.fromOffset(8, 26)
     metricsLabel.BackgroundTransparency = 1
     metricsLabel.Text = "⏱️ 00:00  •  📡 0 ms"
-    metricsLabel.TextColor3 = COLORS.cyan
+    metricsLabel.TextColor3 = COLORS.text
     metricsLabel.Font = Enum.Font.GothamBold
     metricsLabel.TextSize = 10
     metricsLabel.ZIndex = 11
     metricsLabel.Parent = metricsBox
+
+    local metricsHeading = Instance.new("TextLabel")
+    metricsHeading.Size = UDim2.new(1, -16, 0, 16)
+    metricsHeading.Position = UDim2.fromOffset(8, 6)
+    metricsHeading.BackgroundTransparency = 1
+    metricsHeading.Text = "SERVER & SESSION"
+    metricsHeading.TextColor3 = COLORS.textMuted
+    metricsHeading.Font = Enum.Font.GothamBold
+    metricsHeading.TextSize = 9
+    metricsHeading.TextXAlignment = Enum.TextXAlignment.Left
+    metricsHeading.ZIndex = 11
+    metricsHeading.Parent = metricsBox
+
+    local placeLabel = Instance.new("TextLabel")
+    placeLabel.Size = UDim2.new(1, -16, 0, 18)
+    placeLabel.Position = UDim2.fromOffset(8, 53)
+    placeLabel.BackgroundTransparency = 1
+    placeLabel.Text = "Place  " .. tostring(game.PlaceId)
+    placeLabel.TextColor3 = COLORS.text
+    placeLabel.Font = Enum.Font.Gotham
+    placeLabel.TextSize = 10
+    placeLabel.TextXAlignment = Enum.TextXAlignment.Left
+    placeLabel.TextTruncate = Enum.TextTruncate.AtEnd
+    placeLabel.ZIndex = 11
+    placeLabel.Parent = metricsBox
+
+    local playerCountLabel = Instance.new("TextLabel")
+    playerCountLabel.Size = UDim2.new(1, -16, 0, 18)
+    playerCountLabel.Position = UDim2.fromOffset(8, 77)
+    playerCountLabel.BackgroundTransparency = 1
+    playerCountLabel.Text = "Players  " .. tostring(#Players:GetPlayers())
+    playerCountLabel.TextColor3 = COLORS.text
+    playerCountLabel.Font = Enum.Font.Gotham
+    playerCountLabel.TextSize = 10
+    playerCountLabel.TextXAlignment = Enum.TextXAlignment.Left
+    playerCountLabel.ZIndex = 11
+    playerCountLabel.Parent = metricsBox
+
+    task.spawn(function()
+        while gui and gui.Parent and playerCountLabel.Parent do
+            playerCountLabel.Text = "Players  " .. tostring(#Players:GetPlayers())
+            task.wait(2)
+        end
+    end)
 
     task.spawn(function()
         local startTime = os.time()
@@ -1133,7 +1450,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     -- Sidebar Navigation Scroll Container
     local sideDiv = Instance.new("Frame")
     sideDiv.Size = UDim2.new(1, -28, 0, 1)
-    sideDiv.Position = UDim2.new(0, 14, 0, 96)
+    sideDiv.Position = UDim2.new(0, 14, 0, 186)
     sideDiv.BackgroundColor3 = COLORS.divider
     sideDiv.BorderSizePixel = 0
     sideDiv.ZIndex = 10
@@ -1141,7 +1458,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     local navHeader = Instance.new("TextLabel")
     navHeader.Size = UDim2.new(1, -28, 0, 18)
-    navHeader.Position = UDim2.new(0, 16, 0, 104)
+    navHeader.Position = UDim2.new(0, 16, 0, 194)
     navHeader.BackgroundTransparency = 1
     navHeader.Text = "SYSTEM MODULES / หมวดหมู่"
     navHeader.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -1150,6 +1467,143 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     navHeader.TextXAlignment = Enum.TextXAlignment.Left
     navHeader.ZIndex = 10
     navHeader.Parent = userPanel
+
+    local quickActions = cfg.QuickActions
+    if type(quickActions) ~= "table" then
+        quickActions = {
+            { Name = "Center Window", Callback = function() animate(shell, TweenInfo.new(0.24, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Position = UDim2.fromScale(0.5, 0.5) }) end },
+            { Name = "Toggle UI Scale", Callback = function() uiScale.Scale = uiScale.Scale > 0.9 and 0.82 or 1 end },
+            { Name = "Copy Place ID", Callback = function() local copy = setclipboard or toclipboard; if type(copy) == "function" then pcall(copy, tostring(game.PlaceId)) end end },
+            { Name = "Hide / Show UI", Callback = function() shell.Visible = not shell.Visible end },
+        }
+    end
+
+    local quickCard = Instance.new("Frame")
+    quickCard.Name = "QuickUtilitiesCard"
+    quickCard.Size = UDim2.new(1, -28, 0, 36 + #quickActions * 27)
+    quickCard.Position = UDim2.new(0, 14, 0, 198)
+    quickCard.BackgroundColor3 = COLORS.glassDeep
+    quickCard.BorderSizePixel = 0
+    quickCard.ZIndex = 10
+    quickCard.Parent = userPanel
+    local quickCorner = Instance.new("UICorner")
+    quickCorner.CornerRadius = UDim.new(0, 8)
+    quickCorner.Parent = quickCard
+    local quickStroke = Instance.new("UIStroke")
+    quickStroke.Color = COLORS.glassRaised
+    quickStroke.Transparency = 0.16
+    quickStroke.Thickness = 1
+    quickStroke.Parent = quickCard
+    local quickHeading = Instance.new("TextLabel")
+    quickHeading.Size = UDim2.new(1, -16, 0, 18)
+    quickHeading.Position = UDim2.fromOffset(8, 5)
+    quickHeading.BackgroundTransparency = 1
+    quickHeading.Text = "QUICK UTILITIES"
+    quickHeading.TextColor3 = COLORS.textMuted
+    quickHeading.Font = Enum.Font.GothamBold
+    quickHeading.TextSize = 9
+    quickHeading.TextXAlignment = Enum.TextXAlignment.Left
+    quickHeading.ZIndex = 11
+    quickHeading.Parent = quickCard
+
+    for index, action in ipairs(quickActions) do
+        if type(action) == "table" and type(action.Callback) == "function" then
+            local button = Instance.new("TextButton")
+            button.Name = "QuickAction_" .. tostring(index)
+            button.Size = UDim2.new(1, -16, 0, 23)
+            button.Position = UDim2.fromOffset(8, 25 + (index - 1) * 27)
+            button.BackgroundColor3 = COLORS.surfaceRaised
+            button.BorderSizePixel = 0
+            button.AutoButtonColor = false
+            button.Text = tostring(action.Name or ("Action " .. index))
+            button.TextColor3 = COLORS.text
+            button.Font = Enum.Font.GothamMedium
+            button.TextSize = 9
+            button.ZIndex = 11
+            button.Parent = quickCard
+            local buttonCorner = Instance.new("UICorner")
+            buttonCorner.CornerRadius = UDim.new(0, 6)
+            buttonCorner.Parent = button
+            local buttonStroke = Instance.new("UIStroke")
+            buttonStroke.Color = COLORS.glassRaised
+            buttonStroke.Transparency = 0.4
+            buttonStroke.Thickness = 1
+            buttonStroke.Parent = button
+            button.MouseEnter:Connect(function()
+                animate(button, TweenInfo.new(0.14), { BackgroundColor3 = COLORS.surfaceHover })
+                animate(buttonStroke, TweenInfo.new(0.14), { Color = COLORS.primary, Transparency = 0 })
+            end)
+            button.MouseLeave:Connect(function()
+                animate(button, TweenInfo.new(0.14), { BackgroundColor3 = COLORS.surfaceRaised })
+                animate(buttonStroke, TweenInfo.new(0.14), { Color = COLORS.glassRaised, Transparency = 0.4 })
+            end)
+            button.Activated:Connect(function()
+                playClickSound()
+                pcall(action.Callback, WindowObj)
+            end)
+        end
+    end
+
+    local statusCard = Instance.new("Frame")
+    statusCard.Name = "LibraryStatusCard"
+    statusCard.Size = UDim2.new(1, -28, 0, 78)
+    statusCard.Position = UDim2.new(0, 14, 0, 246 + #quickActions * 27)
+    statusCard.BackgroundColor3 = COLORS.glassDeep
+    statusCard.BorderSizePixel = 0
+    statusCard.ZIndex = 10
+    statusCard.Parent = userPanel
+    local statusCorner = Instance.new("UICorner")
+    statusCorner.CornerRadius = UDim.new(0, 8)
+    statusCorner.Parent = statusCard
+    local statusStroke = Instance.new("UIStroke")
+    statusStroke.Color = COLORS.glassRaised
+    statusStroke.Transparency = 0.16
+    statusStroke.Thickness = 1
+    statusStroke.Parent = statusCard
+    local statusHeading = Instance.new("TextLabel")
+    statusHeading.Size = UDim2.new(1, -16, 0, 16)
+    statusHeading.Position = UDim2.fromOffset(8, 6)
+    statusHeading.BackgroundTransparency = 1
+    statusHeading.Text = "HUB STATUS"
+    statusHeading.TextColor3 = COLORS.textMuted
+    statusHeading.Font = Enum.Font.GothamBold
+    statusHeading.TextSize = 9
+    statusHeading.TextXAlignment = Enum.TextXAlignment.Left
+    statusHeading.ZIndex = 11
+    statusHeading.Parent = statusCard
+    local activeTabStatus = Instance.new("TextLabel")
+    activeTabStatus.Size = UDim2.new(1, -16, 0, 17)
+    activeTabStatus.Position = UDim2.fromOffset(8, 28)
+    activeTabStatus.BackgroundTransparency = 1
+    activeTabStatus.Text = "●  ENGINE ONLINE"
+    activeTabStatus.TextColor3 = COLORS.success
+    activeTabStatus.Font = Enum.Font.GothamBold
+    activeTabStatus.TextSize = 9
+    activeTabStatus.TextXAlignment = Enum.TextXAlignment.Left
+    activeTabStatus.ZIndex = 11
+    activeTabStatus.Parent = statusCard
+    local activeControlStatus = Instance.new("TextLabel")
+    activeControlStatus.Size = UDim2.new(1, -16, 0, 16)
+    activeControlStatus.Position = UDim2.fromOffset(8, 49)
+    activeControlStatus.BackgroundTransparency = 1
+    activeControlStatus.Text = "Active controls: 0"
+    activeControlStatus.TextColor3 = COLORS.text
+    activeControlStatus.Font = Enum.Font.Gotham
+    activeControlStatus.TextSize = 9
+    activeControlStatus.TextXAlignment = Enum.TextXAlignment.Left
+    activeControlStatus.ZIndex = 11
+    activeControlStatus.Parent = statusCard
+    task.spawn(function()
+        while gui and gui.Parent and activeTabStatus.Parent do
+            local activeCount = 0
+            for _, option in pairs(ObsidianGlassEngine.Options) do
+                if type(option) == "table" and option.Value == true then activeCount += 1 end
+            end
+            activeTabStatus.Text = WindowObj and WindowObj.CurrentTab and ("●  " .. WindowObj.CurrentTab.TitleLabel.Text) or "●  ENGINE ONLINE"
+            activeControlStatus.Text = "Active controls: " .. tostring(activeCount)
+            task.wait(1.5)
+        end
+    end)
 
     local tabScroll = Instance.new("ScrollingFrame")
     tabScroll.Name = "BottomTabHotbar"
@@ -1195,7 +1649,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     -- Gothic Title using Enum.Font.Fondamento & UIStroke
     local mainTitle = Instance.new("TextLabel")
-    mainTitle.Size = UDim2.new(0, 320, 0, 30)
+    mainTitle.Size = UDim2.new(0, 214, 0, 30)
     mainTitle.Position = UDim2.new(0, 20, 0, 6)
     mainTitle.BackgroundTransparency = 1
     mainTitle.Text = "PAYOMBØYZ HUB"
@@ -1213,7 +1667,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     local vvipTag = Instance.new("Frame")
     vvipTag.Name = "TitleVvipTag"
-    vvipTag.Position = UDim2.new(0, 250, 0, 11)
+    vvipTag.Position = UDim2.new(0, 238, 0, 11)
     vvipTag.Size = UDim2.fromOffset(92, 20)
     vvipTag.BackgroundColor3 = COLORS.surfaceRaised
     vvipTag.BorderSizePixel = 0
@@ -1231,8 +1685,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     local vtLabel = Instance.new("TextLabel")
     vtLabel.Size = UDim2.fromScale(1, 1)
     vtLabel.BackgroundTransparency = 1
-    vtLabel.Text = "⚡ CRIMSON V4"
-    vtLabel.Text = cfg.VersionTag or "EGG HUB"
+    vtLabel.Text = cfg.VersionTag or "ANIME UI"
     vtLabel.TextColor3 = COLORS.primary
     vtLabel.Font = Enum.Font.GothamBold
     vtLabel.TextSize = 9
@@ -1243,13 +1696,49 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     mainSubTitle.Size = UDim2.new(0, 380, 0, 16)
     mainSubTitle.Position = UDim2.new(0, 20, 0, 34)
     mainSubTitle.BackgroundTransparency = 1
-    mainSubTitle.Text = cfg.SubTitle or "⚡ HIGH-VOLTAGE EXECUTION ENGINE • VVIP EDITION"
-    mainSubTitle.Text = cfg.Subtitle or cfg.Name or "EGG AUTOMATION"
+    mainSubTitle.Text = cfg.Subtitle or cfg.SubTitle or cfg.Name or "PAYOMBØYZ ANIME HUB"
     mainSubTitle.TextColor3 = COLORS.cyan
     mainSubTitle.Font = Enum.Font.GothamBold
     mainSubTitle.TextSize = 9
     mainSubTitle.TextXAlignment = Enum.TextXAlignment.Left
     mainSubTitle.Parent = headerBar
+
+    -- Persistent top-bar search follows the Reaper reference's quick-find pattern.
+    local headerSearch = Instance.new("TextBox")
+    headerSearch.Name = "FeatureSearch"
+    headerSearch.Size = UDim2.fromOffset(194, 30)
+    headerSearch.Position = UDim2.new(1, -250, 0, 13)
+    headerSearch.BackgroundColor3 = COLORS.input
+    headerSearch.BorderSizePixel = 0
+    headerSearch.ClearTextOnFocus = false
+    headerSearch.PlaceholderText = "⌕  Search features..."
+    headerSearch.PlaceholderColor3 = COLORS.textFaint
+    headerSearch.Text = ""
+    headerSearch.TextColor3 = COLORS.text
+    headerSearch.Font = Enum.Font.Gotham
+    headerSearch.TextSize = 10
+    headerSearch.TextXAlignment = Enum.TextXAlignment.Left
+    headerSearch.ZIndex = 20
+    headerSearch.Parent = headerBar
+    local searchCorner = Instance.new("UICorner", headerSearch)
+    searchCorner.CornerRadius = UDim.new(0, 8)
+    local searchStroke = Instance.new("UIStroke", headerSearch)
+    searchStroke.Color = COLORS.glassRaised
+    searchStroke.Thickness = 1
+    local searchPadding = Instance.new("UIPadding", headerSearch)
+    searchPadding.PaddingLeft = UDim.new(0, 10)
+    searchPadding.PaddingRight = UDim.new(0, 8)
+    headerSearch.Focused:Connect(function()
+        animate(searchStroke, TweenInfo.new(0.16), { Color = COLORS.primary, Transparency = 0 })
+    end)
+    headerSearch.FocusLost:Connect(function()
+        animate(searchStroke, TweenInfo.new(0.16), { Color = COLORS.glassRaised, Transparency = 0 })
+    end)
+    headerSearch:GetPropertyChangedSignal("Text"):Connect(function()
+        if WindowObj and type(WindowObj.Search) == "function" then
+            WindowObj:Search(headerSearch.Text)
+        end
+    end)
 
     -- Close & Minimize Buttons
     local closeBtn = Instance.new("TextButton")
@@ -1312,12 +1801,12 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         end
     end)
 
-    UserInputService.InputChanged:Connect(function(input)
+    table.insert(trackedConnections, UserInputService.InputChanged:Connect(function(input)
         if input == dragInput and dragging then
             local delta = input.Position - dragStart
             shell.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
         end
-    end)
+    end))
 
     -- Container for all Tab Content Pages
     local pagesContainer = Instance.new("Frame")
@@ -1328,35 +1817,40 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     pagesContainer.Parent = mainPanel
 
     -- 🎬 4-PHASE INTRO EXECUTION SEQUENCE (From Intro.md)
+    if not effectState.Intro or motionMode == "Off" then
+        introOverlay.Visible = false
+        userPanel.Visible = true
+        mainPanel.Visible = true
+    else
     task.spawn(function()
         -- Phase 1: Fade-In (0.45s)
         local fadeInInfo = TweenInfo.new(0.45, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
-        TweenService:Create(introLogo, fadeInInfo, { ImageTransparency = 0 }):Play()
-        TweenService:Create(introTitle, fadeInInfo, { TextTransparency = 0 }):Play()
-        TweenService:Create(introSub, fadeInInfo, { TextTransparency = 0.2 }):Play()
+        animate(introLogo, fadeInInfo, { ImageTransparency = 0 })
+        animate(introTitle, fadeInInfo, { TextTransparency = 0 })
+        animate(introSub, fadeInInfo, { TextTransparency = 0.2 })
         
         task.wait(1.5)
         
         -- Phase 2: Fade-Out (0.30s)
         local fadeOutInfo = TweenInfo.new(0.30, Enum.EasingStyle.Quart, Enum.EasingDirection.In)
-        TweenService:Create(introLogo, fadeOutInfo, { ImageTransparency = 1 }):Play()
-        TweenService:Create(introTitle, fadeOutInfo, { TextTransparency = 1 }):Play()
-        TweenService:Create(introSub, fadeOutInfo, { TextTransparency = 1 }):Play()
+        animate(introLogo, fadeOutInfo, { ImageTransparency = 1 })
+        animate(introTitle, fadeOutInfo, { TextTransparency = 1 })
+        animate(introSub, fadeOutInfo, { TextTransparency = 1 })
         
         task.wait(0.35)
         introOverlay.Visible = false
         
         -- Phase 3: Window Morph & Expand (0.65s Exponential Out)
         local expandInfo = TweenInfo.new(0.65, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
-        TweenService:Create(shell, expandInfo, {
+        animate(shell, expandInfo, {
             Size = UDim2.fromOffset(920, 600),
             BackgroundColor3 = COLORS.shell,
             BackgroundTransparency = 0.12
-        }):Play()
-        TweenService:Create(shellStroke, expandInfo, {
-            Color = Color3.fromRGB(255, 25, 55),
+        })
+        animate(shellStroke, expandInfo, {
+            Color = COLORS.primary,
             Transparency = 0.15
-        }):Play()
+        })
         
         task.wait(0.65)
         
@@ -1364,9 +1858,10 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         userPanel.Visible = true
         mainPanel.Visible = true
     end)
+    end
 
     -- Window Object Interface
-    local WindowObj = {
+    WindowObj = {
         Tabs = {},
         CurrentTab = nil,
         Options = ObsidianGlassEngine.Options,
@@ -1431,45 +1926,83 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         pageScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
         pageScroll.Parent = pagesContainer
 
-        local pageLayout = Instance.new("UIListLayout")
-        pageLayout.FillDirection = Enum.FillDirection.Vertical
-        pageLayout.Padding = UDim.new(0, 8)
-        pageLayout.SortOrder = Enum.SortOrder.LayoutOrder
-        pageLayout.Parent = pageScroll
-
-        local pagePadding = Instance.new("UIPadding")
-        pagePadding.PaddingLeft = UDim.new(0, 20)
-        pagePadding.PaddingRight = UDim.new(0, 20)
-        pagePadding.PaddingTop = UDim.new(0, 10)
-        pagePadding.PaddingBottom = UDim.new(0, 20)
-        pagePadding.Parent = pageScroll
-
-        pageLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-            pageScroll.CanvasSize = UDim2.new(0, 0, 0, pageLayout.AbsoluteContentSize.Y + 30)
-        end)
+        pageScroll.ScrollingDirection = Enum.ScrollingDirection.Y
+        local columns = {}
+        for index = 1, 2 do
+            local column = Instance.new("Frame")
+            column.Name = index == 1 and "LeftColumn" or "RightColumn"
+            column.Position = UDim2.new((index - 1) * 0.5, 10, 0, 10)
+            column.Size = UDim2.new(0.5, -16, 0, 0)
+            column.AutomaticSize = Enum.AutomaticSize.Y
+            column.BackgroundTransparency = 1
+            column.Parent = pageScroll
+            local layout = Instance.new("UIListLayout")
+            layout.FillDirection = Enum.FillDirection.Vertical
+            layout.Padding = UDim.new(0, 8)
+            layout.SortOrder = Enum.SortOrder.LayoutOrder
+            layout.Parent = column
+            columns[index] = { Frame = column, Layout = layout }
+            layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+                local height = math.max(columns[1].Layout.AbsoluteContentSize.Y, columns[2].Layout.AbsoluteContentSize.Y)
+                pageScroll.CanvasSize = UDim2.new(0, 0, 0, height + 24)
+            end)
+        end
+        local sectionFrames = {}
+        local sectionCount = 0
+        local function updateColumnLayout()
+            local compact = camera and camera.ViewportSize.X < 850
+            columns[1].Frame.Position = UDim2.new(0, 10, 0, 10)
+            columns[1].Frame.Size = compact and UDim2.new(1, -20, 0, 0) or UDim2.new(0.5, -16, 0, 0)
+            columns[2].Frame.Position = UDim2.new(0.5, 10, 0, 10)
+            columns[2].Frame.Size = UDim2.new(0.5, -16, 0, 0)
+            columns[2].Frame.Visible = not compact
+            for position, sectionFrame in ipairs(sectionFrames) do
+                local column = compact and 1 or ((position - 1) % 2) + 1
+                sectionFrame.Parent = columns[column].Frame
+                sectionFrame.LayoutOrder = compact and position or math.ceil(position / 2)
+            end
+            local height = compact and columns[1].Layout.AbsoluteContentSize.Y or math.max(columns[1].Layout.AbsoluteContentSize.Y, columns[2].Layout.AbsoluteContentSize.Y)
+            pageScroll.CanvasSize = UDim2.new(0, 0, 0, height + 24)
+        end
+        if camera then
+            table.insert(trackedConnections, camera:GetPropertyChangedSignal("ViewportSize"):Connect(updateColumnLayout))
+        end
 
         local function activateTab()
             for _, t in ipairs(WindowObj.Tabs) do
                 t.Page.Visible = false
-                t.Button.BackgroundColor3 = COLORS.surface
-                t.Button.BackgroundTransparency = 0.40
+                animate(t.Button, TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { BackgroundColor3 = COLORS.surface, BackgroundTransparency = 0.28 })
                 t.TitleLabel.TextColor3 = COLORS.textMuted
                 t.IconLabel.TextColor3 = COLORS.textMuted
-                t.Stroke.Color = COLORS.glassRaised
+                animate(t.Stroke, TweenInfo.new(0.16), { Color = COLORS.glassRaised, Transparency = 0.45 })
             end
             pageScroll.Visible = true
-            tabBtn.BackgroundColor3 = COLORS.surfaceRaised
-            tabBtn.BackgroundTransparency = 0
+            animate(tabBtn, TweenInfo.new(0.18, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { BackgroundColor3 = COLORS.surfaceRaised, BackgroundTransparency = 0 })
             titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
             iconLabel.TextColor3 = COLORS.cyan
-            tbStroke.Color = COLORS.cyan
+            animate(tbStroke, TweenInfo.new(0.18), { Color = COLORS.cyan, Transparency = 0 })
+            pageScroll.CanvasPosition = Vector2.zero
             WindowObj.CurrentTab = TabObj
+            if effectState.Lightning then pcall(strikeLightning, lightningLayer, math.random(4, 6)) end
         end
 
-        tabBtn.MouseButton1Click:Connect(function()
+        tabBtn.MouseEnter:Connect(function()
+            if WindowObj.CurrentTab ~= TabObj then
+                animate(tabBtn, TweenInfo.new(0.12), { BackgroundTransparency = 0.08 })
+                animate(tbStroke, TweenInfo.new(0.12), { Transparency = 0.22 })
+            end
+        end)
+        tabBtn.MouseLeave:Connect(function()
+            if WindowObj.CurrentTab ~= TabObj then
+                animate(tabBtn, TweenInfo.new(0.12), { BackgroundTransparency = 0.28 })
+                animate(tbStroke, TweenInfo.new(0.12), { Transparency = 0.45 })
+            end
+        end)
+        tabBtn.Activated:Connect(function()
             playClickSound()
             activateTab()
         end)
+        TabObj.Activate = activateTab
 
         TabObj.Button = tabBtn
         TabObj.Page = pageScroll
@@ -1485,16 +2018,141 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         -- WIDGET COMPONENT BUILDERS (Sections, Toggles, Sliders, Dropdowns, Buttons, Inputs)
         -- ==============================================================================
 
-        function TabObj:AddSection(secTitle)
+        local controlRegistry = {}
+        TabObj.Controls = controlRegistry
+
+        function TabObj:SetVisible(visible)
+            pageScroll.Visible = visible == true
+        end
+
+        function TabObj:SetBadge(text, color)
+            if text == nil or tostring(text) == "" then
+                if TabObj.BadgeLabel then TabObj.BadgeLabel:Destroy(); TabObj.BadgeLabel = nil end
+                return
+            end
+            if not TabObj.BadgeLabel then
+                local badge = Instance.new("TextLabel")
+                badge.Name = "TabBadge"
+                badge.Size = UDim2.fromOffset(24, 18)
+                badge.Position = UDim2.new(1, -30, 0.5, -9)
+                badge.BackgroundColor3 = COLORS.primary
+                badge.BorderSizePixel = 0
+                badge.Font = Enum.Font.GothamBold
+                badge.TextColor3 = COLORS.text
+                badge.TextSize = 9
+                badge.ZIndex = 13
+                badge.Parent = tabBtn
+                local badgeCorner = Instance.new("UICorner", badge)
+                badgeCorner.CornerRadius = UDim.new(0, 5)
+                TabObj.BadgeLabel = badge
+            end
+            TabObj.BadgeLabel.Text = tostring(text)
+            if typeof(color) == "Color3" then TabObj.BadgeLabel.BackgroundColor3 = color end
+        end
+
+        function TabObj:AddDivider(labelText)
+            local holder = Instance.new("Frame")
+            holder.Name = "Divider"
+            holder.Size = UDim2.new(1, -10, 0, labelText and 25 or 9)
+            holder.BackgroundTransparency = 1
+            holder.Parent = getControlContainer()
+            local line = Instance.new("Frame")
+            line.Size = UDim2.new(1, 0, 0, 1)
+            line.Position = UDim2.new(0, 0, 0.5, 0)
+            line.BackgroundColor3 = COLORS.divider
+            line.BorderSizePixel = 0
+            line.Parent = holder
+            if labelText then
+                local text = Instance.new("TextLabel")
+                text.Size = UDim2.new(1, -16, 1, 0)
+                text.Position = UDim2.fromOffset(8, 0)
+                text.BackgroundColor3 = COLORS.glass
+                text.Text = "  " .. tostring(labelText) .. "  "
+                text.TextColor3 = COLORS.textMuted
+                text.Font = Enum.Font.GothamBold
+                text.TextSize = 9
+                text.TextXAlignment = Enum.TextXAlignment.Left
+                text.Parent = holder
+            end
+            return holder
+        end
+
+        function TabObj:AddCallout(title, message, kind)
+            local tones = {
+                Info = COLORS.cyan,
+                Success = COLORS.success,
+                Warning = COLORS.warning,
+                Danger = COLORS.danger,
+            }
+            local tone = tones[kind or "Info"] or COLORS.cyan
+            local frame = Instance.new("Frame")
+            frame.Name = "Callout"
+            frame.Size = UDim2.new(1, -10, 0, 62)
+            frame.BackgroundColor3 = COLORS.glassDeep
+            frame.BackgroundTransparency = 0.08
+            frame.BorderSizePixel = 0
+            frame.Parent = getControlContainer()
+            local corner = Instance.new("UICorner", frame)
+            corner.CornerRadius = UDim.new(0, 8)
+            local stripe = Instance.new("Frame")
+            stripe.Size = UDim2.new(0, 3, 1, -12)
+            stripe.Position = UDim2.fromOffset(6, 6)
+            stripe.BackgroundColor3 = tone
+            stripe.BorderSizePixel = 0
+            stripe.Parent = frame
+            local heading = Instance.new("TextLabel")
+            heading.Name = "Heading"
+            heading.Size = UDim2.new(1, -30, 0, 20)
+            heading.Position = UDim2.fromOffset(17, 7)
+            heading.BackgroundTransparency = 1
+            heading.Text = tostring(title or "Notice")
+            heading.TextColor3 = tone
+            heading.Font = Enum.Font.GothamBold
+            heading.TextSize = 11
+            heading.TextXAlignment = Enum.TextXAlignment.Left
+            heading.Parent = frame
+            local content = Instance.new("TextLabel")
+            content.Name = "Message"
+            content.Size = UDim2.new(1, -30, 0, 28)
+            content.Position = UDim2.fromOffset(17, 28)
+            content.BackgroundTransparency = 1
+            content.Text = tostring(message or "")
+            content.TextColor3 = COLORS.text
+            content.Font = Enum.Font.Gotham
+            content.TextSize = 10
+            content.TextWrapped = true
+            content.TextXAlignment = Enum.TextXAlignment.Left
+            content.TextYAlignment = Enum.TextYAlignment.Top
+            content.Parent = frame
+            local callout = { Instance = frame, TitleLabel = heading, TextLabel = content, Value = content.Text }
+            function callout:Set(text) self.Value = tostring(text or ""); content.Text = self.Value end
+            function callout:SetValue(text) self:Set(text) end
+            function callout:SetKind(nextKind)
+                tone = tones[nextKind or "Info"] or COLORS.cyan
+                stripe.BackgroundColor3 = tone
+                heading.TextColor3 = tone
+            end
+            return callout
+        end
+
+        function TabObj:AddSection(secTitle, sectionConfig)
+            sectionConfig = type(sectionConfig) == "table" and sectionConfig or {}
+            local sectionDescription = tostring(sectionConfig.Description or "")
+            local sectionIcon = tostring(sectionConfig.Icon or "")
+            local headerHeight = sectionDescription ~= "" and 54 or 42
             local sec = Instance.new("Frame")
             sec.Name = "SectionCard_" .. tostring(secTitle):gsub("%W", "")
-            sec.Size = UDim2.new(1, -10, 0, 42)
+            sec.Size = UDim2.new(1, 0, 0, headerHeight)
             sec.AutomaticSize = Enum.AutomaticSize.None
             sec.BackgroundColor3 = COLORS.glass
             sec.BackgroundTransparency = 0.04
             sec.BorderSizePixel = 0
             sec.ClipsDescendants = false
-            sec.Parent = pageScroll
+            sectionCount += 1
+            sec.LayoutOrder = sectionCount
+            table.insert(sectionFrames, sec)
+            sec.Parent = columns[((sectionCount - 1) % 2) + 1].Frame
+            updateColumnLayout()
 
             local secCorner = Instance.new("UICorner")
             secCorner.CornerRadius = UDim.new(0, 10)
@@ -1508,7 +2166,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
             local header = Instance.new("TextButton")
             header.Name = "SectionHeader"
-            header.Size = UDim2.new(1, -20, 0, 38)
+            header.Size = UDim2.new(1, -20, 0, headerHeight - 4)
             header.Position = UDim2.new(0, 12, 0, 2)
             header.BackgroundTransparency = 1
             header.Text = ""
@@ -1516,17 +2174,31 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             header.Parent = sec
 
             local sTitle = Instance.new("TextLabel")
-            sTitle.Size = UDim2.new(1, -30, 1, 0)
+            sTitle.Size = UDim2.new(1, -30, 0, sectionDescription ~= "" and 22 or headerHeight - 4)
+            sTitle.Position = UDim2.fromOffset(0, sectionDescription ~= "" and 1 or 0)
             sTitle.BackgroundTransparency = 1
-            sTitle.Text = tostring(secTitle)
+            sTitle.Text = (sectionIcon ~= "" and (sectionIcon .. "  ") or "") .. tostring(secTitle)
             sTitle.TextColor3 = COLORS.primary
             sTitle.Font = Enum.Font.GothamBold
             sTitle.TextSize = 13
             sTitle.TextXAlignment = Enum.TextXAlignment.Left
             sTitle.Parent = header
+            if sectionDescription ~= "" then
+                local description = Instance.new("TextLabel")
+                description.Size = UDim2.new(1, -30, 0, 20)
+                description.Position = UDim2.fromOffset(0, 24)
+                description.BackgroundTransparency = 1
+                description.Text = sectionDescription
+                description.TextColor3 = COLORS.textMuted
+                description.Font = Enum.Font.Gotham
+                description.TextSize = 9
+                description.TextXAlignment = Enum.TextXAlignment.Left
+                description.TextTruncate = Enum.TextTruncate.AtEnd
+                description.Parent = header
+            end
 
             local caret = Instance.new("TextLabel")
-            caret.Size = UDim2.fromOffset(22, 38)
+            caret.Size = UDim2.fromOffset(22, headerHeight - 4)
             caret.Position = UDim2.new(1, -22, 0, 0)
             caret.BackgroundTransparency = 1
             caret.Text = "⌄"
@@ -1537,7 +2209,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
             local body = Instance.new("Frame")
             body.Name = "SectionContent"
-            body.Position = UDim2.new(0, 10, 0, 42)
+            body.Position = UDim2.new(0, 10, 0, headerHeight)
             body.Size = UDim2.new(1, -20, 0, 0)
             body.AutomaticSize = Enum.AutomaticSize.Y
             body.BackgroundTransparency = 1
@@ -1555,18 +2227,30 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             local expanded = true
             bodyLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
                 if expanded then
-                    sec.Size = UDim2.new(1, -10, 0, 42 + bodyLayout.AbsoluteContentSize.Y + 10)
+                    sec.Size = UDim2.new(1, 0, 0, headerHeight + bodyLayout.AbsoluteContentSize.Y + 10)
                 end
             end)
             local function setExpanded(value)
                 expanded = value == true
                 body.Visible = expanded
                 caret.Text = expanded and "⌄" or "›"
-                sec.Size = UDim2.new(1, -10, 0, expanded and (42 + bodyLayout.AbsoluteContentSize.Y + 10) or 42)
+                sec.Size = UDim2.new(1, 0, 0, expanded and (headerHeight + bodyLayout.AbsoluteContentSize.Y + 10) or headerHeight)
             end
             header.MouseButton1Click:Connect(function() setExpanded(not expanded) end)
             TabObj.CurrentContainer = body
             return sec, body, setExpanded
+        end
+
+        local defaultSectionBody
+        local activeControlContainer
+        local function getControlContainer()
+            if activeControlContainer and activeControlContainer.Parent then return activeControlContainer end
+            if TabObj.CurrentContainer then return TabObj.CurrentContainer end
+            if not defaultSectionBody then
+                local _, body = TabObj:AddSection("Controls")
+                defaultSectionBody = body
+            end
+            return defaultSectionBody
         end
 
         function TabObj:AddToggle(idx, tCfg)
@@ -1580,7 +2264,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             frame.BackgroundColor3 = COLORS.glassDeep
             frame.BackgroundTransparency = 0.18
             frame.BorderSizePixel = 0
-            frame.Parent = TabObj.CurrentContainer or pageScroll
+            frame.Parent = getControlContainer()
 
             local fCorner = Instance.new("UICorner")
             fCorner.CornerRadius = UDim.new(0, 8)
@@ -1650,8 +2334,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 state = v
                 ToggleObj.Value = v
                 playClickSound()
-                TweenService:Create(toggleBg, TweenInfo.new(0.2), { BackgroundColor3 = state and COLORS.primary or COLORS.surfaceRaised }):Play()
-                TweenService:Create(toggleCircle, TweenInfo.new(0.2), { Position = UDim2.new(state and 1 or 0, state and -19 or 3, 0.5, -8) }):Play()
+                animate(toggleBg, TweenInfo.new(0.2), { BackgroundColor3 = state and COLORS.primary or COLORS.surfaceRaised })
+                animate(toggleCircle, TweenInfo.new(0.2), { Position = UDim2.new(state and 1 or 0, state and -19 or 3, 0.5, -8) })
                 pcall(cb, state)
             end
 
@@ -1666,7 +2350,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             local title = sCfg.Title or "Slider"
             local minVal = sCfg.Min or 0
             local maxVal = sCfg.Max or 100
-            local defVal = sCfg.Default or minVal
+            if maxVal <= minVal then maxVal = minVal + 1 end
+            local defVal = math.clamp(tonumber(sCfg.Default) or minVal, minVal, maxVal)
             local rounding = sCfg.Rounding or 0
             local cb = sCfg.Callback or function() end
 
@@ -1675,7 +2360,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             frame.BackgroundColor3 = COLORS.glassDeep
             frame.BackgroundTransparency = 0.18
             frame.BorderSizePixel = 0
-            frame.Parent = TabObj.CurrentContainer or pageScroll
+            frame.Parent = getControlContainer()
 
             local fCorner = Instance.new("UICorner")
             fCorner.CornerRadius = UDim.new(0, 8)
@@ -1763,11 +2448,19 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 end
             end)
 
-            UserInputService.InputChanged:Connect(function(inp)
+            local inputConnection = UserInputService.InputChanged:Connect(function(inp)
                 if sliding and (inp.UserInputType == Enum.UserInputType.MouseMovement or inp.UserInputType == Enum.UserInputType.Touch) then
                     updateSlider(inp.Position.X)
                 end
             end)
+            table.insert(trackedConnections, inputConnection)
+            SliderObj._InputConnection = inputConnection
+
+            function SliderObj:Destroy()
+                sliding = false
+                if inputConnection then inputConnection:Disconnect(); inputConnection = nil end
+                if frame.Parent then frame:Destroy() end
+            end
 
             function SliderObj:SetValue(v)
                 v = math.clamp(v, minVal, maxVal)
@@ -1785,12 +2478,16 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         function TabObj:AddButton(bCfg)
             local title = bCfg.Title or "Button"
             local cb = bCfg.Callback or function() end
+            local confirmText = bCfg.Confirm
+            local confirmWindow = tonumber(bCfg.ConfirmWindow) or 3
+            local waitingForConfirm = false
+            local originalText = "⚡ " .. title
 
             local frame = Instance.new("Frame")
             frame.Size = UDim2.new(1, -10, 0, 38)
             frame.BackgroundColor3 = COLORS.surfaceRaised
             frame.BorderSizePixel = 0
-            frame.Parent = TabObj.CurrentContainer or pageScroll
+            frame.Parent = getControlContainer()
 
             local fCorner = Instance.new("UICorner")
             fCorner.CornerRadius = UDim.new(0, 8)
@@ -1805,24 +2502,40 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             local btn = Instance.new("TextButton")
             btn.Size = UDim2.fromScale(1, 1)
             btn.BackgroundTransparency = 1
-            btn.Text = "⚡ " .. title
+            btn.Text = originalText
             btn.TextColor3 = COLORS.text
             btn.Font = Enum.Font.GothamBold
             btn.TextSize = 12
             btn.Parent = frame
 
             btn.MouseEnter:Connect(function()
-                TweenService:Create(frame, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.surfaceHover }):Play()
-                TweenService:Create(fStroke, TweenInfo.new(0.2), { Transparency = 0 }):Play()
+                animate(frame, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.surfaceHover })
+                animate(fStroke, TweenInfo.new(0.2), { Transparency = 0 })
             end)
 
             btn.MouseLeave:Connect(function()
-                TweenService:Create(frame, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.surfaceRaised }):Play()
-                TweenService:Create(fStroke, TweenInfo.new(0.2), { Transparency = 0.4 }):Play()
+                animate(frame, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.surfaceRaised })
+                animate(fStroke, TweenInfo.new(0.2), { Transparency = 0.4 })
             end)
 
-            btn.MouseButton1Click:Connect(function()
+            btn.Activated:Connect(function()
                 playClickSound()
+                if confirmText and not waitingForConfirm then
+                    waitingForConfirm = true
+                    btn.Text = "✓ " .. (type(confirmText) == "string" and confirmText or ("Confirm " .. title))
+                    fStroke.Color = COLORS.warning
+                    task.delay(confirmWindow, function()
+                        if btn.Parent and waitingForConfirm then
+                            waitingForConfirm = false
+                            btn.Text = originalText
+                            fStroke.Color = COLORS.primary
+                        end
+                    end)
+                    return
+                end
+                waitingForConfirm = false
+                btn.Text = originalText
+                fStroke.Color = COLORS.primary
                 pcall(cb)
             end)
             return btn
@@ -1840,7 +2553,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             frame.BackgroundTransparency = 0.18
             frame.BorderSizePixel = 0
             frame.ClipsDescendants = true
-            frame.Parent = TabObj.CurrentContainer or pageScroll
+            frame.Parent = getControlContainer()
 
             local fCorner = Instance.new("UICorner")
             fCorner.CornerRadius = UDim.new(0, 8)
@@ -1879,10 +2592,29 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             dropBtn.Text = ""
             dropBtn.Parent = frame
 
-            local listContainer = Instance.new("Frame")
-            listContainer.Size = UDim2.new(1, -24, 0, #values * 28)
-            listContainer.Position = UDim2.new(0, 12, 0, 44)
+            local searchBox = Instance.new("TextBox")
+            searchBox.Name = "Search"
+            searchBox.Size = UDim2.new(1, -24, 0, 28)
+            searchBox.Position = UDim2.fromOffset(12, 48)
+            searchBox.BackgroundColor3 = COLORS.input
+            searchBox.BorderSizePixel = 0
+            searchBox.PlaceholderText = "Filter options..."
+            searchBox.Text = ""
+            searchBox.TextColor3 = COLORS.text
+            searchBox.PlaceholderColor3 = COLORS.textMuted
+            searchBox.Font = Enum.Font.Gotham
+            searchBox.TextSize = 10
+            searchBox.ClearTextOnFocus = false
+            searchBox.Visible = false
+            searchBox.Parent = frame
+            local listContainer = Instance.new("ScrollingFrame")
+            listContainer.Size = UDim2.new(1, -24, 0, 140)
+            listContainer.Position = UDim2.new(0, 12, 0, 82)
             listContainer.BackgroundTransparency = 1
+            listContainer.BorderSizePixel = 0
+            listContainer.ScrollBarThickness = 3
+            listContainer.ScrollBarImageColor3 = COLORS.primary
+            listContainer.CanvasSize = UDim2.new()
             listContainer.Parent = frame
 
             local listLayout = Instance.new("UIListLayout")
@@ -1891,13 +2623,15 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             listLayout.Parent = listContainer
 
             local opened = false
+            local entries = {}
             local DropObj = { Value = defVal, Instance = frame }
 
             local function toggleDrop()
                 opened = not opened
                 dSelected.Text = tostring(DropObj.Value) .. (opened and " ▲" or " ▼")
-                local targetHeight = opened and (48 + #values * 30) or 44
-                TweenService:Create(frame, TweenInfo.new(0.25, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Size = UDim2.new(1, -10, 0, targetHeight) }):Play()
+                searchBox.Visible = opened
+                local targetHeight = opened and (88 + math.min(140, #values * 28)) or 44
+                animate(frame, TweenInfo.new(0.25, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Size = UDim2.new(1, -10, 0, targetHeight) })
             end
 
             dropBtn.MouseButton1Click:Connect(function()
@@ -1905,6 +2639,16 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 toggleDrop()
             end)
 
+            local function refreshItems()
+                local query = string.lower(searchBox.Text)
+                local visible = 0
+                for _, entry in ipairs(entries) do
+                    local match = query == "" or string.find(string.lower(tostring(entry.Value)), query, 1, true) ~= nil
+                    entry.Button.Visible = match
+                    if match then visible += 1 end
+                end
+                listContainer.CanvasSize = UDim2.new(0, 0, 0, visible * 28 + 2)
+            end
             for _, val in ipairs(values) do
                 local itm = Instance.new("TextButton")
                 itm.Size = UDim2.new(1, 0, 0, 26)
@@ -1916,6 +2660,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 itm.TextSize = 11
                 itm.TextXAlignment = Enum.TextXAlignment.Left
                 itm.Parent = listContainer
+                entries[#entries + 1] = { Value = val, Button = itm }
 
                 local itmCorner = Instance.new("UICorner")
                 itmCorner.CornerRadius = UDim.new(0, 5)
@@ -1929,6 +2674,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                     pcall(cb, val)
                 end)
             end
+            searchBox:GetPropertyChangedSignal("Text"):Connect(refreshItems)
+            refreshItems()
 
             function DropObj:SetValue(v)
                 DropObj.Value = v
@@ -1960,7 +2707,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             frame.BackgroundTransparency = 0.18
             frame.BorderSizePixel = 0
             frame.ClipsDescendants = true
-            frame.Parent = TabObj.CurrentContainer or pageScroll
+            frame.Parent = getControlContainer()
             local corner = Instance.new("UICorner")
             corner.CornerRadius = UDim.new(0, 8)
             corner.Parent = frame
@@ -2079,9 +2826,9 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             local function setOpen(value)
                 opened = value == nil and not opened or value == true
                 local height = opened and 232 or 44
-                TweenService:Create(frame, TweenInfo.new(0.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
+                animate(frame, TweenInfo.new(0.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
                     Size = UDim2.new(1, -10, 0, height),
-                }):Play()
+                })
             end
             headerButton.MouseButton1Click:Connect(function()
                 playClickSound()
@@ -2106,13 +2853,15 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             local defVal = iCfg.Default or ""
             local placeholder = iCfg.Placeholder or "Type here..."
             local cb = iCfg.Callback or function() end
+            local multiline = iCfg.Multiline == true
+            local maxLength = tonumber(iCfg.MaxLength)
 
             local frame = Instance.new("Frame")
-            frame.Size = UDim2.new(1, -10, 0, 46)
+            frame.Size = UDim2.new(1, -10, 0, multiline and 92 or 46)
             frame.BackgroundColor3 = COLORS.glassDeep
             frame.BackgroundTransparency = 0.18
             frame.BorderSizePixel = 0
-            frame.Parent = TabObj.CurrentContainer or pageScroll
+            frame.Parent = getControlContainer()
 
             local fCorner = Instance.new("UICorner")
             fCorner.CornerRadius = UDim.new(0, 8)
@@ -2124,8 +2873,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             fStroke.Parent = frame
 
             local iTitle = Instance.new("TextLabel")
-            iTitle.Size = UDim2.new(0, 140, 1, 0)
-            iTitle.Position = UDim2.new(0, 12, 0, 0)
+            iTitle.Size = UDim2.new(1, -24, 0, 22)
+            iTitle.Position = UDim2.fromOffset(12, multiline and 3 or 0)
             iTitle.BackgroundTransparency = 1
             iTitle.Text = title
             iTitle.TextColor3 = COLORS.text
@@ -2135,8 +2884,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             iTitle.Parent = frame
 
             local textBox = Instance.new("TextBox")
-            textBox.Size = UDim2.new(1, -170, 0, 30)
-            textBox.Position = UDim2.new(1, -158, 0.5, -15)
+            textBox.Size = multiline and UDim2.new(1, -24, 0, 52) or UDim2.new(1, -170, 0, 30)
+            textBox.Position = multiline and UDim2.fromOffset(12, 30) or UDim2.new(1, -158, 0.5, -15)
             textBox.BackgroundColor3 = COLORS.input
             textBox.BackgroundTransparency = 0.20
             textBox.Text = defVal
@@ -2145,6 +2894,11 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             textBox.TextColor3 = COLORS.cyan
             textBox.Font = Enum.Font.GothamMedium
             textBox.TextSize = 12
+            textBox.MultiLine = multiline
+            textBox.TextWrapped = multiline
+            textBox.TextYAlignment = multiline and Enum.TextYAlignment.Top or Enum.TextYAlignment.Center
+            textBox.ClearTextOnFocus = iCfg.ClearTextOnFocus == true
+            textBox.TextEditable = iCfg.ReadOnly ~= true
             textBox.Parent = frame
 
             local tbCorner = Instance.new("UICorner")
@@ -2156,15 +2910,33 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             tbStroke.Thickness = 1
             tbStroke.Parent = textBox
 
+            local InputObj = { Value = defVal, Instance = frame, TextBox = textBox }
+            textBox:GetPropertyChangedSignal("Text"):Connect(function()
+                local value = textBox.Text
+                if iCfg.Numeric then value = value:gsub("[^%d%.%-]", "") end
+                if maxLength and maxLength >= 0 then value = string.sub(value, 1, maxLength) end
+                if value ~= textBox.Text then textBox.Text = value end
+                InputObj.Value = textBox.Text
+            end)
             textBox.Focused:Connect(function()
-                TweenService:Create(tbStroke, TweenInfo.new(0.2), { Color = COLORS.cyan }):Play()
+                animate(tbStroke, TweenInfo.new(0.2), { Color = COLORS.cyan })
             end)
             textBox.FocusLost:Connect(function()
-                TweenService:Create(tbStroke, TweenInfo.new(0.2), { Color = COLORS.glassRaised }):Play()
-                pcall(cb, textBox.Text)
+                animate(tbStroke, TweenInfo.new(0.2), { Color = COLORS.glassRaised })
+                local value = textBox.Text
+                if type(iCfg.Validator) == "function" then
+                    local callOk, accepted, validationMessage = pcall(iCfg.Validator, value)
+                    if not callOk or accepted == false then
+                        animate(tbStroke, TweenInfo.new(0.15), { Color = COLORS.danger })
+                        local reason = callOk and validationMessage or accepted
+                        ObsidianGlassEngine:Notify({ Type = "Warning", Title = title, Content = tostring(reason or "Input did not pass validation") })
+                        return
+                    end
+                end
+                InputObj.Value = value
+                pcall(cb, value)
             end)
 
-            local InputObj = { Value = defVal, Instance = frame, TextBox = textBox }
             function InputObj:SetValue(v)
                 textBox.Text = v
                 InputObj.Value = v
@@ -2175,13 +2947,618 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             return InputObj
         end
 
+        function TabObj:AddKeybind(idx, kCfg)
+            kCfg = type(kCfg) == "table" and kCfg or {}
+            local title = kCfg.Title or "Keybind"
+            local mode = kCfg.Mode == "Hold" and "Hold" or "Toggle"
+            local callback = kCfg.Callback or function() end
+            local keyValue = kCfg.Default
+            if type(keyValue) == "string" and Enum.KeyCode[keyValue] then keyValue = Enum.KeyCode[keyValue] end
+            if typeof(keyValue) ~= "EnumItem" then keyValue = Enum.KeyCode.Unknown end
+
+            local frame = Instance.new("Frame")
+            frame.Name = "Keybind_" .. tostring(idx):gsub("[^%w_]", "_")
+            frame.Size = UDim2.new(1, -10, 0, 44)
+            frame.BackgroundColor3 = COLORS.glassDeep
+            frame.BackgroundTransparency = 0.18
+            frame.BorderSizePixel = 0
+            frame.Parent = getControlContainer()
+            local corner = Instance.new("UICorner", frame)
+            corner.CornerRadius = UDim.new(0, 8)
+            local stroke = Instance.new("UIStroke", frame)
+            stroke.Color = COLORS.glassRaised
+            stroke.Thickness = 1
+
+            local label = Instance.new("TextLabel")
+            label.Size = UDim2.new(1, -118, 1, 0)
+            label.Position = UDim2.fromOffset(12, 0)
+            label.BackgroundTransparency = 1
+            label.Text = title
+            label.TextColor3 = COLORS.text
+            label.Font = Enum.Font.GothamMedium
+            label.TextSize = 12
+            label.TextXAlignment = Enum.TextXAlignment.Left
+            label.Parent = frame
+
+            local keyButton = Instance.new("TextButton")
+            keyButton.Size = UDim2.fromOffset(92, 28)
+            keyButton.Position = UDim2.new(1, -104, 0.5, -14)
+            keyButton.BackgroundColor3 = COLORS.surfaceRaised
+            keyButton.BorderSizePixel = 0
+            keyButton.TextColor3 = COLORS.text
+            keyButton.Font = Enum.Font.GothamBold
+            keyButton.TextSize = 10
+            keyButton.AutoButtonColor = false
+            keyButton.Parent = frame
+            local keyCorner = Instance.new("UICorner", keyButton)
+            keyCorner.CornerRadius = UDim.new(0, 6)
+
+            local active = kCfg.Active == true
+            local capture = false
+            local function renderKey()
+                keyButton.Text = capture and "PRESS KEY..." or (keyValue == Enum.KeyCode.Unknown and "UNBOUND" or keyValue.Name)
+                keyButton.BackgroundColor3 = capture and COLORS.primaryPressed or (active and COLORS.primary or COLORS.surfaceRaised)
+            end
+            local keyObj = { Value = keyValue, Active = active, Mode = mode, Instance = frame, Button = keyButton }
+            local function fire(nextActive)
+                active = nextActive == true
+                keyObj.Active = active
+                renderKey()
+                pcall(callback, keyValue, active)
+            end
+            function keyObj:SetActive(nextActive) fire(nextActive) end
+            function keyObj:SetValue(value)
+                if type(value) == "string" and Enum.KeyCode[value] then value = Enum.KeyCode[value] end
+                if typeof(value) ~= "EnumItem" then return false end
+                keyValue = value
+                keyObj.Value = value
+                renderKey()
+                return true
+            end
+            function keyObj:SetMode(nextMode)
+                if nextMode ~= "Toggle" and nextMode ~= "Hold" then return false end
+                mode = nextMode
+                keyObj.Mode = nextMode
+                active = false
+                keyObj.Active = false
+                renderKey()
+                return true
+            end
+            function keyObj:Capture()
+                capture = true
+                renderKey()
+            end
+            function keyObj:Get() return keyValue end
+            function keyObj:GetValue() return keyValue end
+            keyButton.Activated:Connect(function() keyObj:Capture() end)
+            local beganConnection = UserInputService.InputBegan:Connect(function(input, processed)
+                if capture then
+                    capture = false
+                    if input.KeyCode == Enum.KeyCode.Escape then keyObj:SetValue(Enum.KeyCode.Unknown)
+                    elseif input.KeyCode ~= Enum.KeyCode.Unknown then keyObj:SetValue(input.KeyCode) end
+                    renderKey()
+                    return
+                end
+                if processed then return end
+                if input.KeyCode ~= Enum.KeyCode.Unknown and input.KeyCode == keyValue then
+                    if mode == "Toggle" then fire(not active) else fire(true) end
+                end
+            end)
+            local endedConnection = UserInputService.InputEnded:Connect(function(input)
+                if mode == "Hold" and active and input.KeyCode == keyValue then fire(false) end
+            end)
+            table.insert(trackedConnections, beganConnection)
+            table.insert(trackedConnections, endedConnection)
+            function keyObj:Destroy()
+                if active then fire(false) end
+                if beganConnection then beganConnection:Disconnect(); beganConnection = nil end
+                if endedConnection then endedConnection:Disconnect(); endedConnection = nil end
+                if frame.Parent then frame:Destroy() end
+            end
+            renderKey()
+            ObsidianGlassEngine.Options[idx] = keyObj
+            return keyObj
+        end
+
+        function TabObj:AddRadioGroup(idx, rCfg)
+            rCfg = type(rCfg) == "table" and rCfg or {}
+            local title = rCfg.Title or "Choose one"
+            local values = type(rCfg.Values) == "table" and rCfg.Values or {}
+            local callback = rCfg.Callback or function() end
+            local current = rCfg.Default
+            if current == nil then current = values[1] end
+            local frame = Instance.new("Frame")
+            frame.Name = "RadioGroup_" .. tostring(idx):gsub("[^%w_]", "_")
+            frame.Size = UDim2.new(1, -10, 0, 44 + #values * 28)
+            frame.BackgroundColor3 = COLORS.glassDeep
+            frame.BackgroundTransparency = 0.18
+            frame.BorderSizePixel = 0
+            frame.Parent = getControlContainer()
+            local corner = Instance.new("UICorner", frame)
+            corner.CornerRadius = UDim.new(0, 8)
+            local titleLabel = Instance.new("TextLabel")
+            titleLabel.Size = UDim2.new(1, -20, 0, 36)
+            titleLabel.Position = UDim2.fromOffset(12, 3)
+            titleLabel.BackgroundTransparency = 1
+            titleLabel.Text = title
+            titleLabel.TextColor3 = COLORS.text
+            titleLabel.Font = Enum.Font.GothamBold
+            titleLabel.TextSize = 12
+            titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+            titleLabel.Parent = frame
+            local object = { Value = current, Instance = frame, Options = values }
+            local buttons = {}
+            local function selectValue(value, emit)
+                current = value
+                object.Value = value
+                for itemValue, parts in pairs(buttons) do
+                    local selected = itemValue == value
+                    parts.Dot.BackgroundColor3 = selected and COLORS.primary or COLORS.surfaceRaised
+                    parts.Label.TextColor3 = selected and COLORS.text or COLORS.textMuted
+                    parts.Stroke.Color = selected and COLORS.primary or COLORS.glassRaised
+                end
+                if emit then pcall(callback, value) end
+            end
+            for index, value in ipairs(values) do
+                local row = Instance.new("TextButton")
+                row.Name = "Option_" .. tostring(index)
+                row.Size = UDim2.new(1, -24, 0, 25)
+                row.Position = UDim2.fromOffset(12, 38 + (index - 1) * 28)
+                row.BackgroundColor3 = COLORS.surface
+                row.BackgroundTransparency = 0.38
+                row.BorderSizePixel = 0
+                row.Text = ""
+                row.AutoButtonColor = false
+                row.Parent = frame
+                local rowCorner = Instance.new("UICorner", row)
+                rowCorner.CornerRadius = UDim.new(0, 5)
+                local rowStroke = Instance.new("UIStroke", row)
+                rowStroke.Color = COLORS.glassRaised
+                rowStroke.Transparency = 0.35
+                local dot = Instance.new("Frame")
+                dot.Size = UDim2.fromOffset(11, 11)
+                dot.Position = UDim2.fromOffset(8, 7)
+                dot.BackgroundColor3 = COLORS.surfaceRaised
+                dot.BorderSizePixel = 0
+                dot.Parent = row
+                local dotCorner = Instance.new("UICorner", dot)
+                dotCorner.CornerRadius = UDim.new(1, 0)
+                local optionLabel = Instance.new("TextLabel")
+                optionLabel.Size = UDim2.new(1, -30, 1, 0)
+                optionLabel.Position = UDim2.fromOffset(27, 0)
+                optionLabel.BackgroundTransparency = 1
+                optionLabel.Text = tostring(value)
+                optionLabel.TextColor3 = COLORS.textMuted
+                optionLabel.Font = Enum.Font.Gotham
+                optionLabel.TextSize = 10
+                optionLabel.TextXAlignment = Enum.TextXAlignment.Left
+                optionLabel.Parent = row
+                buttons[value] = { Row = row, Dot = dot, Label = optionLabel, Stroke = rowStroke }
+                row.Activated:Connect(function() selectValue(value, true) end)
+            end
+            function object:SetValue(value, fireCallback)
+                if not table.find(values, value) then return false end
+                selectValue(value, fireCallback ~= false)
+                return true
+            end
+            function object:Get() return current end
+            function object:GetValue() return current end
+            selectValue(current, false)
+            ObsidianGlassEngine.Options[idx] = object
+            return object
+        end
+
+        function TabObj:AddColorPicker(idx, cCfg)
+            cCfg = type(cCfg) == "table" and cCfg or {}
+            local title = cCfg.Title or "Color"
+            local callback = cCfg.Callback or function() end
+            local current = typeof(cCfg.Default) == "Color3" and cCfg.Default or COLORS.primary
+            local swatches = {
+                Color3.fromRGB(255, 45, 65), Color3.fromRGB(255, 143, 51),
+                Color3.fromRGB(255, 211, 69), Color3.fromRGB(58, 221, 133),
+                Color3.fromRGB(57, 190, 245), Color3.fromRGB(108, 127, 255),
+                Color3.fromRGB(190, 104, 255), Color3.fromRGB(255, 105, 180),
+                Color3.fromRGB(245, 245, 250), Color3.fromRGB(24, 25, 31),
+            }
+            local frame = Instance.new("Frame")
+            frame.Name = "ColorPicker_" .. tostring(idx):gsub("[^%w_]", "_")
+            frame.Size = UDim2.new(1, -10, 0, 44)
+            frame.BackgroundColor3 = COLORS.glassDeep
+            frame.BackgroundTransparency = 0.18
+            frame.BorderSizePixel = 0
+            frame.ClipsDescendants = true
+            frame.Parent = getControlContainer()
+            local corner = Instance.new("UICorner", frame)
+            corner.CornerRadius = UDim.new(0, 8)
+            local stroke = Instance.new("UIStroke", frame)
+            stroke.Color = COLORS.glassRaised
+            stroke.Thickness = 1
+
+            local label = Instance.new("TextLabel")
+            label.Size = UDim2.new(1, -70, 0, 44)
+            label.Position = UDim2.fromOffset(12, 0)
+            label.BackgroundTransparency = 1
+            label.Text = title
+            label.TextColor3 = COLORS.text
+            label.Font = Enum.Font.GothamMedium
+            label.TextSize = 12
+            label.TextXAlignment = Enum.TextXAlignment.Left
+            label.Parent = frame
+            local previewButton = Instance.new("TextButton")
+            previewButton.Size = UDim2.fromOffset(34, 24)
+            previewButton.Position = UDim2.new(1, -46, 0, 10)
+            previewButton.BackgroundColor3 = current
+            previewButton.BorderSizePixel = 0
+            previewButton.Text = ""
+            previewButton.Parent = frame
+            local previewCorner = Instance.new("UICorner", previewButton)
+            previewCorner.CornerRadius = UDim.new(0, 6)
+
+            local palette = Instance.new("Frame")
+            palette.Name = "Palette"
+            palette.Size = UDim2.new(1, -20, 0, 76)
+            palette.Position = UDim2.fromOffset(10, 52)
+            palette.BackgroundTransparency = 1
+            palette.Parent = frame
+            local grid = Instance.new("UIGridLayout", palette)
+            grid.CellSize = UDim2.fromOffset(25, 25)
+            grid.CellPadding = UDim2.fromOffset(6, 5)
+            grid.SortOrder = Enum.SortOrder.LayoutOrder
+
+            local hexBox = Instance.new("TextBox")
+            hexBox.Size = UDim2.new(1, -20, 0, 25)
+            hexBox.Position = UDim2.fromOffset(10, 112)
+            hexBox.BackgroundColor3 = COLORS.surfaceRaised
+            hexBox.BorderSizePixel = 0
+            hexBox.Text = "#" .. current:ToHex()
+            hexBox.PlaceholderText = "#RRGGBB"
+            hexBox.TextColor3 = COLORS.text
+            hexBox.PlaceholderColor3 = COLORS.textMuted
+            hexBox.Font = Enum.Font.Code
+            hexBox.TextSize = 11
+            hexBox.ClearTextOnFocus = false
+            hexBox.Parent = frame
+            local object
+            local function setColor(color, fireCallback)
+                if typeof(color) ~= "Color3" then return false end
+                current = color
+                previewButton.BackgroundColor3 = color
+                hexBox.Text = "#" .. color:ToHex()
+                object.Value = color
+                if fireCallback ~= false then pcall(callback, color) end
+                return true
+            end
+            object = { Value = current, Instance = frame, Preview = previewButton }
+            function object:SetValue(value, fireCallback)
+                if type(value) == "string" then
+                    local hex = value:gsub("^#", "")
+                    if #hex == 6 and hex:match("^%x+$") then
+                        local ok, color = pcall(Color3.fromHex, hex)
+                        if ok then return setColor(color, fireCallback) end
+                    end
+                    return false
+                end
+                return setColor(value, fireCallback)
+            end
+            function object:Get() return current end
+            function object:GetValue() return current end
+            local expanded = false
+            local function setExpanded(value)
+                expanded = value == nil and not expanded or value == true
+                local height = expanded and 146 or 44
+                animate(frame, TweenInfo.new(0.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Size = UDim2.new(1, -10, 0, height) })
+            end
+            previewButton.Activated:Connect(function() setExpanded() end)
+            for order, color in ipairs(swatches) do
+                local swatch = Instance.new("TextButton")
+                swatch.Name = "Swatch_" .. tostring(order)
+                swatch.LayoutOrder = order
+                swatch.BackgroundColor3 = color
+                swatch.BorderSizePixel = 0
+                swatch.Text = ""
+                swatch.Parent = palette
+                local swatchCorner = Instance.new("UICorner", swatch)
+                swatchCorner.CornerRadius = UDim.new(0, 6)
+                swatch.Activated:Connect(function() setColor(color); setExpanded(false) end)
+            end
+            hexBox.FocusLost:Connect(function(enterPressed)
+                if not enterPressed then return end
+                if not object:SetValue(hexBox.Text) then hexBox.Text = "#" .. current:ToHex() end
+            end)
+            ObsidianGlassEngine.Options[idx] = object
+            return object
+        end
+
+        function TabObj:AddStatCard(idx, sCfg)
+            sCfg = type(sCfg) == "table" and sCfg or {}
+            local title = sCfg.Title or "Statistic"
+            local value = sCfg.Default ~= nil and tostring(sCfg.Default) or "--"
+            local caption = tostring(sCfg.Caption or sCfg.Description or "")
+            local accent = typeof(sCfg.Color) == "Color3" and sCfg.Color or COLORS.primary
+            local frame = Instance.new("Frame")
+            frame.Name = "StatCard_" .. tostring(idx):gsub("[^%w_]", "_")
+            frame.Size = UDim2.new(1, -10, 0, 84)
+            frame.BackgroundColor3 = COLORS.glassDeep
+            frame.BackgroundTransparency = 0.05
+            frame.BorderSizePixel = 0
+            frame.ClipsDescendants = true
+            frame.Parent = getControlContainer()
+            local corner = Instance.new("UICorner", frame)
+            corner.CornerRadius = UDim.new(0, 9)
+            local stroke = Instance.new("UIStroke", frame)
+            stroke.Color = COLORS.glassRaised
+            stroke.Thickness = 1
+            local accentBar = Instance.new("Frame")
+            accentBar.Size = UDim2.new(0, 3, 1, -18)
+            accentBar.Position = UDim2.fromOffset(7, 9)
+            accentBar.BackgroundColor3 = accent
+            accentBar.BorderSizePixel = 0
+            accentBar.Parent = frame
+            local titleLabel = Instance.new("TextLabel")
+            titleLabel.Size = UDim2.new(1, -30, 0, 17)
+            titleLabel.Position = UDim2.fromOffset(17, 8)
+            titleLabel.BackgroundTransparency = 1
+            titleLabel.Text = title
+            titleLabel.TextColor3 = COLORS.textMuted
+            titleLabel.Font = Enum.Font.GothamBold
+            titleLabel.TextSize = 9
+            titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+            titleLabel.Parent = frame
+            local valueLabel = Instance.new("TextLabel")
+            valueLabel.Name = "Value"
+            valueLabel.Size = UDim2.new(1, -30, 0, 34)
+            valueLabel.Position = UDim2.fromOffset(17, 25)
+            valueLabel.BackgroundTransparency = 1
+            valueLabel.Text = value
+            valueLabel.TextColor3 = COLORS.text
+            valueLabel.Font = Enum.Font.GothamBold
+            valueLabel.TextSize = 21
+            valueLabel.TextXAlignment = Enum.TextXAlignment.Left
+            valueLabel.TextTruncate = Enum.TextTruncate.AtEnd
+            valueLabel.Parent = frame
+            local captionLabel = Instance.new("TextLabel")
+            captionLabel.Size = UDim2.new(1, -30, 0, 16)
+            captionLabel.Position = UDim2.fromOffset(17, 61)
+            captionLabel.BackgroundTransparency = 1
+            captionLabel.Text = caption
+            captionLabel.TextColor3 = COLORS.textMuted
+            captionLabel.Font = Enum.Font.Gotham
+            captionLabel.TextSize = 9
+            captionLabel.TextXAlignment = Enum.TextXAlignment.Left
+            captionLabel.TextTruncate = Enum.TextTruncate.AtEnd
+            captionLabel.Parent = frame
+            local object = { Value = value, Instance = frame, TitleLabel = titleLabel, ValueLabel = valueLabel, CaptionLabel = captionLabel }
+            function object:SetValue(nextValue)
+                value = tostring(nextValue == nil and "" or nextValue)
+                object.Value = value
+                valueLabel.Text = value
+            end
+            function object:SetCaption(nextCaption)
+                caption = tostring(nextCaption or "")
+                captionLabel.Text = caption
+            end
+            function object:SetColor(color)
+                if typeof(color) ~= "Color3" then return false end
+                accent = color
+                accentBar.BackgroundColor3 = color
+                stroke.Color = color
+                return true
+            end
+            function object:Get() return value end
+            function object:GetValue() return value end
+            ObsidianGlassEngine.Options[idx] = object
+            return object
+        end
+
+        function TabObj:AddBarChart(idx, cCfg)
+            cCfg = type(cCfg) == "table" and cCfg or {}
+            local title = cCfg.Title or "Activity"
+            local maximumPoints = math.clamp(math.floor(tonumber(cCfg.MaxPoints) or 16), 3, 32)
+            local accent = typeof(cCfg.Color) == "Color3" and cCfg.Color or COLORS.primary
+            local frame = Instance.new("Frame")
+            frame.Name = "BarChart_" .. tostring(idx):gsub("[^%w_]", "_")
+            frame.Size = UDim2.new(1, -10, 0, 154)
+            frame.BackgroundColor3 = COLORS.glassDeep
+            frame.BackgroundTransparency = 0.05
+            frame.BorderSizePixel = 0
+            frame.Parent = getControlContainer()
+            local corner = Instance.new("UICorner", frame)
+            corner.CornerRadius = UDim.new(0, 9)
+            local stroke = Instance.new("UIStroke", frame)
+            stroke.Color = COLORS.glassRaised
+            stroke.Thickness = 1
+            local titleLabel = Instance.new("TextLabel")
+            titleLabel.Size = UDim2.new(1, -24, 0, 20)
+            titleLabel.Position = UDim2.fromOffset(12, 7)
+            titleLabel.BackgroundTransparency = 1
+            titleLabel.Text = title
+            titleLabel.TextColor3 = COLORS.text
+            titleLabel.Font = Enum.Font.GothamBold
+            titleLabel.TextSize = 11
+            titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+            titleLabel.Parent = frame
+            local chartArea = Instance.new("Frame")
+            chartArea.Name = "Plot"
+            chartArea.Size = UDim2.new(1, -24, 0, 98)
+            chartArea.Position = UDim2.fromOffset(12, 31)
+            chartArea.BackgroundTransparency = 1
+            chartArea.ClipsDescendants = true
+            chartArea.Parent = frame
+            local gridLines = {}
+            for index = 1, 3 do
+                local line = Instance.new("Frame")
+                line.Size = UDim2.new(1, 0, 0, 1)
+                line.Position = UDim2.new(0, 0, index / 4, 0)
+                line.BackgroundColor3 = COLORS.divider
+                line.BackgroundTransparency = 0.35
+                line.BorderSizePixel = 0
+                line.ZIndex = 1
+                line.Parent = chartArea
+                gridLines[#gridLines + 1] = line
+            end
+            local bars = {}
+            local data = {}
+            local valueLabel = Instance.new("TextLabel")
+            valueLabel.Size = UDim2.new(1, -24, 0, 14)
+            valueLabel.Position = UDim2.new(0, 12, 1, -18)
+            valueLabel.BackgroundTransparency = 1
+            valueLabel.TextColor3 = COLORS.textMuted
+            valueLabel.Font = Enum.Font.Gotham
+            valueLabel.TextSize = 9
+            valueLabel.TextXAlignment = Enum.TextXAlignment.Right
+            valueLabel.Parent = frame
+            local object = { Value = data, Instance = frame, TitleLabel = titleLabel }
+            local function render()
+                for _, bar in ipairs(bars) do bar:Destroy() end
+                table.clear(bars)
+                local maximum = 0
+                for _, point in ipairs(data) do maximum = math.max(maximum, tonumber(point) or 0) end
+                maximum = maximum > 0 and maximum or 1
+                local count = #data
+                for index, point in ipairs(data) do
+                    local amount = math.max(tonumber(point) or 0, 0)
+                    local ratio = amount / maximum
+                    local bar = Instance.new("Frame")
+                    bar.Name = "Bar_" .. tostring(index)
+                    bar.AnchorPoint = Vector2.new(0, 1)
+                    bar.Position = UDim2.new((index - 1) / count + 0.12 / count, 0, 0.96, 0)
+                    bar.Size = UDim2.new(0.76 / count, 0, math.max(0.035, ratio * 0.86), 0)
+                    bar.BackgroundColor3 = accent
+                    bar.BorderSizePixel = 0
+                    bar.ZIndex = 2
+                    bar.Parent = chartArea
+                    local barCorner = Instance.new("UICorner", bar)
+                    barCorner.CornerRadius = UDim.new(0, 4)
+                    local pointTip = Instance.new("TextLabel")
+                    pointTip.Name = "Value"
+                    pointTip.Size = UDim2.fromScale(1, 1)
+                    pointTip.BackgroundTransparency = 1
+                    pointTip.Text = tostring(point)
+                    pointTip.TextColor3 = COLORS.text
+                    pointTip.Font = Enum.Font.GothamBold
+                    pointTip.TextSize = 8
+                    pointTip.TextTransparency = 1
+                    pointTip.Parent = bar
+                    bar.MouseEnter:Connect(function() pointTip.TextTransparency = 0 end)
+                    bar.MouseLeave:Connect(function() pointTip.TextTransparency = 1 end)
+                    bars[#bars + 1] = bar
+                end
+                valueLabel.Text = count > 0 and (tostring(data[#data]) .. " latest  /  " .. tostring(maximum) .. " peak") or "No data"
+                object.Value = data
+            end
+            function object:SetData(nextData)
+                data = {}
+                if type(nextData) == "table" then
+                    local first = math.max(1, #nextData - maximumPoints + 1)
+                    for index = first, #nextData do
+                        local number = tonumber(nextData[index])
+                        if number then data[#data + 1] = number end
+                    end
+                end
+                render()
+            end
+            function object:SetValue(nextData) object:SetData(nextData) end
+            function object:Push(point)
+                local number = tonumber(point)
+                if not number then return false end
+                data[#data + 1] = number
+                while #data > maximumPoints do table.remove(data, 1) end
+                render()
+                return true
+            end
+            function object:SetColor(color)
+                if typeof(color) ~= "Color3" then return false end
+                accent = color
+                stroke.Color = color
+                render()
+                return true
+            end
+            function object:Get() return data end
+            function object:GetValue() return data end
+            object:SetData(cCfg.Values or cCfg.Data or {})
+            ObsidianGlassEngine.Options[idx] = object
+            return object
+        end
+
+        function TabObj:AddProgressBar(idx, pCfg)
+            pCfg = type(pCfg) == "table" and pCfg or {}
+            local title = pCfg.Title or "Progress"
+            local callback = pCfg.Callback or function() end
+            local minimum = tonumber(pCfg.Min) or 0
+            local maximum = tonumber(pCfg.Max) or 100
+            if maximum <= minimum then maximum = minimum + 1 end
+            local value = math.clamp(tonumber(pCfg.Default) or minimum, minimum, maximum)
+            local frame = Instance.new("Frame")
+            frame.Name = "Progress_" .. tostring(idx):gsub("[^%w_]", "_")
+            frame.Size = UDim2.new(1, -10, 0, 58)
+            frame.BackgroundColor3 = COLORS.glassDeep
+            frame.BackgroundTransparency = 0.18
+            frame.BorderSizePixel = 0
+            frame.Parent = getControlContainer()
+            local corner = Instance.new("UICorner", frame)
+            corner.CornerRadius = UDim.new(0, 8)
+            local titleLabel = Instance.new("TextLabel")
+            titleLabel.Size = UDim2.new(1, -70, 0, 20)
+            titleLabel.Position = UDim2.fromOffset(12, 6)
+            titleLabel.BackgroundTransparency = 1
+            titleLabel.Text = title
+            titleLabel.TextColor3 = COLORS.text
+            titleLabel.Font = Enum.Font.GothamMedium
+            titleLabel.TextSize = 12
+            titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+            titleLabel.Parent = frame
+            local valueLabel = Instance.new("TextLabel")
+            valueLabel.Size = UDim2.new(0, 58, 0, 20)
+            valueLabel.Position = UDim2.new(1, -68, 0, 6)
+            valueLabel.BackgroundTransparency = 1
+            valueLabel.TextColor3 = COLORS.textMuted
+            valueLabel.Font = Enum.Font.GothamBold
+            valueLabel.TextSize = 10
+            valueLabel.TextXAlignment = Enum.TextXAlignment.Right
+            valueLabel.Parent = frame
+            local track = Instance.new("Frame")
+            track.Size = UDim2.new(1, -24, 0, 8)
+            track.Position = UDim2.fromOffset(12, 36)
+            track.BackgroundColor3 = COLORS.surfaceRaised
+            track.BorderSizePixel = 0
+            track.Parent = frame
+            local trackCorner = Instance.new("UICorner", track)
+            trackCorner.CornerRadius = UDim.new(1, 0)
+            local fill = Instance.new("Frame")
+            fill.Size = UDim2.new((value - minimum) / (maximum - minimum), 0, 1, 0)
+            fill.BackgroundColor3 = pCfg.Color or COLORS.primary
+            fill.BorderSizePixel = 0
+            fill.Parent = track
+            local fillCorner = Instance.new("UICorner", fill)
+            fillCorner.CornerRadius = UDim.new(1, 0)
+            local progress = { Value = value, Instance = frame, Minimum = minimum, Maximum = maximum }
+            function progress:SetValue(nextValue, fireCallback)
+                value = math.clamp(tonumber(nextValue) or minimum, minimum, maximum)
+                progress.Value = value
+                local ratio = (value - minimum) / (maximum - minimum)
+                animate(fill, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { Size = UDim2.new(ratio, 0, 1, 0) })
+                valueLabel.Text = tostring(math.floor(ratio * 100 + 0.5)) .. "%"
+                if fireCallback ~= false then pcall(callback, value, ratio) end
+            end
+            function progress:SetColor(color)
+                if typeof(color) ~= "Color3" then return false end
+                fill.BackgroundColor3 = color
+                return true
+            end
+            function progress:SetTitle(text) titleLabel.Text = tostring(text or "") end
+            function progress:Get() return value end
+            progress:SetValue(value)
+            ObsidianGlassEngine.Options[idx] = progress
+            return progress
+        end
+
         function TabObj:AddParagraph(title, desc)
             local frame = Instance.new("Frame")
             frame.Size = UDim2.new(1, -10, 0, 54)
             frame.BackgroundColor3 = COLORS.glassDeep
             frame.BackgroundTransparency = 0.18
             frame.BorderSizePixel = 0
-            frame.Parent = TabObj.CurrentContainer or pageScroll
+            frame.Parent = getControlContainer()
 
             local fCorner = Instance.new("UICorner")
             fCorner.CornerRadius = UDim.new(0, 8)
@@ -2277,6 +3654,24 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                         native:SetOptions(options, default, preserve)
                     end
                 end
+                function handle:Destroy()
+                    if self.Destroyed then return end
+                    self.Destroyed = true
+                    if self.Active == true and type(self.SetActive) == "function" then pcall(self.SetActive, self, false) end
+                    if self.Value == true and type(self.Set) == "function" then pcall(self.Set, self, false) end
+                    if self._dependencyConnection then pcall(function() self._dependencyConnection:Disconnect() end) end
+                    if self.Tooltip and self.Tooltip.Parent then self.Tooltip:Destroy() end
+                    if type(native) == "table" and type(native.Destroy) == "function" then
+                        pcall(native.Destroy, native)
+                    else
+                        local target = self.Instance
+                        if target and target.Parent then
+                            if target:IsA("TextButton") and target.Parent:IsA("Frame") then target.Parent:Destroy()
+                            else target:Destroy() end
+                        end
+                    end
+                    if changed and changed.Parent then changed:Destroy() end
+                end
                 handle._controller = { GetValue = function() return handle.Value end }
                 handle.JoinExclusiveGroup = function(_, group)
                     if type(group) ~= "table" then return end
@@ -2295,21 +3690,35 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                         end
                     end
                 end
+                setmetatable(handle, {
+                    __index = function(_, property)
+                        if type(native) ~= "table" then return nil end
+                        local member = native[property]
+                        if type(member) == "function" then
+                            return function(_, ...)
+                                return member(native, ...)
+                            end
+                        end
+                        return member
+                    end,
+                })
                 return handle, changed, callback
             end
 
-            local function addControl(source, kind)
+            local function addControl(source, kind, containerOverride)
                 source = type(source) == "table" and source or {}
                 widgetIndex += 1
+                local previousContainer = activeControlContainer
+                activeControlContainer = containerOverride
                 local mapped = mapConfig(source)
                 local callback = source.Callback
                 local handle
-                mapped.Callback = function(value)
+                mapped.Callback = function(value, ...)
                     if handle then
                         handle.Value = value
-                        if not handle._suppress and handle._changed then handle._changed:Fire(value) end
+                        if not handle._suppress and handle._changed then handle._changed:Fire(value, ...) end
                     end
-                    if callback and not (handle and handle._suppress) then pcall(callback, value) end
+                    if callback and not (handle and handle._suppress) then pcall(callback, value, ...) end
                 end
                 local optionId = tostring(tab.TitleLabel.Text) .. "/" .. tostring(source.Name or kind) .. "/" .. tostring(widgetIndex)
                 local native
@@ -2323,16 +3732,87 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                     native = tab:AddMultiDropdown(optionId, mapped)
                 elseif kind == "Input" then
                     native = tab:AddInput(optionId, mapped)
+                elseif kind == "Keybind" then
+                    native = tab:AddKeybind(optionId, mapped)
+                elseif kind == "ColorPicker" then
+                    native = tab:AddColorPicker(optionId, mapped)
+                elseif kind == "RadioGroup" then
+                    native = tab:AddRadioGroup(optionId, mapped)
+                elseif kind == "ProgressBar" then
+                    native = tab:AddProgressBar(optionId, mapped)
+                elseif kind == "StatCard" then
+                    native = tab:AddStatCard(optionId, mapped)
+                elseif kind == "BarChart" then
+                    native = tab:AddBarChart(optionId, mapped)
+                elseif kind == "Callout" then
+                    native = tab:AddCallout(source.Name or source.Title or "Notice", source.Text or source.Message or "", source.Kind)
                 elseif kind == "Button" then
                     native = tab:AddButton(mapped)
                 else
                     native = tab:AddParagraph(source.Name or kind, source.Text or source.Note or "")
                 end
                 handle = makeHandle(native, source, source.Default)
+                handle.Name = tostring(source.Name or source.Title or kind)
+                handle.Key = optionId
+                ObsidianGlassEngine.Options[optionId] = handle
+                table.insert(controlRegistry, handle)
                 if type(source.Placeholder) == "string" and handle.Instance then
                     local box = handle.Instance:FindFirstChildWhichIsA("TextBox", true)
                     if box then box.PlaceholderText = source.Placeholder end
                 end
+                local tipText = source.Tooltip or source.Note or source.Description
+                if type(tipText) == "string" and tipText ~= "" and handle.Instance and handle.Instance:IsA("GuiObject") then
+                    local tooltip = Instance.new("Frame")
+                    tooltip.Name = "ControlTooltip"
+                    tooltip.Size = UDim2.fromOffset(250, 0)
+                    tooltip.AutomaticSize = Enum.AutomaticSize.Y
+                    tooltip.BackgroundColor3 = COLORS.glass
+                    tooltip.BorderSizePixel = 0
+                    tooltip.Visible = false
+                    tooltip.ZIndex = 120
+                    tooltip.Parent = gui
+                    handle.Tooltip = tooltip
+                    local tipCorner = Instance.new("UICorner", tooltip)
+                    tipCorner.CornerRadius = UDim.new(0, 7)
+                    local tipStroke = Instance.new("UIStroke", tooltip)
+                    tipStroke.Color = COLORS.primary
+                    tipStroke.Transparency = 0.15
+                    local tipLabel = Instance.new("TextLabel")
+                    tipLabel.Size = UDim2.new(1, -18, 0, 0)
+                    tipLabel.Position = UDim2.fromOffset(9, 7)
+                    tipLabel.AutomaticSize = Enum.AutomaticSize.Y
+                    tipLabel.BackgroundTransparency = 1
+                    tipLabel.Text = tipText
+                    tipLabel.TextColor3 = COLORS.text
+                    tipLabel.Font = Enum.Font.Gotham
+                    tipLabel.TextSize = 10
+                    tipLabel.TextWrapped = true
+                    tipLabel.TextXAlignment = Enum.TextXAlignment.Left
+                    tipLabel.ZIndex = 121
+                    tipLabel.Parent = tooltip
+                    local tipPadding = Instance.new("UIPadding", tooltip)
+                    tipPadding.PaddingBottom = UDim.new(0, 7)
+                    local function showTooltip()
+                        local cameraNow = workspace.CurrentCamera
+                        local viewport = cameraNow and cameraNow.ViewportSize or Vector2.new(800, 600)
+                        local point = handle.Instance.AbsolutePosition
+                        local x = math.clamp(point.X + 12, 8, math.max(8, viewport.X - 266))
+                        local y = math.clamp(point.Y + handle.Instance.AbsoluteSize.Y + 5, 8, math.max(8, viewport.Y - 82))
+                        tooltip.Position = UDim2.fromOffset(x, y)
+                        tooltip.Visible = true
+                    end
+                    handle.Instance.MouseEnter:Connect(showTooltip)
+                    handle.Instance.MouseLeave:Connect(function() tooltip.Visible = false end)
+                    if UserInputService.TouchEnabled then
+                        handle.Instance.InputBegan:Connect(function(input)
+                            if input.UserInputType == Enum.UserInputType.Touch then
+                                showTooltip()
+                                task.delay(2.4, function() if tooltip.Parent then tooltip.Visible = false end end)
+                            end
+                        end)
+                    end
+                end
+                activeControlContainer = previousContainer
 
                 local dependency = source.ShowWhen or source.SubOf
                 if type(dependency) == "table" and type(dependency.Get) == "function" and handle.Instance and handle.Instance:IsA("GuiObject") then
@@ -2340,7 +3820,9 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                         local dependencyValue = dependency:Get()
                         if type(dependencyValue) == "boolean" then handle.Instance.Visible = dependencyValue end
                     end
-                    if type(dependency.Subscribe) == "function" then dependency:Subscribe(updateVisible) end
+                    if type(dependency.Subscribe) == "function" then
+                        handle._dependencyConnection = dependency:Subscribe(updateVisible)
+                    end
                     updateVisible()
                 end
                 return handle
@@ -2349,7 +3831,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             function tab:CreateSection(config)
                 config = type(config) == "table" and config or { Name = tostring(config or "Section") }
                 local title = config.Name or config.Title or "Section"
-                local _, sectionContainer, setExpanded = self:AddSection(title)
+                local _, sectionContainer, setExpanded = self:AddSection(title, config)
                 sectionIndex += 1
                 local section = { Tab = self, Name = title, Expanded = config.Expanded ~= false, Container = sectionContainer }
                 setExpanded(section.Expanded)
@@ -2363,6 +3845,13 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                     CreateDropdown = "Dropdown",
                     CreateMultiDropdown = "MultiDropdown",
                     CreateInput = "Input",
+                    CreateKeybind = "Keybind",
+                    CreateColorPicker = "ColorPicker",
+                    CreateRadioGroup = "RadioGroup",
+                    CreateProgressBar = "ProgressBar",
+                    CreateStatCard = "StatCard",
+                    CreateBarChart = "BarChart",
+                    CreateCallout = "Callout",
                     CreateButton = "Button",
                     CreateText = "Text",
                     CreateLabel = "Label",
@@ -2370,7 +3859,16 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 return setmetatable(section, {
                     __index = function(sectionObject, methodName)
                         local kind = methods[methodName]
-                        if kind then return function(_, source) return addControl(source, kind) end end
+                        if kind then return function(_, source) return addControl(source, kind, sectionContainer) end end
+                        if methodName == "CreateDivider" then
+                            return function(_, text)
+                                local previous = activeControlContainer
+                                activeControlContainer = sectionContainer
+                                local divider = TabObj:AddDivider(text)
+                                activeControlContainer = previous
+                                return divider
+                            end
+                        end
                         return nil
                     end,
                 })
@@ -2381,6 +3879,14 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             function tab:CreateDropdown(source) return addControl(source, "Dropdown") end
             function tab:CreateMultiDropdown(source) return addControl(source, "MultiDropdown") end
             function tab:CreateInput(source) return addControl(source, "Input") end
+            function tab:CreateKeybind(source) return addControl(source, "Keybind") end
+            function tab:CreateColorPicker(source) return addControl(source, "ColorPicker") end
+            function tab:CreateRadioGroup(source) return addControl(source, "RadioGroup") end
+            function tab:CreateProgressBar(source) return addControl(source, "ProgressBar") end
+            function tab:CreateStatCard(source) return addControl(source, "StatCard") end
+            function tab:CreateBarChart(source) return addControl(source, "BarChart") end
+            function tab:CreateCallout(source) return addControl(source, "Callout") end
+            function tab:CreateDivider(label) return self:AddDivider(label) end
             function tab:CreateButton(source) return addControl(source, "Button") end
             function tab:CreateText(source) return addControl(source, "Text") end
             function tab:CreateLabel(source) return addControl(source, "Label") end
@@ -2395,11 +3901,17 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         local defaultTab
         WindowObj.Shell = shell
         WindowObj.Gui = gui
+        WindowObj.TitleLabel = mainTitle
+        WindowObj.SubtitleLabel = mainSubTitle
+        WindowObj.VersionLabel = vtLabel
         WindowObj.Toggle = function()
             shell.Visible = not shell.Visible
             return shell.Visible
         end
         WindowObj.Close = function() shell.Visible = false end
+        function WindowObj:Unload()
+            unloadWindow()
+        end
         WindowObj.States = states
 
         function WindowObj:GetDefaultTab()
@@ -2414,118 +3926,563 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             return self:AddTab({ Title = tabCfg.Name or tabCfg.Title or "Tab", Icon = tabCfg.Icon or "" })
         end
 
+        function WindowObj:SetTheme(theme)
+            return ObsidianGlassEngine:SetTheme(theme)
+        end
+        function WindowObj:GetTheme()
+            return ObsidianGlassEngine:GetTheme()
+        end
+        function WindowObj:GetThemes()
+            return ObsidianGlassEngine:GetThemes()
+        end
+        function WindowObj:SetMotion(mode)
+            if mode ~= "Full" and mode ~= "Subtle" and mode ~= "Off" then
+                return false, "Motion must be Full, Subtle, or Off"
+            end
+            motionMode = mode
+            return true
+        end
+        function WindowObj:SetEffects(name, value)
+            local valid = { Lightning = true, Sparks = true, CapsuleSparks = true, Sound = true, Intro = true, SparkCount = true, CapsuleSparkCount = true }
+            if not valid[name] then return false, "Unknown effect" end
+            if name == "Intro" then return false, "Intro can only be set before creating the window" end
+            if name == "SparkCount" then
+                effectState[name] = math.clamp(tonumber(value) or effectState[name], 0, #plasmaSparkFrames)
+            elseif name == "CapsuleSparkCount" then
+                effectState[name] = math.clamp(tonumber(value) or effectState[name], 0, #capsuleSparkFrames)
+            else
+                effectState[name] = value == true
+            end
+            if name == "Sound" then ObsidianGlassEngine.SoundsEnabled = effectState.Sound end
+            for index, spark in ipairs(plasmaSparkFrames) do
+                spark.Visible = effectState.Sparks and index <= effectState.SparkCount
+            end
+            for index, spark in ipairs(capsuleSparkFrames) do
+                spark.Visible = effectState.CapsuleSparks and index <= effectState.CapsuleSparkCount
+            end
+            return true
+        end
+
+        function WindowObj:CreateAppearanceTab(title)
+            local tab = self:AddTab({ Title = title or "Appearance", Icon = "✦" })
+            local themeSection = tab:CreateSection({ Name = "Theme & Motion" })
+            themeSection:CreateDropdown({
+                Name = "Color Theme",
+                Options = self:GetThemes(),
+                Default = self:GetTheme(),
+                Callback = function(themeName) self:SetTheme(themeName) end,
+            })
+            themeSection:CreateDropdown({
+                Name = "Motion",
+                Options = { "Full", "Subtle", "Off" },
+                Default = motionMode,
+                Callback = function(mode) self:SetMotion(mode) end,
+            })
+
+            local effectsSection = tab:CreateSection({ Name = "Interface Effects" })
+            local function addEffectToggle(name, titleText)
+                effectsSection:CreateToggle({
+                    Name = titleText,
+                    Default = effectState[name],
+                    Callback = function(enabled) self:SetEffects(name, enabled) end,
+                })
+            end
+            addEffectToggle("Lightning", "Lightning accents")
+            addEffectToggle("Sparks", "Floating sparks")
+            addEffectToggle("CapsuleSparks", "Capsule sparks")
+            addEffectToggle("Sound", "Click sound")
+            effectsSection:CreateDropdown({
+                Name = "Spark density",
+                Options = { "0", "2", "4", "6", "8", "10" },
+                Default = tostring(effectState.SparkCount),
+                Callback = function(count) self:SetEffects("SparkCount", tonumber(count)) end,
+            })
+            effectsSection:CreateDropdown({
+                Name = "Capsule spark density",
+                Options = { "0", "1", "2", "3", "4", "5", "6" },
+                Default = tostring(effectState.CapsuleSparkCount),
+                Callback = function(count) self:SetEffects("CapsuleSparkCount", tonumber(count)) end,
+            })
+            return tab
+        end
+        WindowObj.CreateSettingsTab = WindowObj.CreateAppearanceTab
+
         function WindowObj:CreateState(stateCfg)
             stateCfg = type(stateCfg) == "table" and stateCfg or { Name = tostring(stateCfg or "State") }
-            local name = stateCfg.Name or "State"
+            local name = tostring(stateCfg.Name or "State")
             if states[name] then return states[name] end
             local state = { Name = name, Value = stateCfg.Default }
             local changed = Instance.new("BindableEvent")
-            changed.Name = "StateChanged_" .. tostring(name):gsub("%W", "")
+            changed.Name = "StateChanged_" .. name:gsub("[^%w_]", "_")
             changed.Parent = gui
-            function state:Get() return state.Value end
-            function state:GetValue() return state.Value end
-            function state:Set(value, fireCallback)
-                state.Value = value
-                if fireCallback ~= false then changed:Fire(value) end
-                return value
+            function state:Get() return self.Value end
+            function state:GetValue() return self.Value end
+            function state:Set(value)
+                if self.Value == value then return end
+                self.Value = value
+                changed:Fire(value)
             end
-            function state:Subscribe(fn) return changed.Event:Connect(fn) end
-            state._controller = { GetValue = function() return state.Value end }
+            function state:Subscribe(callback)
+                return changed.Event:Connect(callback)
+            end
             states[name] = state
             return state
         end
-
         function WindowObj:GetState(name)
-            return states[name] or self:CreateState({ Name = name, Default = nil })
+            return states[name]
+        end
+        function WindowObj:CreateExclusiveGroup(groupCfg)
+            groupCfg = type(groupCfg) == "table" and groupCfg or {}
+            return { Name = groupCfg.Name or "ExclusiveGroup", MaxActive = 1, Members = {} }
         end
 
-        function WindowObj:CreateExclusiveGroup(config)
-            config = type(config) == "table" and config or {}
-            return { Name = config.Name or "Exclusive Group", MaxActive = config.MaxActive or 1, Members = {} }
+    function WindowObj:SetTitle(value)
+        mainTitle.Text = tostring(value or "")
+    end
+    WindowObj.Logo = cfg.Logo or DEFAULT_BRAND_LOGO
+    function WindowObj:SetLogo(source)
+        source = type(source) == "string" and source ~= "" and source or DEFAULT_BRAND_LOGO
+        self.Logo = source
+        local function applyLogo(asset)
+            for _, image in ipairs({ introLogo, capAvatarImg, avatarImg }) do
+                if image and image.Parent then image.Image = asset end
+            end
+        end
+        applyLogo(loadIntroLogoImage(source, applyLogo))
+        return true
+    end
+    function WindowObj:SetSubtitle(value)
+        mainSubTitle.Text = tostring(value or "")
+    end
+        function WindowObj:SetVersionTag(value)
+            vtLabel.Text = tostring(value or "")
+        end
+        function WindowObj:SetUIScale(value)
+            uiScale.Scale = math.clamp(tonumber(value) or 1, 0.45, 1.25)
+            return uiScale.Scale
+        end
+        function WindowObj:Center()
+            shell.AnchorPoint = Vector2.new(0.5, 0.5)
+            shell.Position = UDim2.fromScale(0.5, 0.5)
+        end
+        function WindowObj:SelectTab(target)
+            local title = type(target) == "table" and target.TitleLabel and target.TitleLabel.Text or tostring(target or "")
+            for _, tab in ipairs(self.Tabs) do
+                if tab == target or tab.TitleLabel.Text == title then
+                    tab.Activate()
+                    return true
+                end
+            end
+            return false
+        end
+        function WindowObj:RemoveTab(target)
+            for index = #self.Tabs, 1, -1 do
+                local tab = self.Tabs[index]
+                local title = type(target) == "table" and target.TitleLabel and target.TitleLabel.Text or tostring(target or "")
+                if tab == target or tab.TitleLabel.Text == title then
+                    for _, control in ipairs(tab.Controls or {}) do
+                        if type(control.Destroy) == "function" then pcall(control.Destroy, control) end
+                    end
+                    if tab.Page then tab.Page:Destroy() end
+                    if tab.Button then tab.Button:Destroy() end
+                    for key, control in pairs(self.Options) do
+                        if type(control) == "table" and type(control.Key) == "string" and control.Key:sub(1, #title + 1) == title .. "/" then
+                            self.Options[key] = nil
+                        end
+                    end
+                    table.remove(self.Tabs, index)
+                    if self.CurrentTab == tab then
+                        self.CurrentTab = nil
+                        if self.Tabs[1] then self.Tabs[1].Activate() end
+                    end
+                    return true
+                end
+            end
+            return false
+        end
+        function WindowObj:GetControls()
+            local result = {}
+            for _, tab in ipairs(self.Tabs) do
+                for _, control in ipairs(tab.Controls or {}) do
+                    result[#result + 1] = control
+                end
+            end
+            return result
+        end
+        function WindowObj:FindControl(query)
+            if query == nil then return nil end
+            local search = tostring(query)
+            if self.Options[search] then return self.Options[search] end
+            local lowerSearch = string.lower(search)
+            for _, control in ipairs(self:GetControls()) do
+                if string.lower(tostring(control.Name or "")) == lowerSearch
+                    or string.lower(tostring(control.Key or "")) == lowerSearch then
+                    return control
+                end
+            end
+            return nil
+        end
+        function WindowObj:Search(query)
+            local needle = string.lower(tostring(query or "")):gsub("^%s+", ""):gsub("%s+$", "")
+            local visibleCount = 0
+            for _, control in ipairs(self:GetControls()) do
+                local instance = control.Instance
+                if instance and instance.Parent then
+                    local text = tostring(control.Name or "")
+                    for _, descendant in ipairs(instance:GetDescendants()) do
+                        if descendant:IsA("TextLabel") or descendant:IsA("TextButton") then
+                            text ..= " " .. descendant.Text
+                        end
+                    end
+                    local match = needle == "" or string.find(string.lower(text), needle, 1, true) ~= nil
+                    instance.Visible = match
+                    if match then visibleCount += 1 end
+                end
+            end
+            return visibleCount
         end
 
-        function WindowObj:Finalize()
-            return self
+        local function packConfigValue(value)
+            local valueType = typeof(value)
+            if valueType == "Color3" then return { __PBZType = "Color3", Value = value:ToHex() } end
+            if valueType == "EnumItem" then
+                return { __PBZType = "EnumItem", EnumType = value.EnumType.Name, Value = value.Name }
+            end
+            if type(value) == "table" then
+                local packed = {}
+                for key, item in pairs(value) do packed[key] = packConfigValue(item) end
+                return packed
+            end
+            if type(value) == "string" or type(value) == "number" or type(value) == "boolean" or value == nil then
+                return value
+            end
+            return nil
+        end
+        local function unpackConfigValue(value)
+            if type(value) ~= "table" then return value end
+            if value.__PBZType == "Color3" and type(value.Value) == "string" then
+                local ok, color = pcall(Color3.fromHex, value.Value)
+                if ok then return color end
+                return nil
+            end
+            if value.__PBZType == "EnumItem" and Enum[value.EnumType] then
+                return Enum[value.EnumType][value.Value]
+            end
+            local unpacked = {}
+            for key, item in pairs(value) do unpacked[key] = unpackConfigValue(item) end
+            return unpacked
+        end
+        function WindowObj:ExportConfig()
+            local controls = {}
+            for _, control in ipairs(self:GetControls()) do
+                if control.Key and control.Value ~= nil then
+                    controls[control.Key] = packConfigValue(control.Value)
+                end
+            end
+            return {
+                Version = 1,
+                Theme = self:GetTheme(),
+                Motion = motionMode,
+                Controls = controls,
+            }
+        end
+        function WindowObj:ApplyConfig(config)
+            if type(config) ~= "table" then return false, "Config must be a table" end
+            if type(config.Theme) == "string" then self:SetTheme(config.Theme) end
+            if config.Motion then self:SetMotion(config.Motion) end
+            local applied = 0
+            for key, storedValue in pairs(type(config.Controls) == "table" and config.Controls or {}) do
+                local control = self:FindControl(key)
+                local value = unpackConfigValue(storedValue)
+                if control and value ~= nil and type(control.Set) == "function" then
+                    control:Set(value, false)
+                    applied += 1
+                end
+            end
+            return true, applied
+        end
+        function WindowObj:CreateConfigManager()
+            local window = self
+            local profiles = {}
+            local manager = { Profiles = profiles }
+            function manager:Save(name)
+                name = tostring(name or "")
+                if name == "" then return false, "Profile name is required" end
+                profiles[name] = window:ExportConfig()
+                return true
+            end
+            function manager:Load(name)
+                local config = profiles[tostring(name or "")]
+                if not config then return false, "Profile not found" end
+                return window:ApplyConfig(config)
+            end
+            function manager:Delete(name)
+                name = tostring(name or "")
+                if not profiles[name] then return false end
+                profiles[name] = nil
+                return true
+            end
+            function manager:List()
+                local names = {}
+                for name in pairs(profiles) do names[#names + 1] = name end
+                table.sort(names)
+                return names
+            end
+            function manager:Encode(name)
+                local config = name and profiles[tostring(name)] or window:ExportConfig()
+                if not config then return nil, "Profile not found" end
+                local ok, encoded = pcall(function() return HttpService:JSONEncode(config) end)
+                if not ok then return nil, tostring(encoded) end
+                return encoded
+            end
+            function manager:Import(encoded, profileName, applyNow)
+                local ok, config = pcall(function() return HttpService:JSONDecode(encoded) end)
+                if not ok or type(config) ~= "table" then return false, "Invalid config JSON" end
+                if profileName then profiles[tostring(profileName)] = config end
+                if applyNow == true then return window:ApplyConfig(config) end
+                return true
+            end
+            return manager
+        end
+
+        function WindowObj:CreateCommandPalette(commandList)
+            if self.CommandPalette then return self.CommandPalette end
+            local commands = {}
+            local overlay = Instance.new("Frame")
+            overlay.Name = "CommandPaletteOverlay"
+            overlay.Size = UDim2.fromScale(1, 1)
+            overlay.BackgroundColor3 = COLORS.backdrop
+            overlay.BackgroundTransparency = 0.28
+            overlay.Visible = false
+            overlay.ZIndex = 80
+            overlay.Parent = gui
+            local outside = Instance.new("TextButton")
+            outside.Size = UDim2.fromScale(1, 1)
+            outside.BackgroundTransparency = 1
+            outside.Text = ""
+            outside.ZIndex = 80
+            outside.Parent = overlay
+            local panel = Instance.new("Frame")
+            panel.Name = "PalettePanel"
+            panel.Size = UDim2.new(0, 470, 0, 380)
+            panel.AnchorPoint = Vector2.new(0.5, 0.5)
+            panel.Position = UDim2.fromScale(0.5, 0.44)
+            panel.BackgroundColor3 = COLORS.glass
+            panel.BorderSizePixel = 0
+            panel.ZIndex = 81
+            panel.Parent = overlay
+            local panelCorner = Instance.new("UICorner", panel)
+            panelCorner.CornerRadius = UDim.new(0, 13)
+            local panelStroke = Instance.new("UIStroke", panel)
+            panelStroke.Color = COLORS.primary
+            panelStroke.Thickness = 1.3
+            local title = Instance.new("TextLabel")
+            title.Size = UDim2.new(1, -24, 0, 26)
+            title.Position = UDim2.fromOffset(12, 9)
+            title.BackgroundTransparency = 1
+            title.Text = "COMMAND CONSOLE"
+            title.TextColor3 = COLORS.primary
+            title.Font = Enum.Font.GothamBold
+            title.TextSize = 12
+            title.TextXAlignment = Enum.TextXAlignment.Left
+            title.ZIndex = 82
+            title.Parent = panel
+            local search = Instance.new("TextBox")
+            search.Name = "CommandSearch"
+            search.Size = UDim2.new(1, -24, 0, 38)
+            search.Position = UDim2.fromOffset(12, 42)
+            search.BackgroundColor3 = COLORS.input
+            search.BorderSizePixel = 0
+            search.PlaceholderText = "Search commands..."
+            search.Text = ""
+            search.TextColor3 = COLORS.text
+            search.PlaceholderColor3 = COLORS.textMuted
+            search.Font = Enum.Font.Gotham
+            search.TextSize = 12
+            search.ClearTextOnFocus = false
+            search.ZIndex = 82
+            search.Parent = panel
+            local searchCorner = Instance.new("UICorner", search)
+            searchCorner.CornerRadius = UDim.new(0, 7)
+            local results = Instance.new("ScrollingFrame")
+            results.Name = "CommandResults"
+            results.Size = UDim2.new(1, -24, 1, -102)
+            results.Position = UDim2.fromOffset(12, 88)
+            results.BackgroundTransparency = 1
+            results.BorderSizePixel = 0
+            results.ScrollBarThickness = 3
+            results.ScrollBarImageColor3 = COLORS.primary
+            results.CanvasSize = UDim2.new()
+            results.ZIndex = 82
+            results.Parent = panel
+            local resultLayout = Instance.new("UIListLayout", results)
+            resultLayout.Padding = UDim.new(0, 5)
+            resultLayout.SortOrder = Enum.SortOrder.LayoutOrder
+            local resultPadding = Instance.new("UIPadding", results)
+            resultPadding.PaddingBottom = UDim.new(0, 4)
+            local rows = {}
+            local selectedIndex = 1
+            local function commandMatches(command, query)
+                local haystack = string.lower(table.concat({
+                    tostring(command.Name or ""),
+                    tostring(command.Description or ""),
+                    tostring(command.Category or ""),
+                    tostring(command.Keywords or ""),
+                }, " "))
+                for token in string.gmatch(string.lower(query), "%S+") do
+                    if not string.find(haystack, token, 1, true) then return false end
+                end
+                return true
+            end
+            local function selectRow(index)
+                if #rows == 0 then selectedIndex = 0; return end
+                selectedIndex = math.clamp(index, 1, #rows)
+                for rowIndex, row in ipairs(rows) do
+                    row.Button.BackgroundColor3 = rowIndex == selectedIndex and COLORS.surfaceHover or COLORS.surface
+                    row.ButtonStroke.Color = rowIndex == selectedIndex and COLORS.primary or COLORS.glassRaised
+                end
+                local row = rows[selectedIndex]
+                if row then
+                    local y = row.Button.Position.Y.Offset
+                    results.CanvasPosition = Vector2.new(0, math.max(0, y - 120))
+                end
+            end
+            local function runCommand(command)
+                if type(command.Callback) ~= "function" then return false end
+                overlay.Visible = false
+                search:ReleaseFocus()
+                local success, err = pcall(command.Callback, self)
+                if not success then ObsidianGlassEngine:Notify({ Type = "Error", Title = "Command failed", Content = tostring(err) }) end
+                return success
+            end
+            local function refresh()
+                for _, row in ipairs(rows) do row.Button:Destroy() end
+                table.clear(rows)
+                local query = search.Text
+                for _, command in ipairs(commands) do
+                    if commandMatches(command, query) then
+                        local rowButton = Instance.new("TextButton")
+                        rowButton.Name = "Command_" .. tostring(command.Name):gsub("[^%w_]", "_")
+                        rowButton.Size = UDim2.new(1, -4, 0, 52)
+                        rowButton.BackgroundColor3 = COLORS.surface
+                        rowButton.BorderSizePixel = 0
+                        rowButton.AutoButtonColor = false
+                        rowButton.Text = ""
+                        rowButton.LayoutOrder = #rows + 1
+                        rowButton.ZIndex = 83
+                        rowButton.Parent = results
+                        local rowCorner = Instance.new("UICorner", rowButton)
+                        rowCorner.CornerRadius = UDim.new(0, 7)
+                        local rowStroke = Instance.new("UIStroke", rowButton)
+                        rowStroke.Color = COLORS.glassRaised
+                        rowStroke.Transparency = 0.25
+                        local rowTitle = Instance.new("TextLabel")
+                        rowTitle.Size = UDim2.new(1, -20, 0, 22)
+                        rowTitle.Position = UDim2.fromOffset(10, 5)
+                        rowTitle.BackgroundTransparency = 1
+                        rowTitle.Text = tostring(command.Name or "Command")
+                        rowTitle.TextColor3 = COLORS.text
+                        rowTitle.Font = Enum.Font.GothamBold
+                        rowTitle.TextSize = 11
+                        rowTitle.TextXAlignment = Enum.TextXAlignment.Left
+                        rowTitle.ZIndex = 84
+                        rowTitle.Parent = rowButton
+                        local rowDescription = Instance.new("TextLabel")
+                        rowDescription.Size = UDim2.new(1, -20, 0, 16)
+                        rowDescription.Position = UDim2.fromOffset(10, 27)
+                        rowDescription.BackgroundTransparency = 1
+                        rowDescription.Text = tostring(command.Description or command.Category or "")
+                        rowDescription.TextColor3 = COLORS.textMuted
+                        rowDescription.Font = Enum.Font.Gotham
+                        rowDescription.TextSize = 9
+                        rowDescription.TextXAlignment = Enum.TextXAlignment.Left
+                        rowDescription.TextTruncate = Enum.TextTruncate.AtEnd
+                        rowDescription.ZIndex = 84
+                        rowDescription.Parent = rowButton
+                        local row = { Command = command, Button = rowButton, ButtonStroke = rowStroke }
+                        rows[#rows + 1] = row
+                        rowButton.Activated:Connect(function() runCommand(command) end)
+                    end
+                end
+                results.CanvasSize = UDim2.new(0, 0, 0, #rows * 57 + 5)
+                selectRow(1)
+            end
+            local api = {}
+            function api:Register(command)
+                if type(command) ~= "table" or type(command.Callback) ~= "function" then return false end
+                if not command.Name or tostring(command.Name) == "" then return false end
+                commands[#commands + 1] = command
+                table.sort(commands, function(a, b) return string.lower(tostring(a.Name)) < string.lower(tostring(b.Name)) end)
+                refresh()
+                return true
+            end
+            function api:Remove(name)
+                for index = #commands, 1, -1 do
+                    if string.lower(tostring(commands[index].Name)) == string.lower(tostring(name)) then
+                        table.remove(commands, index)
+                    end
+                end
+                refresh()
+            end
+            function api:Open()
+                overlay.Visible = true
+                search.Text = ""
+                refresh()
+                task.defer(function() if overlay.Visible then search:CaptureFocus() end end)
+            end
+            function api:Close()
+                overlay.Visible = false
+                search:ReleaseFocus()
+            end
+            function api:Toggle()
+                if overlay.Visible then self:Close() else self:Open() end
+            end
+            function api:Destroy()
+                overlay:Destroy()
+                self.Destroyed = true
+            end
+            function api:List()
+                local resultList = {}
+                for _, command in ipairs(commands) do resultList[#resultList + 1] = command end
+                return resultList
+            end
+            self.CommandPalette = api
+            search:GetPropertyChangedSignal("Text"):Connect(refresh)
+            outside.Activated:Connect(function() api:Close() end)
+            resultLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+                results.CanvasSize = UDim2.new(0, 0, 0, resultLayout.AbsoluteContentSize.Y + 8)
+            end)
+            table.insert(trackedConnections, UserInputService.InputBegan:Connect(function(input, processed)
+                if input.KeyCode == Enum.KeyCode.K and (UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) or UserInputService:IsKeyDown(Enum.KeyCode.RightControl)) then
+                    api:Toggle()
+                    return
+                end
+                if not overlay.Visible then return end
+                if input.KeyCode == Enum.KeyCode.Escape then api:Close()
+                elseif input.KeyCode == Enum.KeyCode.Down then selectRow(selectedIndex + 1)
+                elseif input.KeyCode == Enum.KeyCode.Up then selectRow(selectedIndex - 1)
+                elseif input.KeyCode == Enum.KeyCode.Return and rows[selectedIndex] then runCommand(rows[selectedIndex].Command)
+                end
+            end))
+            for _, command in ipairs(type(commandList) == "table" and commandList or {}) do api:Register(command) end
+            refresh()
+            return api
         end
     end
 
-    -- Keybinds: [K] Toggle Shell Visibility | [F] Toggle Scale
-    UserInputService.InputBegan:Connect(function(input, gpe)
-        if gpe then return end
-        if input.KeyCode == Enum.KeyCode.K or input.KeyCode == Enum.KeyCode.RightControl then
-            playClickSound()
-            shell.Visible = not shell.Visible
-        elseif input.KeyCode == Enum.KeyCode.F then
-            playClickSound()
-            uiScale.Scale = (uiScale.Scale == 1.0) and 0.85 or 1.0
-        end
-    end)
-
+    self.LastWindow = WindowObj
     return WindowObj
 end
 
 function ObsidianGlassEngine:Finalize(config)
     config = type(config) == "table" and config or {}
-    return config.Window or true
+    local window = config.Window or self.LastWindow
+    if not window then return nil end
+    if config.AppearanceTab then window:CreateAppearanceTab(config.AppearanceTabTitle) end
+    if config.NotifyReady ~= false then
+        self:Notify({ Title = "PAYOMBØYZ UI", Content = "Interface ready", Duration = 2.5 })
+    end
+    return window
 end
 
 return ObsidianGlassEngine
-
------------------------------------------------------------------------------------------
--- 🤖 SECTION 7: AI PROMPT & DIRECTIVES (คำสั่งสำหรับส่งให้ AI ใช้พอร์ตสคริปต์แมพอื่น)
------------------------------------------------------------------------------------------
---[[
-    =====================================================================================
-    [ COPY ข้อความในบล็อกนี้เพื่อส่งให้ AI นำระบบนี้ไปแปลงสคริปต์แมพอื่นให้ได้งานตรง 100% ]
-    =====================================================================================
-
-    "ช่วยแปลงและติดตั้งระบบ UI ของสคริปต์นี้ให้ใช้สเปก 'CRIMSON OBSIDIAN GLASSMORPHIC 2'
-    ตามข้อกำหนดของ PAYOMBØYZ HUB อย่างสมบูรณ์และละเอียดที่สุด:
-
-    1. ธีมและคู่สี (Crimson Obsidian Palette - เทาดำ แดงดุ):
-       - ใช้คู่สี Dark Obsidian Void (#060103, #0C0306) ตัดกับขอบเลเซอร์สีแดงนีออน (#FF1432, #FF3C5A)
-       - ห้ามใช้สีขาวล้วนหรือโทนสว่างในตัวแผงควบคุม ให้คงความโปร่งแสงแบบกระจกรมควัน (Dark Smoked Glass)
-       - ขอบหน้าต่างหลัก (MainShell) และปุ่ม Verify/Primary ต้องมีเส้นขอบไล่เฉดนีออนสีแดง (UIGradient)
-
-    2. เอกลักษณ์แบรนด์และฟอนต์ (PAYOMBØYZ HUB & Fondamento Gothic):
-       - ชื่อฮับต้องใช้ตัวสะกด 'PAYOMBØYZ HUB' (มีเครื่องหมาย Ø)
-       - หัวข้อหน้าต่าง (Window Title) และ Intro Title ต้องใช้ฟอนต์ 'Enum.Font.Fondamento' ขนาด 26-28px
-         สีตัวอักษรเป็น Fiery Neon Hot Red (Color3.fromRGB(255, 35, 60)) พร้อม UIStroke สีเลือดหมูดำเข้ม
-         (Color3.fromRGB(80, 0, 15)) ความหนา 1.8px
-       - ต้องมีเข็มกลัด '⚡ CRIMSON V4' และข้อความซับไตเติล '⚡ HIGH-VOLTAGE EXECUTION ENGINE • VVIP EDITION'
-
-    3. แอนิเมชันเปิดตัว (Master Intro Sequence ตาม Intro.md):
-       - หน้าต่างเริ่มต้นเป็นการ์ดกระจกขาวใสขนาด 520x150 (BackgroundTransparency 0.92, Corner 18px)
-       - โหลดโลโก้จาก GitHub Raw พร้อมแคชลงไฟล์ 'payomboyz_intro_logo.png' และมี Fallback ปลอดภัย
-       - Phase 1 (0.45s): ค่อยๆ Fade-in โลโก้ และชื่อ Gothic 'PAYOMBØYZ HUB'
-       - Hold Stage (1.5s): ค้างหน้า Intro แสดงผล
-       - Phase 2 (0.30s): Fade-out เนื้อหา Intro ออกไป
-       - Phase 3 & 4 (0.65s): ขยายการ์ดแบบ Exponential Morph จาก 520x150 ไปสู่ขนาดเต็ม 920x600
-         พร้อมเปลี่ยนสีเป็น Dark Obsidian และเปิดเผยแท็บและเนื้อหาหลักทั้งหมด
-
-    4. เอฟเฟกต์สายฟ้าแดงดุ (Crimson Lightning & Electric Arcs Engine):
-       - นำเอฟเฟกต์หิมะตกออกถาวร และติดตั้งระบบสายฟ้าแรงสูงสีแดง:
-         1) Procedural Lightning Bolt: สุ่มฟาดสายฟ้าสีแดงแกนขาว-ชมพูแบบ Zig-zag คมกริบ พาดผ่านการ์ดทุก 1.8 - 3.8 วินาที
-         2) Ambient Flash: แสงสีแดงวาบสะท้อนทั่วหน้าต่างชั่วพริบตา (0.14s) ทุกครั้งที่สายฟ้าฟาด
-         3) Electric Plasma Sparks: ประกายไฟสีแดง 28 ดวง เคลื่อนที่กระตุก Jitter แบบไฟฟ้าสถิต
-         4) Capsule Lightning: มินิประกายไฟฟ้าวิ่งใน Toggle Capsule
-       - Event Connection และ Threads ทั้งหมดต้องผูกในตารางเพื่อ Clear ได้สะอาด 0 Memory Leaks
-
-    5. ปุ่ม Toggle แคปซูลลอยได้ (Draggable Toggle Capsule):
-       - แคปซูลขนาด 230x58px ลากได้ทั้งเมาส์และหน้าจอสัมผัสมือถือ พร้อมขอบไฟนีออนแดง 45 องศา
-       - แสดงผลรูปโปรไฟล์, @Username, และระบบวัด FPS & Ping แบบเรียลไทม์
-       - ปุ่มลัดคีย์บอร์ด [RightControl] หรือ [K] เพื่อซ่อน/แสดงหน้าต่าง
-
-    6. ระบบ Log out และทำลายสคริปต์อย่างปลอดภัย (จาก logout.txt):
-       - สร้างปุ่ม 'Log out' ขนาด 62x24px ขอบสีแดง Danger ไว้ข้างชื่อโปรไฟล์ในแถบ Sidebar ซ้ายมือ
-       - เมื่อกด Logout ให้ดำเนินการ:
-         1) สั่งหยุดการทำงานของสคริปต์ ลูป และ Connection ทั้งหมดทันที (Cancel Threads, Disconnect Events)
-         2) ลบไฟล์คีย์ในเครื่อง PayomboyZ_LuarmorKey.txt, PayomboyZ_VVIPKey.txt, PayomboyZ_SavedKey.txt
-         3) ล้างตัวแปร global keys และตั้งค่า getgenv().PayomboyZ_LoggedOut = true ป้องกัน Auto-Login ซ้ำ
-         4) ทำลาย GUI ทิ้ง
-         5) โหลดสคริปต์กลับไปยังหน้าหลัก Start URL โดยตรง
-
-    7. การรองรับหน้าจอมือถือ (Responsive UIScale Engine):
-       - มีระบบคำนวณ UIScale อัตโนมัติจาก ViewportSize ปรับย่อขนาดลงอย่างสมส่วนบนมือถือทุกรุ่น"
-    =====================================================================================
---]]
