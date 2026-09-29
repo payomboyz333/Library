@@ -1,0 +1,695 @@
+-- ======================================================================================
+-- [[ PAYOMBØYZ HUB - OFFICIAL DISCORD INVITATION MODAL ]]
+-- Design Edition: Crimson Obsidian Glassmorphic 2 & Red Accent Design System
+-- Framework: PC & Mobile Adaptive Architecture (UIScale Matrix)
+-- Target: Roblox Executor Universal Execution (Windows / iOS / Android)
+-- ======================================================================================
+
+local CoreGui = game:GetService("CoreGui")
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
+
+local LocalPlayer = Players.LocalPlayer or Players:GetPropertyChangedSignal("LocalPlayer"):Wait() or Players.LocalPlayer
+
+-- Clean up any existing instances
+if CoreGui:FindFirstChild("PayomboyZ_DiscordLink") then
+    CoreGui.PayomboyZ_DiscordLink:Destroy()
+end
+if LocalPlayer and LocalPlayer:FindFirstChild("PlayerGui") and LocalPlayer.PlayerGui:FindFirstChild("PayomboyZ_DiscordLink") then
+    LocalPlayer.PlayerGui.PayomboyZ_DiscordLink:Destroy()
+end
+
+-- ======================================================================================
+-- 🎨 DESIGN TOKENS & COLOR PALETTE (CRIMSON OBSIDIAN GLASSMORPHIC 2)
+-- ======================================================================================
+local Palette = {
+    backdrop         = Color3.fromRGB(6, 1, 3),        -- Void ambient ground
+    shell            = Color3.fromRGB(12, 3, 6),       -- Obsidian glass base
+    shellTransparency= 0.06,
+    surface          = Color3.fromRGB(20, 6, 12),      -- Sunken card backing
+    surfaceRaised    = Color3.fromRGB(35, 8, 18),      -- Elevated button base
+    surfaceHover     = Color3.fromRGB(55, 14, 28),     -- Interactive hover state
+    primaryCrimson   = Color3.fromRGB(255, 25, 55),    -- Neon fiery red
+    rubyDeep         = Color3.fromRGB(150, 12, 35),    -- Dark blood ruby
+    glowAccent       = Color3.fromRGB(255, 50, 85),    -- Outer glow highlight
+    laserBorder      = Color3.fromRGB(255, 30, 60),    -- High-voltage laser stroke
+    borderMuted      = Color3.fromRGB(60, 16, 26),     -- Inactive border outline
+    textWhite        = Color3.fromRGB(255, 255, 255),  -- Pure title text
+    textMuted        = Color3.fromRGB(245, 205, 215),  -- Gothic subtitle
+    textDim          = Color3.fromRGB(175, 125, 140),  -- Description & hints
+    discordBlurple   = Color3.fromRGB(88, 101, 242),   -- Discord signature brand
+    successEmerald   = Color3.fromRGB(46, 224, 140),   -- Online status dot
+}
+
+local DISCORD_INVITE_URL = "https://discord.gg/ASQqHRnvJ"
+local DISCORD_INVITE_CODE = "ASQqHRnvJ"
+local LOGO_URL = "https://raw.githubusercontent.com/aslamdunk7/PayomboyZKnowledge/main/nobg_Gemini_Generated_Image_mgkp6ymgkp6ymgkp.png"
+local LOGO_CACHE_NAME = "payomboyz_intro_logo.png"
+local LOGO_FALLBACK = "rbxassetid://10723346959"
+
+-- ======================================================================================
+-- 🛠️ ASSET LOADER (AUTO-CACHE TO DISK & GETCUSTOMASSET)
+-- ======================================================================================
+local function GetLogoAsset()
+    local customAssetFn = getcustomasset or getsynasset
+    local requestFn = (syn and syn.request) or (http and http.request) or http_request or request or (fluxus and fluxus.request)
+    
+    if customAssetFn and writefile and readfile and isfile and requestFn then
+        local success, assetUri = pcall(function()
+            if not isfile(LOGO_CACHE_NAME) then
+                local res = requestFn({
+                    Url = LOGO_URL,
+                    Method = "GET"
+                })
+                if res and res.Body and #res.Body > 100 then
+                    writefile(LOGO_CACHE_NAME, res.Body)
+                end
+            end
+            if isfile(LOGO_CACHE_NAME) then
+                return customAssetFn(LOGO_CACHE_NAME)
+            end
+        end)
+        if success and assetUri then
+            return assetUri
+        end
+    end
+    return LOGO_FALLBACK
+end
+
+-- ======================================================================================
+-- 🔗 CLIPBOARD & DISCORD RPC AUTO-JOIN ENGINE
+-- ======================================================================================
+local function CopyToClipboard(text)
+    local fn = setclipboard or toclipboard or (syn and syn.write_clipboard) or (Clipboard and Clipboard.set)
+    if fn then
+        pcall(fn, text)
+        return true
+    end
+    return false
+end
+
+local function JoinDiscordRPC()
+    local requestFn = (syn and syn.request) or (http and http.request) or http_request or request or (fluxus and fluxus.request)
+    
+    -- Always copy link first to ensure user has it
+    CopyToClipboard(DISCORD_INVITE_URL)
+    
+    -- Attempt Local RPC to prompt Discord Desktop Client
+    if requestFn then
+        task.spawn(function()
+            for port = 6463, 6465 do
+                pcall(function()
+                    requestFn({
+                        Url = string.format("http://127.0.0.1:%d/rpc?v=1", port),
+                        Method = "POST",
+                        Headers = {
+                            ["Content-Type"] = "application/json",
+                            ["Origin"] = "https://discord.com"
+                        },
+                        Body = HttpService:JSONEncode({
+                            cmd = "INVITE_BROWSER",
+                            args = { code = DISCORD_INVITE_CODE },
+                            nonce = HttpService:GenerateGUID(false)
+                        })
+                    })
+                end)
+            end
+        end)
+    end
+end
+
+-- ======================================================================================
+-- 🖥️ UI CREATION & RESPONSIVE COMPONENT ENGINE
+-- ======================================================================================
+local parentGui = (gethui and gethui()) or CoreGui or LocalPlayer:WaitForChild("PlayerGui")
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "PayomboyZ_DiscordLink"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.DisplayOrder = 999999
+ScreenGui.Parent = parentGui
+
+-- Backdrop (Dark cinematic vignette)
+local Backdrop = Instance.new("TextButton")
+Backdrop.Name = "Backdrop"
+Backdrop.Size = UDim2.fromScale(1, 1)
+Backdrop.BackgroundColor3 = Palette.backdrop
+Backdrop.BackgroundTransparency = 1
+Backdrop.Text = ""
+Backdrop.AutoButtonColor = false
+Backdrop.Parent = ScreenGui
+
+-- Responsive Auto-Scaler
+local UIScale = Instance.new("UIScale")
+UIScale.Name = "AdaptiveScale"
+UIScale.Scale = 1
+UIScale.Parent = ScreenGui
+
+local Camera = workspace.CurrentCamera
+local function UpdateScale()
+    if Camera then
+        local viewX = Camera.ViewportSize.X
+        if viewX < 950 or UserInputService.TouchEnabled then
+            UIScale.Scale = math.clamp(viewX / 850, 0.65, 0.95)
+        else
+            UIScale.Scale = 1.0
+        end
+    end
+end
+UpdateScale()
+if Camera then
+    Camera:GetPropertyChangedSignal("ViewportSize"):Connect(UpdateScale)
+end
+
+-- Main Obsidian Modal Shell (490x320)
+local MainShell = Instance.new("Frame")
+MainShell.Name = "MainShell"
+MainShell.Size = UDim2.fromOffset(490, 320)
+MainShell.AnchorPoint = Vector2.new(0.5, 0.5)
+MainShell.Position = UDim2.fromScale(0.5, 0.5)
+MainShell.BackgroundColor3 = Palette.shell
+MainShell.BackgroundTransparency = Palette.shellTransparency
+MainShell.BorderSizePixel = 0
+MainShell.ClipsDescendants = false
+MainShell.Parent = Backdrop
+
+local ShellCorner = Instance.new("UICorner")
+ShellCorner.CornerRadius = UDim.new(0, 18)
+ShellCorner.Parent = MainShell
+
+-- Glowing Laser Border
+local ShellStroke = Instance.new("UIStroke")
+ShellStroke.Name = "LaserBorder"
+ShellStroke.Thickness = 1.6
+ShellStroke.Color = Palette.laserBorder
+ShellStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+ShellStroke.Parent = MainShell
+
+local StrokeGradient = Instance.new("UIGradient")
+StrokeGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 35, 65)),
+    ColorSequenceKeypoint.new(0.35, Color3.fromRGB(140, 15, 35)),
+    ColorSequenceKeypoint.new(0.70, Color3.fromRGB(255, 45, 80)),
+    ColorSequenceKeypoint.new(1.00, Color3.fromRGB(120, 10, 30))
+})
+StrokeGradient.Rotation = 45
+StrokeGradient.Parent = ShellStroke
+
+-- Drop Shadow Ambient Glow
+local DropShadow = Instance.new("ImageLabel")
+DropShadow.Name = "DropShadow"
+DropShadow.Size = UDim2.new(1, 50, 1, 50)
+DropShadow.Position = UDim2.new(0.5, 0, 0.5, 3)
+DropShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+DropShadow.BackgroundTransparency = 1
+DropShadow.Image = "rbxassetid://6015897843"
+DropShadow.ImageColor3 = Color3.fromRGB(255, 15, 45)
+DropShadow.ImageTransparency = 0.78
+DropShadow.ScaleType = Enum.ScaleType.Slice
+DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
+DropShadow.ZIndex = 0
+DropShadow.Parent = MainShell
+
+-- Dynamic Laser Stroke Animation
+local rotAngle = 45
+local strokeCon = RunService.RenderStepped:Connect(function(dt)
+    rotAngle = (rotAngle + (dt * 45)) % 360
+    StrokeGradient.Rotation = rotAngle
+end)
+
+-- --------------------------------------------------------------------------------------
+-- 🏷️ HEADER BAR
+-- --------------------------------------------------------------------------------------
+local HeaderBar = Instance.new("Frame")
+HeaderBar.Name = "HeaderBar"
+HeaderBar.Size = UDim2.new(1, 0, 0, 48)
+HeaderBar.BackgroundTransparency = 1
+HeaderBar.Parent = MainShell
+
+local HeaderLogo = Instance.new("ImageLabel")
+HeaderLogo.Name = "HeaderLogo"
+HeaderLogo.Size = UDim2.fromOffset(28, 28)
+HeaderLogo.Position = UDim2.new(0, 16, 0.5, 0)
+HeaderLogo.AnchorPoint = Vector2.new(0, 0.5)
+HeaderLogo.BackgroundTransparency = 1
+HeaderLogo.Image = GetLogoAsset()
+HeaderLogo.Parent = HeaderBar
+
+local HeaderLogoCorner = Instance.new("UICorner")
+HeaderLogoCorner.CornerRadius = UDim.new(1, 0)
+HeaderLogoCorner.Parent = HeaderLogo
+
+local HeaderTitle = Instance.new("TextLabel")
+HeaderTitle.Name = "HeaderTitle"
+HeaderTitle.Position = UDim2.new(0, 52, 0.5, -7)
+HeaderTitle.AnchorPoint = Vector2.new(0, 0.5)
+HeaderTitle.Size = UDim2.new(0, 220, 0, 24)
+HeaderTitle.BackgroundTransparency = 1
+HeaderTitle.Font = Enum.Font.Fondamento
+HeaderTitle.Text = "PAYOMBØYZ HUB"
+HeaderTitle.TextColor3 = Color3.fromRGB(255, 35, 60)
+HeaderTitle.TextSize = 22
+HeaderTitle.TextXAlignment = Enum.TextXAlignment.Left
+HeaderTitle.Parent = HeaderBar
+
+local TitleStroke = Instance.new("UIStroke")
+TitleStroke.Thickness = 1.4
+TitleStroke.Color = Color3.fromRGB(80, 0, 15)
+TitleStroke.Parent = HeaderTitle
+
+local HeaderSub = Instance.new("TextLabel")
+HeaderSub.Name = "HeaderSub"
+HeaderSub.Position = UDim2.new(0, 52, 0.5, 10)
+HeaderSub.AnchorPoint = Vector2.new(0, 0.5)
+HeaderSub.Size = UDim2.new(0, 260, 0, 14)
+HeaderSub.BackgroundTransparency = 1
+HeaderSub.Font = Enum.Font.GothamBold
+HeaderSub.Text = "OFFICIAL COMMUNITY & VIP INVITATION"
+HeaderSub.TextColor3 = Palette.primaryCrimson
+HeaderSub.TextSize = 9
+HeaderSub.TextXAlignment = Enum.TextXAlignment.Left
+HeaderSub.Parent = HeaderBar
+
+-- Close Button (X)
+local CloseBtn = Instance.new("TextButton")
+CloseBtn.Name = "CloseBtn"
+CloseBtn.Size = UDim2.fromOffset(30, 30)
+CloseBtn.Position = UDim2.new(1, -16, 0.5, 0)
+CloseBtn.AnchorPoint = Vector2.new(1, 0.5)
+CloseBtn.BackgroundColor3 = Palette.surface
+CloseBtn.AutoButtonColor = false
+CloseBtn.Text = "✕"
+CloseBtn.Font = Enum.Font.GothamBold
+CloseBtn.TextColor3 = Palette.textMuted
+CloseBtn.TextSize = 13
+CloseBtn.Parent = HeaderBar
+
+local CloseBtnCorner = Instance.new("UICorner")
+CloseBtnCorner.CornerRadius = UDim.new(1, 0)
+CloseBtnCorner.Parent = CloseBtn
+
+local CloseBtnStroke = Instance.new("UIStroke")
+CloseBtnStroke.Thickness = 1
+CloseBtnStroke.Color = Palette.borderMuted
+CloseBtnStroke.Parent = CloseBtn
+
+-- Top Divider Line
+local HeaderDivider = Instance.new("Frame")
+HeaderDivider.Name = "HeaderDivider"
+HeaderDivider.Size = UDim2.new(1, -32, 0, 1)
+HeaderDivider.Position = UDim2.new(0, 16, 0, 48)
+HeaderDivider.BackgroundColor3 = Palette.borderMuted
+HeaderDivider.BorderSizePixel = 0
+HeaderDivider.Parent = MainShell
+
+local DividerGradient = Instance.new("UIGradient")
+DividerGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0.0, Color3.fromRGB(140, 20, 45)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 30, 65)),
+    ColorSequenceKeypoint.new(1.0, Color3.fromRGB(140, 20, 45))
+})
+DividerGradient.Parent = HeaderDivider
+
+-- --------------------------------------------------------------------------------------
+-- 💎 BODY CONTENT CONTAINER
+-- --------------------------------------------------------------------------------------
+local BodyFrame = Instance.new("Frame")
+BodyFrame.Name = "BodyFrame"
+BodyFrame.Size = UDim2.new(1, -32, 1, -64)
+BodyFrame.Position = UDim2.new(0, 16, 0, 56)
+BodyFrame.BackgroundTransparency = 1
+BodyFrame.Parent = MainShell
+
+-- Center Circular Logo with Glowing Halo
+local CenterLogoFrame = Instance.new("Frame")
+CenterLogoFrame.Name = "CenterLogoFrame"
+CenterLogoFrame.Size = UDim2.fromOffset(72, 72)
+CenterLogoFrame.Position = UDim2.new(0.5, 0, 0, 4)
+CenterLogoFrame.AnchorPoint = Vector2.new(0.5, 0)
+CenterLogoFrame.BackgroundColor3 = Palette.surface
+CenterLogoFrame.Parent = BodyFrame
+
+local CenterLogoCorner = Instance.new("UICorner")
+CenterLogoCorner.CornerRadius = UDim.new(1, 0)
+CenterLogoCorner.Parent = CenterLogoFrame
+
+local CenterLogoStroke = Instance.new("UIStroke")
+CenterLogoStroke.Thickness = 2
+CenterLogoStroke.Color = Palette.laserBorder
+CenterLogoStroke.Parent = CenterLogoFrame
+
+local CenterLogoImage = Instance.new("ImageLabel")
+CenterLogoImage.Name = "CenterLogoImage"
+CenterLogoImage.Size = UDim2.new(1, -6, 1, -6)
+CenterLogoImage.Position = UDim2.fromScale(0.5, 0.5)
+CenterLogoImage.AnchorPoint = Vector2.new(0.5, 0.5)
+CenterLogoImage.BackgroundTransparency = 1
+CenterLogoImage.Image = GetLogoAsset()
+CenterLogoImage.Parent = CenterLogoFrame
+
+local ImageCorner = Instance.new("UICorner")
+ImageCorner.CornerRadius = UDim.new(1, 0)
+ImageCorner.Parent = CenterLogoImage
+
+-- Server Headline Title
+local ServerHeadline = Instance.new("TextLabel")
+ServerHeadline.Name = "ServerHeadline"
+ServerHeadline.Size = UDim2.new(1, 0, 0, 22)
+ServerHeadline.Position = UDim2.new(0.5, 0, 0, 84)
+ServerHeadline.AnchorPoint = Vector2.new(0.5, 0)
+ServerHeadline.BackgroundTransparency = 1
+ServerHeadline.Font = Enum.Font.GothamBold
+ServerHeadline.Text = "PAYOMBØYZ HUB"
+ServerHeadline.TextColor3 = Palette.textWhite
+ServerHeadline.TextSize = 18
+ServerHeadline.Parent = BodyFrame
+
+-- Verified Status Badge (Pulsing Green Dot + Subtitle)
+local BadgeFrame = Instance.new("Frame")
+BadgeFrame.Name = "BadgeFrame"
+BadgeFrame.Size = UDim2.fromOffset(240, 20)
+BadgeFrame.Position = UDim2.new(0.5, 0, 0, 108)
+BadgeFrame.AnchorPoint = Vector2.new(0.5, 0)
+BadgeFrame.BackgroundColor3 = Palette.surface
+BadgeFrame.BackgroundTransparency = 0.4
+BadgeFrame.Parent = BodyFrame
+
+local BadgeCorner = Instance.new("UICorner")
+BadgeCorner.CornerRadius = UDim.new(1, 0)
+BadgeCorner.Parent = BadgeFrame
+
+local BadgeStroke = Instance.new("UIStroke")
+BadgeStroke.Thickness = 1
+BadgeStroke.Color = Palette.borderMuted
+BadgeStroke.Parent = BadgeFrame
+
+local StatusDot = Instance.new("Frame")
+StatusDot.Name = "StatusDot"
+StatusDot.Size = UDim2.fromOffset(8, 8)
+StatusDot.Position = UDim2.new(0, 10, 0.5, 0)
+StatusDot.AnchorPoint = Vector2.new(0, 0.5)
+StatusDot.BackgroundColor3 = Palette.successEmerald
+StatusDot.Parent = BadgeFrame
+
+local StatusDotCorner = Instance.new("UICorner")
+StatusDotCorner.CornerRadius = UDim.new(1, 0)
+StatusDotCorner.Parent = StatusDot
+
+-- Pulsing animation on dot
+task.spawn(function()
+    while ScreenGui and ScreenGui.Parent do
+        TweenService:Create(StatusDot, TweenInfo.new(0.8, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { BackgroundTransparency = 0.5 }):Play()
+        task.wait(0.8)
+        TweenService:Create(StatusDot, TweenInfo.new(0.8, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { BackgroundTransparency = 0.0 }):Play()
+        task.wait(0.8)
+    end
+end)
+
+local BadgeText = Instance.new("TextLabel")
+BadgeText.Name = "BadgeText"
+BadgeText.Size = UDim2.new(1, -26, 1, 0)
+BadgeText.Position = UDim2.new(0, 24, 0, 0)
+BadgeText.BackgroundTransparency = 1
+BadgeText.Font = Enum.Font.GothamBold
+BadgeText.Text = "COMMUNITY • UPDATES • VIP ACCESS"
+BadgeText.TextColor3 = Palette.textMuted
+BadgeText.TextSize = 9
+BadgeText.TextXAlignment = Enum.TextXAlignment.Left
+BadgeText.Parent = BadgeFrame
+
+-- Invite Link Display Pill (Capsule with Copy Icon)
+local LinkPill = Instance.new("Frame")
+LinkPill.Name = "LinkPill"
+LinkPill.Size = UDim2.new(1, -60, 0, 32)
+LinkPill.Position = UDim2.new(0.5, 0, 0, 136)
+LinkPill.AnchorPoint = Vector2.new(0.5, 0)
+LinkPill.BackgroundColor3 = Palette.surface
+LinkPill.BackgroundTransparency = 0.2
+LinkPill.Parent = BodyFrame
+
+local LinkPillCorner = Instance.new("UICorner")
+LinkPillCorner.CornerRadius = UDim.new(0, 10)
+LinkPillCorner.Parent = LinkPill
+
+local LinkPillStroke = Instance.new("UIStroke")
+LinkPillStroke.Thickness = 1
+LinkPillStroke.Color = Palette.borderMuted
+LinkPillStroke.Parent = LinkPill
+
+local DiscordIcon = Instance.new("ImageLabel")
+DiscordIcon.Name = "DiscordIcon"
+DiscordIcon.Size = UDim2.fromOffset(18, 18)
+DiscordIcon.Position = UDim2.new(0, 12, 0.5, 0)
+DiscordIcon.AnchorPoint = Vector2.new(0, 0.5)
+DiscordIcon.BackgroundTransparency = 1
+DiscordIcon.Image = "rbxassetid://13962624449" -- Discord official logo asset
+DiscordIcon.ImageColor3 = Palette.primaryCrimson
+DiscordIcon.Parent = LinkPill
+
+local LinkText = Instance.new("TextLabel")
+LinkText.Name = "LinkText"
+LinkText.Size = UDim2.new(1, -40, 1, 0)
+LinkText.Position = UDim2.new(0, 36, 0, 0)
+LinkText.BackgroundTransparency = 1
+LinkText.Font = Enum.Font.GothamMedium
+LinkText.Text = DISCORD_INVITE_URL
+LinkText.TextColor3 = Palette.textMuted
+LinkText.TextSize = 11
+LinkText.TextXAlignment = Enum.TextXAlignment.Left
+LinkText.Parent = LinkPill
+
+-- --------------------------------------------------------------------------------------
+-- 🔘 ACTION BUTTONS ROW (JOIN DISCORD / COPY LINK)
+-- --------------------------------------------------------------------------------------
+local ButtonsRow = Instance.new("Frame")
+ButtonsRow.Name = "ButtonsRow"
+ButtonsRow.Size = UDim2.new(1, -40, 0, 42)
+ButtonsRow.Position = UDim2.new(0.5, 0, 0, 180)
+ButtonsRow.AnchorPoint = Vector2.new(0.5, 0)
+ButtonsRow.BackgroundTransparency = 1
+ButtonsRow.Parent = BodyFrame
+
+local RowLayout = Instance.new("UIListLayout")
+RowLayout.FillDirection = Enum.FillDirection.Horizontal
+RowLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+RowLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+RowLayout.Padding = UDim.new(0, 12)
+RowLayout.Parent = ButtonsRow
+
+-- Button 1: JOIN DISCORD (Primary Crimson Gradient)
+local JoinButton = Instance.new("TextButton")
+JoinButton.Name = "JoinButton"
+JoinButton.Size = UDim2.new(0.52, -6, 1, 0)
+JoinButton.BackgroundColor3 = Palette.primaryCrimson
+JoinButton.AutoButtonColor = false
+JoinButton.Text = "⚡ JOIN DISCORD"
+JoinButton.Font = Enum.Font.GothamBold
+JoinButton.TextColor3 = Palette.textWhite
+JoinButton.TextSize = 13
+JoinButton.Parent = ButtonsRow
+
+local JoinCorner = Instance.new("UICorner")
+JoinCorner.CornerRadius = UDim.new(0, 11)
+JoinCorner.Parent = JoinButton
+
+local JoinGradient = Instance.new("UIGradient")
+JoinGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 42, 84)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(170, 14, 40))
+})
+JoinGradient.Rotation = 90
+JoinGradient.Parent = JoinButton
+
+local JoinStroke = Instance.new("UIStroke")
+JoinStroke.Thickness = 1.2
+JoinStroke.Color = Palette.glowAccent
+JoinStroke.Parent = JoinButton
+
+-- Button 2: COPY LINK (Secondary Dark Glass)
+local CopyButton = Instance.new("TextButton")
+CopyButton.Name = "CopyButton"
+CopyButton.Size = UDim2.new(0.48, -6, 1, 0)
+CopyButton.BackgroundColor3 = Palette.surface
+CopyButton.AutoButtonColor = false
+CopyButton.Text = "📋 COPY LINK"
+CopyButton.Font = Enum.Font.GothamBold
+CopyButton.TextColor3 = Palette.textMuted
+CopyButton.TextSize = 12
+CopyButton.Parent = ButtonsRow
+
+local CopyCorner = Instance.new("UICorner")
+CopyCorner.CornerRadius = UDim.new(0, 11)
+CopyCorner.Parent = CopyButton
+
+local CopyStroke = Instance.new("UIStroke")
+CopyStroke.Thickness = 1
+CopyStroke.Color = Palette.borderMuted
+CopyStroke.Parent = CopyButton
+
+-- Footer Hint Text
+local FooterHint = Instance.new("TextLabel")
+FooterHint.Name = "FooterHint"
+FooterHint.Size = UDim2.new(1, 0, 0, 16)
+FooterHint.Position = UDim2.new(0.5, 0, 1, -12)
+FooterHint.AnchorPoint = Vector2.new(0.5, 1)
+FooterHint.BackgroundTransparency = 1
+FooterHint.Font = Enum.Font.Gotham
+FooterHint.Text = "Clicking Join will prompt the Discord desktop app or copy the link to clipboard."
+FooterHint.TextColor3 = Palette.textDim
+FooterHint.TextSize = 9
+FooterHint.TextTransparency = 0.2
+FooterHint.Parent = BodyFrame
+
+-- ======================================================================================
+-- 🎬 INTERACTION & SMOOTH ANIMATION ENGINE
+-- ======================================================================================
+
+-- Close modal function with smooth collapse
+local isClosing = false
+local function CloseModal()
+    if isClosing then return end
+    isClosing = true
+    if strokeCon then strokeCon:Disconnect() end
+    
+    TweenService:Create(Backdrop, TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
+        BackgroundTransparency = 1
+    }):Play()
+    
+    local closeTween = TweenService:Create(MainShell, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.In), {
+        Size = UDim2.fromOffset(380, 200),
+        BackgroundTransparency = 1
+    })
+    closeTween:Play()
+    closeTween.Completed:Connect(function()
+        ScreenGui:Destroy()
+    end)
+end
+
+-- Close Button Hooks
+CloseBtn.MouseButton1Click:Connect(CloseModal)
+CloseBtn.MouseEnter:Connect(function()
+    TweenService:Create(CloseBtn, TweenInfo.new(0.2), { BackgroundColor3 = Palette.primaryCrimson, TextColor3 = Palette.textWhite }):Play()
+    TweenService:Create(CloseBtnStroke, TweenInfo.new(0.2), { Color = Palette.glowAccent }):Play()
+end)
+CloseBtn.MouseLeave:Connect(function()
+    TweenService:Create(CloseBtn, TweenInfo.new(0.2), { BackgroundColor3 = Palette.surface, TextColor3 = Palette.textMuted }):Play()
+    TweenService:Create(CloseBtnStroke, TweenInfo.new(0.2), { Color = Palette.borderMuted }):Play()
+end)
+
+-- Join Button Interaction
+JoinButton.MouseButton1Click:Connect(function()
+    JoinDiscordRPC()
+    
+    -- Visual Feedback
+    JoinButton.Text = "✓ JOINING & COPIED!"
+    TweenService:Create(JoinButton, TweenInfo.new(0.18), { BackgroundColor3 = Palette.successEmerald }):Play()
+    JoinGradient.Enabled = false
+    
+    task.delay(2.2, function()
+        if JoinButton and JoinButton.Parent then
+            JoinButton.Text = "⚡ JOIN DISCORD"
+            JoinGradient.Enabled = true
+            TweenService:Create(JoinButton, TweenInfo.new(0.2), { BackgroundColor3 = Palette.primaryCrimson }):Play()
+        end
+    end)
+end)
+
+JoinButton.MouseEnter:Connect(function()
+    TweenService:Create(JoinButton, TweenInfo.new(0.2), { Size = UDim2.new(0.52, -4, 1, 2) }):Play()
+    TweenService:Create(JoinStroke, TweenInfo.new(0.2), { Thickness = 1.8 }):Play()
+end)
+JoinButton.MouseLeave:Connect(function()
+    TweenService:Create(JoinButton, TweenInfo.new(0.2), { Size = UDim2.new(0.52, -6, 1, 0) }):Play()
+    TweenService:Create(JoinStroke, TweenInfo.new(0.2), { Thickness = 1.2 }):Play()
+end)
+
+-- Copy Button Interaction
+CopyButton.MouseButton1Click:Connect(function()
+    CopyToClipboard(DISCORD_INVITE_URL)
+    
+    CopyButton.Text = "✓ COPIED!"
+    CopyButton.TextColor3 = Palette.textWhite
+    TweenService:Create(CopyButton, TweenInfo.new(0.18), { BackgroundColor3 = Palette.surfaceHover }):Play()
+    TweenService:Create(CopyStroke, TweenInfo.new(0.18), { Color = Palette.laserBorder }):Play()
+    
+    task.delay(1.8, function()
+        if CopyButton and CopyButton.Parent then
+            CopyButton.Text = "📋 COPY LINK"
+            CopyButton.TextColor3 = Palette.textMuted
+            TweenService:Create(CopyButton, TweenInfo.new(0.2), { BackgroundColor3 = Palette.surface }):Play()
+            TweenService:Create(CopyStroke, TweenInfo.new(0.2), { Color = Palette.borderMuted }):Play()
+        end
+    end)
+end)
+
+CopyButton.MouseEnter:Connect(function()
+    TweenService:Create(CopyButton, TweenInfo.new(0.2), { BackgroundColor3 = Palette.surfaceHover }):Play()
+    TweenService:Create(CopyStroke, TweenInfo.new(0.2), { Color = Palette.laserBorder }):Play()
+end)
+CopyButton.MouseLeave:Connect(function()
+    TweenService:Create(CopyButton, TweenInfo.new(0.2), { BackgroundColor3 = Palette.surface }):Play()
+    TweenService:Create(CopyStroke, TweenInfo.new(0.2), { Color = Palette.borderMuted }):Play()
+end)
+
+-- --------------------------------------------------------------------------------------
+-- 🖐️ DRAGGABLE LOGIC (DESKTOP MOUSE & MOBILE TOUCH SUPPORT)
+-- --------------------------------------------------------------------------------------
+local dragging = false
+local dragStart = nil
+local startPos = nil
+
+HeaderBar.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainShell.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+HeaderBar.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        if dragging and dragStart and startPos then
+            local delta = input.Position - dragStart
+            local scale = UIScale.Scale
+            MainShell.Position = UDim2.new(
+                startPos.X.Scale,
+                startPos.X.Offset + (delta.X / scale),
+                startPos.Y.Scale,
+                startPos.Y.Offset + (delta.Y / scale)
+            )
+        end
+    end
+end)
+
+-- --------------------------------------------------------------------------------------
+-- 🚀 INTRO ENTRANCE POP-IN SEQUENCE
+-- --------------------------------------------------------------------------------------
+MainShell.Size = UDim2.fromOffset(360, 220)
+MainShell.BackgroundTransparency = 1
+ShellStroke.Transparency = 1
+
+TweenService:Create(Backdrop, TweenInfo.new(0.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
+    BackgroundTransparency = 0.45
+}):Play()
+
+TweenService:Create(MainShell, TweenInfo.new(0.42, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+    Size = UDim2.fromOffset(490, 320),
+    BackgroundTransparency = Palette.shellTransparency
+}):Play()
+
+TweenService:Create(ShellStroke, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+    Transparency = 0
+}):Play()
+
+print("[PAYOMBØYZ HUB] Discord Invitation Modal loaded successfully!")
+return ScreenGui
