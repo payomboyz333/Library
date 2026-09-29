@@ -1,0 +1,2065 @@
+-- ======================================================================================
+-- [[ CRIMSON OBSIDIAN GLASSMORPHIC 2 UI ENGINE - MASTER SPECIFICATION & BLUEPRINT ]]
+-- Edition: PAYOMBØYZ HUB MASTER SPECIFICATION (Universal Reference & Code Template)
+-- Document Version: 2.5.0 (High-Voltage Crimson Lightning & Fondamento Gothic Edition)
+-- ======================================================================================
+-- 📖 PURPOSE FOR DEVELOPERS & AI ASSISTANTS:
+-- This document serves as the absolute ground truth specification and self-contained code
+-- template for the "Crimson Obsidian Glassmorphic 2" design system. Any AI or developer
+-- must use this exact blueprint to port, convert, or generate any script hub / game map UI
+-- so that visual dimensions, colors, Gothic typography, Intro sequence, Crimson Lightning,
+-- Draggable Toggle Capsule, and Logout mechanisms match PAYOMBØYZ HUB with 100% precision.
+-- ======================================================================================
+
+-----------------------------------------------------------------------------------------
+-- 🎨 SECTION 1: COLOR PALETTE SPECIFICATION (โทนสีเทา-ดำ ดุดัน แดงดุ / CRIMSON OBSIDIAN)
+-----------------------------------------------------------------------------------------
+--[[
+    TOKEN NAME          HEX CODE   RGB VALUES                  DESCRIPTION & USAGE
+    --------------------------------------------------------------------------------------
+    backdrop            #060103    Color3.fromRGB(6, 1, 3)     Full-screen ambient dark void ground
+    shell               #0C0306    Color3.fromRGB(12, 3, 6)    Main Window background base (Dark Obsidian)
+    shellStroke         #FF1432    Color3.fromRGB(255, 20, 50) Glowing laser crimson border stroke
+    glass               #14050A    Color3.fromRGB(20, 5, 10)   Intermediate smoky glass container
+    glassDeep           #0F0307    Color3.fromRGB(15, 3, 7)    Deep sunken widget backing & metric box
+    glassRaised         #230810    Color3.fromRGB(35, 8, 16)   Elevated panels, borders & card separators
+    userPanel           #120408    Color3.fromRGB(18, 4, 8)    Left sidebar background (User Profile/Tabs)
+    surface             #1C060C    Color3.fromRGB(28, 6, 12)   Inactive widget surface base
+    surfaceRaised       #300A14    Color3.fromRGB(48, 10, 20)  Active/Interactive widget buttons & badges
+    surfaceHover        #48101E    Color3.fromRGB(72, 16, 30)  Hover state on buttons & tab selectors
+    surfacePressed      #16050A    Color3.fromRGB(22, 5, 10)   Pressed/Click state on buttons
+    input               #0C0306    Color3.fromRGB(12, 3, 6)    Text input background box (Dark carbon)
+    inputFocus          #1E060E    Color3.fromRGB(30, 6, 14)   Text input focused state border glow
+    divider             #8C142D    Color3.fromRGB(140, 20, 45) Thin laser separator lines (1px)
+    primary             #FF1432    Color3.fromRGB(255, 20, 50) Blazing Neon Crimson (Action/Active Toggles)
+    primaryHover        #FF3C5A    Color3.fromRGB(255, 60, 90) Hover state for primary buttons
+    primaryPressed      #B90C23    Color3.fromRGB(185, 12, 35) Pressed state for primary buttons
+    secondary           #280A12    Color3.fromRGB(40, 10, 18)  Secondary action buttons
+    secondaryHover      #3A0F1A    Color3.fromRGB(58, 15, 26)  Secondary button hover state
+    secondaryPressed    #1A060C    Color3.fromRGB(26, 6, 12)   Secondary button pressed state
+    text                #FFFFFF    Color3.fromRGB(255, 255, 255) Primary titles, values & pure white text
+    textMuted           #F5C8D4    Color3.fromRGB(245, 200, 212) Subtitles, descriptions & secondary labels
+    textFaint           #C38796    Color3.fromRGB(195, 135, 150) Timestamps, metadata & inactive icons
+    cyan                #FF1E41    Color3.fromRGB(255, 30, 65) High-voltage electric crimson highlight
+    lightningCore       #FFE1EB    Color3.fromRGB(255, 225, 235) Core hot white-pink plasma for lightning
+    lightningGlow       #FF1437    Color3.fromRGB(255, 20, 55) Outer electric aura glow for lightning
+    success             #2EE08C    Color3.fromRGB(46, 224, 140) Active indicators, status checkmarks & online
+    warning             #FFB946    Color3.fromRGB(255, 185, 70) Cautionary alerts & VVIP redirection notices
+    danger              #FF2D41    Color3.fromRGB(255, 45, 65) Logout button, error text & invalid key badges
+    disabled            #280C12    Color3.fromRGB(40, 12, 18)  Disabled buttons and controls
+--]]
+
+-----------------------------------------------------------------------------------------
+-- 📐 SECTION 2: TYPOGRAPHY & BRANDING SPECIFICATION (ระบบฟอนต์โกธิก และเอกลักษณ์แบรนด์)
+-----------------------------------------------------------------------------------------
+--[[
+    1. BRAND NAME RULE:
+       - Must ALWAYS use: "PAYOMBØYZ HUB" (with Scandinavian 'Ø' character).
+       - Never write plain "PayomboyZ" in main titles or headers.
+
+    2. HEADER & INTRO TITLE FONT (GOTHIC / MEDIEVAL STYLE):
+       - Font Family    : Enum.Font.Fondamento (Gothic calligraphy style)
+       - Text Size      : 26px - 28px
+       - Text Color     : Color3.fromRGB(255, 35, 60) (#FF233C Fiery Hot Neon Red)
+       - Text UIStroke  : Color3.fromRGB(80, 0, 15) (#50000F Dark Blood Crimson), Thickness = 1.8px
+       - Text Alignment : Left-aligned for headers, Centered for banners
+
+    3. STANDARD INTERFACE FONTS:
+       - Subtitles / Badges    : Enum.Font.GothamBold, Size 9 - 11, Color #FF1E41 or #FFFFFF
+       - Profile Name          : Enum.Font.GothamBold, Size 13 - 14, Color #FFFFFF
+       - Profile Username      : Enum.Font.Gotham, Size 10, Color #F5C8D4
+       - Metric Counters       : Enum.Font.GothamBold, Size 10, Color #FF1E41
+       - Section Titles        : Enum.Font.GothamBold, Size 13 - 14, Color #FF1E41
+       - Widget Control Titles : Enum.Font.GothamBold, Size 13 - 14, Color #FFFFFF
+       - Widget Descriptions   : Enum.Font.Gotham, Size 11, Color #F5C8D4
+       - Button Labels         : Enum.Font.GothamBold, Size 11 - 12, Color #FFFFFF
+--]]
+
+-----------------------------------------------------------------------------------------
+-- 🎬 SECTION 3: MASTER INTRO SPLASH & MORPH EXPANSION (จาก INTRO.MD)
+-----------------------------------------------------------------------------------------
+--[[
+    The Intro sequence is a 4-phase cinematic morph animation that introduces the script hub
+    before expanding into the full interface:
+
+    ASSETS:
+    - High-Res Logo URL : https://raw.githubusercontent.com/aslamdunk7/PayomboyZKnowledge/main/nobg_Gemini_Generated_Image_mgkp6ymgkp6ymgkp.png
+    - Local Cache File  : payomboyz_intro_logo.png (Stored via writefile/readfile with getcustomasset)
+    - Fallback Asset ID : rbxassetid://10723346959 or Roblox Avatar HeadShot
+
+    INITIAL STATE (INTRO CARD):
+    - MainShell starts at: UDim2.fromOffset(520, 150), Centered (0.5, 0.5)
+    - BackgroundColor3   : Color3.fromRGB(255, 255, 255) (White Glass)
+    - BackgroundTransp.  : 0.92 (Ultra-transparent)
+    - Corner Radius      : 18px
+    - UIStroke           : Color3.fromRGB(255, 255, 255), Thickness = 1.5px, Transparency = 0.40
+    - IntroOverlay       : Frame containing Logo (115x115), Fondamento Title (28px), Subtitle (11px)
+    - Content Containers : userPanel.Visible = false, mainPanel.Visible = false
+
+    TIMELINE PHASES:
+    1. Phase 1: Fade-In (0.45s, Quart Out)
+       - introLogo.ImageTransparency -> 0
+       - introTitle.TextTransparency -> 0
+       - introSub.TextTransparency -> 0.2
+    2. Hold Stage (1.5s)
+       - Displays the glowing Gothic title and logo.
+    3. Phase 2: Fade-Out (0.30s, Quart In)
+       - introLogo.ImageTransparency -> 1
+       - introTitle.TextTransparency -> 1
+       - introSub.TextTransparency -> 1
+       - Delay 0.35s -> introOverlay.Visible = false
+    4. Phase 3: Window Morph & Expand (0.65s, Exponential Out)
+       - shell.Size -> UDim2.fromOffset(920, 600) (Target Full Window Size)
+       - shell.BackgroundColor3 -> COLORS.shell (Color3.fromRGB(12, 3, 6))
+       - shell.BackgroundTransparency -> 0.12 - 0.20
+       - shellStroke.Color -> Color3.fromRGB(255, 25, 55)
+       - shellStroke.Transparency -> 0.15
+    5. Phase 4: Content Reveal
+       - userPanel.Visible = true
+       - mainPanel.Visible = true
+--]]
+
+-----------------------------------------------------------------------------------------
+-- ⚡ SECTION 4: CRIMSON LIGHTNING & ELECTRIC ARCS ENGINE (แทนที่หิมะตกถาวร)
+-----------------------------------------------------------------------------------------
+--[[
+    Replaces legacy snowflakes with high-voltage crimson lightning, fork branches, and erratic plasma sparks:
+
+    1. Z-Index & Hierarchy Rule (CRITICAL FOR VISIBILITY):
+       - ambientLightningFlash: ZIndex = 80, Active = false (directly inside shell/shellChrome)
+       - lightningLayer: ZIndex = 85, Active = false, ClipsDescendants = true
+       - MUST be positioned in front of all panels, cards, and buttons (ZIndex > 50) so bolts
+         and plasma sparks are 100% visible across the UI and never hidden underneath cards!
+       - Active = false ensures mouse clicks and touch events pass straight through to buttons.
+       - NEVER disable or skip on mobile! (Sparks: 32 on PC, 16 on Mobile; Capsule: 12 on PC, 6 on Mobile)
+
+    2. Ambient Flash (ambientLightningFlash):
+       - Full-canvas frame with BackgroundColor3 = Color3.fromRGB(255, 20, 50), Transparency = 1
+       - Instantly flashes to Transparency = 0.82 on lightning strike, then tweens to 1 in 0.18s
+
+    3. Procedural Lightning Bolt Generator (strikeLightning(targetFrame, numSegments)):
+       - Spawns a jagged high-voltage electric bolt across the shell every 1.6s to 3.2s randomly
+       - Generates 6 to 9 connected zig-zag segments between randomized coordinates
+       - Secondary Fork: Automatically generates 1-2 jagged fork branches shooting from mid-points
+       - Main Segment: Thickness 3.2px, Core Color #FFF8FC with glowing UIStroke #FF1230 (3.2px thickness)
+       - Fork Segment: Thickness 2.2px, Core Color #FFDCEB with glowing UIStroke #FF1E41 (2.5px thickness)
+       - Multi-stage electric crackle flicker (0.00s spawn -> 0.06s flicker -> 0.12s crackle -> 0.28s destroy)
+
+    4. Continuous Erratic Electric Plasma Sparks (32 on PC, 16 on Mobile - Replaces Falling Snow):
+       - Floating sparks moving downwards like embers, but jittering erratically side-to-side
+       - Electrostatic Jitter: Every 3-12 frames, sparks randomly snap position (+-12px) and flicker opacity
+       - Visual: 3-4px rounded square with glowing crimson UIStroke (#FF1232, 1.2px) and hot core (#FFF2F8)
+
+    5. Interactive High-Voltage Strikes:
+       - Strike immediately on UI spawn (0.4s)
+       - Strike during Intro sequence on Gothic title reveal (0.18s) and on Morph Expand (0.25s)
+       - Strike on tab switching and verify key button interaction
+--]]
+
+-----------------------------------------------------------------------------------------
+-- 🔒 SECTION 5: LOGOUT & TERMINATION ENGINE (จาก LOGOUT.TXT)
+-----------------------------------------------------------------------------------------
+--[[
+    Provides clean logout, key wiping, and script termination without leaving lingering threads:
+
+    1. UI Placement:
+       - Sits inside userPanel directly beside username: Position = UDim2.new(1, -74, 0, 20)
+       - Size = UDim2.fromOffset(62, 24), Corner = 6px
+       - BackgroundColor3 = COLORS.surfacePressed (#16050A)
+       - UIStroke = COLORS.danger (#FF2D41, 1px)
+       - Text = "Log out" (GothamBold, 11px, TextColor3 = #FF2D41)
+       - Hover Tweens: Background -> #FF2D41 (Trans 0.15), Stroke -> Trans 0, Text -> #FFFFFF
+
+    2. Logout Actions on Click:
+       Step 1: Terminate all script operations (stopAllScriptOperations):
+               - Call cleanup callbacks (_G.ScriptCleanup, _G.PayomboyZCleanup)
+               - Disable all active options/toggles in ObsidianGlassEngine.Options
+       Step 2: Wipe all saved key files from disk (performLogoutKeyClear):
+               - Files: PayomboyZ_LuarmorKey.txt, PayomboyZ_VVIPKey.txt, PayomboyZ_SavedKey.txt
+               - Using delfile / deletefile or writefile("", "")
+       Step 3: Clear environment keys and set logout flag:
+               - getgenv().script_key = nil
+               - getgenv().PayomboyZ_InputKey = nil
+               - getgenv().PayomboyZ_LoggedOut = true (Prevents auto-login loop!)
+               - _G.script_key = nil, shared.script_key = nil
+       Step 4: Destroy GUI (gui:Destroy())
+       Step 5: Redirect to Start script via loadstring:
+               loadstring(game:HttpGet("https://raw.githubusercontent.com/Payomboyz0028/Yaranikaaaa/refs/heads/main/Start"))()
+--]]
+
+-----------------------------------------------------------------------------------------
+-- 💻 SECTION 6: COMPLETE UNIVERSAL SOURCE CODE (FULL SELF-CONTAINED LUAU TEMPLATE)
+-----------------------------------------------------------------------------------------
+
+local CoreGui = game:GetService("CoreGui")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer or Players.PlayerAdded:Wait()
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local Stats = game:GetService("Stats")
+local SoundService = game:GetService("SoundService")
+
+local COLORS = {
+    backdrop = Color3.fromRGB(6, 1, 3),
+    shell = Color3.fromRGB(12, 3, 6),
+    shellStroke = Color3.fromRGB(255, 20, 50),
+    glass = Color3.fromRGB(20, 5, 10),
+    glassDeep = Color3.fromRGB(15, 3, 7),
+    glassRaised = Color3.fromRGB(35, 8, 16),
+    userPanel = Color3.fromRGB(18, 4, 8),
+    surface = Color3.fromRGB(28, 6, 12),
+    surfaceRaised = Color3.fromRGB(48, 10, 20),
+    surfaceHover = Color3.fromRGB(72, 16, 30),
+    surfacePressed = Color3.fromRGB(22, 5, 10),
+    input = Color3.fromRGB(12, 3, 6),
+    inputFocus = Color3.fromRGB(30, 6, 14),
+    divider = Color3.fromRGB(140, 20, 45),
+    primary = Color3.fromRGB(255, 20, 50),
+    primaryHover = Color3.fromRGB(255, 60, 90),
+    primaryPressed = Color3.fromRGB(185, 12, 35),
+    secondary = Color3.fromRGB(40, 10, 18),
+    secondaryHover = Color3.fromRGB(58, 15, 26),
+    secondaryPressed = Color3.fromRGB(26, 6, 12),
+    text = Color3.fromRGB(255, 255, 255),
+    textMuted = Color3.fromRGB(245, 200, 212),
+    textFaint = Color3.fromRGB(195, 135, 150),
+    cyan = Color3.fromRGB(255, 30, 65),
+    lightningCore = Color3.fromRGB(255, 225, 235),
+    lightningGlow = Color3.fromRGB(255, 20, 55),
+    success = Color3.fromRGB(46, 224, 140),
+    warning = Color3.fromRGB(255, 185, 70),
+    danger = Color3.fromRGB(255, 45, 65),
+    disabled = Color3.fromRGB(40, 12, 18),
+}
+
+local ObsidianGlassEngine = { Options = {} }
+local Fluent = ObsidianGlassEngine
+
+-- Trackers for clean memory leak prevention and anti-cheat compliance
+local trackedConnections = {}
+local trackedThreads = {}
+
+-- Helper: Click sound
+local function playClickSound()
+    pcall(function()
+        local sound = Instance.new("Sound")
+        sound.SoundId = "rbxassetid://6895079853"
+        sound.Volume = 0.35
+        sound.Parent = SoundService
+        sound:Play()
+        sound.Ended:Connect(function() sound:Destroy() end)
+    end)
+end
+
+-- Helper: High-Res Logo Downloader with Local Cache (from Intro.md)
+local customIntroLogoAsset = nil
+local isDownloadingIntroLogo = false
+
+local function loadIntroLogoImage()
+    if customIntroLogoAsset then return customIntroLogoAsset end
+    local logoUrl = "https://raw.githubusercontent.com/aslamdunk7/PayomboyZKnowledge/main/nobg_Gemini_Generated_Image_mgkp6ymgkp6ymgkp.png"
+    local fileName = "payomboyz_intro_logo.png"
+    
+    pcall(function()
+        if typeof(isfile) == "function" and isfile(fileName) then
+            if typeof(getcustomasset) == "function" or typeof(getsynasset) == "function" then
+                local getAsset = getcustomasset or getsynasset
+                customIntroLogoAsset = getAsset(fileName)
+            end
+        end
+    end)
+
+    if not customIntroLogoAsset and not isDownloadingIntroLogo then
+        isDownloadingIntroLogo = true
+        task.spawn(function()
+            pcall(function()
+                if typeof(writefile) == "function" and (typeof(getcustomasset) == "function" or typeof(getsynasset) == "function") then
+                    local getAsset = getcustomasset or getsynasset
+                    local ok, imageBytes = pcall(game.HttpGet, game, logoUrl)
+                    if ok and imageBytes and #imageBytes > 0 then
+                        writefile(fileName, imageBytes)
+                        if typeof(isfile) == "function" and isfile(fileName) then
+                            customIntroLogoAsset = getAsset(fileName)
+                        end
+                    end
+                end
+            end)
+            isDownloadingIntroLogo = false
+        end)
+    end
+
+    if not customIntroLogoAsset then
+        customIntroLogoAsset = "rbxassetid://10723346959"
+    end
+    return customIntroLogoAsset
+end
+
+-- Helper: Get parent GUI
+local function getSafeParentGui()
+    if typeof(gethui) == "function" then
+        local ok, res = pcall(gethui)
+        if ok and res and typeof(res) == "Instance" then return res end
+    end
+    if typeof(cloneref) == "function" then
+        local ok, cg = pcall(function() return cloneref(game:GetService("CoreGui")) end)
+        if ok and cg then return cg end
+    end
+    local ok, cg = pcall(function() return game:GetService("CoreGui") end)
+    if ok and cg then return cg end
+    return LocalPlayer:FindFirstChildOfClass("PlayerGui") or LocalPlayer:WaitForChild("PlayerGui", 5)
+end
+
+-- 🔔 TOAST NOTIFICATION ENGINE
+function ObsidianGlassEngine:Notify(cfg)
+    pcall(function()
+        local title = cfg.Title or "System"
+        local content = cfg.Content or ""
+        local duration = cfg.Duration or 4
+        
+        local parentGui = getSafeParentGui()
+        local notifHolder = parentGui:FindFirstChild("ObsidianGlass_NotifHolder")
+        if not notifHolder then
+            notifHolder = Instance.new("ScreenGui")
+            notifHolder.Name = "ObsidianGlass_NotifHolder"
+            notifHolder.ResetOnSpawn = false
+            notifHolder.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+            notifHolder.Parent = parentGui
+        end
+        
+        local toast = Instance.new("Frame")
+        toast.Size = UDim2.new(0, 310, 0, 65)
+        toast.Position = UDim2.new(1, 20, 1, -85)
+        toast.BackgroundColor3 = COLORS.glass
+        toast.BackgroundTransparency = 0.12
+        toast.BorderSizePixel = 0
+        toast.Parent = notifHolder
+        
+        local corner = Instance.new("UICorner")
+        corner.CornerRadius = UDim.new(0, 10)
+        corner.Parent = toast
+        
+        local stroke = Instance.new("UIStroke")
+        stroke.Color = COLORS.cyan
+        stroke.Thickness = 1.4
+        stroke.Parent = toast
+        
+        local tTitle = Instance.new("TextLabel")
+        tTitle.Size = UDim2.new(1, -20, 0, 22)
+        tTitle.Position = UDim2.new(0, 10, 0, 6)
+        tTitle.BackgroundTransparency = 1
+        tTitle.Text = title
+        tTitle.TextColor3 = COLORS.cyan
+        tTitle.Font = Enum.Font.GothamBold
+        tTitle.TextSize = 13
+        tTitle.TextXAlignment = Enum.TextXAlignment.Left
+        tTitle.Parent = toast
+        
+        local tDesc = Instance.new("TextLabel")
+        tDesc.Size = UDim2.new(1, -20, 0, 32)
+        tDesc.Position = UDim2.new(0, 10, 0, 26)
+        tDesc.BackgroundTransparency = 1
+        tDesc.Text = content
+        tDesc.TextColor3 = COLORS.text
+        tDesc.Font = Enum.Font.Gotham
+        tDesc.TextSize = 11
+        tDesc.TextWrapped = true
+        tDesc.TextXAlignment = Enum.TextXAlignment.Left
+        tDesc.Parent = toast
+        
+        playClickSound()
+        TweenService:Create(toast, TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Position = UDim2.new(1, -330, 1, -85) }):Play()
+        task.delay(duration, function()
+            if toast and toast.Parent then
+                local tw = TweenService:Create(toast, TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.In), { Position = UDim2.new(1, 20, 1, -85) })
+                tw:Play()
+                tw.Completed:Connect(function() toast:Destroy() end)
+            end
+        end)
+    end)
+end
+
+-- 🖼️ MAIN WINDOW ENGINE
+function ObsidianGlassEngine:CreateWindow(cfg)
+    cfg = cfg or {}
+    local parentGui = getSafeParentGui()
+    if parentGui:FindFirstChild("ObsidianGlass2_UI") then
+        parentGui.ObsidianGlass2_UI:Destroy()
+    end
+
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "ObsidianGlass2_UI"
+    gui.ResetOnSpawn = false
+    gui.IgnoreGuiInset = true
+    gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    gui.DisplayOrder = 99999
+    gui.Parent = parentGui
+
+    local uiScale = Instance.new("UIScale")
+    
+    -- 📱 AUTOMATIC MOBILE RESPONSIVE SCALING ENGINE
+    local camera = workspace.CurrentCamera
+    local function updateScale()
+        if camera and camera.ViewportSize then
+            local vp = camera.ViewportSize
+            local targetWidth, targetHeight = 920, 600
+            local scaleX = (vp.X - 24) / targetWidth
+            local scaleY = (vp.Y - 24) / targetHeight
+            local calcScale = math.clamp(math.min(scaleX, scaleY), 0.45, 1.0)
+            uiScale.Scale = calcScale
+        end
+    end
+    updateScale()
+    if camera then
+        camera:GetPropertyChangedSignal("ViewportSize"):Connect(updateScale)
+    end
+    uiScale.Parent = gui
+
+    -- 🌟 SHELL FRAME (Starts as 520x150 White Transparent Glass Card per Intro.md)
+    local shell = Instance.new("Frame")
+    shell.Name = "MainShell"
+    shell.Size = UDim2.fromOffset(520, 150)
+    shell.AnchorPoint = Vector2.new(0.5, 0.5)
+    shell.Position = UDim2.new(0.5, 0, 0.5, 0)
+    shell.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    shell.BackgroundTransparency = 0.92
+    shell.BorderSizePixel = 0
+    shell.ClipsDescendants = true
+    shell.Parent = gui
+
+    local shellCorner = Instance.new("UICorner")
+    shellCorner.CornerRadius = UDim.new(0, 18)
+    shellCorner.Parent = shell
+
+    local shellStroke = Instance.new("UIStroke")
+    shellStroke.Color = Color3.fromRGB(255, 255, 255)
+    shellStroke.Thickness = 1.5
+    shellStroke.Transparency = 0.40
+    shellStroke.Parent = shell
+
+    -- ⚡ AMBIENT LIGHTNING FLASH (ZIndex 80 - OVER PANELS & CARDS)
+    local ambientLightningFlash = Instance.new("Frame")
+    ambientLightningFlash.Name = "AmbientLightningFlash"
+    ambientLightningFlash.Size = UDim2.fromScale(1, 1)
+    ambientLightningFlash.BackgroundColor3 = Color3.fromRGB(255, 20, 50)
+    ambientLightningFlash.BackgroundTransparency = 1
+    ambientLightningFlash.BorderSizePixel = 0
+    ambientLightningFlash.Active = false
+    ambientLightningFlash.ZIndex = 80
+    ambientLightningFlash.Parent = shell
+    local fCorner = Instance.new("UICorner")
+    fCorner.CornerRadius = UDim.new(0, 18)
+    fCorner.Parent = ambientLightningFlash
+
+    -- ⚡ CRIMSON LIGHTNING & ELECTRIC ARCS ENGINE (ZIndex 85 - IN FRONT OF ALL UI)
+    local lightningLayer = Instance.new("Frame")
+    lightningLayer.Name = "LightningLayer"
+    lightningLayer.Size = UDim2.fromScale(1, 1)
+    lightningLayer.BackgroundTransparency = 1
+    lightningLayer.BorderSizePixel = 0
+    lightningLayer.ClipsDescendants = true
+    lightningLayer.Active = false
+    lightningLayer.ZIndex = 85
+    lightningLayer.Parent = shell
+
+    -- Procedural High-Voltage Crimson Lightning Bolt Strike Function
+    local function strikeLightning(targetFrame, numSegments)
+        if not targetFrame or not targetFrame.Parent then return end
+        local w = targetFrame.AbsoluteSize.X
+        local h = targetFrame.AbsoluteSize.Y
+        if w <= 20 or h <= 20 then
+            w = 920
+            h = 600
+        end
+
+        local startX = math.random(30, math.max(50, math.floor(w - 30)))
+        local startY = math.random(4, 20)
+        local endX = math.clamp(startX + math.random(-240, 240), 25, w - 25)
+        local endY = math.random(math.floor(h * 0.45), math.floor(h * 0.94))
+
+        local segCount = numSegments or math.random(6, 9)
+        local pts = {}
+        table.insert(pts, Vector2.new(startX, startY))
+        for i = 1, segCount - 1 do
+            local alpha = i / segCount
+            local midX = startX + (endX - startX) * alpha + math.random(-42, 42)
+            local midY = startY + (endY - startY) * alpha + math.random(-20, 20)
+            table.insert(pts, Vector2.new(midX, midY))
+        end
+        table.insert(pts, Vector2.new(endX, endY))
+
+        -- Optional Jagged Electric Fork Branch
+        local forkPts = {}
+        if #pts >= 4 and math.random(1, 10) >= 3 then
+            local forkStartIndex = math.random(2, #pts - 2)
+            local forkOrigin = pts[forkStartIndex]
+            local forkEndX = math.clamp(forkOrigin.X + math.random(-120, 120), 20, w - 20)
+            local forkEndY = math.clamp(forkOrigin.Y + math.random(35, 110), 35, h - 20)
+            local forkMidX = (forkOrigin.X + forkEndX) / 2 + math.random(-25, 25)
+            local forkMidY = (forkOrigin.Y + forkEndY) / 2 + math.random(-14, 14)
+            table.insert(forkPts, forkOrigin)
+            table.insert(forkPts, Vector2.new(forkMidX, forkMidY))
+            table.insert(forkPts, Vector2.new(forkEndX, forkEndY))
+        end
+
+        local segFrames = {}
+        local function renderSegments(pointList, coreColor, strokeColor, thickness, zIdx)
+            for i = 1, #pointList - 1 do
+                local p1 = pointList[i]
+                local p2 = pointList[i + 1]
+                local diff = p2 - p1
+                local len = diff.Magnitude
+                local angle = math.deg(math.atan2(diff.Y, diff.X))
+                local mid = (p1 + p2) / 2
+
+                local seg = Instance.new("Frame")
+                seg.Name = "CrimsonBoltSeg"
+                seg.AnchorPoint = Vector2.new(0.5, 0.5)
+                seg.Position = UDim2.fromOffset(mid.X, mid.Y)
+                seg.Size = UDim2.fromOffset(len + 1, thickness or 2.8)
+                seg.Rotation = angle
+                seg.BackgroundColor3 = coreColor or Color3.fromRGB(255, 245, 252)
+                seg.BorderSizePixel = 0
+                seg.Active = false
+                seg.ZIndex = zIdx or 95
+                seg.Parent = targetFrame
+
+                local st = Instance.new("UIStroke")
+                st.Color = strokeColor or Color3.fromRGB(255, 18, 48)
+                st.Thickness = 3.2
+                st.Transparency = 0.05
+                st.Parent = seg
+
+                table.insert(segFrames, seg)
+            end
+        end
+
+        -- Render primary bolt & secondary fork
+        renderSegments(pts, Color3.fromRGB(255, 248, 252), Color3.fromRGB(255, 18, 48), 3.2, 95)
+        if #forkPts > 1 then
+            renderSegments(forkPts, Color3.fromRGB(255, 220, 235), Color3.fromRGB(255, 30, 65), 2.2, 94)
+        end
+
+        -- Flash ambient crimson glow across entire shell
+        if ambientLightningFlash and ambientLightningFlash.Parent then
+            ambientLightningFlash.BackgroundTransparency = 0.82
+            task.delay(0.05, function()
+                if ambientLightningFlash and ambientLightningFlash.Parent then
+                    TweenService:Create(ambientLightningFlash, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { BackgroundTransparency = 1 }):Play()
+                end
+            end)
+        end
+
+        -- Multi-stage electric crackle flicker & fade
+        task.delay(0.06, function()
+            for _, seg in ipairs(segFrames) do
+                if seg and seg.Parent then
+                    seg.BackgroundTransparency = 0.3
+                end
+            end
+        end)
+        task.delay(0.12, function()
+            for _, seg in ipairs(segFrames) do
+                if seg and seg.Parent then
+                    seg.BackgroundTransparency = 0.05
+                end
+            end
+        end)
+        task.delay(0.18, function()
+            for _, seg in ipairs(segFrames) do
+                if seg and seg.Parent then
+                    TweenService:Create(seg, TweenInfo.new(0.08), { BackgroundTransparency = 1 }):Play()
+                end
+            end
+        end)
+        task.delay(0.28, function()
+            for _, seg in ipairs(segFrames) do
+                if seg and seg.Parent then
+                    seg:Destroy()
+                end
+            end
+        end)
+    end
+
+    -- ⚡ DYNAMIC ELECTRIC PLASMA SPARKS ANIMATION (REPLACING SNOW WITH CRIMSON EMBERS)
+    task.spawn(function()
+        local isMobile = (UserInputService.TouchEnabled and not UserInputService.MouseEnabled)
+        local maxSparks = isMobile and 16 or 32
+        local sparks = {}
+        for i = 1, maxSparks do
+            local isCore = (i % 3 == 0)
+            local sparkSize = isCore and math.random(3, 4) or math.random(2, 3)
+            local spark = Instance.new("Frame")
+            spark.Name = "PlasmaSpark"
+            spark.Size = UDim2.fromOffset(sparkSize, sparkSize)
+            spark.Position = UDim2.new(math.random(), 0, math.random(), 0)
+            spark.BackgroundColor3 = isCore and Color3.fromRGB(255, 242, 248) or Color3.fromRGB(255, 30, 65)
+            spark.BackgroundTransparency = math.random(10, 50) / 100
+            spark.BorderSizePixel = 0
+            spark.Active = false
+            spark.ZIndex = 88
+            spark.Parent = lightningLayer
+
+            local sc = Instance.new("UICorner")
+            sc.CornerRadius = UDim.new(1, 0)
+            sc.Parent = spark
+
+            local sst = Instance.new("UIStroke")
+            sst.Color = Color3.fromRGB(255, 18, 50)
+            sst.Thickness = 1.2
+            sst.Transparency = 0.15
+            sst.Parent = spark
+
+            sparks[#sparks + 1] = {
+                frame = spark,
+                vx = math.random(-18, 18) / 10000,
+                vy = math.random(18, 42) / 10000,
+                jitterTimer = math.random(4, 16),
+                baseX = spark.Position.X.Scale,
+                baseY = spark.Position.Y.Scale,
+            }
+        end
+
+        local sparkConn
+        sparkConn = RunService.Heartbeat:Connect(function()
+            if not gui or not gui.Parent then
+                if sparkConn then sparkConn:Disconnect() end
+                return
+            end
+            if shell and shell.Visible then
+                for _, s in ipairs(sparks) do
+                    s.baseY = s.baseY + s.vy
+                    s.baseX = (s.baseX + s.vx) % 1.0
+                    if s.baseY > 1.05 then s.baseY = -0.05 end
+
+                    -- High-voltage erratic electrostatic jitter
+                    s.jitterTimer = s.jitterTimer - 1
+                    local jitterX = 0
+                    local jitterY = 0
+                    if s.jitterTimer <= 0 then
+                        s.jitterTimer = math.random(3, 12)
+                        jitterX = math.random(-12, 12) / 1000
+                        jitterY = math.random(-6, 6) / 1000
+                        s.frame.BackgroundTransparency = math.random(10, 60) / 100
+                    end
+
+                    s.frame.Position = UDim2.new(s.baseX + jitterX, 0, s.baseY + jitterY, 0)
+                end
+            end
+        end)
+        table.insert(trackedConnections, sparkConn)
+
+        -- Periodic High-Voltage Procedural Lightning Bolt Loop
+        local boltThread = task.spawn(function()
+            task.wait(0.4)
+            while gui and gui.Parent do
+                if shell and shell.Visible then
+                    pcall(function()
+                        strikeLightning(lightningLayer, math.random(6, 9))
+                    end)
+                end
+                task.wait(math.random(16, 32) / 10)
+            end
+        end)
+        table.insert(trackedThreads, boltThread)
+    end)
+
+    -- 🎬 INTRO OVERLAY CONTAINER (From Intro.md)
+    local introOverlay = Instance.new("Frame")
+    introOverlay.Name = "IntroOverlay"
+    introOverlay.Size = UDim2.fromScale(1, 1)
+    introOverlay.BackgroundTransparency = 1
+    introOverlay.ZIndex = 999
+    introOverlay.Parent = shell
+
+    local introLogo = Instance.new("ImageLabel")
+    introLogo.Name = "IntroLogo"
+    introLogo.Size = UDim2.fromOffset(115, 115)
+    introLogo.Position = UDim2.new(0, 24, 0.5, -57.5)
+    introLogo.BackgroundTransparency = 1
+    introLogo.Image = loadIntroLogoImage()
+    introLogo.ImageTransparency = 1
+    introLogo.ZIndex = 1000
+    introLogo.Parent = introOverlay
+
+    local introTitle = Instance.new("TextLabel")
+    introTitle.Name = "IntroTitle"
+    introTitle.Size = UDim2.new(1, -160, 0, 36)
+    introTitle.Position = UDim2.new(0, 150, 0.5, -26)
+    introTitle.BackgroundTransparency = 1
+    introTitle.Text = "PAYOMBØYZ HUB"
+    introTitle.TextColor3 = Color3.fromRGB(255, 35, 60)
+    introTitle.Font = Enum.Font.Fondamento -- Gothic Style
+    introTitle.TextSize = 28
+    introTitle.TextXAlignment = Enum.TextXAlignment.Left
+    introTitle.TextTransparency = 1
+    introTitle.ZIndex = 1000
+    introTitle.Parent = introOverlay
+
+    local titleStroke = Instance.new("UIStroke")
+    titleStroke.Color = Color3.fromRGB(80, 0, 15) -- Dark Crimson Stroke
+    titleStroke.Thickness = 1.8
+    titleStroke.Parent = introTitle
+
+    local introSub = Instance.new("TextLabel")
+    introSub.Name = "IntroSub"
+    introSub.Size = UDim2.new(1, -160, 0, 18)
+    introSub.Position = UDim2.new(0, 150, 0.5, 14)
+    introSub.BackgroundTransparency = 1
+    introSub.Text = cfg.SubTitle or "⚡ HIGH-VOLTAGE EXECUTION ENGINE • VVIP EDITION"
+    introSub.TextColor3 = Color3.fromRGB(240, 240, 245)
+    introSub.Font = Enum.Font.GothamBold
+    introSub.TextSize = 11
+    introSub.TextXAlignment = Enum.TextXAlignment.Left
+    introSub.TextTransparency = 1
+    introSub.ZIndex = 1000
+    introSub.Parent = introOverlay
+
+    -- 💎 UNIVERSAL DRAGGABLE TOGGLE CAPSULE WITH RED LIGHTNING & METRICS
+    local toggleCapsule = Instance.new("Frame")
+    toggleCapsule.Name = "ObsidianToggleCapsule"
+    toggleCapsule.Size = UDim2.fromOffset(230, 58)
+    toggleCapsule.Position = UDim2.new(0, 15, 0.5, -29)
+    toggleCapsule.BackgroundColor3 = COLORS.shell
+    toggleCapsule.BackgroundTransparency = 0.12
+    toggleCapsule.BorderSizePixel = 0
+    toggleCapsule.ClipsDescendants = true
+    toggleCapsule.ZIndex = 99999
+    toggleCapsule.Parent = gui
+
+    local tcCorner = Instance.new("UICorner")
+    tcCorner.CornerRadius = UDim.new(0, 16)
+    tcCorner.Parent = toggleCapsule
+
+    local tcStroke = Instance.new("UIStroke")
+    tcStroke.Color = Color3.fromRGB(255, 30, 65)
+    tcStroke.Thickness = 1.6
+    tcStroke.Transparency = 0.15
+    tcStroke.Parent = toggleCapsule
+
+    local tcGrad = Instance.new("UIGradient")
+    tcGrad.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 60, 90)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 20, 50)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(140, 10, 25)),
+    })
+    tcGrad.Rotation = 45
+    tcGrad.Parent = tcStroke
+
+    -- ⚡ Mini Capsule Sparks
+    local capLightningLayer = Instance.new("Frame")
+    capLightningLayer.Name = "CapsuleLightningLayer"
+    capLightningLayer.Size = UDim2.fromScale(1, 1)
+    capLightningLayer.BackgroundTransparency = 1
+    capLightningLayer.ZIndex = 1
+    capLightningLayer.Parent = toggleCapsule
+
+    task.spawn(function()
+        local sparks = {}
+        for i = 1, 10 do
+            local sp = Instance.new("Frame")
+            sp.Size = UDim2.fromOffset(math.random(2, 3), math.random(2, 3))
+            sp.Position = UDim2.new(math.random(), 0, math.random(), 0)
+            sp.BackgroundColor3 = Color3.fromRGB(255, 40, 75)
+            sp.BackgroundTransparency = math.random(25, 65) / 100
+            sp.BorderSizePixel = 0
+            sp.ZIndex = 1
+            sp.Parent = capLightningLayer
+
+            local sc = Instance.new("UICorner")
+            sc.CornerRadius = UDim.new(1, 0)
+            sc.Parent = sp
+
+            sparks[#sparks + 1] = {
+                frame = sp,
+                vx = math.random(-10, 10) / 10000,
+                vy = math.random(15, 35) / 10000,
+                pos = sp.Position.Y.Scale,
+            }
+        end
+
+        local capSparkConn
+        capSparkConn = RunService.Heartbeat:Connect(function()
+            if not gui or not gui.Parent or not toggleCapsule or not toggleCapsule.Parent then
+                if capSparkConn then capSparkConn:Disconnect() end
+                return
+            end
+            if toggleCapsule and toggleCapsule.Visible then
+                for _, d in ipairs(sparks) do
+                    d.pos = d.pos + d.vy
+                    if d.pos > 1.05 then d.pos = -0.05 end
+                    local newX = (d.frame.Position.X.Scale + d.vx) % 1.0
+                    d.frame.Position = UDim2.new(newX, 0, d.pos, 0)
+                end
+            end
+        end)
+        table.insert(trackedConnections, capSparkConn)
+    end)
+
+    -- Avatar Box inside Capsule
+    local capAvatarFrame = Instance.new("Frame")
+    capAvatarFrame.Size = UDim2.fromOffset(42, 42)
+    capAvatarFrame.Position = UDim2.new(0, 8, 0.5, -21)
+    capAvatarFrame.BackgroundColor3 = COLORS.glassDeep
+    capAvatarFrame.BorderSizePixel = 0
+    capAvatarFrame.ZIndex = 3
+    capAvatarFrame.Parent = toggleCapsule
+
+    local caCorner = Instance.new("UICorner")
+    caCorner.CornerRadius = UDim.new(1, 0)
+    caCorner.Parent = capAvatarFrame
+
+    local caStroke = Instance.new("UIStroke")
+    caStroke.Color = COLORS.primary
+    caStroke.Thickness = 1.5
+    caStroke.Parent = capAvatarFrame
+
+    local capAvatarImg = Instance.new("ImageLabel")
+    capAvatarImg.Size = UDim2.fromScale(1, 1)
+    capAvatarImg.BackgroundTransparency = 1
+    capAvatarImg.Image = loadIntroLogoImage()
+    capAvatarImg.ZIndex = 4
+    capAvatarImg.Parent = capAvatarFrame
+
+    local caiCorner = Instance.new("UICorner")
+    caiCorner.CornerRadius = UDim.new(1, 0)
+    caiCorner.Parent = capAvatarImg
+
+    -- User Label & Metrics Label
+    local capUserLabel = Instance.new("TextLabel")
+    capUserLabel.Size = UDim2.new(1, -58, 0, 18)
+    capUserLabel.Position = UDim2.new(0, 56, 0, 10)
+    capUserLabel.BackgroundTransparency = 1
+    capUserLabel.Text = "@" .. LocalPlayer.Name
+    capUserLabel.TextColor3 = COLORS.text
+    capUserLabel.Font = Enum.Font.GothamBold
+    capUserLabel.TextSize = 12
+    capUserLabel.TextXAlignment = Enum.TextXAlignment.Left
+    capUserLabel.ZIndex = 3
+    capUserLabel.Parent = toggleCapsule
+
+    local capMetricsLabel = Instance.new("TextLabel")
+    capMetricsLabel.Size = UDim2.new(1, -58, 0, 16)
+    capMetricsLabel.Position = UDim2.new(0, 56, 0, 28)
+    capMetricsLabel.BackgroundTransparency = 1
+    capMetricsLabel.Text = "⚡ PAYOMBØYZ HUB • V4"
+    capMetricsLabel.TextColor3 = COLORS.cyan
+    capMetricsLabel.Font = Enum.Font.GothamBold
+    capMetricsLabel.TextSize = 10
+    capMetricsLabel.TextXAlignment = Enum.TextXAlignment.Left
+    capMetricsLabel.ZIndex = 3
+    capMetricsLabel.Parent = toggleCapsule
+
+    -- FPS & Ping Loop for Capsule
+    task.spawn(function()
+        local frameCount = 0
+        local lastFpsTime = tick()
+        local fpsVal = 60
+
+        local renderConn
+        renderConn = RunService.RenderStepped:Connect(function()
+            frameCount = frameCount + 1
+            local now = tick()
+            if now - lastFpsTime >= 1 then
+                fpsVal = frameCount
+                frameCount = 0
+                lastFpsTime = now
+            end
+        end)
+        table.insert(trackedConnections, renderConn)
+
+        while task.wait(0.8) do
+            if not gui or not gui.Parent or not toggleCapsule or not toggleCapsule.Parent then
+                if renderConn then renderConn:Disconnect() end
+                break
+            end
+            local pingVal = 0
+            pcall(function() pingVal = math.floor(Stats.Network.ServerStatsItem["Data Ping"]:GetValue()) end)
+            capMetricsLabel.Text = string.format("⚡ %d FPS  •  📡 %d ms", fpsVal, pingVal)
+        end
+    end)
+
+    -- Draggable Toggle Handler
+    local capBtn = Instance.new("TextButton")
+    capBtn.Size = UDim2.fromScale(1, 1)
+    capBtn.BackgroundTransparency = 1
+    capBtn.Text = ""
+    capBtn.ZIndex = 10
+    capBtn.Parent = toggleCapsule
+
+    local tDragging, tDragInput, tDragStart, tStartPos
+    local hasDragged = false
+
+    capBtn.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            tDragging = true
+            hasDragged = false
+            tDragStart = input.Position
+            tStartPos = toggleCapsule.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then tDragging = false end
+            end)
+        end
+    end)
+
+    capBtn.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            tDragInput = input
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if input == tDragInput and tDragging then
+            local delta = input.Position - tDragStart
+            if math.abs(delta.X) > 3 or math.abs(delta.Y) > 3 then hasDragged = true end
+            toggleCapsule.Position = UDim2.new(tStartPos.X.Scale, tStartPos.X.Offset + delta.X, tStartPos.Y.Scale, tStartPos.Y.Offset + delta.Y)
+        end
+    end)
+
+    capBtn.MouseButton1Click:Connect(function()
+        if not hasDragged then
+            playClickSound()
+            shell.Visible = not shell.Visible
+        end
+    end)
+
+    -- 👤 LEFT SIDEBAR (USER PROFILE, LOGOUT & NAVIGATION)
+    local userPanel = Instance.new("Frame")
+    userPanel.Name = "UserPanel"
+    userPanel.Size = UDim2.new(0, 240, 1, 0)
+    userPanel.BackgroundColor3 = COLORS.userPanel
+    userPanel.BackgroundTransparency = 0.20
+    userPanel.BorderSizePixel = 0
+    userPanel.Visible = false -- Initially false during Intro
+    userPanel.ZIndex = 5
+    userPanel.Parent = shell
+
+    local userDiv = Instance.new("Frame")
+    userDiv.Size = UDim2.new(0, 1, 1, 0)
+    userDiv.Position = UDim2.new(1, -1, 0, 0)
+    userDiv.BackgroundColor3 = COLORS.glassRaised
+    userDiv.BorderSizePixel = 0
+    userDiv.ZIndex = 10
+    userDiv.Parent = userPanel
+
+    -- Profile Header
+    local avatarFrame = Instance.new("Frame")
+    avatarFrame.Size = UDim2.fromOffset(44, 44)
+    avatarFrame.Position = UDim2.new(0, 14, 0, 14)
+    avatarFrame.BackgroundColor3 = COLORS.glassDeep
+    avatarFrame.BorderSizePixel = 0
+    avatarFrame.ZIndex = 10
+    avatarFrame.Parent = userPanel
+
+    local avCorner = Instance.new("UICorner")
+    avCorner.CornerRadius = UDim.new(1, 0)
+    avCorner.Parent = avatarFrame
+
+    local avStroke = Instance.new("UIStroke")
+    avStroke.Color = COLORS.cyan
+    avStroke.Thickness = 1.5
+    avStroke.Parent = avatarFrame
+
+    local avatarImg = Instance.new("ImageLabel")
+    avatarImg.Size = UDim2.fromScale(1, 1)
+    avatarImg.BackgroundTransparency = 1
+    avatarImg.Image = loadIntroLogoImage()
+    avatarImg.ZIndex = 11
+    avatarImg.Parent = avatarFrame
+
+    local avImgCorner = Instance.new("UICorner")
+    avImgCorner.CornerRadius = UDim.new(1, 0)
+    avImgCorner.Parent = avatarImg
+
+    local onlineDot = Instance.new("Frame")
+    onlineDot.Size = UDim2.fromOffset(10, 10)
+    onlineDot.Position = UDim2.new(1, -8, 1, -8)
+    onlineDot.BackgroundColor3 = COLORS.success
+    onlineDot.BorderSizePixel = 0
+    onlineDot.ZIndex = 12
+    onlineDot.Parent = avatarFrame
+
+    local onlineCorner = Instance.new("UICorner")
+    onlineCorner.CornerRadius = UDim.new(1, 0)
+    onlineCorner.Parent = onlineDot
+
+    local displayNameLabel = Instance.new("TextLabel")
+    displayNameLabel.Size = UDim2.new(1, -145, 0, 18)
+    displayNameLabel.Position = UDim2.new(0, 66, 0, 15)
+    displayNameLabel.BackgroundTransparency = 1
+    displayNameLabel.Text = LocalPlayer.DisplayName
+    displayNameLabel.TextColor3 = COLORS.text
+    displayNameLabel.Font = Enum.Font.GothamBold
+    displayNameLabel.TextSize = 13
+    displayNameLabel.TextXAlignment = Enum.TextXAlignment.Left
+    displayNameLabel.ZIndex = 10
+    displayNameLabel.Parent = userPanel
+
+    local usernameLabel = Instance.new("TextLabel")
+    usernameLabel.Size = UDim2.new(1, -145, 0, 14)
+    usernameLabel.Position = UDim2.new(0, 66, 0, 33)
+    usernameLabel.BackgroundTransparency = 1
+    usernameLabel.Text = "@" .. LocalPlayer.Name
+    usernameLabel.TextColor3 = COLORS.textMuted
+    usernameLabel.Font = Enum.Font.Gotham
+    usernameLabel.TextSize = 10
+    usernameLabel.TextXAlignment = Enum.TextXAlignment.Left
+    usernameLabel.ZIndex = 10
+    usernameLabel.Parent = userPanel
+
+    -- 🔒 LOGOUT BUTTON & SAFE TERMINATION SYSTEM (From logout.txt)
+    local function performLogoutKeyClear()
+        pcall(function()
+            local filesToDelete = {
+                "PayomboyZ_LuarmorKey.txt",
+                "PayomboyZ_VVIPKey.txt",
+                "PayomboyZ_SavedKey.txt"
+            }
+            local del = (type(delfile) == "function" and delfile) or (type(deletefile) == "function" and deletefile)
+            for _, file in ipairs(filesToDelete) do
+                pcall(function()
+                    if isfile and isfile(file) then
+                        if del then del(file)
+                        elseif type(writefile) == "function" then writefile(file, "") end
+                    end
+                end)
+            end
+        end)
+
+        pcall(function()
+            if getgenv then
+                getgenv().script_key = nil
+                getgenv().PayomboyZ_InputKey = nil
+                getgenv().PayomboyZ_LoggedOut = true
+            end
+            if _G then _G.script_key = nil end
+            if shared then shared.script_key = nil end
+            script_key = nil
+        end)
+    end
+
+    local function stopAllScriptOperations()
+        if _G.ScriptCleanup then pcall(_G.ScriptCleanup) end
+        if _G.PayomboyZCleanup then pcall(_G.PayomboyZCleanup) end
+        if ObsidianGlassEngine and ObsidianGlassEngine.Options then
+            for _, opt in pairs(ObsidianGlassEngine.Options) do
+                if type(opt) == "table" and opt.SetValue then
+                    pcall(function() opt:SetValue(false) end)
+                end
+            end
+        end
+    end
+
+    local logoutBtn = Instance.new("TextButton")
+    logoutBtn.Name = "LogoutButton"
+    logoutBtn.Size = UDim2.fromOffset(62, 24)
+    logoutBtn.Position = UDim2.new(1, -72, 0, 18)
+    logoutBtn.BackgroundColor3 = COLORS.surfacePressed
+    logoutBtn.BackgroundTransparency = 0.20
+    logoutBtn.Text = "Log out"
+    logoutBtn.TextColor3 = COLORS.danger
+    logoutBtn.Font = Enum.Font.GothamBold
+    logoutBtn.TextSize = 11
+    logoutBtn.ZIndex = 12
+    logoutBtn.Parent = userPanel
+
+    local loCorner = Instance.new("UICorner")
+    loCorner.CornerRadius = UDim.new(0, 6)
+    loCorner.Parent = logoutBtn
+
+    local loStroke = Instance.new("UIStroke")
+    loStroke.Color = COLORS.danger
+    loStroke.Thickness = 1
+    loStroke.Transparency = 0.4
+    loStroke.Parent = logoutBtn
+
+    logoutBtn.MouseEnter:Connect(function()
+        TweenService:Create(logoutBtn, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.danger, BackgroundTransparency = 0.15 }):Play()
+        TweenService:Create(loStroke, TweenInfo.new(0.2), { Transparency = 0 }):Play()
+        logoutBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    end)
+
+    logoutBtn.MouseLeave:Connect(function()
+        TweenService:Create(logoutBtn, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.surfacePressed, BackgroundTransparency = 0.20 }):Play()
+        TweenService:Create(loStroke, TweenInfo.new(0.2), { Transparency = 0.4 }):Play()
+        logoutBtn.TextColor3 = COLORS.danger
+    end)
+
+    logoutBtn.MouseButton1Click:Connect(function()
+        playClickSound()
+        stopAllScriptOperations()
+        performLogoutKeyClear()
+        if gui then pcall(function() gui:Destroy() end) end
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Payomboyz0028/Yaranikaaaa/refs/heads/main/Start"))()
+        end)
+    end)
+
+    -- Session Time & Ping Metrics Box
+    local metricsBox = Instance.new("Frame")
+    metricsBox.Size = UDim2.new(1, -28, 0, 24)
+    metricsBox.Position = UDim2.new(0, 14, 0, 64)
+    metricsBox.BackgroundColor3 = COLORS.glassDeep
+    metricsBox.BorderSizePixel = 0
+    metricsBox.ZIndex = 10
+    metricsBox.Parent = userPanel
+
+    local mCorner = Instance.new("UICorner")
+    mCorner.CornerRadius = UDim.new(0, 6)
+    mCorner.Parent = metricsBox
+
+    local metricsLabel = Instance.new("TextLabel")
+    metricsLabel.Size = UDim.fromScale(1, 1)
+    metricsLabel.BackgroundTransparency = 1
+    metricsLabel.Text = "⏱️ 00:00  •  📡 0 ms"
+    metricsLabel.TextColor3 = COLORS.cyan
+    metricsLabel.Font = Enum.Font.GothamBold
+    metricsLabel.TextSize = 10
+    metricsLabel.ZIndex = 11
+    metricsLabel.Parent = metricsBox
+
+    task.spawn(function()
+        local startTime = os.time()
+        while task.wait(1) do
+            if not gui or not gui.Parent then break end
+            local elapsed = os.time() - startTime
+            local mins = math.floor(elapsed / 60)
+            local secs = elapsed % 60
+            local ping = 0
+            pcall(function() ping = math.floor(Stats.Network.ServerStatsItem["Data Ping"]:GetValue()) end)
+            metricsLabel.Text = string.format("⏱️ %02d:%02d  •  📡 %d ms", mins, secs, ping)
+        end
+    end)
+
+    -- Sidebar Navigation Scroll Container
+    local sideDiv = Instance.new("Frame")
+    sideDiv.Size = UDim2.new(1, -28, 0, 1)
+    sideDiv.Position = UDim2.new(0, 14, 0, 96)
+    sideDiv.BackgroundColor3 = COLORS.divider
+    sideDiv.BorderSizePixel = 0
+    sideDiv.ZIndex = 10
+    sideDiv.Parent = userPanel
+
+    local navHeader = Instance.new("TextLabel")
+    navHeader.Size = UDim2.new(1, -28, 0, 18)
+    navHeader.Position = UDim2.new(0, 16, 0, 104)
+    navHeader.BackgroundTransparency = 1
+    navHeader.Text = "SYSTEM MODULES / หมวดหมู่"
+    navHeader.TextColor3 = Color3.fromRGB(255, 255, 255)
+    navHeader.Font = Enum.Font.GothamBold
+    navHeader.TextSize = 11
+    navHeader.TextXAlignment = Enum.TextXAlignment.Left
+    navHeader.ZIndex = 10
+    navHeader.Parent = userPanel
+
+    local tabScroll = Instance.new("ScrollingFrame")
+    tabScroll.Name = "VerticalTabScroll"
+    tabScroll.Size = UDim2.new(1, -20, 1, -178)
+    tabScroll.Position = UDim2.new(0, 10, 0, 126)
+    tabScroll.BackgroundTransparency = 1
+    tabScroll.ScrollBarThickness = 3
+    tabScroll.ScrollBarImageColor3 = COLORS.cyan
+    tabScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+    tabScroll.ZIndex = 10
+    tabScroll.Parent = userPanel
+
+    local tabLayout = Instance.new("UIListLayout")
+    tabLayout.FillDirection = Enum.FillDirection.Vertical
+    tabLayout.Padding = UDim.new(0, 5)
+    tabLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    tabLayout.Parent = tabScroll
+
+    tabLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        tabScroll.CanvasSize = UDim2.new(0, 0, 0, tabLayout.AbsoluteContentSize.Y + 10)
+    end)
+
+    -- 🖥️ RIGHT MAIN PANEL (Content & Header)
+    local mainPanel = Instance.new("Frame")
+    mainPanel.Name = "MainPanel"
+    mainPanel.Size = UDim2.new(1, -240, 1, 0)
+    mainPanel.Position = UDim2.new(0, 240, 0, 0)
+    mainPanel.BackgroundTransparency = 1
+    mainPanel.Visible = false -- Initially false during Intro
+    mainPanel.ZIndex = 5
+    mainPanel.Parent = shell
+
+    local headerBar = Instance.new("Frame")
+    headerBar.Size = UDim2.new(1, 0, 0, 56)
+    headerBar.BackgroundTransparency = 1
+    headerBar.Parent = mainPanel
+
+    -- Gothic Title using Enum.Font.Fondamento & UIStroke
+    local mainTitle = Instance.new("TextLabel")
+    mainTitle.Size = UDim2.new(0, 320, 0, 30)
+    mainTitle.Position = UDim2.new(0, 20, 0, 6)
+    mainTitle.BackgroundTransparency = 1
+    mainTitle.Text = "PAYOMBØYZ HUB"
+    mainTitle.TextColor3 = Color3.fromRGB(255, 35, 60)
+    mainTitle.Font = Enum.Font.Fondamento
+    mainTitle.TextSize = 26
+    mainTitle.TextXAlignment = Enum.TextXAlignment.Left
+    mainTitle.Parent = headerBar
+
+    local mtStroke = Instance.new("UIStroke")
+    mtStroke.Color = Color3.fromRGB(80, 0, 15)
+    mtStroke.Thickness = 1.8
+    mtStroke.Parent = mainTitle
+
+    local vvipTag = Instance.new("Frame")
+    vvipTag.Name = "TitleVvipTag"
+    vvipTag.Position = UDim2.new(0, 250, 0, 11)
+    vvipTag.Size = UDim2.fromOffset(92, 20)
+    vvipTag.BackgroundColor3 = COLORS.surfaceRaised
+    vvipTag.BorderSizePixel = 0
+    vvipTag.Parent = headerBar
+
+    local vtCorner = Instance.new("UICorner")
+    vtCorner.CornerRadius = UDim.new(0, 6)
+    vtCorner.Parent = vvipTag
+
+    local vtStroke = Instance.new("UIStroke")
+    vtStroke.Color = COLORS.primary
+    vtStroke.Thickness = 1.2
+    vtStroke.Parent = vvipTag
+
+    local vtLabel = Instance.new("TextLabel")
+    vtLabel.Size = UDim2.fromScale(1, 1)
+    vtLabel.BackgroundTransparency = 1
+    vtLabel.Text = "⚡ CRIMSON V4"
+    vtLabel.TextColor3 = COLORS.primary
+    vtLabel.Font = Enum.Font.GothamBold
+    vtLabel.TextSize = 9
+    vtLabel.TextXAlignment = Enum.TextXAlignment.Center
+    vtLabel.Parent = vvipTag
+
+    local mainSubTitle = Instance.new("TextLabel")
+    mainSubTitle.Size = UDim2.new(0, 380, 0, 16)
+    mainSubTitle.Position = UDim2.new(0, 20, 0, 34)
+    mainSubTitle.BackgroundTransparency = 1
+    mainSubTitle.Text = cfg.SubTitle or "⚡ HIGH-VOLTAGE EXECUTION ENGINE • VVIP EDITION"
+    mainSubTitle.TextColor3 = COLORS.cyan
+    mainSubTitle.Font = Enum.Font.GothamBold
+    mainSubTitle.TextSize = 9
+    mainSubTitle.TextXAlignment = Enum.TextXAlignment.Left
+    mainSubTitle.Parent = headerBar
+
+    -- Close & Minimize Buttons
+    local closeBtn = Instance.new("TextButton")
+    closeBtn.Size = UDim2.fromOffset(28, 28)
+    closeBtn.Position = UDim2.new(1, -38, 0, 14)
+    closeBtn.BackgroundColor3 = COLORS.surfaceRaised
+    closeBtn.BackgroundTransparency = 0.20
+    closeBtn.Text = "X"
+    closeBtn.TextColor3 = COLORS.textMuted
+    closeBtn.Font = Enum.Font.GothamBold
+    closeBtn.TextSize = 14
+    closeBtn.Parent = headerBar
+
+    local closeCorner = Instance.new("UICorner")
+    closeCorner.CornerRadius = UDim.new(0, 8)
+    closeCorner.Parent = closeBtn
+
+    closeBtn.MouseButton1Click:Connect(function()
+        playClickSound()
+        shell.Visible = not shell.Visible
+    end)
+
+    local minBtn = Instance.new("TextButton")
+    minBtn.Size = UDim2.fromOffset(28, 28)
+    minBtn.Position = UDim2.new(1, -72, 0, 14)
+    minBtn.BackgroundColor3 = COLORS.surfaceRaised
+    minBtn.BackgroundTransparency = 0.20
+    minBtn.Text = "─"
+    minBtn.TextColor3 = COLORS.textMuted
+    minBtn.Font = Enum.Font.GothamBold
+    minBtn.TextSize = 13
+    minBtn.Parent = headerBar
+
+    local minCorner = Instance.new("UICorner")
+    minCorner.CornerRadius = UDim.new(0, 8)
+    minCorner.Parent = minBtn
+
+    minBtn.MouseButton1Click:Connect(function()
+        playClickSound()
+        shell.Visible = not shell.Visible
+    end)
+
+    -- Window Dragging Handler
+    local dragging, dragInput, dragStart, startPos
+    headerBar.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = shell.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then dragging = false end
+            end)
+        end
+    end)
+
+    headerBar.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            dragInput = input
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if input == dragInput and dragging then
+            local delta = input.Position - dragStart
+            shell.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        end
+    end)
+
+    -- Container for all Tab Content Pages
+    local pagesContainer = Instance.new("Frame")
+    pagesContainer.Name = "PagesContainer"
+    pagesContainer.Size = UDim2.new(1, 0, 1, -56)
+    pagesContainer.Position = UDim2.new(0, 0, 0, 56)
+    pagesContainer.BackgroundTransparency = 1
+    pagesContainer.Parent = mainPanel
+
+    -- 🎬 4-PHASE INTRO EXECUTION SEQUENCE (From Intro.md)
+    task.spawn(function()
+        -- Phase 1: Fade-In (0.45s)
+        local fadeInInfo = TweenInfo.new(0.45, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
+        TweenService:Create(introLogo, fadeInInfo, { ImageTransparency = 0 }):Play()
+        TweenService:Create(introTitle, fadeInInfo, { TextTransparency = 0 }):Play()
+        TweenService:Create(introSub, fadeInInfo, { TextTransparency = 0.2 }):Play()
+        
+        task.wait(1.5)
+        
+        -- Phase 2: Fade-Out (0.30s)
+        local fadeOutInfo = TweenInfo.new(0.30, Enum.EasingStyle.Quart, Enum.EasingDirection.In)
+        TweenService:Create(introLogo, fadeOutInfo, { ImageTransparency = 1 }):Play()
+        TweenService:Create(introTitle, fadeOutInfo, { TextTransparency = 1 }):Play()
+        TweenService:Create(introSub, fadeOutInfo, { TextTransparency = 1 }):Play()
+        
+        task.wait(0.35)
+        introOverlay.Visible = false
+        
+        -- Phase 3: Window Morph & Expand (0.65s Exponential Out)
+        local expandInfo = TweenInfo.new(0.65, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+        TweenService:Create(shell, expandInfo, {
+            Size = UDim2.fromOffset(920, 600),
+            BackgroundColor3 = COLORS.shell,
+            BackgroundTransparency = 0.12
+        }):Play()
+        TweenService:Create(shellStroke, expandInfo, {
+            Color = Color3.fromRGB(255, 25, 55),
+            Transparency = 0.15
+        }):Play()
+        
+        task.wait(0.65)
+        
+        -- Phase 4: Reveal Main Interface
+        userPanel.Visible = true
+        mainPanel.Visible = true
+    end)
+
+    -- Window Object Interface
+    local WindowObj = {
+        Tabs = {},
+        CurrentTab = nil,
+        Options = ObsidianGlassEngine.Options,
+    }
+
+    function WindowObj:AddTab(tabCfg)
+        local tabName = tabCfg.Title or "Tab"
+        local tabIcon = tabCfg.Icon or "⚡"
+        local TabObj = {}
+
+        -- Tab Button in Sidebar
+        local tabBtn = Instance.new("TextButton")
+        tabBtn.Size = UDim2.new(1, 0, 0, 36)
+        tabBtn.BackgroundColor3 = COLORS.surface
+        tabBtn.BackgroundTransparency = 0.40
+        tabBtn.BorderSizePixel = 0
+        tabBtn.Text = ""
+        tabBtn.ZIndex = 11
+        tabBtn.Parent = tabScroll
+
+        local tbCorner = Instance.new("UICorner")
+        tbCorner.CornerRadius = UDim.new(0, 8)
+        tbCorner.Parent = tabBtn
+
+        local tbStroke = Instance.new("UIStroke")
+        tbStroke.Color = COLORS.glassRaised
+        tbStroke.Thickness = 1
+        tbStroke.Transparency = 0.6
+        tbStroke.Parent = tabBtn
+
+        local iconLabel = Instance.new("TextLabel")
+        iconLabel.Size = UDim2.fromOffset(26, 36)
+        iconLabel.Position = UDim2.new(0, 10, 0, 0)
+        iconLabel.BackgroundTransparency = 1
+        iconLabel.Text = tabIcon
+        iconLabel.TextColor3 = COLORS.textMuted
+        iconLabel.Font = Enum.Font.GothamBold
+        iconLabel.TextSize = 14
+        iconLabel.ZIndex = 12
+        iconLabel.Parent = tabBtn
+
+        local titleLabel = Instance.new("TextLabel")
+        titleLabel.Size = UDim2.new(1, -44, 1, 0)
+        titleLabel.Position = UDim2.new(0, 38, 0, 0)
+        titleLabel.BackgroundTransparency = 1
+        titleLabel.Text = tabName
+        titleLabel.TextColor3 = COLORS.textMuted
+        titleLabel.Font = Enum.Font.GothamBold
+        titleLabel.TextSize = 13
+        titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+        titleLabel.ZIndex = 12
+        titleLabel.Parent = tabBtn
+
+        -- Tab Content Page Frame
+        local pageScroll = Instance.new("ScrollingFrame")
+        pageScroll.Name = "Page_" .. tabName
+        pageScroll.Size = UDim2.fromScale(1, 1)
+        pageScroll.BackgroundTransparency = 1
+        pageScroll.ScrollBarThickness = 3
+        pageScroll.ScrollBarImageColor3 = COLORS.cyan
+        pageScroll.Visible = false
+        pageScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+        pageScroll.Parent = pagesContainer
+
+        local pageLayout = Instance.new("UIListLayout")
+        pageLayout.FillDirection = Enum.FillDirection.Vertical
+        pageLayout.Padding = UDim.new(0, 8)
+        pageLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        pageLayout.Parent = pageScroll
+
+        local pagePadding = Instance.new("UIPadding")
+        pagePadding.PaddingLeft = UDim.new(0, 20)
+        pagePadding.PaddingRight = UDim.new(0, 20)
+        pagePadding.PaddingTop = UDim.new(0, 10)
+        pagePadding.PaddingBottom = UDim.new(0, 20)
+        pagePadding.Parent = pageScroll
+
+        pageLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+            pageScroll.CanvasSize = UDim2.new(0, 0, 0, pageLayout.AbsoluteContentSize.Y + 30)
+        end)
+
+        local function activateTab()
+            for _, t in ipairs(WindowObj.Tabs) do
+                t.Page.Visible = false
+                t.Button.BackgroundColor3 = COLORS.surface
+                t.Button.BackgroundTransparency = 0.40
+                t.TitleLabel.TextColor3 = COLORS.textMuted
+                t.IconLabel.TextColor3 = COLORS.textMuted
+                t.Stroke.Color = COLORS.glassRaised
+            end
+            pageScroll.Visible = true
+            tabBtn.BackgroundColor3 = COLORS.surfaceRaised
+            tabBtn.BackgroundTransparency = 0
+            titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            iconLabel.TextColor3 = COLORS.cyan
+            tbStroke.Color = COLORS.cyan
+            WindowObj.CurrentTab = TabObj
+        end
+
+        tabBtn.MouseButton1Click:Connect(function()
+            playClickSound()
+            activateTab()
+        end)
+
+        TabObj.Button = tabBtn
+        TabObj.Page = pageScroll
+        TabObj.TitleLabel = titleLabel
+        TabObj.IconLabel = iconLabel
+        TabObj.Stroke = tbStroke
+
+        if #WindowObj.Tabs == 0 then
+            activateTab()
+        end
+
+        -- ==============================================================================
+        -- WIDGET COMPONENT BUILDERS (Sections, Toggles, Sliders, Dropdowns, Buttons, Inputs)
+        -- ==============================================================================
+
+        function TabObj:AddSection(secTitle)
+            local sec = Instance.new("Frame")
+            sec.Size = UDim2.new(1, -10, 0, 28)
+            sec.BackgroundTransparency = 1
+            sec.Parent = pageScroll
+
+            local sTitle = Instance.new("TextLabel")
+            sTitle.Size = UDim2.new(1, -10, 0, 20)
+            sTitle.Position = UDim2.new(0, 4, 0, 6)
+            sTitle.BackgroundTransparency = 1
+            sTitle.Text = string.upper(secTitle)
+            sTitle.TextColor3 = COLORS.cyan
+            sTitle.Font = Enum.Font.GothamBold
+            sTitle.TextSize = 12
+            sTitle.TextXAlignment = Enum.TextXAlignment.Left
+            sTitle.Parent = sec
+
+            local sLine = Instance.new("Frame")
+            sLine.Size = UDim2.new(1, -10, 0, 1)
+            sLine.Position = UDim2.new(0, 4, 1, -1)
+            sLine.BackgroundColor3 = COLORS.divider
+            sLine.BorderSizePixel = 0
+            sLine.Parent = sec
+            return sec
+        end
+
+        function TabObj:AddToggle(idx, tCfg)
+            local title = tCfg.Title or "Toggle"
+            local desc = tCfg.Description or ""
+            local def = tCfg.Default or false
+            local cb = tCfg.Callback or function() end
+
+            local frame = Instance.new("Frame")
+            frame.Size = UDim2.new(1, -10, 0, desc ~= "" and 50 or 42)
+            frame.BackgroundColor3 = COLORS.glassDeep
+            frame.BackgroundTransparency = 0.18
+            frame.BorderSizePixel = 0
+            frame.Parent = pageScroll
+
+            local fCorner = Instance.new("UICorner")
+            fCorner.CornerRadius = UDim.new(0, 8)
+            fCorner.Parent = frame
+
+            local fStroke = Instance.new("UIStroke")
+            fStroke.Color = COLORS.glassRaised
+            fStroke.Thickness = 1
+            fStroke.Parent = frame
+
+            local tTitle = Instance.new("TextLabel")
+            tTitle.Size = UDim2.new(1, -70, 0, 20)
+            tTitle.Position = UDim2.new(0, 12, 0, desc ~= "" and 6 or 11)
+            tTitle.BackgroundTransparency = 1
+            tTitle.Text = title
+            tTitle.TextColor3 = COLORS.text
+            tTitle.Font = Enum.Font.GothamBold
+            tTitle.TextSize = 13
+            tTitle.TextXAlignment = Enum.TextXAlignment.Left
+            tTitle.Parent = frame
+
+            if desc ~= "" then
+                local tDesc = Instance.new("TextLabel")
+                tDesc.Size = UDim2.new(1, -70, 0, 16)
+                tDesc.Position = UDim2.new(0, 12, 0, 26)
+                tDesc.BackgroundTransparency = 1
+                tDesc.Text = desc
+                tDesc.TextColor3 = COLORS.textMuted
+                tDesc.Font = Enum.Font.Gotham
+                tDesc.TextSize = 10
+                tDesc.TextXAlignment = Enum.TextXAlignment.Left
+                tDesc.Parent = frame
+            end
+
+            local toggleBg = Instance.new("Frame")
+            toggleBg.Size = UDim2.fromOffset(40, 22)
+            toggleBg.Position = UDim2.new(1, -52, 0.5, -11)
+            toggleBg.BackgroundColor3 = def and COLORS.primary or COLORS.surfaceRaised
+            toggleBg.BorderSizePixel = 0
+            toggleBg.Parent = frame
+
+            local tgCorner = Instance.new("UICorner")
+            tgCorner.CornerRadius = UDim.new(1, 0)
+            tgCorner.Parent = toggleBg
+
+            local toggleCircle = Instance.new("Frame")
+            toggleCircle.Size = UDim2.fromOffset(16, 16)
+            toggleCircle.Position = UDim2.new(def and 1 or 0, def and -19 or 3, 0.5, -8)
+            toggleCircle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            toggleCircle.BorderSizePixel = 0
+            toggleCircle.Parent = toggleBg
+
+            local tcRound = Instance.new("UICorner")
+            tcRound.CornerRadius = UDim.new(1, 0)
+            tcRound.Parent = toggleCircle
+
+            local hit = Instance.new("TextButton")
+            hit.Size = UDim2.fromScale(1, 1)
+            hit.BackgroundTransparency = 1
+            hit.Text = ""
+            hit.Parent = frame
+
+            local state = def
+            local ToggleObj = { Value = state }
+
+            local function setState(v)
+                state = v
+                ToggleObj.Value = v
+                playClickSound()
+                TweenService:Create(toggleBg, TweenInfo.new(0.2), { BackgroundColor3 = state and COLORS.primary or COLORS.surfaceRaised }):Play()
+                TweenService:Create(toggleCircle, TweenInfo.new(0.2), { Position = UDim2.new(state and 1 or 0, state and -19 or 3, 0.5, -8) }):Play()
+                pcall(cb, state)
+            end
+
+            function ToggleObj:SetValue(v) setState(v) end
+
+            hit.MouseButton1Click:Connect(function() setState(not state) end)
+            ObsidianGlassEngine.Options[idx] = ToggleObj
+            return ToggleObj
+        end
+
+        function TabObj:AddSlider(idx, sCfg)
+            local title = sCfg.Title or "Slider"
+            local minVal = sCfg.Min or 0
+            local maxVal = sCfg.Max or 100
+            local defVal = sCfg.Default or minVal
+            local rounding = sCfg.Rounding or 0
+            local cb = sCfg.Callback or function() end
+
+            local frame = Instance.new("Frame")
+            frame.Size = UDim2.new(1, -10, 0, 50)
+            frame.BackgroundColor3 = COLORS.glassDeep
+            frame.BackgroundTransparency = 0.18
+            frame.BorderSizePixel = 0
+            frame.Parent = pageScroll
+
+            local fCorner = Instance.new("UICorner")
+            fCorner.CornerRadius = UDim.new(0, 8)
+            fCorner.Parent = frame
+
+            local fStroke = Instance.new("UIStroke")
+            fStroke.Color = COLORS.glassRaised
+            fStroke.Thickness = 1
+            fStroke.Parent = frame
+
+            local sTitle = Instance.new("TextLabel")
+            sTitle.Size = UDim2.new(1, -70, 0, 20)
+            sTitle.Position = UDim2.new(0, 12, 0, 6)
+            sTitle.BackgroundTransparency = 1
+            sTitle.Text = title
+            sTitle.TextColor3 = COLORS.text
+            sTitle.Font = Enum.Font.GothamBold
+            sTitle.TextSize = 13
+            sTitle.TextXAlignment = Enum.TextXAlignment.Left
+            sTitle.Parent = frame
+
+            local sVal = Instance.new("TextLabel")
+            sVal.Size = UDim2.new(0, 50, 0, 20)
+            sVal.Position = UDim2.new(1, -62, 0, 6)
+            sVal.BackgroundTransparency = 1
+            sVal.Text = tostring(defVal)
+            sVal.TextColor3 = COLORS.cyan
+            sVal.Font = Enum.Font.GothamBold
+            sVal.TextSize = 12
+            sVal.TextXAlignment = Enum.TextXAlignment.Right
+            sVal.Parent = frame
+
+            local barBg = Instance.new("Frame")
+            barBg.Size = UDim2.new(1, -24, 0, 6)
+            barBg.Position = UDim2.new(0, 12, 0, 32)
+            barBg.BackgroundColor3 = COLORS.surfaceRaised
+            barBg.BorderSizePixel = 0
+            barBg.Parent = frame
+
+            local bCorner = Instance.new("UICorner")
+            bCorner.CornerRadius = UDim.new(1, 0)
+            bCorner.Parent = barBg
+
+            local fill = Instance.new("Frame")
+            local initPct = math.clamp((defVal - minVal) / (maxVal - minVal), 0, 1)
+            fill.Size = UDim2.new(initPct, 0, 1, 0)
+            fill.BackgroundColor3 = COLORS.primary
+            fill.BorderSizePixel = 0
+            fill.Parent = barBg
+
+            local fillCorner = Instance.new("UICorner")
+            fillCorner.CornerRadius = UDim.new(1, 0)
+            fillCorner.Parent = fill
+
+            local sliderBtn = Instance.new("TextButton")
+            sliderBtn.Size = UDim2.new(1, 0, 0, 20)
+            sliderBtn.Position = UDim2.new(0, 0, 0.5, -10)
+            sliderBtn.BackgroundTransparency = 1
+            sliderBtn.Text = ""
+            sliderBtn.Parent = barBg
+
+            local currentVal = defVal
+            local SliderObj = { Value = currentVal }
+
+            local function updateSlider(inputX)
+                local absPos = barBg.AbsolutePosition.X
+                local absSize = barBg.AbsoluteSize.X
+                local pct = math.clamp((inputX - absPos) / absSize, 0, 1)
+                local rawVal = minVal + (maxVal - minVal) * pct
+                local formattedVal = (rounding == 0) and math.floor(rawVal) or tonumber(string.format("%." .. rounding .. "f", rawVal))
+                fill.Size = UDim2.new(pct, 0, 1, 0)
+                sVal.Text = tostring(formattedVal)
+                SliderObj.Value = formattedVal
+                pcall(cb, formattedVal)
+            end
+
+            local sliding = false
+            sliderBtn.InputBegan:Connect(function(inp)
+                if inp.UserInputType == Enum.UserInputType.MouseButton1 or inp.UserInputType == Enum.UserInputType.Touch then
+                    sliding = true
+                    updateSlider(inp.Position.X)
+                    inp.Changed:Connect(function()
+                        if inp.UserInputState == Enum.UserInputState.End then sliding = false end
+                    end)
+                end
+            end)
+
+            UserInputService.InputChanged:Connect(function(inp)
+                if sliding and (inp.UserInputType == Enum.UserInputType.MouseMovement or inp.UserInputType == Enum.UserInputType.Touch) then
+                    updateSlider(inp.Position.X)
+                end
+            end)
+
+            function SliderObj:SetValue(v)
+                v = math.clamp(v, minVal, maxVal)
+                local pct = (v - minVal) / (maxVal - minVal)
+                fill.Size = UDim2.new(pct, 0, 1, 0)
+                sVal.Text = tostring(v)
+                SliderObj.Value = v
+                pcall(cb, v)
+            end
+
+            ObsidianGlassEngine.Options[idx] = SliderObj
+            return SliderObj
+        end
+
+        function TabObj:AddButton(bCfg)
+            local title = bCfg.Title or "Button"
+            local cb = bCfg.Callback or function() end
+
+            local frame = Instance.new("Frame")
+            frame.Size = UDim2.new(1, -10, 0, 38)
+            frame.BackgroundColor3 = COLORS.surfaceRaised
+            frame.BorderSizePixel = 0
+            frame.Parent = pageScroll
+
+            local fCorner = Instance.new("UICorner")
+            fCorner.CornerRadius = UDim.new(0, 8)
+            fCorner.Parent = frame
+
+            local fStroke = Instance.new("UIStroke")
+            fStroke.Color = COLORS.primary
+            fStroke.Thickness = 1.2
+            fStroke.Transparency = 0.4
+            fStroke.Parent = frame
+
+            local btn = Instance.new("TextButton")
+            btn.Size = UDim2.fromScale(1, 1)
+            btn.BackgroundTransparency = 1
+            btn.Text = "⚡ " .. title
+            btn.TextColor3 = COLORS.text
+            btn.Font = Enum.Font.GothamBold
+            btn.TextSize = 12
+            btn.Parent = frame
+
+            btn.MouseEnter:Connect(function()
+                TweenService:Create(frame, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.surfaceHover }):Play()
+                TweenService:Create(fStroke, TweenInfo.new(0.2), { Transparency = 0 }):Play()
+            end)
+
+            btn.MouseLeave:Connect(function()
+                TweenService:Create(frame, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.surfaceRaised }):Play()
+                TweenService:Create(fStroke, TweenInfo.new(0.2), { Transparency = 0.4 }):Play()
+            end)
+
+            btn.MouseButton1Click:Connect(function()
+                playClickSound()
+                pcall(cb)
+            end)
+            return btn
+        end
+
+        function TabObj:AddDropdown(idx, dCfg)
+            local title = dCfg.Title or "Dropdown"
+            local values = dCfg.Values or {}
+            local defVal = dCfg.Default or values[1] or ""
+            local cb = dCfg.Callback or function() end
+
+            local frame = Instance.new("Frame")
+            frame.Size = UDim2.new(1, -10, 0, 44)
+            frame.BackgroundColor3 = COLORS.glassDeep
+            frame.BackgroundTransparency = 0.18
+            frame.BorderSizePixel = 0
+            frame.ClipsDescendants = true
+            frame.Parent = pageScroll
+
+            local fCorner = Instance.new("UICorner")
+            fCorner.CornerRadius = UDim.new(0, 8)
+            fCorner.Parent = frame
+
+            local fStroke = Instance.new("UIStroke")
+            fStroke.Color = COLORS.glassRaised
+            fStroke.Thickness = 1
+            fStroke.Parent = frame
+
+            local dTitle = Instance.new("TextLabel")
+            dTitle.Size = UDim2.new(1, -150, 0, 44)
+            dTitle.Position = UDim2.new(0, 12, 0, 0)
+            dTitle.BackgroundTransparency = 1
+            dTitle.Text = title
+            dTitle.TextColor3 = COLORS.text
+            dTitle.Font = Enum.Font.GothamBold
+            dTitle.TextSize = 13
+            dTitle.TextXAlignment = Enum.TextXAlignment.Left
+            dTitle.Parent = frame
+
+            local dSelected = Instance.new("TextLabel")
+            dSelected.Size = UDim2.new(0, 130, 0, 44)
+            dSelected.Position = UDim2.new(1, -142, 0, 0)
+            dSelected.BackgroundTransparency = 1
+            dSelected.Text = tostring(defVal) .. " ▼"
+            dSelected.TextColor3 = COLORS.cyan
+            dSelected.Font = Enum.Font.GothamBold
+            dSelected.TextSize = 12
+            dSelected.TextXAlignment = Enum.TextXAlignment.Right
+            dSelected.Parent = frame
+
+            local dropBtn = Instance.new("TextButton")
+            dropBtn.Size = UDim2.new(1, 0, 0, 44)
+            dropBtn.BackgroundTransparency = 1
+            dropBtn.Text = ""
+            dropBtn.Parent = frame
+
+            local listContainer = Instance.new("Frame")
+            listContainer.Size = UDim2.new(1, -24, 0, #values * 28)
+            listContainer.Position = UDim2.new(0, 12, 0, 44)
+            listContainer.BackgroundTransparency = 1
+            listContainer.Parent = frame
+
+            local listLayout = Instance.new("UIListLayout")
+            listLayout.FillDirection = Enum.FillDirection.Vertical
+            listLayout.Padding = UDim.new(0, 2)
+            listLayout.Parent = listContainer
+
+            local opened = false
+            local DropObj = { Value = defVal }
+
+            local function toggleDrop()
+                opened = not opened
+                dSelected.Text = tostring(DropObj.Value) .. (opened and " ▲" or " ▼")
+                local targetHeight = opened and (48 + #values * 30) or 44
+                TweenService:Create(frame, TweenInfo.new(0.25, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Size = UDim2.new(1, -10, 0, targetHeight) }):Play()
+            end
+
+            dropBtn.MouseButton1Click:Connect(function()
+                playClickSound()
+                toggleDrop()
+            end)
+
+            for _, val in ipairs(values) do
+                local itm = Instance.new("TextButton")
+                itm.Size = UDim2.new(1, 0, 0, 26)
+                itm.BackgroundColor3 = COLORS.surfaceRaised
+                itm.BackgroundTransparency = 0.40
+                itm.Text = "  " .. tostring(val)
+                itm.TextColor3 = COLORS.textMuted
+                itm.Font = Enum.Font.GothamMedium
+                itm.TextSize = 11
+                itm.TextXAlignment = Enum.TextXAlignment.Left
+                itm.Parent = listContainer
+
+                local itmCorner = Instance.new("UICorner")
+                itmCorner.CornerRadius = UDim.new(0, 5)
+                itmCorner.Parent = itm
+
+                itm.MouseButton1Click:Connect(function()
+                    playClickSound()
+                    DropObj.Value = val
+                    dSelected.Text = tostring(val) .. " ▼"
+                    toggleDrop()
+                    pcall(cb, val)
+                end)
+            end
+
+            function DropObj:SetValue(v)
+                DropObj.Value = v
+                dSelected.Text = tostring(v) .. " ▼"
+                pcall(cb, v)
+            end
+
+            ObsidianGlassEngine.Options[idx] = DropObj
+            return DropObj
+        end
+
+        function TabObj:AddInput(idx, iCfg)
+            local title = iCfg.Title or "Input"
+            local defVal = iCfg.Default or ""
+            local placeholder = iCfg.Placeholder or "Type here..."
+            local cb = iCfg.Callback or function() end
+
+            local frame = Instance.new("Frame")
+            frame.Size = UDim2.new(1, -10, 0, 46)
+            frame.BackgroundColor3 = COLORS.glassDeep
+            frame.BackgroundTransparency = 0.18
+            frame.BorderSizePixel = 0
+            frame.Parent = pageScroll
+
+            local fCorner = Instance.new("UICorner")
+            fCorner.CornerRadius = UDim.new(0, 8)
+            fCorner.Parent = frame
+
+            local fStroke = Instance.new("UIStroke")
+            fStroke.Color = COLORS.glassRaised
+            fStroke.Thickness = 1
+            fStroke.Parent = frame
+
+            local iTitle = Instance.new("TextLabel")
+            iTitle.Size = UDim2.new(0, 140, 1, 0)
+            iTitle.Position = UDim2.new(0, 12, 0, 0)
+            iTitle.BackgroundTransparency = 1
+            iTitle.Text = title
+            iTitle.TextColor3 = COLORS.text
+            iTitle.Font = Enum.Font.GothamBold
+            iTitle.TextSize = 13
+            iTitle.TextXAlignment = Enum.TextXAlignment.Left
+            iTitle.Parent = frame
+
+            local textBox = Instance.new("TextBox")
+            textBox.Size = UDim2.new(1, -170, 0, 30)
+            textBox.Position = UDim2.new(1, -158, 0.5, -15)
+            textBox.BackgroundColor3 = COLORS.input
+            textBox.BackgroundTransparency = 0.20
+            textBox.Text = defVal
+            textBox.PlaceholderText = placeholder
+            textBox.PlaceholderColor3 = COLORS.textFaint
+            textBox.TextColor3 = COLORS.cyan
+            textBox.Font = Enum.Font.GothamMedium
+            textBox.TextSize = 12
+            textBox.Parent = frame
+
+            local tbCorner = Instance.new("UICorner")
+            tbCorner.CornerRadius = UDim.new(0, 6)
+            tbCorner.Parent = textBox
+
+            local tbStroke = Instance.new("UIStroke")
+            tbStroke.Color = COLORS.glassRaised
+            tbStroke.Thickness = 1
+            tbStroke.Parent = textBox
+
+            textBox.Focused:Connect(function()
+                TweenService:Create(tbStroke, TweenInfo.new(0.2), { Color = COLORS.cyan }):Play()
+            end)
+            textBox.FocusLost:Connect(function()
+                TweenService:Create(tbStroke, TweenInfo.new(0.2), { Color = COLORS.glassRaised }):Play()
+                pcall(cb, textBox.Text)
+            end)
+
+            local InputObj = { Value = defVal }
+            function InputObj:SetValue(v)
+                textBox.Text = v
+                InputObj.Value = v
+                pcall(cb, v)
+            end
+
+            ObsidianGlassEngine.Options[idx] = InputObj
+            return InputObj
+        end
+
+        function TabObj:AddParagraph(title, desc)
+            local frame = Instance.new("Frame")
+            frame.Size = UDim2.new(1, -10, 0, 54)
+            frame.BackgroundColor3 = COLORS.glassDeep
+            frame.BackgroundTransparency = 0.18
+            frame.BorderSizePixel = 0
+            frame.Parent = pageScroll
+
+            local fCorner = Instance.new("UICorner")
+            fCorner.CornerRadius = UDim.new(0, 8)
+            fCorner.Parent = frame
+
+            local pTitle = Instance.new("TextLabel")
+            pTitle.Size = UDim2.new(1, -20, 0, 22)
+            pTitle.Position = UDim2.new(0, 10, 0, 6)
+            pTitle.BackgroundTransparency = 1
+            pTitle.Text = title
+            pTitle.TextColor3 = COLORS.text
+            pTitle.Font = Enum.Font.GothamBold
+            pTitle.TextSize = 13
+            pTitle.TextXAlignment = Enum.TextXAlignment.Left
+            pTitle.Parent = frame
+
+            local pDesc = Instance.new("TextLabel")
+            pDesc.Size = UDim2.new(1, -20, 0, 24)
+            pDesc.Position = UDim2.new(0, 10, 0, 26)
+            pDesc.BackgroundTransparency = 1
+            pDesc.Text = desc
+            pDesc.TextColor3 = COLORS.textMuted
+            pDesc.Font = Enum.Font.Gotham
+            pDesc.TextSize = 11
+            pDesc.TextWrapped = true
+            pDesc.TextXAlignment = Enum.TextXAlignment.Left
+            pDesc.Parent = frame
+            return frame
+        end
+
+        table.insert(WindowObj.Tabs, TabObj)
+        return TabObj
+    end
+
+    -- Keybinds: [K] Toggle Shell Visibility | [F] Toggle Scale
+    UserInputService.InputBegan:Connect(function(input, gpe)
+        if gpe then return end
+        if input.KeyCode == Enum.KeyCode.K or input.KeyCode == Enum.KeyCode.RightControl then
+            playClickSound()
+            shell.Visible = not shell.Visible
+        elseif input.KeyCode == Enum.KeyCode.F then
+            playClickSound()
+            uiScale.Scale = (uiScale.Scale == 1.0) and 0.85 or 1.0
+        end
+    end)
+
+    return WindowObj
+end
+
+return ObsidianGlassEngine
+
+-----------------------------------------------------------------------------------------
+-- 🤖 SECTION 7: AI PROMPT & DIRECTIVES (คำสั่งสำหรับส่งให้ AI ใช้พอร์ตสคริปต์แมพอื่น)
+-----------------------------------------------------------------------------------------
+--[[
+    =====================================================================================
+    [ COPY ข้อความในบล็อกนี้เพื่อส่งให้ AI นำระบบนี้ไปแปลงสคริปต์แมพอื่นให้ได้งานตรง 100% ]
+    =====================================================================================
+
+    "ช่วยแปลงและติดตั้งระบบ UI ของสคริปต์นี้ให้ใช้สเปก 'CRIMSON OBSIDIAN GLASSMORPHIC 2'
+    ตามข้อกำหนดของ PAYOMBØYZ HUB อย่างสมบูรณ์และละเอียดที่สุด:
+
+    1. ธีมและคู่สี (Crimson Obsidian Palette - เทาดำ แดงดุ):
+       - ใช้คู่สี Dark Obsidian Void (#060103, #0C0306) ตัดกับขอบเลเซอร์สีแดงนีออน (#FF1432, #FF3C5A)
+       - ห้ามใช้สีขาวล้วนหรือโทนสว่างในตัวแผงควบคุม ให้คงความโปร่งแสงแบบกระจกรมควัน (Dark Smoked Glass)
+       - ขอบหน้าต่างหลัก (MainShell) และปุ่ม Verify/Primary ต้องมีเส้นขอบไล่เฉดนีออนสีแดง (UIGradient)
+
+    2. เอกลักษณ์แบรนด์และฟอนต์ (PAYOMBØYZ HUB & Fondamento Gothic):
+       - ชื่อฮับต้องใช้ตัวสะกด 'PAYOMBØYZ HUB' (มีเครื่องหมาย Ø)
+       - หัวข้อหน้าต่าง (Window Title) และ Intro Title ต้องใช้ฟอนต์ 'Enum.Font.Fondamento' ขนาด 26-28px
+         สีตัวอักษรเป็น Fiery Neon Hot Red (Color3.fromRGB(255, 35, 60)) พร้อม UIStroke สีเลือดหมูดำเข้ม
+         (Color3.fromRGB(80, 0, 15)) ความหนา 1.8px
+       - ต้องมีเข็มกลัด '⚡ CRIMSON V4' และข้อความซับไตเติล '⚡ HIGH-VOLTAGE EXECUTION ENGINE • VVIP EDITION'
+
+    3. แอนิเมชันเปิดตัว (Master Intro Sequence ตาม Intro.md):
+       - หน้าต่างเริ่มต้นเป็นการ์ดกระจกขาวใสขนาด 520x150 (BackgroundTransparency 0.92, Corner 18px)
+       - โหลดโลโก้จาก GitHub Raw พร้อมแคชลงไฟล์ 'payomboyz_intro_logo.png' และมี Fallback ปลอดภัย
+       - Phase 1 (0.45s): ค่อยๆ Fade-in โลโก้ และชื่อ Gothic 'PAYOMBØYZ HUB'
+       - Hold Stage (1.5s): ค้างหน้า Intro แสดงผล
+       - Phase 2 (0.30s): Fade-out เนื้อหา Intro ออกไป
+       - Phase 3 & 4 (0.65s): ขยายการ์ดแบบ Exponential Morph จาก 520x150 ไปสู่ขนาดเต็ม 920x600
+         พร้อมเปลี่ยนสีเป็น Dark Obsidian และเปิดเผยแท็บและเนื้อหาหลักทั้งหมด
+
+    4. เอฟเฟกต์สายฟ้าแดงดุ (Crimson Lightning & Electric Arcs Engine):
+       - นำเอฟเฟกต์หิมะตกออกถาวร และติดตั้งระบบสายฟ้าแรงสูงสีแดง:
+         1) Procedural Lightning Bolt: สุ่มฟาดสายฟ้าสีแดงแกนขาว-ชมพูแบบ Zig-zag คมกริบ พาดผ่านการ์ดทุก 1.8 - 3.8 วินาที
+         2) Ambient Flash: แสงสีแดงวาบสะท้อนทั่วหน้าต่างชั่วพริบตา (0.14s) ทุกครั้งที่สายฟ้าฟาด
+         3) Electric Plasma Sparks: ประกายไฟสีแดง 28 ดวง เคลื่อนที่กระตุก Jitter แบบไฟฟ้าสถิต
+         4) Capsule Lightning: มินิประกายไฟฟ้าวิ่งใน Toggle Capsule
+       - Event Connection และ Threads ทั้งหมดต้องผูกในตารางเพื่อ Clear ได้สะอาด 0 Memory Leaks
+
+    5. ปุ่ม Toggle แคปซูลลอยได้ (Draggable Toggle Capsule):
+       - แคปซูลขนาด 230x58px ลากได้ทั้งเมาส์และหน้าจอสัมผัสมือถือ พร้อมขอบไฟนีออนแดง 45 องศา
+       - แสดงผลรูปโปรไฟล์, @Username, และระบบวัด FPS & Ping แบบเรียลไทม์
+       - ปุ่มลัดคีย์บอร์ด [RightControl] หรือ [K] เพื่อซ่อน/แสดงหน้าต่าง
+
+    6. ระบบ Log out และทำลายสคริปต์อย่างปลอดภัย (จาก logout.txt):
+       - สร้างปุ่ม 'Log out' ขนาด 62x24px ขอบสีแดง Danger ไว้ข้างชื่อโปรไฟล์ในแถบ Sidebar ซ้ายมือ
+       - เมื่อกด Logout ให้ดำเนินการ:
+         1) สั่งหยุดการทำงานของสคริปต์ ลูป และ Connection ทั้งหมดทันที (Cancel Threads, Disconnect Events)
+         2) ลบไฟล์คีย์ในเครื่อง PayomboyZ_LuarmorKey.txt, PayomboyZ_VVIPKey.txt, PayomboyZ_SavedKey.txt
+         3) ล้างตัวแปร global keys และตั้งค่า getgenv().PayomboyZ_LoggedOut = true ป้องกัน Auto-Login ซ้ำ
+         4) ทำลาย GUI ทิ้ง
+         5) โหลดสคริปต์กลับไปยังหน้าหลัก Start URL โดยตรง
+
+    7. การรองรับหน้าจอมือถือ (Responsive UIScale Engine):
+       - มีระบบคำนวณ UIScale อัตโนมัติจาก ViewportSize ปรับย่อขนาดลงอย่างสมส่วนบนมือถือทุกรุ่น"
+    =====================================================================================
+--]]
