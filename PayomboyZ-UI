@@ -201,32 +201,32 @@ local Stats = game:GetService("Stats")
 local SoundService = game:GetService("SoundService")
 
 local COLORS = {
-    backdrop = Color3.fromRGB(6, 1, 3),
-    shell = Color3.fromRGB(12, 3, 6),
-    shellStroke = Color3.fromRGB(255, 20, 50),
-    glass = Color3.fromRGB(20, 5, 10),
-    glassDeep = Color3.fromRGB(15, 3, 7),
-    glassRaised = Color3.fromRGB(35, 8, 16),
-    userPanel = Color3.fromRGB(18, 4, 8),
-    surface = Color3.fromRGB(28, 6, 12),
-    surfaceRaised = Color3.fromRGB(48, 10, 20),
-    surfaceHover = Color3.fromRGB(72, 16, 30),
-    surfacePressed = Color3.fromRGB(22, 5, 10),
-    input = Color3.fromRGB(12, 3, 6),
-    inputFocus = Color3.fromRGB(30, 6, 14),
-    divider = Color3.fromRGB(140, 20, 45),
-    primary = Color3.fromRGB(255, 20, 50),
-    primaryHover = Color3.fromRGB(255, 60, 90),
-    primaryPressed = Color3.fromRGB(185, 12, 35),
-    secondary = Color3.fromRGB(40, 10, 18),
-    secondaryHover = Color3.fromRGB(58, 15, 26),
-    secondaryPressed = Color3.fromRGB(26, 6, 12),
-    text = Color3.fromRGB(255, 255, 255),
-    textMuted = Color3.fromRGB(245, 200, 212),
-    textFaint = Color3.fromRGB(195, 135, 150),
-    cyan = Color3.fromRGB(255, 30, 65),
+    backdrop = Color3.fromRGB(9, 10, 13),
+    shell = Color3.fromRGB(13, 14, 18),
+    shellStroke = Color3.fromRGB(42, 44, 56),
+    glass = Color3.fromRGB(20, 21, 27),
+    glassDeep = Color3.fromRGB(16, 17, 22),
+    glassRaised = Color3.fromRGB(28, 30, 38),
+    userPanel = Color3.fromRGB(16, 17, 22),
+    surface = Color3.fromRGB(20, 21, 27),
+    surfaceRaised = Color3.fromRGB(28, 30, 38),
+    surfaceHover = Color3.fromRGB(36, 38, 48),
+    surfacePressed = Color3.fromRGB(17, 18, 23),
+    input = Color3.fromRGB(13, 14, 18),
+    inputFocus = Color3.fromRGB(28, 30, 38),
+    divider = Color3.fromRGB(42, 44, 56),
+    primary = Color3.fromRGB(255, 42, 84),
+    primaryHover = Color3.fromRGB(255, 59, 105),
+    primaryPressed = Color3.fromRGB(180, 20, 50),
+    secondary = Color3.fromRGB(28, 30, 38),
+    secondaryHover = Color3.fromRGB(42, 44, 56),
+    secondaryPressed = Color3.fromRGB(17, 18, 23),
+    text = Color3.fromRGB(245, 245, 250),
+    textMuted = Color3.fromRGB(190, 193, 204),
+    textFaint = Color3.fromRGB(150, 155, 170),
+    cyan = Color3.fromRGB(255, 42, 84),
     lightningCore = Color3.fromRGB(255, 225, 235),
-    lightningGlow = Color3.fromRGB(255, 20, 55),
+    lightningGlow = Color3.fromRGB(255, 42, 84),
     success = Color3.fromRGB(46, 224, 140),
     warning = Color3.fromRGB(255, 185, 70),
     danger = Color3.fromRGB(255, 45, 65),
@@ -382,6 +382,7 @@ end
 -- 🖼️ MAIN WINDOW ENGINE
 function ObsidianGlassEngine:CreateWindow(cfg)
     cfg = cfg or {}
+    self.Options = {}
     local parentGui = getSafeParentGui()
     if parentGui:FindFirstChild("ObsidianGlass2_UI") then
         parentGui.ObsidianGlass2_UI:Destroy()
@@ -389,6 +390,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     local gui = Instance.new("ScreenGui")
     gui.Name = "ObsidianGlass2_UI"
+    gui:SetAttribute("PayomboyZLibraryOwned", true)
     gui.ResetOnSpawn = false
     gui.IgnoreGuiInset = true
     gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -584,7 +586,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     -- ⚡ DYNAMIC ELECTRIC PLASMA SPARKS ANIMATION (REPLACING SNOW WITH CRIMSON EMBERS)
     task.spawn(function()
         local isMobile = (UserInputService.TouchEnabled and not UserInputService.MouseEnabled)
-        local maxSparks = isMobile and 16 or 32
+        local maxSparks = isMobile and 3 or 5
         local sparks = {}
         for i = 1, maxSparks do
             local isCore = (i % 3 == 0)
@@ -658,7 +660,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                         strikeLightning(lightningLayer, math.random(6, 9))
                     end)
                 end
-                task.wait(math.random(16, 32) / 10)
+                task.wait(math.random(70, 110) / 10)
             end
         end)
         table.insert(trackedThreads, boltThread)
@@ -706,7 +708,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     introSub.Size = UDim2.new(1, -160, 0, 18)
     introSub.Position = UDim2.new(0, 150, 0.5, 14)
     introSub.BackgroundTransparency = 1
-    introSub.Text = cfg.SubTitle or "⚡ HIGH-VOLTAGE EXECUTION ENGINE • VVIP EDITION"
+    introSub.Text = cfg.Subtitle or cfg.SubTitle or cfg.Name or "EGG AUTOMATION"
     introSub.TextColor3 = Color3.fromRGB(240, 240, 245)
     introSub.Font = Enum.Font.GothamBold
     introSub.TextSize = 11
@@ -718,32 +720,28 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     -- 💎 UNIVERSAL DRAGGABLE TOGGLE CAPSULE WITH RED LIGHTNING & METRICS
     local toggleCapsule = Instance.new("Frame")
     toggleCapsule.Name = "ObsidianToggleCapsule"
-    toggleCapsule.Size = UDim2.fromOffset(230, 58)
-    toggleCapsule.Position = UDim2.new(0, 15, 0.5, -29)
+    toggleCapsule.Size = UDim2.fromOffset(144, 40)
+    toggleCapsule.Position = UDim2.new(0, 14, 0.36, 0)
     toggleCapsule.BackgroundColor3 = COLORS.shell
-    toggleCapsule.BackgroundTransparency = 0.12
+    toggleCapsule.BackgroundTransparency = 0.06
     toggleCapsule.BorderSizePixel = 0
     toggleCapsule.ClipsDescendants = true
     toggleCapsule.ZIndex = 99999
     toggleCapsule.Parent = gui
 
     local tcCorner = Instance.new("UICorner")
-    tcCorner.CornerRadius = UDim.new(0, 16)
+    tcCorner.CornerRadius = UDim.new(1, 0)
     tcCorner.Parent = toggleCapsule
 
     local tcStroke = Instance.new("UIStroke")
-    tcStroke.Color = Color3.fromRGB(255, 30, 65)
-    tcStroke.Thickness = 1.6
-    tcStroke.Transparency = 0.15
+    tcStroke.Color = COLORS.primary
+    tcStroke.Thickness = 1
+    tcStroke.Transparency = 0.35
     tcStroke.Parent = toggleCapsule
 
     local tcGrad = Instance.new("UIGradient")
-    tcGrad.Color = ColorSequence.new({
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 60, 90)),
-        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 20, 50)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(140, 10, 25)),
-    })
-    tcGrad.Rotation = 45
+    tcGrad.Color = ColorSequence.new(COLORS.glass, COLORS.shell)
+    tcGrad.Rotation = 90
     tcGrad.Parent = tcStroke
 
     -- ⚡ Mini Capsule Sparks
@@ -756,7 +754,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     task.spawn(function()
         local sparks = {}
-        for i = 1, 10 do
+        for i = 1, 0 do
             local sp = Instance.new("Frame")
             sp.Size = UDim2.fromOffset(math.random(2, 3), math.random(2, 3))
             sp.Position = UDim2.new(math.random(), 0, math.random(), 0)
@@ -798,8 +796,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     -- Avatar Box inside Capsule
     local capAvatarFrame = Instance.new("Frame")
-    capAvatarFrame.Size = UDim2.fromOffset(42, 42)
-    capAvatarFrame.Position = UDim2.new(0, 8, 0.5, -21)
+    capAvatarFrame.Size = UDim2.fromOffset(30, 30)
+    capAvatarFrame.Position = UDim2.new(0, 7, 0.5, -15)
     capAvatarFrame.BackgroundColor3 = COLORS.glassDeep
     capAvatarFrame.BorderSizePixel = 0
     capAvatarFrame.ZIndex = 3
@@ -827,25 +825,26 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     -- User Label & Metrics Label
     local capUserLabel = Instance.new("TextLabel")
-    capUserLabel.Size = UDim2.new(1, -58, 0, 18)
-    capUserLabel.Position = UDim2.new(0, 56, 0, 10)
+    capUserLabel.Size = UDim2.new(1, -48, 0, 16)
+    capUserLabel.Position = UDim2.new(0, 45, 0, 5)
     capUserLabel.BackgroundTransparency = 1
-    capUserLabel.Text = "@" .. LocalPlayer.Name
+    capUserLabel.Text = cfg.Title or "PAYOMBOYZ HUB"
     capUserLabel.TextColor3 = COLORS.text
     capUserLabel.Font = Enum.Font.GothamBold
-    capUserLabel.TextSize = 12
+    capUserLabel.TextSize = 11
     capUserLabel.TextXAlignment = Enum.TextXAlignment.Left
     capUserLabel.ZIndex = 3
     capUserLabel.Parent = toggleCapsule
 
     local capMetricsLabel = Instance.new("TextLabel")
-    capMetricsLabel.Size = UDim2.new(1, -58, 0, 16)
-    capMetricsLabel.Position = UDim2.new(0, 56, 0, 28)
+    capMetricsLabel.Size = UDim2.new(1, -48, 0, 13)
+    capMetricsLabel.Position = UDim2.new(0, 45, 0, 22)
     capMetricsLabel.BackgroundTransparency = 1
     capMetricsLabel.Text = "⚡ PAYOMBØYZ HUB • V4"
-    capMetricsLabel.TextColor3 = COLORS.cyan
-    capMetricsLabel.Font = Enum.Font.GothamBold
-    capMetricsLabel.TextSize = 10
+    capMetricsLabel.Text = "TAP TO OPEN / CLOSE"
+    capMetricsLabel.TextColor3 = COLORS.textFaint
+    capMetricsLabel.Font = Enum.Font.GothamMedium
+    capMetricsLabel.TextSize = 9
     capMetricsLabel.TextXAlignment = Enum.TextXAlignment.Left
     capMetricsLabel.ZIndex = 3
     capMetricsLabel.Parent = toggleCapsule
@@ -926,7 +925,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     -- 👤 LEFT SIDEBAR (USER PROFILE, LOGOUT & NAVIGATION)
     local userPanel = Instance.new("Frame")
     userPanel.Name = "UserPanel"
-    userPanel.Size = UDim2.new(0, 240, 1, 0)
+    userPanel.Size = UDim2.new(0, 196, 1, 0)
     userPanel.BackgroundColor3 = COLORS.userPanel
     userPanel.BackgroundTransparency = 0.20
     userPanel.BorderSizePixel = 0
@@ -1153,35 +1152,41 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     navHeader.Parent = userPanel
 
     local tabScroll = Instance.new("ScrollingFrame")
-    tabScroll.Name = "VerticalTabScroll"
-    tabScroll.Size = UDim2.new(1, -20, 1, -178)
-    tabScroll.Position = UDim2.new(0, 10, 0, 126)
+    tabScroll.Name = "BottomTabHotbar"
+    tabScroll.Size = UDim2.new(1, -24, 0, 46)
+    tabScroll.Position = UDim2.new(0, 12, 1, -54)
     tabScroll.BackgroundTransparency = 1
-    tabScroll.ScrollBarThickness = 3
+    tabScroll.ScrollBarThickness = 0
     tabScroll.ScrollBarImageColor3 = COLORS.cyan
     tabScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
     tabScroll.ZIndex = 10
     tabScroll.Parent = userPanel
 
     local tabLayout = Instance.new("UIListLayout")
-    tabLayout.FillDirection = Enum.FillDirection.Vertical
-    tabLayout.Padding = UDim.new(0, 5)
+    tabLayout.FillDirection = Enum.FillDirection.Horizontal
+    tabLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
+    tabLayout.Padding = UDim.new(0, 8)
     tabLayout.SortOrder = Enum.SortOrder.LayoutOrder
     tabLayout.Parent = tabScroll
 
     tabLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-        tabScroll.CanvasSize = UDim2.new(0, 0, 0, tabLayout.AbsoluteContentSize.Y + 10)
+        tabScroll.CanvasSize = UDim2.new(0, tabLayout.AbsoluteContentSize.X + 8, 0, 0)
     end)
 
     -- 🖥️ RIGHT MAIN PANEL (Content & Header)
     local mainPanel = Instance.new("Frame")
     mainPanel.Name = "MainPanel"
-    mainPanel.Size = UDim2.new(1, -240, 1, 0)
-    mainPanel.Position = UDim2.new(0, 240, 0, 0)
+    mainPanel.Size = UDim2.new(1, -196, 1, 0)
+    mainPanel.Position = UDim2.new(0, 196, 0, 0)
     mainPanel.BackgroundTransparency = 1
     mainPanel.Visible = false -- Initially false during Intro
     mainPanel.ZIndex = 5
     mainPanel.Parent = shell
+
+    navHeader.Visible = false
+    tabScroll.Parent = mainPanel
+    tabScroll.Size = UDim2.new(1, -20, 0, 46)
+    tabScroll.Position = UDim2.new(0, 10, 1, -50)
 
     local headerBar = Instance.new("Frame")
     headerBar.Size = UDim2.new(1, 0, 0, 56)
@@ -1194,9 +1199,10 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     mainTitle.Position = UDim2.new(0, 20, 0, 6)
     mainTitle.BackgroundTransparency = 1
     mainTitle.Text = "PAYOMBØYZ HUB"
-    mainTitle.TextColor3 = Color3.fromRGB(255, 35, 60)
-    mainTitle.Font = Enum.Font.Fondamento
-    mainTitle.TextSize = 26
+    mainTitle.Text = cfg.Title or mainTitle.Text
+    mainTitle.TextColor3 = COLORS.primary
+    mainTitle.Font = Enum.Font.GothamBold
+    mainTitle.TextSize = 18
     mainTitle.TextXAlignment = Enum.TextXAlignment.Left
     mainTitle.Parent = headerBar
 
@@ -1226,6 +1232,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     vtLabel.Size = UDim2.fromScale(1, 1)
     vtLabel.BackgroundTransparency = 1
     vtLabel.Text = "⚡ CRIMSON V4"
+    vtLabel.Text = cfg.VersionTag or "EGG HUB"
     vtLabel.TextColor3 = COLORS.primary
     vtLabel.Font = Enum.Font.GothamBold
     vtLabel.TextSize = 9
@@ -1237,6 +1244,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     mainSubTitle.Position = UDim2.new(0, 20, 0, 34)
     mainSubTitle.BackgroundTransparency = 1
     mainSubTitle.Text = cfg.SubTitle or "⚡ HIGH-VOLTAGE EXECUTION ENGINE • VVIP EDITION"
+    mainSubTitle.Text = cfg.Subtitle or cfg.Name or "EGG AUTOMATION"
     mainSubTitle.TextColor3 = COLORS.cyan
     mainSubTitle.Font = Enum.Font.GothamBold
     mainSubTitle.TextSize = 9
@@ -1265,6 +1273,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     end)
 
     local minBtn = Instance.new("TextButton")
+    minBtn.Visible = false
     minBtn.Size = UDim2.fromOffset(28, 28)
     minBtn.Position = UDim2.new(1, -72, 0, 14)
     minBtn.BackgroundColor3 = COLORS.surfaceRaised
@@ -1313,7 +1322,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     -- Container for all Tab Content Pages
     local pagesContainer = Instance.new("Frame")
     pagesContainer.Name = "PagesContainer"
-    pagesContainer.Size = UDim2.new(1, 0, 1, -56)
+    pagesContainer.Size = UDim2.new(1, 0, 1, -112)
     pagesContainer.Position = UDim2.new(0, 0, 0, 56)
     pagesContainer.BackgroundTransparency = 1
     pagesContainer.Parent = mainPanel
@@ -1370,7 +1379,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
         -- Tab Button in Sidebar
         local tabBtn = Instance.new("TextButton")
-        tabBtn.Size = UDim2.new(1, 0, 0, 36)
+        tabBtn.Size = UDim2.fromOffset(116, 36)
         tabBtn.BackgroundColor3 = COLORS.surface
         tabBtn.BackgroundTransparency = 0.40
         tabBtn.BorderSizePixel = 0
@@ -1389,8 +1398,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         tbStroke.Parent = tabBtn
 
         local iconLabel = Instance.new("TextLabel")
-        iconLabel.Size = UDim2.fromOffset(26, 36)
-        iconLabel.Position = UDim2.new(0, 10, 0, 0)
+        iconLabel.Size = UDim2.fromOffset(0, 36)
+        iconLabel.Position = UDim2.new(0, 8, 0, 0)
         iconLabel.BackgroundTransparency = 1
         iconLabel.Text = tabIcon
         iconLabel.TextColor3 = COLORS.textMuted
@@ -1400,8 +1409,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         iconLabel.Parent = tabBtn
 
         local titleLabel = Instance.new("TextLabel")
-        titleLabel.Size = UDim2.new(1, -44, 1, 0)
-        titleLabel.Position = UDim2.new(0, 38, 0, 0)
+        titleLabel.Size = UDim2.new(1, -16, 1, 0)
+        titleLabel.Position = UDim2.new(0, 8, 0, 0)
         titleLabel.BackgroundTransparency = 1
         titleLabel.Text = tabName
         titleLabel.TextColor3 = COLORS.textMuted
@@ -1478,28 +1487,86 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
         function TabObj:AddSection(secTitle)
             local sec = Instance.new("Frame")
-            sec.Size = UDim2.new(1, -10, 0, 28)
-            sec.BackgroundTransparency = 1
+            sec.Name = "SectionCard_" .. tostring(secTitle):gsub("%W", "")
+            sec.Size = UDim2.new(1, -10, 0, 42)
+            sec.AutomaticSize = Enum.AutomaticSize.None
+            sec.BackgroundColor3 = COLORS.glass
+            sec.BackgroundTransparency = 0.04
+            sec.BorderSizePixel = 0
+            sec.ClipsDescendants = false
             sec.Parent = pageScroll
 
-            local sTitle = Instance.new("TextLabel")
-            sTitle.Size = UDim2.new(1, -10, 0, 20)
-            sTitle.Position = UDim2.new(0, 4, 0, 6)
-            sTitle.BackgroundTransparency = 1
-            sTitle.Text = string.upper(secTitle)
-            sTitle.TextColor3 = COLORS.cyan
-            sTitle.Font = Enum.Font.GothamBold
-            sTitle.TextSize = 12
-            sTitle.TextXAlignment = Enum.TextXAlignment.Left
-            sTitle.Parent = sec
+            local secCorner = Instance.new("UICorner")
+            secCorner.CornerRadius = UDim.new(0, 10)
+            secCorner.Parent = sec
 
-            local sLine = Instance.new("Frame")
-            sLine.Size = UDim2.new(1, -10, 0, 1)
-            sLine.Position = UDim2.new(0, 4, 1, -1)
-            sLine.BackgroundColor3 = COLORS.divider
-            sLine.BorderSizePixel = 0
-            sLine.Parent = sec
-            return sec
+            local secStroke = Instance.new("UIStroke")
+            secStroke.Color = COLORS.glassRaised
+            secStroke.Transparency = 0.18
+            secStroke.Thickness = 1
+            secStroke.Parent = sec
+
+            local header = Instance.new("TextButton")
+            header.Name = "SectionHeader"
+            header.Size = UDim2.new(1, -20, 0, 38)
+            header.Position = UDim2.new(0, 12, 0, 2)
+            header.BackgroundTransparency = 1
+            header.Text = ""
+            header.AutoButtonColor = false
+            header.Parent = sec
+
+            local sTitle = Instance.new("TextLabel")
+            sTitle.Size = UDim2.new(1, -30, 1, 0)
+            sTitle.BackgroundTransparency = 1
+            sTitle.Text = tostring(secTitle)
+            sTitle.TextColor3 = COLORS.primary
+            sTitle.Font = Enum.Font.GothamBold
+            sTitle.TextSize = 13
+            sTitle.TextXAlignment = Enum.TextXAlignment.Left
+            sTitle.Parent = header
+
+            local caret = Instance.new("TextLabel")
+            caret.Size = UDim2.fromOffset(22, 38)
+            caret.Position = UDim2.new(1, -22, 0, 0)
+            caret.BackgroundTransparency = 1
+            caret.Text = "⌄"
+            caret.TextColor3 = COLORS.textFaint
+            caret.Font = Enum.Font.GothamBold
+            caret.TextSize = 16
+            caret.Parent = header
+
+            local body = Instance.new("Frame")
+            body.Name = "SectionContent"
+            body.Position = UDim2.new(0, 10, 0, 42)
+            body.Size = UDim2.new(1, -20, 0, 0)
+            body.AutomaticSize = Enum.AutomaticSize.Y
+            body.BackgroundTransparency = 1
+            body.Parent = sec
+
+            local bodyLayout = Instance.new("UIListLayout")
+            bodyLayout.Padding = UDim.new(0, 6)
+            bodyLayout.SortOrder = Enum.SortOrder.LayoutOrder
+            bodyLayout.Parent = body
+
+            local bodyPadding = Instance.new("UIPadding")
+            bodyPadding.PaddingBottom = UDim.new(0, 10)
+            bodyPadding.Parent = body
+
+            local expanded = true
+            bodyLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+                if expanded then
+                    sec.Size = UDim2.new(1, -10, 0, 42 + bodyLayout.AbsoluteContentSize.Y + 10)
+                end
+            end)
+            local function setExpanded(value)
+                expanded = value == true
+                body.Visible = expanded
+                caret.Text = expanded and "⌄" or "›"
+                sec.Size = UDim2.new(1, -10, 0, expanded and (42 + bodyLayout.AbsoluteContentSize.Y + 10) or 42)
+            end
+            header.MouseButton1Click:Connect(function() setExpanded(not expanded) end)
+            TabObj.CurrentContainer = body
+            return sec, body, setExpanded
         end
 
         function TabObj:AddToggle(idx, tCfg)
@@ -1513,7 +1580,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             frame.BackgroundColor3 = COLORS.glassDeep
             frame.BackgroundTransparency = 0.18
             frame.BorderSizePixel = 0
-            frame.Parent = pageScroll
+            frame.Parent = TabObj.CurrentContainer or pageScroll
 
             local fCorner = Instance.new("UICorner")
             fCorner.CornerRadius = UDim.new(0, 8)
@@ -1577,7 +1644,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             hit.Parent = frame
 
             local state = def
-            local ToggleObj = { Value = state }
+            local ToggleObj = { Value = state, Instance = frame }
 
             local function setState(v)
                 state = v
@@ -1608,7 +1675,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             frame.BackgroundColor3 = COLORS.glassDeep
             frame.BackgroundTransparency = 0.18
             frame.BorderSizePixel = 0
-            frame.Parent = pageScroll
+            frame.Parent = TabObj.CurrentContainer or pageScroll
 
             local fCorner = Instance.new("UICorner")
             fCorner.CornerRadius = UDim.new(0, 8)
@@ -1671,7 +1738,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             sliderBtn.Parent = barBg
 
             local currentVal = defVal
-            local SliderObj = { Value = currentVal }
+            local SliderObj = { Value = currentVal, Instance = frame }
 
             local function updateSlider(inputX)
                 local absPos = barBg.AbsolutePosition.X
@@ -1723,7 +1790,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             frame.Size = UDim2.new(1, -10, 0, 38)
             frame.BackgroundColor3 = COLORS.surfaceRaised
             frame.BorderSizePixel = 0
-            frame.Parent = pageScroll
+            frame.Parent = TabObj.CurrentContainer or pageScroll
 
             local fCorner = Instance.new("UICorner")
             fCorner.CornerRadius = UDim.new(0, 8)
@@ -1773,7 +1840,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             frame.BackgroundTransparency = 0.18
             frame.BorderSizePixel = 0
             frame.ClipsDescendants = true
-            frame.Parent = pageScroll
+            frame.Parent = TabObj.CurrentContainer or pageScroll
 
             local fCorner = Instance.new("UICorner")
             fCorner.CornerRadius = UDim.new(0, 8)
@@ -1824,7 +1891,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             listLayout.Parent = listContainer
 
             local opened = false
-            local DropObj = { Value = defVal }
+            local DropObj = { Value = defVal, Instance = frame }
 
             local function toggleDrop()
                 opened = not opened
@@ -1873,6 +1940,167 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             return DropObj
         end
 
+        function TabObj:AddMultiDropdown(idx, dCfg)
+            local title = dCfg.Title or "Select options"
+            local values = type(dCfg.Values) == "table" and dCfg.Values or {}
+            local cb = dCfg.Callback or function() end
+            local selected = {}
+            local initial = type(dCfg.Default) == "table" and dCfg.Default or {}
+            for key, value in pairs(initial) do
+                if value == true and type(key) == "string" then
+                    selected[key] = true
+                elseif type(value) == "string" then
+                    selected[value] = true
+                end
+            end
+
+            local frame = Instance.new("Frame")
+            frame.Size = UDim2.new(1, -10, 0, 44)
+            frame.BackgroundColor3 = COLORS.glassDeep
+            frame.BackgroundTransparency = 0.18
+            frame.BorderSizePixel = 0
+            frame.ClipsDescendants = true
+            frame.Parent = TabObj.CurrentContainer or pageScroll
+            local corner = Instance.new("UICorner")
+            corner.CornerRadius = UDim.new(0, 8)
+            corner.Parent = frame
+            local stroke = Instance.new("UIStroke")
+            stroke.Color = COLORS.glassRaised
+            stroke.Thickness = 1
+            stroke.Parent = frame
+
+            local label = Instance.new("TextLabel")
+            label.Size = UDim2.new(1, -150, 0, 44)
+            label.Position = UDim2.new(0, 12, 0, 0)
+            label.BackgroundTransparency = 1
+            label.Text = title
+            label.TextColor3 = COLORS.text
+            label.Font = Enum.Font.GothamMedium
+            label.TextSize = 13
+            label.TextXAlignment = Enum.TextXAlignment.Left
+            label.Parent = frame
+
+            local summary = Instance.new("TextLabel")
+            summary.Size = UDim2.new(0, 130, 0, 44)
+            summary.Position = UDim2.new(1, -142, 0, 0)
+            summary.BackgroundTransparency = 1
+            summary.TextColor3 = COLORS.cyan
+            summary.Font = Enum.Font.GothamMedium
+            summary.TextSize = 11
+            summary.TextXAlignment = Enum.TextXAlignment.Right
+            summary.TextTruncate = Enum.TextTruncate.AtEnd
+            summary.Parent = frame
+
+            local headerButton = Instance.new("TextButton")
+            headerButton.Size = UDim2.new(1, 0, 0, 44)
+            headerButton.BackgroundTransparency = 1
+            headerButton.Text = ""
+            headerButton.Parent = frame
+
+            local list = Instance.new("ScrollingFrame")
+            list.Name = "Options"
+            list.Size = UDim2.new(1, -24, 0, 180)
+            list.Position = UDim2.new(0, 12, 0, 48)
+            list.BackgroundTransparency = 1
+            list.BorderSizePixel = 0
+            list.ScrollBarThickness = 3
+            list.ScrollBarImageColor3 = COLORS.primary
+            list.CanvasSize = UDim2.new(0, 0, 0, 0)
+            list.Parent = frame
+            local layout = Instance.new("UIListLayout")
+            layout.FillDirection = Enum.FillDirection.Vertical
+            layout.Padding = UDim.new(0, 3)
+            layout.SortOrder = Enum.SortOrder.LayoutOrder
+            layout.Parent = list
+            layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+                list.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 4)
+            end)
+
+            local object = { Value = selected, Instance = frame }
+            local opened = false
+            local entries = {}
+            local function updateSummary()
+                local count = 0
+                for _, value in pairs(selected) do if value then count += 1 end end
+                summary.Text = count == 0 and "All" or (tostring(count) .. " selected")
+            end
+            local function fireChanged()
+                object.Value = selected
+                updateSummary()
+                local copy = {}
+                for key, value in pairs(selected) do if value then copy[key] = true end end
+                pcall(cb, copy)
+            end
+            local function rebuild(nextValues, nextDefault, preserve)
+                if type(nextValues) == "table" then values = nextValues end
+                if type(nextDefault) == "table" then
+                    table.clear(selected)
+                    for key, value in pairs(nextDefault) do
+                        if value == true and type(key) == "string" then selected[key] = true
+                        elseif type(value) == "string" then selected[value] = true end
+                    end
+                elseif not preserve then
+                    table.clear(selected)
+                end
+                for _, entry in ipairs(entries) do
+                    if entry and entry.Parent then entry:Destroy() end
+                end
+                table.clear(entries)
+                for order, option in ipairs(values) do
+                    local optionText = tostring(option)
+                    local item = Instance.new("TextButton")
+                    item.Name = "Option_" .. tostring(order)
+                    item.LayoutOrder = order
+                    item.Size = UDim2.new(1, -4, 0, 28)
+                    item.BackgroundColor3 = selected[optionText] and COLORS.surfaceRaised or COLORS.glassDeep
+                    item.BackgroundTransparency = selected[optionText] and 0.08 or 0.32
+                    item.BorderSizePixel = 0
+                    item.Text = (selected[optionText] and "  ✓  " or "  •  ") .. optionText
+                    item.TextColor3 = selected[optionText] and COLORS.text or COLORS.textMuted
+                    item.Font = Enum.Font.Gotham
+                    item.TextSize = 11
+                    item.TextXAlignment = Enum.TextXAlignment.Left
+                    item.TextTruncate = Enum.TextTruncate.AtEnd
+                    item.Parent = list
+                    entries[#entries + 1] = item
+                    item.MouseButton1Click:Connect(function()
+                        selected[optionText] = not selected[optionText] or nil
+                        item.BackgroundColor3 = selected[optionText] and COLORS.surfaceRaised or COLORS.glassDeep
+                        item.BackgroundTransparency = selected[optionText] and 0.08 or 0.32
+                        item.Text = (selected[optionText] and "  ✓  " or "  •  ") .. optionText
+                        item.TextColor3 = selected[optionText] and COLORS.text or COLORS.textMuted
+                        fireChanged()
+                    end)
+                end
+                object.Value = selected
+                updateSummary()
+            end
+            rebuild(values, initial, true)
+            local function setOpen(value)
+                opened = value == nil and not opened or value == true
+                local height = opened and 232 or 44
+                TweenService:Create(frame, TweenInfo.new(0.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
+                    Size = UDim2.new(1, -10, 0, height),
+                }):Play()
+            end
+            headerButton.MouseButton1Click:Connect(function()
+                playClickSound()
+                setOpen()
+            end)
+            function object:SetValue(value)
+                rebuild(values, type(value) == "table" and value or {}, true)
+                fireChanged()
+            end
+            function object:SetOptions(nextValues, nextDefault, preserve)
+                rebuild(nextValues, nextDefault, preserve == true)
+            end
+            function object:Get()
+                return object.Value
+            end
+            ObsidianGlassEngine.Options[idx] = object
+            return object
+        end
+
         function TabObj:AddInput(idx, iCfg)
             local title = iCfg.Title or "Input"
             local defVal = iCfg.Default or ""
@@ -1884,7 +2112,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             frame.BackgroundColor3 = COLORS.glassDeep
             frame.BackgroundTransparency = 0.18
             frame.BorderSizePixel = 0
-            frame.Parent = pageScroll
+            frame.Parent = TabObj.CurrentContainer or pageScroll
 
             local fCorner = Instance.new("UICorner")
             fCorner.CornerRadius = UDim.new(0, 8)
@@ -1936,7 +2164,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 pcall(cb, textBox.Text)
             end)
 
-            local InputObj = { Value = defVal }
+            local InputObj = { Value = defVal, Instance = frame, TextBox = textBox }
             function InputObj:SetValue(v)
                 textBox.Text = v
                 InputObj.Value = v
@@ -1953,7 +2181,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             frame.BackgroundColor3 = COLORS.glassDeep
             frame.BackgroundTransparency = 0.18
             frame.BorderSizePixel = 0
-            frame.Parent = pageScroll
+            frame.Parent = TabObj.CurrentContainer or pageScroll
 
             local fCorner = Instance.new("UICorner")
             fCorner.CornerRadius = UDim.new(0, 8)
@@ -1981,11 +2209,244 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             pDesc.TextWrapped = true
             pDesc.TextXAlignment = Enum.TextXAlignment.Left
             pDesc.Parent = frame
-            return frame
+            local ParagraphObj = { Value = desc, Instance = frame, TitleLabel = pTitle, TextLabel = pDesc }
+            function ParagraphObj:Set(value)
+                ParagraphObj.Value = tostring(value or "")
+                pDesc.Text = ParagraphObj.Value
+            end
+            function ParagraphObj:SetValue(value)
+                ParagraphObj:Set(value)
+            end
+            function ParagraphObj:Get()
+                return ParagraphObj.Value
+            end
+            return ParagraphObj
+        end
+
+        do
+            local tab = TabObj
+            local sectionIndex = 0
+            local widgetIndex = 0
+
+            local function mapConfig(source)
+                source = type(source) == "table" and source or {}
+                local mapped = {}
+                for key, value in pairs(source) do mapped[key] = value end
+                mapped.Title = source.Name or source.Title or "Control"
+                mapped.Description = source.Note or source.Description or ""
+                mapped.Values = source.Options or source.Values or {}
+                return mapped
+            end
+
+            local function makeHandle(native, source, initialValue)
+                local callback = source.Callback
+                local handle = {
+                    Native = native,
+                    Instance = type(native) == "table" and native.Instance or native,
+                    Name = source.Name or source.Title,
+                    Value = type(native) == "table" and native.Value or initialValue,
+                }
+                local changed = Instance.new("BindableEvent")
+                changed.Name = "ControlChanged"
+                changed.Parent = gui
+                handle._changed = changed
+                handle._suppress = false
+                function handle:Get() return handle.Value end
+                function handle:GetValue() return handle.Value end
+                function handle:Subscribe(fn)
+                    return changed.Event:Connect(fn)
+                end
+                function handle:Set(value, fireCallback)
+                    handle._suppress = fireCallback == false
+                    if type(native) == "table" and type(native.SetValue) == "function" then
+                        pcall(native.SetValue, native, value)
+                    elseif type(native) == "table" and type(native.Set) == "function" then
+                        pcall(native.Set, native, value)
+                    end
+                    handle.Value = type(native) == "table" and native.Value or value
+                    if fireCallback == false then
+                        handle._suppress = false
+                    elseif type(native) ~= "table" or type(native.SetValue) ~= "function" then
+                        changed:Fire(handle.Value)
+                    end
+                    handle._suppress = false
+                end
+                handle.SetValue = handle.Set
+                function handle:SetOptions(options, default, preserve)
+                    if type(native) == "table" and type(native.SetOptions) == "function" then
+                        native:SetOptions(options, default, preserve)
+                    end
+                end
+                handle._controller = { GetValue = function() return handle.Value end }
+                handle.JoinExclusiveGroup = function(_, group)
+                    if type(group) ~= "table" then return end
+                    group.Members = group.Members or {}
+                    group.Members[#group.Members + 1] = handle
+                    handle:Subscribe(function(value)
+                        if value == true then
+                            for _, other in ipairs(group.Members) do
+                                if other ~= handle and other:Get() == true then other:Set(false, false) end
+                            end
+                        end
+                    end)
+                    if handle:Get() == true then
+                        for _, other in ipairs(group.Members) do
+                            if other ~= handle and other:Get() == true then other:Set(false, false) end
+                        end
+                    end
+                end
+                return handle, changed, callback
+            end
+
+            local function addControl(source, kind)
+                source = type(source) == "table" and source or {}
+                widgetIndex += 1
+                local mapped = mapConfig(source)
+                local callback = source.Callback
+                local handle
+                mapped.Callback = function(value)
+                    if handle then
+                        handle.Value = value
+                        if not handle._suppress and handle._changed then handle._changed:Fire(value) end
+                    end
+                    if callback and not (handle and handle._suppress) then pcall(callback, value) end
+                end
+                local optionId = tostring(tab.TitleLabel.Text) .. "/" .. tostring(source.Name or kind) .. "/" .. tostring(widgetIndex)
+                local native
+                if kind == "Toggle" then
+                    native = tab:AddToggle(optionId, mapped)
+                elseif kind == "Slider" then
+                    native = tab:AddSlider(optionId, mapped)
+                elseif kind == "Dropdown" then
+                    native = tab:AddDropdown(optionId, mapped)
+                elseif kind == "MultiDropdown" then
+                    native = tab:AddMultiDropdown(optionId, mapped)
+                elseif kind == "Input" then
+                    native = tab:AddInput(optionId, mapped)
+                elseif kind == "Button" then
+                    native = tab:AddButton(mapped)
+                else
+                    native = tab:AddParagraph(source.Name or kind, source.Text or source.Note or "")
+                end
+                handle = makeHandle(native, source, source.Default)
+                if type(source.Placeholder) == "string" and handle.Instance then
+                    local box = handle.Instance:FindFirstChildWhichIsA("TextBox", true)
+                    if box then box.PlaceholderText = source.Placeholder end
+                end
+
+                local dependency = source.ShowWhen or source.SubOf
+                if type(dependency) == "table" and type(dependency.Get) == "function" and handle.Instance and handle.Instance:IsA("GuiObject") then
+                    local function updateVisible()
+                        local dependencyValue = dependency:Get()
+                        if type(dependencyValue) == "boolean" then handle.Instance.Visible = dependencyValue end
+                    end
+                    if type(dependency.Subscribe) == "function" then dependency:Subscribe(updateVisible) end
+                    updateVisible()
+                end
+                return handle
+            end
+
+            function tab:CreateSection(config)
+                config = type(config) == "table" and config or { Name = tostring(config or "Section") }
+                local title = config.Name or config.Title or "Section"
+                local _, sectionContainer, setExpanded = self:AddSection(title)
+                sectionIndex += 1
+                local section = { Tab = self, Name = title, Expanded = config.Expanded ~= false, Container = sectionContainer }
+                setExpanded(section.Expanded)
+                function section:SetExpanded(value)
+                    self.Expanded = value == true
+                    setExpanded(self.Expanded)
+                end
+                local methods = {
+                    CreateToggle = "Toggle",
+                    CreateSlider = "Slider",
+                    CreateDropdown = "Dropdown",
+                    CreateMultiDropdown = "MultiDropdown",
+                    CreateInput = "Input",
+                    CreateButton = "Button",
+                    CreateText = "Text",
+                    CreateLabel = "Label",
+                }
+                return setmetatable(section, {
+                    __index = function(sectionObject, methodName)
+                        local kind = methods[methodName]
+                        if kind then return function(_, source) return addControl(source, kind) end end
+                        return nil
+                    end,
+                })
+            end
+
+            function tab:CreateToggle(source) return addControl(source, "Toggle") end
+            function tab:CreateSlider(source) return addControl(source, "Slider") end
+            function tab:CreateDropdown(source) return addControl(source, "Dropdown") end
+            function tab:CreateMultiDropdown(source) return addControl(source, "MultiDropdown") end
+            function tab:CreateInput(source) return addControl(source, "Input") end
+            function tab:CreateButton(source) return addControl(source, "Button") end
+            function tab:CreateText(source) return addControl(source, "Text") end
+            function tab:CreateLabel(source) return addControl(source, "Label") end
         end
 
         table.insert(WindowObj.Tabs, TabObj)
         return TabObj
+    end
+
+    do
+        local states = {}
+        local defaultTab
+        WindowObj.Shell = shell
+        WindowObj.Gui = gui
+        WindowObj.Toggle = function()
+            shell.Visible = not shell.Visible
+            return shell.Visible
+        end
+        WindowObj.Close = function() shell.Visible = false end
+        WindowObj.States = states
+
+        function WindowObj:GetDefaultTab()
+            if not defaultTab then
+                defaultTab = self:AddTab({ Title = cfg.DefaultTab or "Farm", Icon = "Egg" })
+            end
+            return defaultTab
+        end
+
+        function WindowObj:CreateTab(tabCfg)
+            tabCfg = type(tabCfg) == "table" and tabCfg or { Name = tostring(tabCfg or "Tab") }
+            return self:AddTab({ Title = tabCfg.Name or tabCfg.Title or "Tab", Icon = tabCfg.Icon or "" })
+        end
+
+        function WindowObj:CreateState(stateCfg)
+            stateCfg = type(stateCfg) == "table" and stateCfg or { Name = tostring(stateCfg or "State") }
+            local name = stateCfg.Name or "State"
+            if states[name] then return states[name] end
+            local state = { Name = name, Value = stateCfg.Default }
+            local changed = Instance.new("BindableEvent")
+            changed.Name = "StateChanged_" .. tostring(name):gsub("%W", "")
+            changed.Parent = gui
+            function state:Get() return state.Value end
+            function state:GetValue() return state.Value end
+            function state:Set(value, fireCallback)
+                state.Value = value
+                if fireCallback ~= false then changed:Fire(value) end
+                return value
+            end
+            function state:Subscribe(fn) return changed.Event:Connect(fn) end
+            state._controller = { GetValue = function() return state.Value end }
+            states[name] = state
+            return state
+        end
+
+        function WindowObj:GetState(name)
+            return states[name] or self:CreateState({ Name = name, Default = nil })
+        end
+
+        function WindowObj:CreateExclusiveGroup(config)
+            config = type(config) == "table" and config or {}
+            return { Name = config.Name or "Exclusive Group", MaxActive = config.MaxActive or 1, Members = {} }
+        end
+
+        function WindowObj:Finalize()
+            return self
+        end
     end
 
     -- Keybinds: [K] Toggle Shell Visibility | [F] Toggle Scale
@@ -2001,6 +2462,11 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     end)
 
     return WindowObj
+end
+
+function ObsidianGlassEngine:Finalize(config)
+    config = type(config) == "table" and config or {}
+    return config.Window or true
 end
 
 return ObsidianGlassEngine
