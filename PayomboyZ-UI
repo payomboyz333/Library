@@ -1108,7 +1108,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     mCorner.Parent = metricsBox
 
     local metricsLabel = Instance.new("TextLabel")
-    metricsLabel.Size = UDim.fromScale(1, 1)
+    metricsLabel.Size = UDim2.fromScale(1, 1)
     metricsLabel.BackgroundTransparency = 1
     metricsLabel.Text = "⏱️ 00:00  •  📡 0 ms"
     metricsLabel.TextColor3 = COLORS.cyan
