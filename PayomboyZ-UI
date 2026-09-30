@@ -717,18 +717,6 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             or parent.Name == "LibraryStatusCard"
             or parent.Name == "MetricsBox"
             or string.match(parent.Name, "^SectionCard_") ~= nil
-        local backingColor = explicitBackingColor or COLORS.shell
-        if not explicitBackingColor then
-            local ancestor = parent.Parent
-            while ancestor and ancestor:IsA("GuiObject") do
-                if ancestor.BackgroundTransparency < 0.95 then
-                    backingColor = ancestor.BackgroundColor3
-                    break
-                end
-                ancestor = ancestor.Parent
-            end
-        end
-
         if explicitBackingColor then
             parent.ClipsDescendants = false
         elseif majorPanel then
@@ -737,7 +725,11 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         local outline
         for _, child in ipairs(parent:GetChildren()) do
             if child:IsA("UICorner") then
-                child:Destroy()
+                if majorPanel then
+                    child.CornerRadius = UDim.new(0, 12)
+                else
+                    child:Destroy()
+                end
             elseif child:IsA("UIStroke") then
                 outline = child
             end
@@ -753,34 +745,23 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         end
 
         if majorPanel then
-            local cuts = {
-                { "TopLeft", UDim2.fromOffset(0, 0), -45, UDim2.fromOffset(7, 7), -45 },
-                { "TopRight", UDim2.new(1, 0, 0, 0), 45, UDim2.new(1, -7, 0, 7), 45 },
-                { "BottomRight", UDim2.new(1, 0, 1, 0), -45, UDim2.new(1, -7, 1, -7), -45 },
-                { "BottomLeft", UDim2.new(0, 0, 1, 0), 45, UDim2.new(0, 7, 1, -7), 45 },
-            }
-            for _, cut in ipairs(cuts) do
-                local mask = Instance.new("Frame")
-                mask.Name = "ComicCutMask_" .. cut[1]
-                mask.AnchorPoint = Vector2.new(0.5, 0.5)
-                mask.Position = cut[2]
-                mask.Size = UDim2.fromOffset(explicitBackingColor and 40 or 22, explicitBackingColor and 40 or 22)
-                mask.Rotation = cut[3]
-                mask.BackgroundColor3 = backingColor
-                mask.BorderSizePixel = 0
-                mask.ZIndex = parent.ZIndex + 2
-                mask.Parent = parent
-
-                local bevel = Instance.new("Frame")
-                bevel.Name = "ComicCutInk_" .. cut[1]
-                bevel.AnchorPoint = Vector2.new(0.5, 0.5)
-                bevel.Position = cut[4]
-                bevel.Size = UDim2.fromOffset(explicitBackingColor and 40 or 22, 1.7)
-                bevel.Rotation = cut[5]
-                bevel.BackgroundColor3 = COLORS.primary
-                bevel.BorderSizePixel = 0
-                bevel.ZIndex = parent.ZIndex + 3
-                bevel.Parent = parent
+            -- Small asymmetric slashes keep the comic edge detail without the
+            -- four square-looking corner masks used in the previous pass.
+            for _, slash in ipairs({
+                { "TopLeft", UDim2.fromOffset(15, 10) },
+                { "BottomRight", UDim2.new(1, -15, 1, -10) },
+            }) do
+                local accent = Instance.new("Frame")
+                accent.Name = "ComicEdgeSlash_" .. slash[1]
+                accent.AnchorPoint = Vector2.new(0.5, 0.5)
+                accent.Position = slash[2]
+                accent.Size = UDim2.fromOffset(22, 2)
+                accent.Rotation = -42
+                accent.BackgroundColor3 = COLORS.primary
+                accent.BackgroundTransparency = 0.08
+                accent.BorderSizePixel = 0
+                accent.ZIndex = parent.ZIndex + 3
+                accent.Parent = parent
             end
         end
 
@@ -832,18 +813,32 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     local uiScale = Instance.new("UIScale")
     
-    -- 📱 AUTOMATIC MOBILE RESPONSIVE SCALING ENGINE
+    -- Responsive layout: phones reflow to a full-height single-column view;
+    -- desktop and tablet layouts keep the two-panel composition.
     local camera = workspace.CurrentCamera
+    local shell, userPanel, mainPanel
     local function updateScale()
         if camera and camera.ViewportSize then
             local vp = camera.ViewportSize
-            local targetWidth, targetHeight = 920, 600
-            local scaleX = (vp.X - 24) / targetWidth
-            local scaleY = (vp.Y - 24) / targetHeight
-            -- Narrow phones need to scale below the old 0.45 floor or the 920px
-            -- shell spills past the edges. Keep a usable floor, then reflow cards.
-            local calcScale = math.clamp(math.min(scaleX, scaleY), 0.32, 1.0)
-            uiScale.Scale = calcScale
+            if touchOnly then
+                uiScale.Scale = 1
+                if shell then shell.Size = UDim2.new(1, -16, 1, -28) end
+                if userPanel then userPanel.Visible = false end
+                if mainPanel then
+                    mainPanel.Size = UDim2.fromScale(1, 1)
+                    mainPanel.Position = UDim2.fromOffset(0, 0)
+                end
+            else
+                local scaleX = (vp.X - 24) / 920
+                local scaleY = (vp.Y - 24) / 600
+                uiScale.Scale = math.clamp(math.min(scaleX, scaleY), 0.72, 1.0)
+                if shell then shell.Size = UDim2.fromOffset(920, 600) end
+                if userPanel then userPanel.Visible = true end
+                if mainPanel then
+                    mainPanel.Size = UDim2.new(1, -228, 1, 0)
+                    mainPanel.Position = UDim2.new(0, 196, 0, 0)
+                end
+            end
         end
     end
     updateScale()
@@ -853,7 +848,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     uiScale.Parent = gui
 
     -- Dark anime shell; the opening sequence expands from this compact frame.
-    local shell = Instance.new("Frame")
+    shell = Instance.new("Frame")
     shell.Name = "MainShell"
     shell.Size = UDim2.fromOffset(520, 150)
     shell.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -863,6 +858,24 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     shell.BorderSizePixel = 0
     shell.ClipsDescendants = false
     shell.Parent = gui
+    local shellMotionScale = Instance.new("UIScale")
+    shellMotionScale.Scale = 1
+    shellMotionScale.Parent = shell
+    local function setShellVisible(visible)
+        if visible then
+            shell.Visible = true
+            shellMotionScale.Scale = 0.975
+            shell.BackgroundTransparency = 0.20
+            animate(shellMotionScale, TweenInfo.new(0.24, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Scale = 1 })
+            animate(shell, TweenInfo.new(0.20, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { BackgroundTransparency = 0.08 })
+        else
+            animate(shellMotionScale, TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { Scale = 0.985 })
+            animate(shell, TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { BackgroundTransparency = 0.22 })
+            task.delay(motionMode == "Off" and 0 or 0.17, function()
+                if shell and shell.Parent and shellMotionScale.Scale <= 0.99 then shell.Visible = false end
+            end)
+        end
+    end
 
     local shellGradient = Instance.new("UIGradient")
     shellGradient.Color = ColorSequence.new({
@@ -887,23 +900,31 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         { 0.06, 0.96 }, { 0, 0.89 }, { 0, 0.24 },
     }
     local outerFrameLines = {}
+    local outerSegments = {}
     local showContourImmediately = not effectState.Intro or motionMode == "Off"
-    local function addOuterLine(pointA, pointB, color, thickness)
-        local ax, ay = pointA[1] * 920, pointA[2] * 600
-        local bx, by = pointB[1] * 920, pointB[2] * 600
+    local function setOuterLineGeometry(line, pointA, pointB)
+        local width = math.max(shell.AbsoluteSize.X, 1)
+        local height = math.max(shell.AbsoluteSize.Y, 1)
+        local ax, ay = pointA[1] * width, pointA[2] * height
+        local bx, by = pointB[1] * width, pointB[2] * height
         local dx, dy = bx - ax, by - ay
+        line.Position = UDim2.new((pointA[1] + pointB[1]) * 0.5, 0, (pointA[2] + pointB[2]) * 0.5, 0)
+        line.Size = UDim2.fromOffset(math.sqrt(dx * dx + dy * dy), 2.6)
+        line.Rotation = math.deg(math.atan2(dy, dx))
+    end
+    local function addOuterLine(pointA, pointB, color, thickness)
         local line = Instance.new("Frame")
         line.Name = "OuterComicContour"
         line.AnchorPoint = Vector2.new(0.5, 0.5)
-        line.Position = UDim2.new((pointA[1] + pointB[1]) * 0.5, 0, (pointA[2] + pointB[2]) * 0.5, 0)
-        line.Size = UDim2.fromOffset(math.sqrt(dx * dx + dy * dy), thickness or 2.6)
-        line.Rotation = math.deg(math.atan2(dy, dx))
+        setOuterLineGeometry(line, pointA, pointB)
+        line.Size = UDim2.new(line.Size.X.Scale, line.Size.X.Offset, line.Size.Y.Scale, thickness or line.Size.Y.Offset)
         line.BackgroundColor3 = color or COLORS.primary
         line.BorderSizePixel = 0
         line.ZIndex = 4
         line.Visible = showContourImmediately
         line.Parent = shell
         outerFrameLines[#outerFrameLines + 1] = line
+        outerSegments[#outerSegments + 1] = { Line = line, A = pointA, B = pointB }
         return line
     end
     local shellStroke
@@ -912,6 +933,14 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         local color = (index == 5 or index == 6 or index == 7) and COLORS.primaryHover or COLORS.primary
         local line = addOuterLine(point, nextPoint, color, 2.6)
         if index == 3 then shellStroke = line end
+    end
+    table.insert(trackedConnections, shell:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+        for _, segment in ipairs(outerSegments) do
+            setOuterLineGeometry(segment.Line, segment.A, segment.B)
+        end
+    end))
+    for _, segment in ipairs(outerSegments) do
+        setOuterLineGeometry(segment.Line, segment.A, segment.B)
     end
     addAnimeEdge(shell, false, COLORS.backdrop)
     local notchMask = Instance.new("Frame")
@@ -1700,12 +1729,12 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     capBtn.MouseButton1Click:Connect(function()
         if not hasDragged then
             playClickSound()
-            shell.Visible = not shell.Visible
+            setShellVisible(not shell.Visible)
         end
     end)
 
     -- 👤 LEFT SIDEBAR (USER PROFILE, LOGOUT & NAVIGATION)
-    local userPanel = Instance.new("Frame")
+    userPanel = Instance.new("Frame")
     userPanel.Name = "UserPanel"
     userPanel.Size = UDim2.new(0, 196, 1, 0)
     userPanel.BackgroundColor3 = COLORS.userPanel
@@ -1939,7 +1968,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             { Name = "Center Window", Callback = function() animate(shell, TweenInfo.new(0.24, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Position = UDim2.fromScale(0.5, 0.5) }) end },
             { Name = "Toggle UI Scale", Callback = function() uiScale.Scale = uiScale.Scale > 0.9 and 0.82 or 1 end },
             { Name = "Copy Place ID", Callback = function() local copy = setclipboard or toclipboard; if type(copy) == "function" then pcall(copy, tostring(game.PlaceId)) end end },
-            { Name = "Hide / Show UI", Callback = function() shell.Visible = not shell.Visible end },
+            { Name = "Hide / Show UI", Callback = function() setShellVisible(not shell.Visible) end },
         }
     end
 
@@ -2169,7 +2198,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     end)
 
     -- 🖥️ RIGHT MAIN PANEL (Content & Header)
-    local mainPanel = Instance.new("Frame")
+    mainPanel = Instance.new("Frame")
     mainPanel.Name = "MainPanel"
     mainPanel.Size = UDim2.new(1, -228, 1, 0)
     mainPanel.Position = UDim2.new(0, 196, 0, 0)
@@ -2177,41 +2206,42 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     mainPanel.Visible = false -- Initially false during Intro
     mainPanel.ZIndex = 5
     mainPanel.Parent = shell
+    updateScale()
 
     navHeader.Visible = false
     tabScroll.Parent = mainPanel
     tabScroll.Size = UDim2.new(1, -20, 0, 46)
-    tabScroll.Position = UDim2.new(0, 10, 1, -50)
+    tabScroll.Position = UDim2.new(0, 10, 1, -48)
 
     local tabScrollCue = Instance.new("TextLabel")
     tabScrollCue.Name = "TabScrollCue"
-    tabScrollCue.AnchorPoint = Vector2.new(1, 1)
-    tabScrollCue.Position = UDim2.new(1, -14, 1, -70)
-    tabScrollCue.Size = UDim2.fromOffset(166, 18)
-    tabScrollCue.BackgroundColor3 = COLORS.glassDeep
-    tabScrollCue.BackgroundTransparency = 0.08
-    tabScrollCue.BorderSizePixel = 0
-    tabScrollCue.Text = "‹   SWIPE TO NAVIGATE   ›"
+    tabScrollCue.AnchorPoint = Vector2.new(0.5, 1)
+    tabScrollCue.Position = UDim2.new(0.5, 0, 1, -8)
+    tabScrollCue.Size = UDim2.fromOffset(190, 18)
+    tabScrollCue.BackgroundTransparency = 1
+    tabScrollCue.Text = "‹  SWIPE TABS  ›"
     tabScrollCue.TextColor3 = COLORS.primaryHover
     tabScrollCue.Font = Enum.Font.GothamBold
-    tabScrollCue.TextSize = 9
+    tabScrollCue.TextSize = 11
+    tabScrollCue.TextTransparency = 0.18
     tabScrollCue.TextXAlignment = Enum.TextXAlignment.Center
-    tabScrollCue.ZIndex = 16
-    tabScrollCue.Parent = mainPanel
-    local tabScrollCueCorner = Instance.new("UICorner", tabScrollCue)
-    tabScrollCueCorner.CornerRadius = UDim.new(0, 5)
-    local tabScrollCueStroke = Instance.new("UIStroke", tabScrollCue)
-    tabScrollCueStroke.Color = COLORS.primary
-    tabScrollCueStroke.Thickness = 1
-    tabScrollCueStroke.Transparency = 0.12
+    tabScrollCue.ZIndex = 100
+    tabScrollCue.Parent = gui
     tabScrollCue.Visible = false
+    local cuePulse = TweenService:Create(
+        tabScrollCue,
+        TweenInfo.new(2.4, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true),
+        { TextTransparency = 0.52 }
+    )
+    if motionMode ~= "Off" then cuePulse:Play() end
 
     local function refreshTabScrollCue()
         local hasOverflow = tabScroll.CanvasSize.X.Offset > tabScroll.AbsoluteSize.X + 2
-        tabScrollCue.Visible = hasOverflow
+        tabScrollCue.Visible = touchOnly and hasOverflow and shell.Visible
     end
     tabLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(refreshTabScrollCue)
     tabScroll:GetPropertyChangedSignal("AbsoluteSize"):Connect(refreshTabScrollCue)
+    shell:GetPropertyChangedSignal("Visible"):Connect(refreshTabScrollCue)
 
     local headerBar = Instance.new("Frame")
     headerBar.Size = UDim2.new(1, 0, 0, 56)
@@ -2321,9 +2351,10 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     local function fitHeaderToWidth()
         local width = mainPanel.AbsoluteSize.X
         local compact = width < 560
-        mainTitle.Size = UDim2.new(0, math.max(180, math.min(300, width - 28)), 0, 62)
+        mainTitle.Size = UDim2.new(0, math.max(168, math.min(300, width - 82)), 0, 62)
         vvipTag.Visible = not compact
         headerSearch.Visible = not compact
+        mainSubTitle.Size = UDim2.new(1, -32, 0, 16)
     end
     mainPanel:GetPropertyChangedSignal("AbsoluteSize"):Connect(fitHeaderToWidth)
     fitHeaderToWidth()
@@ -2347,7 +2378,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     closeBtn.Activated:Connect(function()
         playClickSound()
-        shell.Visible = false
+        setShellVisible(false)
     end)
 
     local minBtn = Instance.new("TextButton")
@@ -2368,7 +2399,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     minBtn.Activated:Connect(function()
         playClickSound()
-        shell.Visible = false
+        setShellVisible(false)
     end)
 
     -- Window Dragging Handler
@@ -2400,21 +2431,22 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     -- Container for all Tab Content Pages
     local pagesContainer = Instance.new("Frame")
     pagesContainer.Name = "PagesContainer"
-    pagesContainer.Size = UDim2.new(1, 0, 1, -112)
+    pagesContainer.Size = UDim2.new(1, 0, 1, -108)
     pagesContainer.Position = UDim2.new(0, 0, 0, 56)
     pagesContainer.BackgroundTransparency = 1
+    pagesContainer.ClipsDescendants = true
     pagesContainer.Parent = mainPanel
 
     -- 🎬 4-PHASE INTRO EXECUTION SEQUENCE (From Intro.md)
     if not effectState.Intro or motionMode == "Off" then
         introOverlay.Visible = false
-        shell.Size = UDim2.fromOffset(920, 600)
+        shell.Size = touchOnly and UDim2.new(1, -16, 1, -28) or UDim2.fromOffset(920, 600)
         shell.BackgroundColor3 = COLORS.shell
         shell.BackgroundTransparency = 0.12
         shellStroke.BackgroundColor3 = COLORS.primary
         shellStroke.BackgroundTransparency = 0
         for _, line in ipairs(outerFrameLines) do line.Visible = true end
-        userPanel.Visible = true
+        userPanel.Visible = not touchOnly
         mainPanel.Visible = true
     else
     task.spawn(function()
@@ -2483,7 +2515,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         -- Full window expansion lands on the grid after the impact sequence.
         local expandInfo = TweenInfo.new(0.58, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
         animate(shell, expandInfo, {
-            Size = UDim2.fromOffset(920, 600),
+            Size = touchOnly and UDim2.new(1, -16, 1, -28) or UDim2.fromOffset(920, 600),
             BackgroundColor3 = COLORS.shell,
             BackgroundTransparency = 0.12
         })
@@ -2494,7 +2526,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         
         task.wait(0.58)
         for _, line in ipairs(outerFrameLines) do line.Visible = true end
-        userPanel.Visible = true
+        userPanel.Visible = not touchOnly
         mainPanel.Visible = true
     end)
     end
@@ -2581,6 +2613,10 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         pageScroll.BackgroundTransparency = 1
         pageScroll.ScrollBarThickness = 3
         pageScroll.ScrollBarImageColor3 = COLORS.cyan
+        pageScroll.ScrollBarImageTransparency = 0.15
+        pageScroll.Active = true
+        pageScroll.ScrollingEnabled = true
+        pageScroll.ElasticBehavior = Enum.ElasticBehavior.Always
         pageScroll.Visible = false
         pageScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
         pageScroll.Parent = pagesContainer
@@ -2618,13 +2654,13 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             columns[index] = { Frame = column, Layout = layout }
             layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
                 local height = math.max(columns[1].Layout.AbsoluteContentSize.Y, columns[2].Layout.AbsoluteContentSize.Y)
-                pageScroll.CanvasSize = UDim2.new(0, 0, 0, height + 24)
+                pageScroll.CanvasSize = UDim2.new(0, 0, 0, height + 28)
             end)
         end
         local sectionFrames = {}
         local sectionCount = 0
         local function updateColumnLayout()
-            local compact = camera and camera.ViewportSize.X < 850
+            local compact = mainPanel.AbsoluteSize.X < 620
             columns[1].Frame.Position = UDim2.new(0, 10, 0, 10)
             columns[1].Frame.Size = compact and UDim2.new(1, -20, 0, 0) or UDim2.new(0.5, -16, 0, 0)
             columns[2].Frame.Position = UDim2.new(0.5, 10, 0, 10)
@@ -2636,11 +2672,17 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 sectionFrame.LayoutOrder = compact and position or math.ceil(position / 2)
             end
             local height = compact and columns[1].Layout.AbsoluteContentSize.Y or math.max(columns[1].Layout.AbsoluteContentSize.Y, columns[2].Layout.AbsoluteContentSize.Y)
-            pageScroll.CanvasSize = UDim2.new(0, 0, 0, height + 24)
+            pageScroll.CanvasSize = UDim2.new(0, 0, 0, height + 28)
+            local maxY = math.max(0, pageScroll.CanvasSize.Y.Offset - pageScroll.AbsoluteSize.Y)
+            if pageScroll.CanvasPosition.Y > maxY then
+                pageScroll.CanvasPosition = Vector2.new(0, maxY)
+            end
         end
         if camera then
             table.insert(trackedConnections, camera:GetPropertyChangedSignal("ViewportSize"):Connect(updateColumnLayout))
         end
+        table.insert(trackedConnections, mainPanel:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateColumnLayout))
+        table.insert(trackedConnections, pageScroll:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateColumnLayout))
 
         local function revealTabButton()
             local currentX = tabScroll.CanvasPosition.X
@@ -2789,7 +2831,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             local tone = tones[kind or "Info"] or COLORS.cyan
             local frame = Instance.new("Frame")
             frame.Name = "Callout"
-            frame.Size = UDim2.new(1, -10, 0, 62)
+            frame.Size = UDim2.new(1, -10, 0, 0)
+            frame.AutomaticSize = Enum.AutomaticSize.Y
             frame.BackgroundColor3 = COLORS.glassDeep
             frame.BackgroundTransparency = 0.08
             frame.BorderSizePixel = 0
@@ -2816,13 +2859,14 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             heading.Parent = frame
             local content = Instance.new("TextLabel")
             content.Name = "Message"
-            content.Size = UDim2.new(1, -30, 0, 28)
+            content.Size = UDim2.new(1, -30, 0, 0)
             content.Position = UDim2.fromOffset(17, 28)
+            content.AutomaticSize = Enum.AutomaticSize.Y
             content.BackgroundTransparency = 1
             content.Text = tostring(message or "")
             content.TextColor3 = COLORS.text
             content.Font = Enum.Font.Gotham
-            content.TextSize = 10
+            content.TextSize = 12
             content.TextWrapped = true
             content.TextXAlignment = Enum.TextXAlignment.Left
             content.TextYAlignment = Enum.TextYAlignment.Top
@@ -2981,11 +3025,15 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
             local frame = Instance.new("Frame")
             -- Reserve a right rail for the switch so long labels cannot run below it.
-            frame.Size = UDim2.new(1, -10, 0, desc ~= "" and 58 or 42)
+            frame.Size = UDim2.new(1, -10, 0, 0)
+            frame.AutomaticSize = Enum.AutomaticSize.Y
             frame.BackgroundColor3 = COLORS.glassDeep
             frame.BackgroundTransparency = 0.18
             frame.BorderSizePixel = 0
             frame.Parent = getControlContainer()
+            local togglePadding = Instance.new("UIPadding")
+            togglePadding.PaddingBottom = UDim.new(0, 8)
+            togglePadding.Parent = frame
 
             local fCorner = Instance.new("UICorner")
             fCorner.CornerRadius = UDim.new(0, 8)
@@ -3004,7 +3052,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             tTitle.Text = title
             tTitle.TextColor3 = COLORS.text
             tTitle.Font = Enum.Font.GothamBold
-            tTitle.TextSize = 13
+            tTitle.TextSize = 14
             tTitle.TextXAlignment = Enum.TextXAlignment.Left
             tTitle.TextTruncate = Enum.TextTruncate.AtEnd
             tTitle.Parent = frame
@@ -3012,17 +3060,17 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
             if desc ~= "" then
                 local tDesc = Instance.new("TextLabel")
-                tDesc.Size = UDim2.new(1, -112, 0, 28)
+                tDesc.Size = UDim2.new(1, -112, 0, 0)
                 tDesc.Position = UDim2.new(0, 12, 0, 26)
+                tDesc.AutomaticSize = Enum.AutomaticSize.Y
                 tDesc.BackgroundTransparency = 1
                 tDesc.Text = desc
                 tDesc.TextColor3 = COLORS.textMuted
                 tDesc.Font = Enum.Font.Gotham
-                tDesc.TextSize = 10
+                tDesc.TextSize = 12
                 tDesc.TextWrapped = true
                 tDesc.TextYAlignment = Enum.TextYAlignment.Top
                 tDesc.TextXAlignment = Enum.TextXAlignment.Left
-                tDesc.TextTruncate = Enum.TextTruncate.AtEnd
                 tDesc.Parent = frame
                 sharpenText(tDesc, 0.72)
             end
@@ -3508,6 +3556,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 end
                 listContainer.CanvasSize = UDim2.new(0, 0, 0, visible * 28 + 2)
             end
+            local function buildItems()
             for _, val in ipairs(values) do
                 local itm = Instance.new("TextButton")
                 itm.Size = UDim2.new(1, 0, 0, 26)
@@ -3566,6 +3615,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                     pcall(cb, val)
                 end)
             end
+            end
+            buildItems()
             searchBox:GetPropertyChangedSignal("Text"):Connect(refreshItems)
             refreshItems()
 
@@ -3582,6 +3633,35 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                     entry.Stroke.Transparency = selected and 0.12 or 0.55
                 end
                 pcall(cb, v)
+            end
+
+            function DropObj:SetOptions(nextValues, nextDefault, preserve)
+                if type(nextValues) ~= "table" then return false end
+                local previousValue = DropObj.Value
+                values = nextValues
+                local nextValue
+                if preserve == true and table.find(values, previousValue) then
+                    nextValue = previousValue
+                elseif nextDefault ~= nil and table.find(values, nextDefault) then
+                    nextValue = nextDefault
+                else
+                    nextValue = values[1] or ""
+                end
+                defVal = nextValue
+                DropObj.Value = nextValue
+                dSelected.Text = tostring(nextValue)
+                for _, entry in ipairs(entries) do
+                    if entry.Button and entry.Button.Parent then entry.Button:Destroy() end
+                end
+                table.clear(entries)
+                buildItems()
+                refreshItems()
+                if opened then
+                    animate(frame, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                        Size = UDim2.new(1, -10, 0, 88 + math.min(140, #values * 28)),
+                    })
+                end
+                return true
             end
 
             ObsidianGlassEngine.Options[idx] = DropObj
@@ -4522,12 +4602,12 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
         function TabObj:AddParagraph(title, desc)
             local frame = Instance.new("Frame")
-            frame.Size = UDim2.new(1, -10, 0, 54)
+            frame.Size = UDim2.new(1, -10, 0, 0)
+            frame.AutomaticSize = Enum.AutomaticSize.Y
             frame.BackgroundColor3 = COLORS.glassDeep
             frame.BackgroundTransparency = 0.18
             frame.BorderSizePixel = 0
             frame.Parent = getControlContainer()
-
             local fCorner = Instance.new("UICorner")
             fCorner.CornerRadius = UDim.new(0, 8)
             fCorner.Parent = frame
@@ -4545,13 +4625,14 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             pTitle.Parent = frame
 
             local pDesc = Instance.new("TextLabel")
-            pDesc.Size = UDim2.new(1, -20, 0, 24)
+            pDesc.Size = UDim2.new(1, -20, 0, 0)
             pDesc.Position = UDim2.new(0, 10, 0, 26)
+            pDesc.AutomaticSize = Enum.AutomaticSize.Y
             pDesc.BackgroundTransparency = 1
             pDesc.Text = desc
             pDesc.TextColor3 = COLORS.textMuted
             pDesc.Font = Enum.Font.Gotham
-            pDesc.TextSize = 11
+            pDesc.TextSize = 12
             pDesc.TextWrapped = true
             pDesc.TextXAlignment = Enum.TextXAlignment.Left
             pDesc.Parent = frame
@@ -4874,10 +4955,10 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         WindowObj.SubtitleLabel = mainSubTitle
         WindowObj.VersionLabel = vtLabel
         WindowObj.Toggle = function()
-            shell.Visible = not shell.Visible
+            setShellVisible(not shell.Visible)
             return shell.Visible
         end
-        WindowObj.Close = function() shell.Visible = false end
+        WindowObj.Close = function() setShellVisible(false) end
         function WindowObj:Unload()
             unloadWindow()
         end
