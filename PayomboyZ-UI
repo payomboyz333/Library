@@ -1,5 +1,5 @@
 -- PAYOMBØYZ UI LIBRARY
--- Version: 4.6.0 | Runtime: Roblox Luau | Delivery: single self-contained module
+-- Version: 4.7.0 | Runtime: Roblox Luau | Delivery: single self-contained module
 --
 -- Brand direction: ink-black panels, scarlet action color, white readable type,
 -- manga-inspired framing, restrained electric effects, and touch-friendly controls.
@@ -61,7 +61,7 @@ local COLORS = {
 }
 
 local ObsidianGlassEngine = { Options = {} }
-ObsidianGlassEngine.Version = "4.6.0"
+ObsidianGlassEngine.Version = "4.7.0"
 local ICON_GLYPHS = {
     egg = "◉", farm = "✦", home = "⌂", combat = "刀", quest = "卷", event = "祭",
     player = "◉", travel = "風", visual = "眼", visuals = "眼", settings = "⚙",
@@ -407,8 +407,20 @@ end
 local function loadIntroLogoImage(source, onReady)
     source = type(source) == "string" and source ~= "" and source or DEFAULT_BRAND_LOGO
     if not source:match("^https?://") then
-        if type(onReady) == "function" then task.defer(onReady, source) end
-        return source
+        if source:match("^rbxassetid://") or source:match("^rbxasset://") then
+            if type(onReady) == "function" then task.defer(onReady, source) end
+            return source
+        end
+        local getAsset = getcustomasset or getsynasset
+        if type(getAsset) == "function" then
+            local ok, localAsset = pcall(getAsset, source)
+            if ok and type(localAsset) == "string" then
+                brandLogoCache[source] = localAsset
+                if type(onReady) == "function" then task.defer(onReady, localAsset) end
+                return localAsset
+            end
+        end
+        return FALLBACK_BRAND_LOGO
     end
     if brandLogoCache[source] then
         if type(onReady) == "function" then task.defer(onReady, brandLogoCache[source]) end
@@ -745,7 +757,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 mask.Name = "ComicCutMask_" .. cut[1]
                 mask.AnchorPoint = Vector2.new(0.5, 0.5)
                 mask.Position = cut[2]
-                mask.Size = UDim2.fromOffset(explicitBackingColor and 52 or 22, explicitBackingColor and 52 or 22)
+                mask.Size = UDim2.fromOffset(explicitBackingColor and 40 or 22, explicitBackingColor and 40 or 22)
                 mask.Rotation = cut[3]
                 mask.BackgroundColor3 = backingColor
                 mask.BorderSizePixel = 0
@@ -756,7 +768,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 bevel.Name = "ComicCutInk_" .. cut[1]
                 bevel.AnchorPoint = Vector2.new(0.5, 0.5)
                 bevel.Position = cut[4]
-                bevel.Size = UDim2.fromOffset(explicitBackingColor and 52 or 22, 1.7)
+                bevel.Size = UDim2.fromOffset(explicitBackingColor and 40 or 22, 1.7)
                 bevel.Rotation = cut[5]
                 bevel.BackgroundColor3 = COLORS.primary
                 bevel.BorderSizePixel = 0
@@ -859,13 +871,13 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     -- interrupt the rectangle. Segment frames let the silhouette extend beyond
     -- the shell without drawing a standard rectangular UIStroke.
     local outerContour = {
-        { 0.05, 0.17 }, { 0.05, 0.11 }, { 0.28, 0.04 },
+        { 0, 0.18 }, { 0, 0.12 }, { 0.08, 0.04 }, { 0.28, 0.04 },
         { 0.55, 0.04 }, { 0.60, -0.025 }, { 0.81, -0.025 },
-        { 0.855, 0.04 }, { 0.95, 0.04 }, { 1.005, 0.11 },
-        { 1.005, 0.63 }, { 0.975, 0.70 }, { 1.005, 0.76 },
-        { 1.005, 0.91 }, { 0.95, 0.98 }, { 0.70, 0.98 },
-        { 0.65, 1.025 }, { 0.23, 1.025 }, { 0.18, 0.98 },
-        { 0.05, 0.98 }, { -0.005, 0.91 }, { -0.005, 0.24 },
+        { 0.855, 0.04 }, { 0.95, 0.04 }, { 1, 0.11 },
+        { 1, 0.60 }, { 0.965, 0.67 }, { 1, 0.73 },
+        { 1, 0.89 }, { 0.94, 0.96 }, { 0.71, 0.96 },
+        { 0.66, 1 }, { 0.24, 1 }, { 0.19, 0.96 },
+        { 0.06, 0.96 }, { 0, 0.89 }, { 0, 0.24 },
     }
     local outerFrameLines = {}
     local showContourImmediately = not effectState.Intro or motionMode == "Off"
@@ -898,8 +910,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     local notchMask = Instance.new("Frame")
     notchMask.Name = "OuterRightImpactCut"
     notchMask.AnchorPoint = Vector2.new(0.5, 0.5)
-    notchMask.Position = UDim2.new(1, 0, 0.73, 0)
-    notchMask.Size = UDim2.fromOffset(58, 58)
+    notchMask.Position = UDim2.new(1, -18, 0.70, 0)
+    notchMask.Size = UDim2.fromOffset(28, 28)
     notchMask.Rotation = 45
     notchMask.BackgroundColor3 = COLORS.backdrop
     notchMask.BorderSizePixel = 0
@@ -2162,6 +2174,15 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         mainPanel.Visible = true
     else
     task.spawn(function()
+        local logoSource = type(cfg.Logo) == "string" and cfg.Logo ~= "" and cfg.Logo or DEFAULT_BRAND_LOGO
+        local logoDeadline = os.clock() + 1.6
+        while brandLogoLoading[logoSource] and os.clock() < logoDeadline do
+            task.wait(0.05)
+        end
+        if brandLogoCache[logoSource] and introLogo.Parent then
+            introLogo.Image = brandLogoCache[logoSource]
+        end
+
         -- Impact frame: the shell snaps open and a crimson blade cuts across it.
         animate(shell, TweenInfo.new(0.28, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
             Size = UDim2.fromOffset(650, 190),
