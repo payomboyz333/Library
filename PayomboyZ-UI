@@ -1,5 +1,5 @@
 -- PAYOMBØYZ UI LIBRARY
--- Version: 4.4.0 | Runtime: Roblox Luau | Delivery: single self-contained module
+-- Version: 4.5.0 | Runtime: Roblox Luau | Delivery: single self-contained module
 --
 -- Brand direction: ink-black panels, scarlet action color, white readable type,
 -- manga-inspired framing, restrained electric effects, and touch-friendly controls.
@@ -13,7 +13,7 @@
 --           CreateProgressBar / CreateStatCard / CreateBarChart / CreateCallout /
 --           CreateButton / CreateText / CreateLabel / CreateDivider
 --   window:CreateAppearanceTab() | window:CreateCommandPalette(commands) | window:SetLogo(source)
---   window:CreateConfigManager() | window:Search(query) | window:SetTheme(name)
+--   window:CreateConfigManager() | window:Search(query) | window:SetTheme(name) | window:SetAccent(color)
 --   Library:Notify({ Type, Title, Content, Duration, Action }) | window:Unload()
 --
 -- See README.md and Example.lua in this folder for the developer guide.
@@ -61,7 +61,7 @@ local COLORS = {
 }
 
 local ObsidianGlassEngine = { Options = {} }
-ObsidianGlassEngine.Version = "4.4.0"
+ObsidianGlassEngine.Version = "4.5.0"
 local ICON_GLYPHS = {
     egg = "◉", farm = "✦", home = "⌂", combat = "刀", quest = "卷", event = "祭",
     player = "◉", travel = "風", visual = "眼", visuals = "眼", settings = "⚙",
@@ -688,21 +688,23 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     end
 
     local comicPanelSequence = 0
-    local function addAnimeEdge(parent, usePanelMotion)
+    local function addAnimeEdge(parent, usePanelMotion, explicitBackingColor)
         comicPanelSequence += 1
         local panelRotation = comicPanelSequence % 2 == 0 and 1.1 or -1.1
         if usePanelMotion ~= false then parent.Rotation = panelRotation end
 
         -- Find the ink/backing color behind this panel so the masks produce real
         -- clipped corners instead of painting rounded corners over a square card.
-        local backingColor = COLORS.shell
+        local backingColor = explicitBackingColor or COLORS.shell
         local ancestor = parent.Parent
-        while ancestor and ancestor:IsA("GuiObject") do
-            if ancestor.BackgroundTransparency < 0.95 then
-                backingColor = ancestor.BackgroundColor3
-                break
+        if not explicitBackingColor then
+            while ancestor and ancestor:IsA("GuiObject") do
+                if ancestor.BackgroundTransparency < 0.95 then
+                    backingColor = ancestor.BackgroundColor3
+                    break
+                end
+                ancestor = ancestor.Parent
             end
-            ancestor = ancestor.Parent
         end
 
         parent.ClipsDescendants = true
@@ -730,17 +732,17 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
         -- Four 45-degree masks plus ink rules create the chamfered manga-panel silhouette.
         local cuts = {
-            { Name = "TopLeft", Position = UDim2.fromOffset(0, 0), Anchor = Vector2.new(0, 0), Angle = -45, LinePosition = UDim2.fromOffset(7, 7), LineAngle = -45 },
-            { Name = "TopRight", Position = UDim2.new(1, 0, 0, 0), Anchor = Vector2.new(1, 0), Angle = 45, LinePosition = UDim2.new(1, -7, 0, 7), LineAngle = 45 },
-            { Name = "BottomRight", Position = UDim2.new(1, 0, 1, 0), Anchor = Vector2.new(1, 1), Angle = -45, LinePosition = UDim2.new(1, -7, 1, -7), LineAngle = -45 },
-            { Name = "BottomLeft", Position = UDim2.new(0, 0, 1, 0), Anchor = Vector2.new(0, 1), Angle = 45, LinePosition = UDim2.new(0, 7, 1, -7), LineAngle = 45 },
+            { Name = "TopLeft", Position = UDim2.fromOffset(0, 0), Anchor = Vector2.new(0, 0), Angle = -45, LinePosition = UDim2.fromOffset(9, 9), LineAngle = -45 },
+            { Name = "TopRight", Position = UDim2.new(1, 0, 0, 0), Anchor = Vector2.new(1, 0), Angle = 45, LinePosition = UDim2.new(1, -9, 0, 9), LineAngle = 45 },
+            { Name = "BottomRight", Position = UDim2.new(1, 0, 1, 0), Anchor = Vector2.new(1, 1), Angle = -45, LinePosition = UDim2.new(1, -9, 1, -9), LineAngle = -45 },
+            { Name = "BottomLeft", Position = UDim2.new(0, 0, 1, 0), Anchor = Vector2.new(0, 1), Angle = 45, LinePosition = UDim2.new(0, 9, 1, -9), LineAngle = 45 },
         }
         for _, cut in ipairs(cuts) do
             local mask = Instance.new("Frame")
             mask.Name = "ComicCutMask_" .. cut.Name
             mask.AnchorPoint = Vector2.new(0.5, 0.5)
             mask.Position = cut.Position
-            mask.Size = UDim2.fromOffset(20, 20)
+            mask.Size = UDim2.fromOffset(28, 28)
             mask.Rotation = cut.Angle
             mask.BackgroundColor3 = backingColor
             mask.BorderSizePixel = 0
@@ -751,7 +753,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             bevel.Name = "ComicCutInk_" .. cut.Name
             bevel.AnchorPoint = Vector2.new(0.5, 0.5)
             bevel.Position = cut.LinePosition
-            bevel.Size = UDim2.fromOffset(20, 1.6)
+            bevel.Size = UDim2.fromOffset(28, 2)
             bevel.Rotation = cut.LineAngle
             bevel.BackgroundColor3 = COLORS.primary
             bevel.BorderSizePixel = 0
@@ -838,7 +840,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 if bevel.Name:match("^ComicCutInk_") then
                     animate(bevel, TweenInfo.new(0.09, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
                         BackgroundColor3 = COLORS.lightningCore,
-                        Size = UDim2.fromOffset(24, 2),
+                        Size = UDim2.fromOffset(32, 2.4),
                     })
                 end
             end
@@ -866,7 +868,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 if bevel.Name:match("^ComicCutInk_") then
                     animate(bevel, TweenInfo.new(0.13, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
                         BackgroundColor3 = COLORS.primary,
-                        Size = UDim2.fromOffset(20, 1.6),
+                        Size = UDim2.fromOffset(28, 2),
                     })
                 end
             end
@@ -927,7 +929,9 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             local targetWidth, targetHeight = 920, 600
             local scaleX = (vp.X - 24) / targetWidth
             local scaleY = (vp.Y - 24) / targetHeight
-            local calcScale = math.clamp(math.min(scaleX, scaleY), 0.45, 1.0)
+            -- Narrow phones need to scale below the old 0.45 floor or the 920px
+            -- shell spills past the edges. Keep a usable floor, then reflow cards.
+            local calcScale = math.clamp(math.min(scaleX, scaleY), 0.32, 1.0)
             uiScale.Scale = calcScale
         end
     end
@@ -958,7 +962,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     shellStroke.Thickness = 1.8
     shellStroke.Transparency = 0.18
     shellStroke.Parent = shell
-    addAnimeEdge(shell, false)
+    addAnimeEdge(shell, false, COLORS.backdrop)
 
     -- Sparse impact rays sit behind content and break up the empty ink-black canvas.
     local comicBurstLayer = Instance.new("Frame")
@@ -2069,15 +2073,42 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     headerBar.BackgroundTransparency = 1
     headerBar.Parent = mainPanel
 
+    local headerLogoFrame = Instance.new("Frame")
+    headerLogoFrame.Name = "BrandLogoFrame"
+    headerLogoFrame.Size = UDim2.fromOffset(40, 40)
+    headerLogoFrame.Position = UDim2.fromOffset(12, 8)
+    headerLogoFrame.BackgroundColor3 = COLORS.glassDeep
+    headerLogoFrame.BorderSizePixel = 0
+    headerLogoFrame.ZIndex = 6
+    headerLogoFrame.Parent = headerBar
+    local headerLogoCorner = Instance.new("UICorner", headerLogoFrame)
+    headerLogoCorner.CornerRadius = UDim.new(1, 0)
+    local headerLogoStroke = Instance.new("UIStroke", headerLogoFrame)
+    headerLogoStroke.Color = COLORS.primary
+    headerLogoStroke.Thickness = 1.5
+    local headerLogoImage = Instance.new("ImageLabel")
+    headerLogoImage.Name = "BrandLogo"
+    headerLogoImage.Size = UDim2.new(1, -4, 1, -4)
+    headerLogoImage.Position = UDim2.fromOffset(2, 2)
+    headerLogoImage.BackgroundTransparency = 1
+    headerLogoImage.Image = loadIntroLogoImage(cfg.Logo, function(asset)
+        if headerLogoImage.Parent then headerLogoImage.Image = asset end
+    end)
+    headerLogoImage.ScaleType = Enum.ScaleType.Fit
+    headerLogoImage.ZIndex = 7
+    headerLogoImage.Parent = headerLogoFrame
+    local headerLogoImageCorner = Instance.new("UICorner", headerLogoImage)
+    headerLogoImageCorner.CornerRadius = UDim.new(1, 0)
+
     -- Gothic Title using Enum.Font.Fondamento & UIStroke
     local mainTitle = Instance.new("TextLabel")
-    mainTitle.Size = UDim2.new(0, 214, 0, 30)
-    mainTitle.Position = UDim2.new(0, 20, 0, 6)
+    mainTitle.Size = UDim2.new(0, 198, 0, 30)
+    mainTitle.Position = UDim2.new(0, 60, 0, 6)
     mainTitle.BackgroundTransparency = 1
     mainTitle.Text = "PAYOMBØYZ HUB"
     mainTitle.Text = cfg.Title or mainTitle.Text
     mainTitle.TextColor3 = COLORS.primary
-    mainTitle.Font = Enum.Font.PermanentMarker
+    mainTitle.Font = string.find(mainTitle.Text, "[\224-\239][\128-\191][\128-\191]") and Enum.Font.GothamBold or Enum.Font.PermanentMarker
     mainTitle.TextSize = 21
     mainTitle.TextXAlignment = Enum.TextXAlignment.Left
     mainTitle.Parent = headerBar
@@ -2089,7 +2120,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     local vvipTag = Instance.new("Frame")
     vvipTag.Name = "TitleVvipTag"
-    vvipTag.Position = UDim2.new(0, 238, 0, 11)
+    vvipTag.Position = UDim2.new(0, 264, 0, 11)
     vvipTag.Size = UDim2.fromOffset(92, 20)
     vvipTag.BackgroundColor3 = COLORS.surfaceRaised
     vvipTag.BorderSizePixel = 0
@@ -2116,7 +2147,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     local mainSubTitle = Instance.new("TextLabel")
     mainSubTitle.Size = UDim2.new(0, 380, 0, 16)
-    mainSubTitle.Position = UDim2.new(0, 20, 0, 34)
+    mainSubTitle.Position = UDim2.new(0, 62, 0, 34)
     mainSubTitle.BackgroundTransparency = 1
     mainSubTitle.Text = cfg.Subtitle or cfg.SubTitle or cfg.Name or "PAYOMBØYZ ANIME HUB"
     mainSubTitle.TextColor3 = COLORS.cyan
@@ -2687,7 +2718,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             sTitle.BackgroundTransparency = 1
             sTitle.Text = (sectionIcon ~= "" and (sectionIcon .. "  ") or "") .. tostring(secTitle)
             sTitle.TextColor3 = COLORS.primary
-            sTitle.Font = Enum.Font.PermanentMarker
+            sTitle.Font = string.find(tostring(secTitle), "[\224-\239][\128-\191][\128-\191]") and Enum.Font.GothamBold or Enum.Font.PermanentMarker
             sTitle.TextSize = 15
             sTitle.TextXAlignment = Enum.TextXAlignment.Left
             sTitle.Parent = header
@@ -3091,7 +3122,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             btn.BackgroundTransparency = 1
             btn.Text = originalText
             btn.TextColor3 = COLORS.text
-            btn.Font = Enum.Font.PermanentMarker
+            btn.Font = string.find(tostring(title), "[\224-\239][\128-\191][\128-\191]") and Enum.Font.GothamBold or Enum.Font.PermanentMarker
             btn.TextSize = 14
             btn.Parent = frame
             sharpenText(btn, 0.40)
@@ -4675,6 +4706,13 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         function WindowObj:SetTheme(theme)
             return ObsidianGlassEngine:SetTheme(theme)
         end
+        function WindowObj:SetAccent(color)
+            if typeof(color) ~= "Color3" then return false, "Accent must be a Color3" end
+            local bright = color:Lerp(Color3.fromRGB(255, 255, 255), 0.22)
+            local deep = color:Lerp(Color3.fromRGB(0, 0, 0), 0.34)
+            local tint = color:Lerp(COLORS.shell, 0.78)
+            return self:SetTheme({ Accent = color, Bright = bright, Deep = deep, Tint = tint })
+        end
         function WindowObj:GetTheme()
             return ObsidianGlassEngine:GetTheme()
         end
@@ -4719,6 +4757,11 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 Options = self:GetThemes(),
                 Default = self:GetTheme(),
                 Callback = function(themeName) self:SetTheme(themeName) end,
+            })
+            themeSection:CreateColorPicker({
+                Name = "Custom Interface Color",
+                Default = COLORS.primary,
+                Callback = function(color) self:SetAccent(color) end,
             })
             themeSection:CreateDropdown({
                 Name = "Motion",
@@ -4786,13 +4829,14 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     function WindowObj:SetTitle(value)
         mainTitle.Text = tostring(value or "")
+        mainTitle.Font = string.find(mainTitle.Text, "[\224-\239][\128-\191][\128-\191]") and Enum.Font.GothamBold or Enum.Font.PermanentMarker
     end
     WindowObj.Logo = cfg.Logo or DEFAULT_BRAND_LOGO
     function WindowObj:SetLogo(source)
         source = type(source) == "string" and source ~= "" and source or DEFAULT_BRAND_LOGO
         self.Logo = source
         local function applyLogo(asset)
-            for _, image in ipairs({ introLogo, capAvatarImg, avatarImg }) do
+        for _, image in ipairs({ introLogo, capAvatarImg, avatarImg, headerLogoImage }) do
                 if image and image.Parent then image.Image = asset end
             end
         end
@@ -4806,7 +4850,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             vtLabel.Text = tostring(value or "")
         end
         function WindowObj:SetUIScale(value)
-            uiScale.Scale = math.clamp(tonumber(value) or 1, 0.45, 1.25)
+            uiScale.Scale = math.clamp(tonumber(value) or 1, 0.32, 1.25)
             return uiScale.Scale
         end
         function WindowObj:Center()
