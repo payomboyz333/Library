@@ -1,5 +1,5 @@
 -- PAYOMBØYZ UI LIBRARY
--- Version: 4.8.1 | Runtime: Roblox Luau | Delivery: single self-contained module
+-- Version: 4.9.0 | Runtime: Roblox Luau | Delivery: single self-contained module
 --
 -- Brand direction: ink-black panels, scarlet action color, white readable type,
 -- manga-inspired framing, restrained electric effects, and touch-friendly controls.
@@ -61,7 +61,7 @@ local COLORS = {
 }
 
 local ObsidianGlassEngine = { Options = {} }
-ObsidianGlassEngine.Version = "4.8.1"
+ObsidianGlassEngine.Version = "4.9.0"
 local ICON_GLYPHS = {
     egg = "E", farm = "F", home = "H", combat = "C", quest = "Q", event = "!",
     player = "P", travel = "T", visual = "V", visuals = "V", settings = "S",
@@ -675,7 +675,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         CapsuleSparks = configuredEffects.CapsuleSparks == true or cfg.CapsuleSparks == true,
         Intro = configuredEffects.Intro ~= false and cfg.Intro ~= false,
         Sound = configuredEffects.Sound ~= false and cfg.Sound ~= false,
-        SparkCount = math.clamp(tonumber(configuredEffects.SparkCount or cfg.SparkCount) or (touchOnly and 2 or 3), 0, 4),
+        SparkCount = math.clamp(tonumber(configuredEffects.SparkCount or cfg.SparkCount) or (touchOnly and 2 or 3), 0, 7),
         CapsuleSparkCount = math.clamp(tonumber(configuredEffects.CapsuleSparkCount or cfg.CapsuleSparkCount) or (touchOnly and 0 or 1), 0, 2),
     }
     local motionMode = cfg.Motion or "Full"
@@ -1087,32 +1087,118 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         end)
     end
 
-    -- Pooled GUI sprites follow the supplied GuiParticleEmitter model (texture,
-    -- life, velocity, rotation), but reuse a handful of ImageLabels instead of
-    -- cloning and destroying a particle every time one expires.
+    -- Seven pooled manga particles borrow the lifetime/velocity/rotation model
+    -- from GuiParticleEmitter, using the same built-in spark texture plus light
+    -- Frame geometry so each hue has a distinct silhouette without asset loads.
     local sparkTexture = "rbxasset://textures/particles/sparkles_main.dds"
+    local PARTICLE_COLORS = {
+        Color3.fromRGB(255, 49, 77), Color3.fromRGB(255, 119, 51),
+        Color3.fromRGB(255, 212, 71), Color3.fromRGB(112, 238, 104),
+        Color3.fromRGB(62, 221, 218), Color3.fromRGB(77, 133, 255),
+        Color3.fromRGB(190, 104, 255),
+    }
+    local PARTICLE_KINDS = { "Star", "Halo", "Shard", "Comet", "Cross", "Trio", "Orbit" }
+    local function createParticleShape(kind, color)
+        local root = Instance.new("Frame")
+        root.Name = "ComicParticle_" .. kind
+        root.AnchorPoint = Vector2.new(0.5, 0.5)
+        root.Size = UDim2.fromOffset(24, 24)
+        root.BackgroundTransparency = 1
+        root.BorderSizePixel = 0
+        root.ZIndex = 3
+        local opacityTargets = {}
+        local function addShape(className, name, size, position, shapeColor, weight, rotation)
+            local shape = Instance.new(className)
+            shape.Name = name
+            shape.AnchorPoint = Vector2.new(0.5, 0.5)
+            shape.Size = size
+            shape.Position = position
+            shape.BackgroundColor3 = shapeColor or color
+            shape.BackgroundTransparency = 1
+            shape.BorderSizePixel = 0
+            shape.Rotation = rotation or 0
+            shape.ZIndex = 4
+            shape.Parent = root
+            local property = className == "ImageLabel" and "ImageTransparency" or "BackgroundTransparency"
+            if className == "ImageLabel" then shape.ImageTransparency = 1 end
+            opacityTargets[#opacityTargets + 1] = { Object = shape, Property = property, Weight = weight or 1 }
+            return shape
+        end
+        local function round(shape)
+            local corner = Instance.new("UICorner")
+            corner.CornerRadius = UDim.new(1, 0)
+            corner.Parent = shape
+        end
+        local function addRing(name, size, position, thickness, ringColor)
+            local ring = addShape("Frame", name, UDim2.fromOffset(size, size), position, color, 0)
+            round(ring)
+            local stroke = Instance.new("UIStroke")
+            stroke.Color = ringColor or color
+            stroke.Thickness = thickness
+            stroke.Transparency = 1
+            stroke.Parent = ring
+            opacityTargets[#opacityTargets + 1] = { Object = stroke, Property = "Transparency", Weight = 1 }
+            return ring
+        end
+
+        if kind == "Star" then
+            local star = addShape("ImageLabel", "SparkCore", UDim2.fromOffset(18, 18), UDim2.fromScale(0.5, 0.5), color, 1)
+            star.BackgroundTransparency = 1
+            star.Image = sparkTexture
+            star.ImageColor3 = color
+            star.ScaleType = Enum.ScaleType.Fit
+        elseif kind == "Halo" then
+            addRing("PulseRing", 15, UDim2.fromScale(0.5, 0.5), 2, color)
+            local core = addShape("Frame", "HaloCore", UDim2.fromOffset(4, 4), UDim2.fromScale(0.5, 0.5), color, 0.88)
+            round(core)
+        elseif kind == "Shard" then
+            local shard = addShape("Frame", "CutShard", UDim2.fromOffset(9, 13), UDim2.fromScale(0.5, 0.5), color, 1, 42)
+            local glint = addShape("Frame", "ShardGlint", UDim2.fromOffset(2, 7), UDim2.new(0.5, 2, 0.5, -1), Color3.fromRGB(255, 255, 255), 0.62, 42)
+            shard.BackgroundTransparency = 1
+            glint.BackgroundTransparency = 1
+        elseif kind == "Comet" then
+            local tail = addShape("Frame", "CometTail", UDim2.fromOffset(17, 3), UDim2.new(0.42, 0, 0.54, 0), color, 0.48, -32)
+            local head = addShape("Frame", "CometHead", UDim2.fromOffset(6, 6), UDim2.new(0.7, 0, 0.38, 0), Color3.fromRGB(255, 255, 255), 1)
+            round(head)
+            tail.BackgroundTransparency = 1
+        elseif kind == "Cross" then
+            local vertical = addShape("Frame", "RuneVertical", UDim2.fromOffset(3, 17), UDim2.fromScale(0.5, 0.5), color, 0.95)
+            local horizontal = addShape("Frame", "RuneHorizontal", UDim2.fromOffset(17, 3), UDim2.fromScale(0.5, 0.5), color, 0.95)
+            vertical.BackgroundTransparency = 1
+            horizontal.BackgroundTransparency = 1
+        elseif kind == "Trio" then
+            for index, point in ipairs({
+                UDim2.new(0.34, 0, 0.38, 0), UDim2.new(0.66, 0, 0.38, 0), UDim2.new(0.5, 0, 0.68, 0),
+            }) do
+                local dot = addShape("Frame", "PetalDot_" .. tostring(index), UDim2.fromOffset(index == 3 and 7 or 5, index == 3 and 7 or 5), point, color, 1)
+                round(dot)
+            end
+        elseif kind == "Orbit" then
+            addRing("OrbitPath", 16, UDim2.fromScale(0.5, 0.5), 1.5, color)
+            local moon = addShape("Frame", "OrbitMoon", UDim2.fromOffset(6, 6), UDim2.new(0.78, 0, 0.27, 0), Color3.fromRGB(255, 255, 255), 1)
+            round(moon)
+        end
+        return root, opacityTargets
+    end
+
     local particleStates = {}
-    for index = 1, 4 do
-        local sprite = Instance.new("ImageLabel")
-        sprite.Name = "ComicSpark"
-        sprite.AnchorPoint = Vector2.new(0.5, 0.5)
-        sprite.Size = UDim2.fromOffset(index % 2 == 0 and 18 or 14, index % 2 == 0 and 18 or 14)
-        sprite.BackgroundTransparency = 1
-        sprite.Image = sparkTexture
-        sprite.ImageColor3 = COLORS.primaryHover
-        sprite.ImageTransparency = 0.48
-        sprite.ScaleType = Enum.ScaleType.Fit
-        sprite.ZIndex = 3
+    for index, kind in ipairs(PARTICLE_KINDS) do
+        local color = PARTICLE_COLORS[index]
+        local sprite, opacityTargets = createParticleShape(kind, color)
         sprite.Visible = effectState.Sparks and index <= effectState.SparkCount
         sprite.Parent = lightningLayer
         plasmaSparkFrames[#plasmaSparkFrames + 1] = sprite
         particleStates[#particleStates + 1] = {
             Frame = sprite,
-            Edge = index % 2 == 0 and 0.965 or 0.035,
-            Y = math.random(10, 90) / 100,
+            OpacityTargets = opacityTargets,
+            Color = color,
+            X = math.random(12, 88) / 100,
+            Y = math.random(8, 92) / 100,
             Phase = math.random() * math.pi * 2,
-            Age = math.random() * 4,
-            Life = math.random(4, 7),
+            Age = math.random() * 2.4,
+            Life = math.random(3, 5),
+            RotationSpeed = ({ 36, -24, 72, -18, 28, -12, 42 })[index],
+            Scale = index % 3 == 0 and 1.05 or 0.86,
         }
     end
 
@@ -1393,20 +1479,26 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                     state.Age += dt
                     if state.Age >= state.Life then
                         state.Age = 0
+                        state.X = math.random(12, 88) / 100
                         state.Y = math.random(12, 88) / 100
                         state.Phase = math.random() * math.pi * 2
                     end
                     state.Y += direction * speed * styleMotion * dt
                     if state.Y < 0.05 then state.Y = 0.92 end
                     if state.Y > 0.95 then state.Y = 0.08 end
+                    state.X = 0.08 + ((state.X - 0.08 + drift * dt * 0.35) % 0.84)
                     local phase = math.sin(math.pi * state.Age / state.Life)
                     local sprite = state.Frame
                     sprite.Visible = true
-                    local driftX = state.Edge + math.sin(now * 0.16 + state.Phase) * drift + math.sin(now * 0.45 + state.Phase) * sway * 0.35
+                    local driftX = state.X + math.sin(now * 0.42 + state.Phase) * sway * 0.35
                     sprite.Position = UDim2.new(math.clamp(driftX, 0.08, 0.92), 0, state.Y, 0)
-                    sprite.Rotation = (state.Age * spin + state.Phase * 30) % 360
-                    sprite.ImageColor3 = colors[(index - 1) % #colors + 1]
-                    sprite.ImageTransparency = 1 - opacity * phase
+                    sprite.Rotation = (state.Phase * 30 + state.Age * (spin + state.RotationSpeed * styleMotion)) % 360
+                    local particleOpacity = opacity * phase
+                    local sizePulse = state.Scale * (0.88 + phase * 0.18)
+                    sprite.Size = UDim2.fromOffset(24 * sizePulse, 24 * sizePulse)
+                    for _, target in ipairs(state.OpacityTargets) do
+                        target.Object[target.Property] = 1 - math.clamp(particleOpacity * target.Weight, 0, 0.88)
+                    end
                 else
                     state.Frame.Visible = false
                 end
@@ -1643,37 +1735,35 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     -- 🔒 LOGOUT BUTTON & SAFE TERMINATION SYSTEM (From logout.txt)
     local logoutBtn = Instance.new("TextButton")
     logoutBtn.Name = "LogoutButton"
-    logoutBtn.Size = UDim2.fromOffset(62, 24)
-    logoutBtn.Position = UDim2.new(1, -72, 0, 18)
-    logoutBtn.BackgroundColor3 = COLORS.surfacePressed
-    logoutBtn.BackgroundTransparency = 0.20
-    logoutBtn.Text = "Log out"
-    logoutBtn.TextColor3 = COLORS.danger
+    logoutBtn.Size = UDim2.new(1, -28, 0, 34)
+    logoutBtn.Position = UDim2.new(0, 14, 1, -50)
+    logoutBtn.BackgroundColor3 = COLORS.primary
+    logoutBtn.BackgroundTransparency = 0.08
+    logoutBtn.Text = "×   LOG OUT"
+    logoutBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
     logoutBtn.Font = Enum.Font.GothamBold
     logoutBtn.TextSize = 11
     logoutBtn.ZIndex = 12
     logoutBtn.Parent = userPanel
 
     local loCorner = Instance.new("UICorner")
-    loCorner.CornerRadius = UDim.new(0, 6)
+    loCorner.CornerRadius = UDim.new(0, 4)
     loCorner.Parent = logoutBtn
 
     local loStroke = Instance.new("UIStroke")
-    loStroke.Color = COLORS.danger
+    loStroke.Color = COLORS.primary
     loStroke.Thickness = 1
     loStroke.Transparency = 0.4
     loStroke.Parent = logoutBtn
 
     logoutBtn.MouseEnter:Connect(function()
-        animate(logoutBtn, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.danger, BackgroundTransparency = 0.15 })
+        animate(logoutBtn, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.primaryHover, BackgroundTransparency = 0 })
         animate(loStroke, TweenInfo.new(0.2), { Transparency = 0 })
-        logoutBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
     end)
 
     logoutBtn.MouseLeave:Connect(function()
-        animate(logoutBtn, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.surfacePressed, BackgroundTransparency = 0.20 })
+        animate(logoutBtn, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.primary, BackgroundTransparency = 0.08 })
         animate(loStroke, TweenInfo.new(0.2), { Transparency = 0.4 })
-        logoutBtn.TextColor3 = COLORS.danger
     end)
 
     logoutBtn.MouseButton1Click:Connect(function()
@@ -1865,7 +1955,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     local statusCard = Instance.new("Frame")
     statusCard.Name = "LibraryStatusCard"
     statusCard.Size = UDim2.new(1, -28, 0, 78)
-    statusCard.Position = UDim2.new(0, 14, 0, 246 + #quickActions * 27)
+    local statusTop = 246 + #quickActions * 27
+    statusCard.Position = UDim2.new(0, 14, 0, statusTop)
     statusCard.BackgroundColor3 = COLORS.glassDeep
     statusCard.BorderSizePixel = 0
     statusCard.ZIndex = 10
@@ -1912,6 +2003,74 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     activeControlStatus.TextXAlignment = Enum.TextXAlignment.Left
     activeControlStatus.ZIndex = 11
     activeControlStatus.Parent = statusCard
+
+    local function detectExecutorName()
+        local environments = { _G }
+        if type(getfenv) == "function" then
+            local ok, environment = pcall(getfenv, 0)
+            if ok and type(environment) == "table" then environments[#environments + 1] = environment end
+        end
+        if type(getgenv) == "function" then
+            local ok, environment = pcall(getgenv)
+            if ok and type(environment) == "table" then environments[#environments + 1] = environment end
+        end
+        for _, environment in ipairs(environments) do
+            for _, detectorName in ipairs({ "identifyexecutor", "getexecutorname" }) do
+                local ok, detector = pcall(function() return environment[detectorName] end)
+                if ok and type(detector) == "function" then
+                    local callOk, name, version = pcall(detector)
+                    if callOk and type(name) == "string" and name ~= "" then
+                        name = name:gsub("[%c]", " "):sub(1, 25)
+                        if type(version) == "string" and version ~= "" then
+                            name = name .. "  /  " .. version:gsub("[%c]", " "):sub(1, 10)
+                        end
+                        return name
+                    end
+                end
+            end
+        end
+        return RunService:IsStudio() and "Roblox Studio" or "Not detected"
+    end
+
+    local executorCard = Instance.new("Frame")
+    executorCard.Name = "ExecutorStatusCard"
+    executorCard.Size = UDim2.new(1, -28, 0, 46)
+    executorCard.Position = UDim2.new(0, 14, 0, statusTop + 86)
+    executorCard.BackgroundColor3 = COLORS.glassDeep
+    executorCard.BorderSizePixel = 0
+    executorCard.ZIndex = 10
+    executorCard.Parent = userPanel
+    local executorCorner = Instance.new("UICorner", executorCard)
+    executorCorner.CornerRadius = UDim.new(0, 7)
+    local executorStroke = Instance.new("UIStroke", executorCard)
+    executorStroke.Color = COLORS.glassRaised
+    executorStroke.Transparency = 0.2
+    executorStroke.Thickness = 1
+    local executorHeading = Instance.new("TextLabel")
+    executorHeading.Size = UDim2.new(1, -16, 0, 14)
+    executorHeading.Position = UDim2.fromOffset(8, 5)
+    executorHeading.BackgroundTransparency = 1
+    executorHeading.Text = "EXECUTOR / RUNTIME"
+    executorHeading.TextColor3 = COLORS.textMuted
+    executorHeading.Font = Enum.Font.GothamBold
+    executorHeading.TextSize = 8
+    executorHeading.TextXAlignment = Enum.TextXAlignment.Left
+    executorHeading.ZIndex = 11
+    executorHeading.Parent = executorCard
+    local executorValue = Instance.new("TextLabel")
+    executorValue.Name = "ExecutorName"
+    executorValue.Size = UDim2.new(1, -16, 0, 17)
+    executorValue.Position = UDim2.fromOffset(8, 22)
+    executorValue.BackgroundTransparency = 1
+    executorValue.Text = detectExecutorName()
+    executorValue.TextColor3 = COLORS.primaryHover
+    executorValue.Font = Enum.Font.GothamBold
+    executorValue.TextSize = 10
+    executorValue.TextTruncate = Enum.TextTruncate.AtEnd
+    executorValue.TextXAlignment = Enum.TextXAlignment.Left
+    executorValue.ZIndex = 11
+    executorValue.Parent = executorCard
+
     task.spawn(function()
         while gui and gui.Parent and activeTabStatus.Parent do
             local activeCount = 0
@@ -4704,7 +4863,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             addEffectToggle("Sound", "Click sound")
             effectsSection:CreateDropdown({
                 Name = "Spark density",
-                Options = { "0", "1", "2", "3", "4" },
+                Options = { "0", "1", "2", "3", "4", "5", "6", "7" },
                 Default = tostring(effectState.SparkCount),
                 Callback = function(count) self:SetEffects("SparkCount", tonumber(count)) end,
             })
