@@ -72,6 +72,10 @@ local ICON_GLYPHS = {
     package = "#", terminal = ">", bell = "!", code = "</>", help = "?",
     flame = "!", shuriken = "X", katana = "/", scroll = "=", trophy = "*", raid = "!",
     lock = "L", unlock = "U", wifi = "~", clock = "T", chart = "#",
+    gem = "G", swords = "/", crosshair = "+", sparkles = "*", hammer = "+",
+    gift = "G", ["map-pin"] = "P", ["layout-dashboard"] = "#",
+    ["arrow-up-right"] = ">", ["check-circle"] = "V", ["alert-triangle"] = "!",
+    ["shield-check"] = "S", ["shield-alert"] = "!", ["trash-2"] = "X",
 }
 
 local function resolveIcon(icon)
@@ -492,7 +496,8 @@ function ObsidianGlassEngine:Notify(cfg)
             layer.Name = "PayomboyZ_ToastLayer"
             layer.ResetOnSpawn = false
             layer.IgnoreGuiInset = true
-            layer.DisplayOrder = 100000
+            -- Keep the window's close/toggle controls above notifications.
+            layer.DisplayOrder = 99998
             layer.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
             layer.Parent = parentGui
             local stack = Instance.new("Frame")
@@ -509,6 +514,7 @@ function ObsidianGlassEngine:Notify(cfg)
             layout.SortOrder = Enum.SortOrder.LayoutOrder
             layout.Padding = UDim.new(0, 8)
         end
+        layer.DisplayOrder = 99998
         local stack = layer:FindFirstChild("Stack")
         local tones = { Default = COLORS.primary, Info = COLORS.cyan, Success = COLORS.success, Warning = COLORS.warning, Error = COLORS.danger }
         local kind = tostring(cfg.Type or cfg.Kind or "Default")
@@ -635,7 +641,7 @@ function ObsidianGlassEngine:Notify(cfg)
             end)
         end
         notificationHandles[#notificationHandles + 1] = result
-        while #notificationHandles > 5 do notificationHandles[1]:Dismiss() end
+        while #notificationHandles > 3 do notificationHandles[1]:Dismiss() end
         playClickSound()
         local duration = math.max(tonumber(cfg.Duration) or 4, 0)
         if duration > 0 then
@@ -2219,7 +2225,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     mainTitle.Size = UDim2.new(0, 300, 0, 62)
     mainTitle.Position = UDim2.new(0, 14, 0, -31)
     mainTitle.BackgroundColor3 = COLORS.shell
-    mainTitle.BackgroundTransparency = 0.02
+    mainTitle.BackgroundTransparency = 1
     mainTitle.BorderSizePixel = 0
     mainTitle.Text = "PAYOMBØYZ"
     mainTitle.TextColor3 = COLORS.text
@@ -2332,15 +2338,16 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     closeBtn.TextColor3 = COLORS.textMuted
     closeBtn.Font = Enum.Font.GothamBold
     closeBtn.TextSize = 14
+    closeBtn.ZIndex = 31
     closeBtn.Parent = headerBar
 
     local closeCorner = Instance.new("UICorner")
     closeCorner.CornerRadius = UDim.new(0, 8)
     closeCorner.Parent = closeBtn
 
-    closeBtn.MouseButton1Click:Connect(function()
+    closeBtn.Activated:Connect(function()
         playClickSound()
-        shell.Visible = not shell.Visible
+        shell.Visible = false
     end)
 
     local minBtn = Instance.new("TextButton")
@@ -2359,9 +2366,9 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     minCorner.CornerRadius = UDim.new(0, 8)
     minCorner.Parent = minBtn
 
-    minBtn.MouseButton1Click:Connect(function()
+    minBtn.Activated:Connect(function()
         playClickSound()
-        shell.Visible = not shell.Visible
+        shell.Visible = false
     end)
 
     -- Window Dragging Handler
