@@ -1,5 +1,5 @@
 -- PAYOMBØYZ UI LIBRARY
--- Version: 4.1.0 | Runtime: Roblox Luau | Delivery: single self-contained module
+-- Version: 4.3.0 | Runtime: Roblox Luau | Delivery: single self-contained module
 --
 -- Brand direction: ink-black panels, scarlet action color, white readable type,
 -- manga-inspired framing, restrained electric effects, and touch-friendly controls.
@@ -61,36 +61,60 @@ local COLORS = {
 }
 
 local ObsidianGlassEngine = { Options = {} }
-ObsidianGlassEngine.Version = "4.1.0"
+ObsidianGlassEngine.Version = "4.3.0"
+local ICON_GLYPHS = {
+    egg = "◉", farm = "✦", home = "⌂", combat = "刀", quest = "卷", event = "祭",
+    player = "◉", travel = "風", visual = "眼", visuals = "眼", settings = "⚙",
+    trade = "⇄", economy = "◇", shield = "盾", sword = "刀", crown = "♛",
+    spark = "✧", inventory = "▤", shop = "¥", server = "▣", extras = "✦",
+    search = "⌕", close = "×", next = "›", back = "‹", eye = "◉", filter = "≋",
+    package = "▣", terminal = "⌘", bell = "♢", code = "</>", help = "?",
+    flame = "♨", shuriken = "✥", katana = "刀", scroll = "巻", trophy = "♜", raid = "☠",
+    lock = "▣", unlock = "◇", wifi = "⌁", clock = "◷", chart = "▥",
+}
+
+local function resolveIcon(icon)
+    if type(icon) ~= "string" then return "" end
+    return ICON_GLYPHS[string.lower(icon)] or icon
+end
+
+ObsidianGlassEngine.Icons = ICON_GLYPHS
+function ObsidianGlassEngine:RegisterIcon(name, glyph)
+    if type(name) ~= "string" or name == "" or type(glyph) ~= "string" or glyph == "" then
+        return false, "Icon name and glyph are required"
+    end
+    ICON_GLYPHS[string.lower(name)] = string.sub(glyph, 1, 8)
+    return true
+end
 
 local THEME_PRESETS = {
     ["ดำทมิฬ"] = {
         Accent = Color3.fromRGB(181, 190, 208), Bright = Color3.fromRGB(233, 238, 248), Deep = Color3.fromRGB(79, 88, 108), Tint = Color3.fromRGB(43, 48, 61),
-        Particle = { Glyph = "◇", Style = "Ash", Direction = 1, Speed = 0.018, Drift = 0.006, Sway = 0.004, Spin = 12, Colors = { Color3.fromRGB(226, 233, 245), Color3.fromRGB(130, 145, 170) } },
+        Particle = { Glyph = "◇", Style = "Ash", Direction = 1, Speed = 0.018, Drift = 0.006, Sway = 0.004, Spin = 12, Lifetime = 8.5, Opacity = 0.34, Colors = { Color3.fromRGB(226, 233, 245), Color3.fromRGB(130, 145, 170) } },
     },
     ["แดงเปลวเพลิง"] = {
         Accent = Color3.fromRGB(255, 35, 60), Bright = Color3.fromRGB(255, 105, 112), Deep = Color3.fromRGB(166, 12, 35), Tint = Color3.fromRGB(89, 15, 29),
-        Particle = { Glyph = "✦", Style = "Ember", Direction = -1, Speed = 0.045, Drift = 0.008, Sway = 0.005, Spin = 42, Colors = { Color3.fromRGB(255, 228, 193), Color3.fromRGB(255, 62, 48) } },
+        Particle = { Glyph = "✦", Style = "Ember", Direction = -1, Speed = 0.045, Drift = 0.008, Sway = 0.005, Spin = 42, Lifetime = 4.8, Opacity = 0.52, Colors = { Color3.fromRGB(255, 228, 193), Color3.fromRGB(255, 62, 48) } },
     },
     ["เขียวมรกต"] = {
         Accent = Color3.fromRGB(62, 222, 146), Bright = Color3.fromRGB(142, 255, 196), Deep = Color3.fromRGB(23, 133, 88), Tint = Color3.fromRGB(16, 65, 49),
-        Particle = { Glyph = "❋", Style = "Leaf", Direction = 1, Speed = 0.024, Drift = 0.009, Sway = 0.017, Spin = 34, Colors = { Color3.fromRGB(193, 255, 195), Color3.fromRGB(65, 220, 137) } },
+        Particle = { Glyph = "❋", Style = "Leaf", Direction = 1, Speed = 0.024, Drift = 0.009, Sway = 0.017, Spin = 34, Lifetime = 7.2, Opacity = 0.4, Colors = { Color3.fromRGB(193, 255, 195), Color3.fromRGB(65, 220, 137) } },
     },
     ["ฟ้าคลื่นทะเล"] = {
         Accent = Color3.fromRGB(63, 190, 235), Bright = Color3.fromRGB(145, 231, 255), Deep = Color3.fromRGB(22, 111, 160), Tint = Color3.fromRGB(15, 59, 83),
-        Particle = { Glyph = "〜", Style = "Wave", Direction = 1, Speed = 0.015, Drift = 0.034, Sway = 0.012, Spin = 8, Colors = { Color3.fromRGB(189, 249, 255), Color3.fromRGB(62, 179, 236) } },
+        Particle = { Glyph = "〜", Style = "Wave", Direction = 1, Speed = 0.015, Drift = 0.034, Sway = 0.012, Spin = 8, Lifetime = 8.0, Opacity = 0.32, Colors = { Color3.fromRGB(189, 249, 255), Color3.fromRGB(62, 179, 236) } },
     },
     ["ม่วงแห่งความลึกลับ"] = {
         Accent = Color3.fromRGB(180, 112, 255), Bright = Color3.fromRGB(220, 176, 255), Deep = Color3.fromRGB(112, 54, 178), Tint = Color3.fromRGB(53, 31, 83),
-        Particle = { Glyph = "✧", Style = "Arcane", Direction = -1, Speed = 0.022, Drift = 0.008, Sway = 0.012, Spin = 22, Colors = { Color3.fromRGB(243, 213, 255), Color3.fromRGB(160, 103, 255) } },
+        Particle = { Glyph = "✧", Style = "Arcane", Direction = -1, Speed = 0.022, Drift = 0.008, Sway = 0.012, Spin = 22, Lifetime = 5.8, Opacity = 0.46, Colors = { Color3.fromRGB(243, 213, 255), Color3.fromRGB(160, 103, 255) } },
     },
     ["ทองแห่งเกียรติยศ"] = {
         Accent = Color3.fromRGB(244, 181, 57), Bright = Color3.fromRGB(255, 224, 135), Deep = Color3.fromRGB(165, 105, 24), Tint = Color3.fromRGB(83, 58, 20),
-        Particle = { Glyph = "❀", Style = "Petal", Direction = 1, Speed = 0.018, Drift = 0.012, Sway = 0.019, Spin = 25, Colors = { Color3.fromRGB(255, 239, 183), Color3.fromRGB(230, 157, 43) } },
+        Particle = { Glyph = "❀", Style = "Petal", Direction = 1, Speed = 0.018, Drift = 0.012, Sway = 0.019, Spin = 25, Lifetime = 9.2, Opacity = 0.38, Colors = { Color3.fromRGB(255, 239, 183), Color3.fromRGB(230, 157, 43) } },
     },
     ["ขาวแห่งความบริสุทธิ์"] = {
         Accent = Color3.fromRGB(218, 230, 244), Bright = Color3.fromRGB(255, 255, 255), Deep = Color3.fromRGB(124, 151, 181), Tint = Color3.fromRGB(50, 62, 79),
-        Particle = { Glyph = "❄", Style = "Snow", Direction = 1, Speed = 0.020, Drift = 0.008, Sway = 0.010, Spin = 10, Colors = { Color3.fromRGB(255, 255, 255), Color3.fromRGB(155, 209, 255) } },
+        Particle = { Glyph = "❄", Style = "Snow", Direction = 1, Speed = 0.020, Drift = 0.008, Sway = 0.010, Spin = 10, Lifetime = 6.8, Opacity = 0.36, Colors = { Color3.fromRGB(255, 255, 255), Color3.fromRGB(155, 209, 255) } },
     },
 }
 local THEME_ALIASES = {
@@ -121,6 +145,8 @@ local function normalizeParticleProfile(source, accent, bright)
         Drift = math.clamp(tonumber(source.Drift) or 0.008, 0, 0.08),
         Sway = math.clamp(tonumber(source.Sway) or 0.01, 0, 0.08),
         Spin = math.clamp(tonumber(source.Spin) or 24, 0, 180),
+        Lifetime = math.clamp(tonumber(source.Lifetime) or 6.5, 3, 12),
+        Opacity = math.clamp(tonumber(source.Opacity) or 0.4, 0.12, 0.72),
         Colors = colors,
     }
 end
@@ -655,6 +681,37 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         return tween
     end
 
+    local function sharpenText(label, transparency)
+        if not label or not label:IsA("TextLabel") and not label:IsA("TextButton") and not label:IsA("TextBox") then return end
+        label.TextStrokeColor3 = COLORS.backdrop
+        label.TextStrokeTransparency = transparency or 0.58
+    end
+
+    local function addAnimeEdge(parent)
+        local mainSlash = Instance.new("Frame")
+        mainSlash.Name = "AnimeEdgeSlash"
+        mainSlash.AnchorPoint = Vector2.new(0.5, 0.5)
+        mainSlash.Position = UDim2.new(0, 6, 0.5, 0)
+        mainSlash.Size = UDim2.fromOffset(2, 17)
+        mainSlash.Rotation = 18
+        mainSlash.BackgroundColor3 = COLORS.primary
+        mainSlash.BorderSizePixel = 0
+        mainSlash.ZIndex = parent.ZIndex + 1
+        mainSlash.Parent = parent
+
+        local glint = Instance.new("Frame")
+        glint.Name = "AnimeEdgeGlint"
+        glint.AnchorPoint = Vector2.new(0.5, 0.5)
+        glint.Position = UDim2.new(0, 10, 0.5, 2)
+        glint.Size = UDim2.fromOffset(1, 9)
+        glint.Rotation = 18
+        glint.BackgroundColor3 = COLORS.primaryHover
+        glint.BackgroundTransparency = 0.12
+        glint.BorderSizePixel = 0
+        glint.ZIndex = parent.ZIndex + 1
+        glint.Parent = parent
+    end
+
     if cfg.Theme then self:SetTheme(cfg.Theme) end
     local parentGui = getSafeParentGui()
     if parentGui:FindFirstChild("ObsidianGlass2_UI") then
@@ -715,26 +772,26 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     end
     uiScale.Parent = gui
 
-    -- 🌟 SHELL FRAME (Starts as 520x150 White Transparent Glass Card per Intro.md)
+    -- Dark anime shell; the opening sequence expands from this compact frame.
     local shell = Instance.new("Frame")
     shell.Name = "MainShell"
     shell.Size = UDim2.fromOffset(520, 150)
     shell.AnchorPoint = Vector2.new(0.5, 0.5)
     shell.Position = UDim2.new(0.5, 0, 0.5, 0)
-    shell.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    shell.BackgroundTransparency = 0.92
+    shell.BackgroundColor3 = COLORS.shell
+    shell.BackgroundTransparency = 0.08
     shell.BorderSizePixel = 0
     shell.ClipsDescendants = true
     shell.Parent = gui
 
     local shellCorner = Instance.new("UICorner")
-    shellCorner.CornerRadius = UDim.new(0, 18)
+    shellCorner.CornerRadius = UDim.new(0, 14)
     shellCorner.Parent = shell
 
     local shellStroke = Instance.new("UIStroke")
-    shellStroke.Color = Color3.fromRGB(255, 255, 255)
-    shellStroke.Thickness = 1.5
-    shellStroke.Transparency = 0.40
+    shellStroke.Color = COLORS.primary
+    shellStroke.Thickness = 1.8
+    shellStroke.Transparency = 0.18
     shellStroke.Parent = shell
 
     -- ⚡ AMBIENT LIGHTNING FLASH (ZIndex 80 - OVER PANELS & CARDS)
@@ -910,7 +967,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 baseX = spark.Position.X.Scale,
                 baseY = spark.Position.Y.Scale,
                 phase = math.random() * math.pi * 2,
-                alpha = math.random(18, 48) / 100,
+                alpha = math.random(70, 130) / 100,
+                age = math.random() * 8,
             }
         end
 
@@ -929,9 +987,19 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 local drift = tonumber(profile.Drift) or 0.008
                 local sway = tonumber(profile.Sway) or 0.01
                 local spin = tonumber(profile.Spin) or 24
+                local lifetime = tonumber(profile.Lifetime) or 6.5
+                local opacity = tonumber(profile.Opacity) or 0.4
                 local dt = math.min(tonumber(deltaTime) or 0.016, 0.08)
                 local now = os.clock()
                 for _, s in ipairs(sparks) do
+                    s.age = s.age + dt
+                    if s.age >= lifetime then
+                        s.age = 0
+                        s.baseX = math.random()
+                        s.baseY = direction >= 0 and -0.04 or 1.04
+                        s.phase = math.random() * math.pi * 2
+                        s.alpha = math.random(70, 130) / 100
+                    end
                     local colorIndex = (math.floor(s.phase * 10) % #colors) + 1
                     s.frame.Text = profile.Glyph or "✦"
                     s.frame.TextColor3 = colors[colorIndex]
@@ -942,9 +1010,14 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                     if direction < 0 and s.baseY < -0.04 then s.baseY = 1.04 end
                     local wave = style == "Wave" and math.sin(now * 1.6 + s.phase) * 0.012 or 0
                     s.frame.Position = UDim2.new(s.baseX, 0, s.baseY + wave, 0)
-                    s.frame.Rotation = math.sin(now * 0.7 + s.phase) * spin
-                    local pulse = style == "Arcane" and (math.sin(now * 2 + s.phase) + 1) * 0.10 or 0
-                    s.frame.TextTransparency = math.clamp(s.alpha + pulse, 0.08, 0.68)
+                    local spinFactor = style == "Wave" and 0.22 or (style == "Ash" and 0.45 or 1)
+                    local pulse = style == "Arcane" and (math.sin(now * 2 + s.phase) + 1) * 0.12 or 0
+                    local fadeIn = math.clamp(s.age / 0.75, 0, 1)
+                    local fadeOut = math.clamp((lifetime - s.age) / 1.1, 0, 1)
+                    local visibility = math.min(fadeIn, fadeOut) * (1 - pulse)
+                    s.frame.Rotation = math.sin(now * 0.7 + s.phase) * spin * spinFactor
+                    s.frame.TextTransparency = 1 - math.clamp(opacity * s.alpha * visibility, 0, 0.8)
+                    s.frame.TextStrokeTransparency = 1 - math.clamp(opacity * s.alpha * visibility * 0.42, 0, 0.55)
                 end
             end
         end)
@@ -965,18 +1038,87 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         table.insert(trackedThreads, boltThread)
     end)
 
-    -- 🎬 INTRO OVERLAY CONTAINER (From Intro.md)
+    -- Cinematic opening card with an anime slash sweep and live boot indicator.
     local introOverlay = Instance.new("Frame")
     introOverlay.Name = "IntroOverlay"
     introOverlay.Size = UDim2.fromScale(1, 1)
-    introOverlay.BackgroundTransparency = 1
+    introOverlay.BackgroundColor3 = COLORS.backdrop
+    introOverlay.BackgroundTransparency = 0.10
     introOverlay.ZIndex = 999
     introOverlay.Parent = shell
 
+    local introRing = Instance.new("Frame")
+    introRing.Name = "IntroSigilRing"
+    introRing.AnchorPoint = Vector2.new(0.5, 0.5)
+    introRing.Size = UDim2.fromOffset(124, 124)
+    introRing.Position = UDim2.new(0, 73, 0.5, 0)
+    introRing.BackgroundTransparency = 1
+    introRing.Rotation = -35
+    introRing.ZIndex = 1000
+    introRing.Parent = introOverlay
+    local introRingCorner = Instance.new("UICorner")
+    introRingCorner.CornerRadius = UDim.new(1, 0)
+    introRingCorner.Parent = introRing
+    local introRingStroke = Instance.new("UIStroke")
+    introRingStroke.Color = COLORS.primary
+    introRingStroke.Thickness = 2
+    introRingStroke.Transparency = 1
+    introRingStroke.Parent = introRing
+    local introRingGradient = Instance.new("UIGradient")
+    introRingGradient.Color = ColorSequence.new(COLORS.primaryHover, COLORS.primaryPressed)
+    introRingGradient.Rotation = 35
+    introRingGradient.Parent = introRingStroke
+
+    local introSlash = Instance.new("Frame")
+    introSlash.Name = "IntroBladeSweep"
+    introSlash.AnchorPoint = Vector2.new(0.5, 0.5)
+    introSlash.Size = UDim2.new(1.3, 0, 0, 5)
+    introSlash.Position = UDim2.new(-0.85, 0, 0.52, 0)
+    introSlash.Rotation = -14
+    introSlash.BackgroundColor3 = COLORS.primary
+    introSlash.BorderSizePixel = 0
+    introSlash.ZIndex = 1001
+    introSlash.Parent = introOverlay
+    local introSlashGradient = Instance.new("UIGradient")
+    introSlashGradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, COLORS.primaryPressed),
+        ColorSequenceKeypoint.new(0.48, Color3.fromRGB(255, 245, 247)),
+        ColorSequenceKeypoint.new(1, COLORS.primary),
+    })
+    introSlashGradient.Parent = introSlash
+
+    local introSlashEcho = Instance.new("Frame")
+    introSlashEcho.Name = "IntroBladeEcho"
+    introSlashEcho.AnchorPoint = Vector2.new(0.5, 0.5)
+    introSlashEcho.Size = UDim2.new(1.05, 0, 0, 1)
+    introSlashEcho.Position = UDim2.new(-0.72, 0, 0.56, 0)
+    introSlashEcho.Rotation = -14
+    introSlashEcho.BackgroundColor3 = COLORS.primaryHover
+    introSlashEcho.BackgroundTransparency = 0.2
+    introSlashEcho.BorderSizePixel = 0
+    introSlashEcho.ZIndex = 1001
+    introSlashEcho.Parent = introOverlay
+
+    local introKicker = Instance.new("TextLabel")
+    introKicker.Name = "IntroKicker"
+    introKicker.Size = UDim2.new(1, -205, 0, 16)
+    introKicker.Position = UDim2.new(0, 174, 0.5, -48)
+    introKicker.BackgroundTransparency = 1
+    introKicker.Text = "// PAYOMBØYZ  •  ANIME SCRIPT SYSTEM"
+    introKicker.TextColor3 = COLORS.primaryHover
+    introKicker.Font = Enum.Font.GothamBold
+    introKicker.TextSize = 9
+    introKicker.TextXAlignment = Enum.TextXAlignment.Left
+    introKicker.TextTransparency = 1
+    introKicker.ZIndex = 1002
+    introKicker.Parent = introOverlay
+    sharpenText(introKicker, 0.38)
+
     local introLogo = Instance.new("ImageLabel")
     introLogo.Name = "IntroLogo"
-    introLogo.Size = UDim2.fromOffset(115, 115)
-    introLogo.Position = UDim2.new(0, 24, 0.5, -57.5)
+    introLogo.AnchorPoint = Vector2.new(0.5, 0.5)
+    introLogo.Size = UDim2.fromOffset(96, 96)
+    introLogo.Position = UDim2.new(0, 73, 0.5, 0)
     introLogo.BackgroundTransparency = 1
     introLogo.Image = loadIntroLogoImage(cfg.Logo, function(asset)
         if introLogo.Parent then introLogo.Image = asset end
@@ -984,30 +1126,36 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     introLogo.ImageTransparency = 1
     introLogo.ZIndex = 1000
     introLogo.Parent = introOverlay
+    local introLogoScale = Instance.new("UIScale")
+    introLogoScale.Scale = 0.68
+    introLogoScale.Parent = introLogo
 
     local introTitle = Instance.new("TextLabel")
     introTitle.Name = "IntroTitle"
-    introTitle.Size = UDim2.new(1, -160, 0, 36)
-    introTitle.Position = UDim2.new(0, 150, 0.5, -26)
+    introTitle.Size = UDim2.new(1, -198, 0, 38)
+    introTitle.Position = UDim2.new(0, 194, 0.5, -22)
     introTitle.BackgroundTransparency = 1
     introTitle.Text = "PAYOMBØYZ HUB"
     introTitle.TextColor3 = COLORS.primary
     introTitle.Font = Enum.Font.Fondamento -- Gothic Style
-    introTitle.TextSize = 28
+    introTitle.TextSize = 27
     introTitle.TextXAlignment = Enum.TextXAlignment.Left
     introTitle.TextTransparency = 1
+    introTitle.TextTruncate = Enum.TextTruncate.AtEnd
     introTitle.ZIndex = 1000
     introTitle.Parent = introOverlay
 
     local titleStroke = Instance.new("UIStroke")
     titleStroke.Color = Color3.fromRGB(80, 0, 15) -- Dark Crimson Stroke
-    titleStroke.Thickness = 1.8
+    titleStroke.Thickness = 2.4
+    titleStroke.Transparency = 0.12
     titleStroke.Parent = introTitle
+    sharpenText(introTitle, 0.34)
 
     local introSub = Instance.new("TextLabel")
     introSub.Name = "IntroSub"
-    introSub.Size = UDim2.new(1, -160, 0, 18)
-    introSub.Position = UDim2.new(0, 150, 0.5, 14)
+    introSub.Size = UDim2.new(1, -198, 0, 18)
+    introSub.Position = UDim2.new(0, 195, 0.5, 14)
     introSub.BackgroundTransparency = 1
     introSub.Text = cfg.Subtitle or cfg.SubTitle or cfg.Name or "EGG AUTOMATION"
     introSub.TextColor3 = Color3.fromRGB(240, 240, 245)
@@ -1015,8 +1163,58 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     introSub.TextSize = 11
     introSub.TextXAlignment = Enum.TextXAlignment.Left
     introSub.TextTransparency = 1
+    introSub.TextTruncate = Enum.TextTruncate.AtEnd
     introSub.ZIndex = 1000
     introSub.Parent = introOverlay
+    sharpenText(introSub, 0.48)
+
+    local introStatus = Instance.new("TextLabel")
+    introStatus.Name = "IntroStatus"
+    introStatus.Size = UDim2.new(1, -222, 0, 15)
+    introStatus.Position = UDim2.new(0, 195, 0.5, 43)
+    introStatus.BackgroundTransparency = 1
+    introStatus.Text = "INITIALIZING  /  LOADING HUB MODULES"
+    introStatus.TextColor3 = COLORS.textMuted
+    introStatus.Font = Enum.Font.Code
+    introStatus.TextSize = 9
+    introStatus.TextXAlignment = Enum.TextXAlignment.Left
+    introStatus.TextTransparency = 1
+    introStatus.ZIndex = 1002
+    introStatus.Parent = introOverlay
+
+    local introTrack = Instance.new("Frame")
+    introTrack.Name = "IntroEnergyTrack"
+    introTrack.Size = UDim2.new(1, -222, 0, 3)
+    introTrack.Position = UDim2.new(0, 195, 0.5, 62)
+    introTrack.BackgroundColor3 = COLORS.glassRaised
+    introTrack.BorderSizePixel = 0
+    introTrack.ZIndex = 1002
+    introTrack.Parent = introOverlay
+    local introProgress = Instance.new("Frame")
+    introProgress.Name = "IntroEnergyFill"
+    introProgress.Size = UDim2.new(0, 0, 1, 0)
+    introProgress.BackgroundColor3 = COLORS.primary
+    introProgress.BorderSizePixel = 0
+    introProgress.ZIndex = 1003
+    introProgress.Parent = introTrack
+    local introProgressGradient = Instance.new("UIGradient")
+    introProgressGradient.Color = ColorSequence.new(COLORS.primaryPressed, COLORS.primaryHover)
+    introProgressGradient.Parent = introProgress
+
+    local introStamp = Instance.new("TextLabel")
+    introStamp.Name = "IntroBrandStamp"
+    introStamp.Size = UDim2.new(1, -24, 0, 14)
+    introStamp.Position = UDim2.new(0, 12, 1, -23)
+    introStamp.BackgroundTransparency = 1
+    introStamp.Text = "PAYOMBØYZ HUB     /     PLAY MORE  •  WORK LESS"
+    introStamp.TextColor3 = COLORS.textFaint
+    introStamp.Font = Enum.Font.GothamBold
+    introStamp.TextSize = 8
+    introStamp.TextXAlignment = Enum.TextXAlignment.Right
+    introStamp.TextTransparency = 0.25
+    introStamp.ZIndex = 1002
+    introStamp.Parent = introOverlay
+    sharpenText(introStamp, 0.58)
 
     -- 💎 UNIVERSAL DRAGGABLE TOGGLE CAPSULE WITH RED LIGHTNING & METRICS
     local toggleCapsule = Instance.new("Frame")
@@ -1079,6 +1277,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 vy = math.random(15, 35) / 10000,
                 pos = sp.Position.Y.Scale,
                 phase = math.random() * math.pi * 2,
+                alpha = math.random(75, 130) / 100,
             }
         end
 
@@ -1093,16 +1292,23 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 local colors = type(profile.Colors) == "table" and #profile.Colors > 0 and profile.Colors or { COLORS.lightningGlow }
                 local direction = tonumber(profile.Direction) or -1
                 local speedScale = math.clamp((tonumber(profile.Speed) or 0.02) / 0.02, 0.5, 2)
+                local style = profile.Style or "Ember"
+                local sway = tonumber(profile.Sway) or 0.01
+                local opacity = tonumber(profile.Opacity) or 0.4
+                local now = os.clock()
                 for _, d in ipairs(sparks) do
                     d.pos = d.pos + d.vy * speedScale * direction
                     if direction >= 0 and d.pos > 1.05 then d.pos = -0.05 end
                     if direction < 0 and d.pos < -0.05 then d.pos = 1.05 end
-                    local newX = (d.frame.Position.X.Scale + d.vx) % 1.0
+                    local newX = (d.frame.Position.X.Scale + d.vx + math.sin(now + d.phase) * sway * 0.015) % 1.0
                     d.frame.Position = UDim2.new(newX, 0, d.pos, 0)
                     d.frame.Text = profile.Glyph or "✦"
                     d.frame.TextColor3 = colors[(math.floor(d.phase * 10) % #colors) + 1]
                     d.frame.TextStrokeColor3 = COLORS.lightningGlow
-                    d.frame.Rotation = math.sin(os.clock() + d.phase) * (tonumber(profile.Spin) or 12)
+                    local spinFactor = style == "Wave" and 0.2 or (style == "Ash" and 0.4 or 1)
+                    local pulse = style == "Arcane" and (math.sin(now * 2.2 + d.phase) + 1) * 0.18 or 0
+                    d.frame.Rotation = math.sin(now * 0.8 + d.phase) * (tonumber(profile.Spin) or 12) * spinFactor
+                    d.frame.TextTransparency = 1 - math.clamp(d.alpha * opacity * (0.68 + pulse), 0, 0.82)
                 end
             end
         end)
@@ -1819,29 +2025,70 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     -- 🎬 4-PHASE INTRO EXECUTION SEQUENCE (From Intro.md)
     if not effectState.Intro or motionMode == "Off" then
         introOverlay.Visible = false
+        shell.Size = UDim2.fromOffset(920, 600)
+        shell.BackgroundColor3 = COLORS.shell
+        shell.BackgroundTransparency = 0.12
+        shellStroke.Color = COLORS.primary
+        shellStroke.Transparency = 0.15
         userPanel.Visible = true
         mainPanel.Visible = true
     else
     task.spawn(function()
-        -- Phase 1: Fade-In (0.45s)
-        local fadeInInfo = TweenInfo.new(0.45, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
-        animate(introLogo, fadeInInfo, { ImageTransparency = 0 })
-        animate(introTitle, fadeInInfo, { TextTransparency = 0 })
-        animate(introSub, fadeInInfo, { TextTransparency = 0.2 })
-        
-        task.wait(1.5)
-        
-        -- Phase 2: Fade-Out (0.30s)
-        local fadeOutInfo = TweenInfo.new(0.30, Enum.EasingStyle.Quart, Enum.EasingDirection.In)
-        animate(introLogo, fadeOutInfo, { ImageTransparency = 1 })
-        animate(introTitle, fadeOutInfo, { TextTransparency = 1 })
-        animate(introSub, fadeOutInfo, { TextTransparency = 1 })
-        
-        task.wait(0.35)
+        -- Impact frame: the shell snaps open and a crimson blade cuts across it.
+        animate(shell, TweenInfo.new(0.28, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+            Size = UDim2.fromOffset(650, 190),
+            BackgroundTransparency = 0.04,
+        })
+        animate(shellStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Color = COLORS.primaryHover,
+            Transparency = 0.02,
+        })
+        animate(introSlash, TweenInfo.new(0.42, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+            Position = UDim2.new(1.45, 0, 0.52, 0),
+        })
+        animate(introSlashEcho, TweenInfo.new(0.48, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
+            Position = UDim2.new(1.28, 0, 0.56, 0),
+        })
+        animate(introRingStroke, TweenInfo.new(0.32, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Transparency = 0.12 })
+        animate(introRing, TweenInfo.new(0.9, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), { Rotation = 325 })
+        animate(introLogo, TweenInfo.new(0.32, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { ImageTransparency = 0 })
+        animate(introLogoScale, TweenInfo.new(0.38, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Scale = 1.12 })
+
+        task.wait(0.15)
+        introTitle.Position = UDim2.new(0, 218, 0.5, -22)
+        animate(introKicker, TweenInfo.new(0.26, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { TextTransparency = 0 })
+        animate(introTitle, TweenInfo.new(0.34, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+            Position = UDim2.new(0, 194, 0.5, -22),
+            TextTransparency = 0,
+        })
+        animate(introSub, TweenInfo.new(0.32, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { TextTransparency = 0.08 })
+        animate(introStatus, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { TextTransparency = 0.12 })
+        animate(introProgress, TweenInfo.new(0.95, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Size = UDim2.new(1, 0, 1, 0) })
+        task.wait(0.36)
+        animate(introLogoScale, TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { Scale = 1 })
+        introStatus.Text = "ACCESS READY  /  PAYOMBØYZ SYSTEM ONLINE"
+        playClickSound()
+        task.wait(0.82)
+
+        -- Wipe the title card, then reveal the full control deck.
+        animate(introOverlay, TweenInfo.new(0.28, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
+            BackgroundTransparency = 1,
+        })
+        for _, item in ipairs({ introLogo, introTitle, introSub, introKicker, introStatus, introStamp }) do
+            if item:IsA("ImageLabel") then
+                animate(item, TweenInfo.new(0.24, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { ImageTransparency = 1 })
+            else
+                animate(item, TweenInfo.new(0.24, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { TextTransparency = 1 })
+            end
+        end
+        animate(introRingStroke, TweenInfo.new(0.24, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { Transparency = 1 })
+        animate(introSlash, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { BackgroundTransparency = 1 })
+        animate(introSlashEcho, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { BackgroundTransparency = 1 })
+        task.wait(0.3)
         introOverlay.Visible = false
-        
-        -- Phase 3: Window Morph & Expand (0.65s Exponential Out)
-        local expandInfo = TweenInfo.new(0.65, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+
+        -- Full window expansion lands on the grid after the impact sequence.
+        local expandInfo = TweenInfo.new(0.58, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
         animate(shell, expandInfo, {
             Size = UDim2.fromOffset(920, 600),
             BackgroundColor3 = COLORS.shell,
@@ -1852,9 +2099,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             Transparency = 0.15
         })
         
-        task.wait(0.65)
-        
-        -- Phase 4: Reveal Main Interface
+        task.wait(0.58)
         userPanel.Visible = true
         mainPanel.Visible = true
     end)
@@ -1869,12 +2114,18 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     function WindowObj:AddTab(tabCfg)
         local tabName = tabCfg.Title or "Tab"
-        local tabIcon = tabCfg.Icon or "⚡"
+        local tabIcon = resolveIcon(tabCfg.Icon or "spark")
         local TabObj = {}
+        local popupClosers = {}
+        function TabObj:ClosePopups()
+            for _, closePopup in ipairs(popupClosers) do
+                pcall(closePopup)
+            end
+        end
 
         -- Tab Button in Sidebar
         local tabBtn = Instance.new("TextButton")
-        tabBtn.Size = UDim2.fromOffset(116, 36)
+        tabBtn.Size = UDim2.fromOffset(132, 36)
         tabBtn.BackgroundColor3 = COLORS.surface
         tabBtn.BackgroundTransparency = 0.40
         tabBtn.BorderSizePixel = 0
@@ -1892,8 +2143,21 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         tbStroke.Transparency = 0.6
         tbStroke.Parent = tabBtn
 
+        local tabEdge = Instance.new("Frame")
+        tabEdge.Name = "ActiveTabEdge"
+        tabEdge.AnchorPoint = Vector2.new(0, 0.5)
+        tabEdge.Position = UDim2.new(0, 0, 0.5, 0)
+        tabEdge.Size = UDim2.new(0, 3, 0, 0)
+        tabEdge.BackgroundColor3 = COLORS.primary
+        tabEdge.BorderSizePixel = 0
+        tabEdge.ZIndex = 13
+        tabEdge.Parent = tabBtn
+        local tabEdgeCorner = Instance.new("UICorner")
+        tabEdgeCorner.CornerRadius = UDim.new(1, 0)
+        tabEdgeCorner.Parent = tabEdge
+
         local iconLabel = Instance.new("TextLabel")
-        iconLabel.Size = UDim2.fromOffset(0, 36)
+        iconLabel.Size = UDim2.fromOffset(22, 36)
         iconLabel.Position = UDim2.new(0, 8, 0, 0)
         iconLabel.BackgroundTransparency = 1
         iconLabel.Text = tabIcon
@@ -1904,14 +2168,15 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         iconLabel.Parent = tabBtn
 
         local titleLabel = Instance.new("TextLabel")
-        titleLabel.Size = UDim2.new(1, -16, 1, 0)
-        titleLabel.Position = UDim2.new(0, 8, 0, 0)
+        titleLabel.Size = UDim2.new(1, -42, 1, 0)
+        titleLabel.Position = UDim2.new(0, 34, 0, 0)
         titleLabel.BackgroundTransparency = 1
         titleLabel.Text = tabName
         titleLabel.TextColor3 = COLORS.textMuted
         titleLabel.Font = Enum.Font.GothamBold
         titleLabel.TextSize = 13
         titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+        titleLabel.TextTruncate = Enum.TextTruncate.AtEnd
         titleLabel.ZIndex = 12
         titleLabel.Parent = tabBtn
 
@@ -1969,18 +2234,26 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         end
 
         local function activateTab()
+            if WindowObj.CurrentTab == TabObj then return end
+            local previousTab = WindowObj.CurrentTab
+            local slideDirection = previousTab and (TabObj.Index > previousTab.Index and 1 or -1) or 0
+            if previousTab and previousTab.ClosePopups then previousTab:ClosePopups() end
             for _, t in ipairs(WindowObj.Tabs) do
                 t.Page.Visible = false
                 animate(t.Button, TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { BackgroundColor3 = COLORS.surface, BackgroundTransparency = 0.28 })
                 t.TitleLabel.TextColor3 = COLORS.textMuted
                 t.IconLabel.TextColor3 = COLORS.textMuted
                 animate(t.Stroke, TweenInfo.new(0.16), { Color = COLORS.glassRaised, Transparency = 0.45 })
+                animate(t.ActiveEdge, TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { Size = UDim2.new(0, 3, 0, 0) })
             end
+            pageScroll.Position = UDim2.new(0, slideDirection * 16, 0, 0)
             pageScroll.Visible = true
+            animate(pageScroll, TweenInfo.new(0.24, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), { Position = UDim2.new(0, 0, 0, 0) })
             animate(tabBtn, TweenInfo.new(0.18, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { BackgroundColor3 = COLORS.surfaceRaised, BackgroundTransparency = 0 })
             titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
             iconLabel.TextColor3 = COLORS.cyan
             animate(tbStroke, TweenInfo.new(0.18), { Color = COLORS.cyan, Transparency = 0 })
+            animate(tabEdge, TweenInfo.new(0.22, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Size = UDim2.new(0, 3, 0, 24) })
             pageScroll.CanvasPosition = Vector2.zero
             WindowObj.CurrentTab = TabObj
             if effectState.Lightning then pcall(strikeLightning, lightningLayer, math.random(4, 6)) end
@@ -2005,10 +2278,12 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         TabObj.Activate = activateTab
 
         TabObj.Button = tabBtn
+        TabObj.Index = #WindowObj.Tabs + 1
         TabObj.Page = pageScroll
         TabObj.TitleLabel = titleLabel
         TabObj.IconLabel = iconLabel
         TabObj.Stroke = tbStroke
+        TabObj.ActiveEdge = tabEdge
 
         if #WindowObj.Tabs == 0 then
             activateTab()
@@ -2138,7 +2413,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         function TabObj:AddSection(secTitle, sectionConfig)
             sectionConfig = type(sectionConfig) == "table" and sectionConfig or {}
             local sectionDescription = tostring(sectionConfig.Description or "")
-            local sectionIcon = tostring(sectionConfig.Icon or "")
+            local sectionIcon = resolveIcon(tostring(sectionConfig.Icon or ""))
             local headerHeight = sectionDescription ~= "" and 54 or 42
             local sec = Instance.new("Frame")
             sec.Name = "SectionCard_" .. tostring(secTitle):gsub("%W", "")
@@ -2274,6 +2549,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             fStroke.Color = COLORS.glassRaised
             fStroke.Thickness = 1
             fStroke.Parent = frame
+            addAnimeEdge(frame)
 
             local tTitle = Instance.new("TextLabel")
             tTitle.Size = UDim2.new(1, -70, 0, 20)
@@ -2285,6 +2561,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             tTitle.TextSize = 13
             tTitle.TextXAlignment = Enum.TextXAlignment.Left
             tTitle.Parent = frame
+            sharpenText(tTitle, 0.42)
 
             if desc ~= "" then
                 local tDesc = Instance.new("TextLabel")
@@ -2297,7 +2574,21 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 tDesc.TextSize = 10
                 tDesc.TextXAlignment = Enum.TextXAlignment.Left
                 tDesc.Parent = frame
+                sharpenText(tDesc, 0.72)
             end
+
+            local stateLabel = Instance.new("TextLabel")
+            stateLabel.Name = "ToggleState"
+            stateLabel.Size = UDim2.fromOffset(36, 16)
+            stateLabel.Position = UDim2.new(1, -98, 0.5, -8)
+            stateLabel.BackgroundTransparency = 1
+            stateLabel.Text = def and "ON" or "OFF"
+            stateLabel.TextColor3 = def and COLORS.primaryHover or COLORS.textFaint
+            stateLabel.Font = Enum.Font.GothamBold
+            stateLabel.TextSize = 9
+            stateLabel.TextXAlignment = Enum.TextXAlignment.Right
+            stateLabel.Parent = frame
+            sharpenText(stateLabel, 0.48)
 
             local toggleBg = Instance.new("Frame")
             toggleBg.Size = UDim2.fromOffset(40, 22)
@@ -2336,6 +2627,12 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 playClickSound()
                 animate(toggleBg, TweenInfo.new(0.2), { BackgroundColor3 = state and COLORS.primary or COLORS.surfaceRaised })
                 animate(toggleCircle, TweenInfo.new(0.2), { Position = UDim2.new(state and 1 or 0, state and -19 or 3, 0.5, -8) })
+                animate(fStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                    Color = state and COLORS.primary or COLORS.glassRaised,
+                    Transparency = state and 0.08 or 0.32,
+                })
+                stateLabel.Text = state and "ON" or "OFF"
+                stateLabel.TextColor3 = state and COLORS.primaryHover or COLORS.textFaint
                 pcall(cb, state)
             end
 
@@ -2370,6 +2667,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             fStroke.Color = COLORS.glassRaised
             fStroke.Thickness = 1
             fStroke.Parent = frame
+            addAnimeEdge(frame)
 
             local sTitle = Instance.new("TextLabel")
             sTitle.Size = UDim2.new(1, -70, 0, 20)
@@ -2381,6 +2679,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             sTitle.TextSize = 13
             sTitle.TextXAlignment = Enum.TextXAlignment.Left
             sTitle.Parent = frame
+            sharpenText(sTitle, 0.42)
 
             local sVal = Instance.new("TextLabel")
             sVal.Size = UDim2.new(0, 50, 0, 20)
@@ -2420,7 +2719,53 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             sliderBtn.Position = UDim2.new(0, 0, 0.5, -10)
             sliderBtn.BackgroundTransparency = 1
             sliderBtn.Text = ""
+            sliderBtn.ZIndex = 2
             sliderBtn.Parent = barBg
+
+            local sliderHalo = Instance.new("Frame")
+            sliderHalo.Name = "SliderEnergyHalo"
+            sliderHalo.AnchorPoint = Vector2.new(0.5, 0.5)
+            sliderHalo.Size = UDim2.fromOffset(22, 22)
+            sliderHalo.Position = UDim2.new(initPct, 0, 0.5, 0)
+            sliderHalo.BackgroundTransparency = 1
+            sliderHalo.ZIndex = 2
+            sliderHalo.Parent = barBg
+            local sliderHaloCorner = Instance.new("UICorner")
+            sliderHaloCorner.CornerRadius = UDim.new(1, 0)
+            sliderHaloCorner.Parent = sliderHalo
+            local sliderHaloStroke = Instance.new("UIStroke")
+            sliderHaloStroke.Color = COLORS.primary
+            sliderHaloStroke.Thickness = 1
+            sliderHaloStroke.Transparency = 1
+            sliderHaloStroke.Parent = sliderHalo
+
+            local sliderThumb = Instance.new("Frame")
+            sliderThumb.Name = "SliderBladeHandle"
+            sliderThumb.AnchorPoint = Vector2.new(0.5, 0.5)
+            sliderThumb.Size = UDim2.fromOffset(14, 14)
+            sliderThumb.Position = UDim2.new(initPct, 0, 0.5, 0)
+            sliderThumb.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            sliderThumb.BorderSizePixel = 0
+            sliderThumb.ZIndex = 3
+            sliderThumb.Parent = barBg
+            local sliderThumbCorner = Instance.new("UICorner")
+            sliderThumbCorner.CornerRadius = UDim.new(1, 0)
+            sliderThumbCorner.Parent = sliderThumb
+            local sliderThumbStroke = Instance.new("UIStroke")
+            sliderThumbStroke.Color = COLORS.primary
+            sliderThumbStroke.Thickness = 2
+            sliderThumbStroke.Parent = sliderThumb
+            local sliderCore = Instance.new("Frame")
+            sliderCore.AnchorPoint = Vector2.new(0.5, 0.5)
+            sliderCore.Position = UDim2.fromScale(0.5, 0.5)
+            sliderCore.Size = UDim2.fromOffset(4, 4)
+            sliderCore.BackgroundColor3 = COLORS.primary
+            sliderCore.BorderSizePixel = 0
+            sliderCore.ZIndex = 4
+            sliderCore.Parent = sliderThumb
+            local sliderCoreCorner = Instance.new("UICorner")
+            sliderCoreCorner.CornerRadius = UDim.new(1, 0)
+            sliderCoreCorner.Parent = sliderCore
 
             local currentVal = defVal
             local SliderObj = { Value = currentVal, Instance = frame }
@@ -2432,6 +2777,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 local rawVal = minVal + (maxVal - minVal) * pct
                 local formattedVal = (rounding == 0) and math.floor(rawVal) or tonumber(string.format("%." .. rounding .. "f", rawVal))
                 fill.Size = UDim2.new(pct, 0, 1, 0)
+                sliderThumb.Position = UDim2.new(pct, 0, 0.5, 0)
+                sliderHalo.Position = UDim2.new(pct, 0, 0.5, 0)
                 sVal.Text = tostring(formattedVal)
                 SliderObj.Value = formattedVal
                 pcall(cb, formattedVal)
@@ -2441,9 +2788,13 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             sliderBtn.InputBegan:Connect(function(inp)
                 if inp.UserInputType == Enum.UserInputType.MouseButton1 or inp.UserInputType == Enum.UserInputType.Touch then
                     sliding = true
+                    sliderHaloStroke.Transparency = 0.32
                     updateSlider(inp.Position.X)
                     inp.Changed:Connect(function()
-                        if inp.UserInputState == Enum.UserInputState.End then sliding = false end
+                        if inp.UserInputState == Enum.UserInputState.End then
+                            sliding = false
+                            sliderHaloStroke.Transparency = 1
+                        end
                     end)
                 end
             end)
@@ -2466,6 +2817,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 v = math.clamp(v, minVal, maxVal)
                 local pct = (v - minVal) / (maxVal - minVal)
                 fill.Size = UDim2.new(pct, 0, 1, 0)
+                sliderThumb.Position = UDim2.new(pct, 0, 0.5, 0)
+                sliderHalo.Position = UDim2.new(pct, 0, 0.5, 0)
                 sVal.Text = tostring(v)
                 SliderObj.Value = v
                 pcall(cb, v)
@@ -2481,7 +2834,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             local confirmText = bCfg.Confirm
             local confirmWindow = tonumber(bCfg.ConfirmWindow) or 3
             local waitingForConfirm = false
-            local originalText = "⚡ " .. title
+            local originalText = resolveIcon(bCfg.Icon or "spark") .. "  " .. title
 
             local frame = Instance.new("Frame")
             frame.Size = UDim2.new(1, -10, 0, 38)
@@ -2498,6 +2851,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             fStroke.Thickness = 1.2
             fStroke.Transparency = 0.4
             fStroke.Parent = frame
+            addAnimeEdge(frame)
 
             local btn = Instance.new("TextButton")
             btn.Size = UDim2.fromScale(1, 1)
@@ -2507,19 +2861,37 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             btn.Font = Enum.Font.GothamBold
             btn.TextSize = 12
             btn.Parent = frame
+            sharpenText(btn, 0.40)
+            local buttonHovered = false
 
             btn.MouseEnter:Connect(function()
+                buttonHovered = true
                 animate(frame, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.surfaceHover })
                 animate(fStroke, TweenInfo.new(0.2), { Transparency = 0 })
             end)
 
             btn.MouseLeave:Connect(function()
+                buttonHovered = false
                 animate(frame, TweenInfo.new(0.2), { BackgroundColor3 = COLORS.surfaceRaised })
                 animate(fStroke, TweenInfo.new(0.2), { Transparency = 0.4 })
             end)
 
             btn.Activated:Connect(function()
                 playClickSound()
+                animate(frame, TweenInfo.new(0.10, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                    BackgroundColor3 = COLORS.primaryPressed,
+                })
+                animate(fStroke, TweenInfo.new(0.10), { Color = COLORS.primaryHover, Thickness = 2.2, Transparency = 0 })
+                task.delay(0.14, function()
+                    if frame.Parent then
+                        animate(frame, TweenInfo.new(0.18), { BackgroundColor3 = buttonHovered and COLORS.surfaceHover or COLORS.surfaceRaised })
+                        animate(fStroke, TweenInfo.new(0.18), {
+                            Color = waitingForConfirm and COLORS.warning or COLORS.primary,
+                            Thickness = 1.2,
+                            Transparency = buttonHovered and 0 or 0.4,
+                        })
+                    end
+                end)
                 if confirmText and not waitingForConfirm then
                     waitingForConfirm = true
                     btn.Text = "✓ " .. (type(confirmText) == "string" and confirmText or ("Confirm " .. title))
@@ -2563,6 +2935,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             fStroke.Color = COLORS.glassRaised
             fStroke.Thickness = 1
             fStroke.Parent = frame
+            addAnimeEdge(frame)
 
             local dTitle = Instance.new("TextLabel")
             dTitle.Size = UDim2.new(1, -150, 0, 44)
@@ -2574,17 +2947,32 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             dTitle.TextSize = 13
             dTitle.TextXAlignment = Enum.TextXAlignment.Left
             dTitle.Parent = frame
+            sharpenText(dTitle, 0.42)
 
             local dSelected = Instance.new("TextLabel")
             dSelected.Size = UDim2.new(0, 130, 0, 44)
             dSelected.Position = UDim2.new(1, -142, 0, 0)
             dSelected.BackgroundTransparency = 1
-            dSelected.Text = tostring(defVal) .. " ▼"
+            dSelected.Text = tostring(defVal)
             dSelected.TextColor3 = COLORS.cyan
             dSelected.Font = Enum.Font.GothamBold
             dSelected.TextSize = 12
             dSelected.TextXAlignment = Enum.TextXAlignment.Right
+            dSelected.TextTruncate = Enum.TextTruncate.AtEnd
             dSelected.Parent = frame
+            sharpenText(dSelected, 0.48)
+
+            local dropChevron = Instance.new("TextLabel")
+            dropChevron.Name = "DropChevron"
+            dropChevron.Size = UDim2.fromOffset(18, 44)
+            dropChevron.Position = UDim2.new(1, -21, 0, 0)
+            dropChevron.BackgroundTransparency = 1
+            dropChevron.Text = "⌄"
+            dropChevron.TextColor3 = COLORS.primary
+            dropChevron.Font = Enum.Font.GothamBold
+            dropChevron.TextSize = 15
+            dropChevron.ZIndex = 2
+            dropChevron.Parent = frame
 
             local dropBtn = Instance.new("TextButton")
             dropBtn.Size = UDim2.new(1, 0, 0, 44)
@@ -2628,10 +3016,28 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
             local function toggleDrop()
                 opened = not opened
-                dSelected.Text = tostring(DropObj.Value) .. (opened and " ▲" or " ▼")
+                dSelected.Text = tostring(DropObj.Value)
                 searchBox.Visible = opened
                 local targetHeight = opened and (88 + math.min(140, #values * 28)) or 44
                 animate(frame, TweenInfo.new(0.25, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Size = UDim2.new(1, -10, 0, targetHeight) })
+                animate(fStroke, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                    Color = opened and COLORS.primary or COLORS.glassRaised,
+                    Transparency = opened and 0.04 or 0.20,
+                    Thickness = opened and 1.5 or 1,
+                })
+                animate(dropChevron, TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Rotation = opened and 180 or 0 })
+                dSelected.TextColor3 = opened and COLORS.primaryHover or COLORS.cyan
+            end
+            popupClosers[#popupClosers + 1] = function()
+                if opened then
+                    opened = false
+                    dSelected.Text = tostring(DropObj.Value)
+                    searchBox.Visible = false
+                    animate(frame, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { Size = UDim2.new(1, -10, 0, 44) })
+                    animate(fStroke, TweenInfo.new(0.16), { Color = COLORS.glassRaised, Transparency = 0.20, Thickness = 1 })
+                    animate(dropChevron, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { Rotation = 0 })
+                    dSelected.TextColor3 = COLORS.cyan
+                end
             end
 
             dropBtn.MouseButton1Click:Connect(function()
@@ -2654,22 +3060,55 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 itm.Size = UDim2.new(1, 0, 0, 26)
                 itm.BackgroundColor3 = COLORS.surfaceRaised
                 itm.BackgroundTransparency = 0.40
-                itm.Text = "  " .. tostring(val)
+                itm.Text = (tostring(val) == tostring(defVal) and "  ◆  " or "  ·  ") .. tostring(val)
                 itm.TextColor3 = COLORS.textMuted
                 itm.Font = Enum.Font.GothamMedium
                 itm.TextSize = 11
                 itm.TextXAlignment = Enum.TextXAlignment.Left
                 itm.Parent = listContainer
-                entries[#entries + 1] = { Value = val, Button = itm }
+                local itemStroke = Instance.new("UIStroke")
+                itemStroke.Color = tostring(val) == tostring(defVal) and COLORS.primary or COLORS.glassRaised
+                itemStroke.Transparency = tostring(val) == tostring(defVal) and 0.12 or 0.55
+                itemStroke.Thickness = 1
+                itemStroke.Parent = itm
+                entries[#entries + 1] = { Value = val, Button = itm, Stroke = itemStroke }
 
                 local itmCorner = Instance.new("UICorner")
                 itmCorner.CornerRadius = UDim.new(0, 5)
                 itmCorner.Parent = itm
 
+                itm.MouseEnter:Connect(function()
+                    animate(itm, TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                        BackgroundColor3 = COLORS.surfaceHover,
+                        BackgroundTransparency = 0.04,
+                    })
+                    animate(itemStroke, TweenInfo.new(0.12), { Color = COLORS.primary, Transparency = 0.1 })
+                end)
+                itm.MouseLeave:Connect(function()
+                    local selected = tostring(DropObj.Value) == tostring(val)
+                    animate(itm, TweenInfo.new(0.14, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                        BackgroundColor3 = selected and COLORS.surfaceRaised or COLORS.surface,
+                        BackgroundTransparency = selected and 0.08 or 0.30,
+                    })
+                    animate(itemStroke, TweenInfo.new(0.14), {
+                        Color = selected and COLORS.primary or COLORS.glassRaised,
+                        Transparency = selected and 0.12 or 0.55,
+                    })
+                end)
+
                 itm.MouseButton1Click:Connect(function()
                     playClickSound()
                     DropObj.Value = val
-                    dSelected.Text = tostring(val) .. " ▼"
+                    dSelected.Text = tostring(val)
+                    for _, entry in ipairs(entries) do
+                        local selected = tostring(entry.Value) == tostring(val)
+                        entry.Button.Text = (selected and "  ◆  " or "  ·  ") .. tostring(entry.Value)
+                        entry.Button.TextColor3 = selected and COLORS.text or COLORS.textMuted
+                        entry.Button.BackgroundColor3 = selected and COLORS.surfaceRaised or COLORS.surface
+                        entry.Button.BackgroundTransparency = selected and 0.08 or 0.30
+                        entry.Stroke.Color = selected and COLORS.primary or COLORS.glassRaised
+                        entry.Stroke.Transparency = selected and 0.12 or 0.55
+                    end
                     toggleDrop()
                     pcall(cb, val)
                 end)
@@ -2679,7 +3118,16 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
             function DropObj:SetValue(v)
                 DropObj.Value = v
-                dSelected.Text = tostring(v) .. " ▼"
+                dSelected.Text = tostring(v)
+                for _, entry in ipairs(entries) do
+                    local selected = tostring(entry.Value) == tostring(v)
+                    entry.Button.Text = (selected and "  ◆  " or "  ·  ") .. tostring(entry.Value)
+                    entry.Button.TextColor3 = selected and COLORS.text or COLORS.textMuted
+                    entry.Button.BackgroundColor3 = selected and COLORS.surfaceRaised or COLORS.surface
+                    entry.Button.BackgroundTransparency = selected and 0.08 or 0.30
+                    entry.Stroke.Color = selected and COLORS.primary or COLORS.glassRaised
+                    entry.Stroke.Transparency = selected and 0.12 or 0.55
+                end
                 pcall(cb, v)
             end
 
@@ -2715,6 +3163,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             stroke.Color = COLORS.glassRaised
             stroke.Thickness = 1
             stroke.Parent = frame
+            addAnimeEdge(frame)
 
             local label = Instance.new("TextLabel")
             label.Size = UDim2.new(1, -150, 0, 44)
@@ -2726,6 +3175,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             label.TextSize = 13
             label.TextXAlignment = Enum.TextXAlignment.Left
             label.Parent = frame
+            sharpenText(label, 0.42)
 
             local summary = Instance.new("TextLabel")
             summary.Size = UDim2.new(0, 130, 0, 44)
@@ -2737,6 +3187,19 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             summary.TextXAlignment = Enum.TextXAlignment.Right
             summary.TextTruncate = Enum.TextTruncate.AtEnd
             summary.Parent = frame
+            sharpenText(summary, 0.48)
+
+            local multiChevron = Instance.new("TextLabel")
+            multiChevron.Name = "MultiChevron"
+            multiChevron.Size = UDim2.fromOffset(18, 44)
+            multiChevron.Position = UDim2.new(1, -21, 0, 0)
+            multiChevron.BackgroundTransparency = 1
+            multiChevron.Text = "⌄"
+            multiChevron.TextColor3 = COLORS.primary
+            multiChevron.Font = Enum.Font.GothamBold
+            multiChevron.TextSize = 15
+            multiChevron.ZIndex = 2
+            multiChevron.Parent = frame
 
             local headerButton = Instance.new("TextButton")
             headerButton.Size = UDim2.new(1, 0, 0, 44)
@@ -2790,7 +3253,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                     table.clear(selected)
                 end
                 for _, entry in ipairs(entries) do
-                    if entry and entry.Parent then entry:Destroy() end
+                    if entry and entry.Button and entry.Button.Parent then entry.Button:Destroy() end
                 end
                 table.clear(entries)
                 for order, option in ipairs(values) do
@@ -2802,20 +3265,50 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                     item.BackgroundColor3 = selected[optionText] and COLORS.surfaceRaised or COLORS.glassDeep
                     item.BackgroundTransparency = selected[optionText] and 0.08 or 0.32
                     item.BorderSizePixel = 0
-                    item.Text = (selected[optionText] and "  ✓  " or "  •  ") .. optionText
+                    item.Text = (selected[optionText] and "  ◆  " or "  ◇  ") .. optionText
                     item.TextColor3 = selected[optionText] and COLORS.text or COLORS.textMuted
                     item.Font = Enum.Font.Gotham
                     item.TextSize = 11
                     item.TextXAlignment = Enum.TextXAlignment.Left
                     item.TextTruncate = Enum.TextTruncate.AtEnd
                     item.Parent = list
-                    entries[#entries + 1] = item
+                    sharpenText(item, 0.50)
+                    local itemStroke = Instance.new("UIStroke")
+                    itemStroke.Color = selected[optionText] and COLORS.primary or COLORS.glassRaised
+                    itemStroke.Transparency = selected[optionText] and 0.18 or 0.72
+                    itemStroke.Thickness = 1
+                    itemStroke.Parent = item
+                    entries[#entries + 1] = { Button = item, Stroke = itemStroke, Value = optionText }
+                    item.MouseEnter:Connect(function()
+                        animate(item, TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                            BackgroundColor3 = COLORS.surfaceHover,
+                            BackgroundTransparency = 0.06,
+                        })
+                        animate(itemStroke, TweenInfo.new(0.12), { Color = COLORS.primaryHover, Transparency = 0.08, Thickness = 1.4 })
+                    end)
+                    item.MouseLeave:Connect(function()
+                        local isSelected = selected[optionText] == true
+                        animate(item, TweenInfo.new(0.14, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                            BackgroundColor3 = isSelected and COLORS.surfaceRaised or COLORS.glassDeep,
+                            BackgroundTransparency = isSelected and 0.08 or 0.32,
+                        })
+                        animate(itemStroke, TweenInfo.new(0.14), {
+                            Color = isSelected and COLORS.primary or COLORS.glassRaised,
+                            Transparency = isSelected and 0.18 or 0.72,
+                            Thickness = 1,
+                        })
+                    end)
                     item.MouseButton1Click:Connect(function()
                         selected[optionText] = not selected[optionText] or nil
-                        item.BackgroundColor3 = selected[optionText] and COLORS.surfaceRaised or COLORS.glassDeep
-                        item.BackgroundTransparency = selected[optionText] and 0.08 or 0.32
-                        item.Text = (selected[optionText] and "  ✓  " or "  •  ") .. optionText
-                        item.TextColor3 = selected[optionText] and COLORS.text or COLORS.textMuted
+                        for _, entry in ipairs(entries) do
+                            local isSelected = selected[entry.Value] == true
+                            entry.Button.BackgroundColor3 = isSelected and COLORS.surfaceRaised or COLORS.glassDeep
+                            entry.Button.BackgroundTransparency = isSelected and 0.08 or 0.32
+                            entry.Button.Text = (isSelected and "  ◆  " or "  ◇  ") .. entry.Value
+                            entry.Button.TextColor3 = isSelected and COLORS.text or COLORS.textMuted
+                            entry.Stroke.Color = isSelected and COLORS.primary or COLORS.glassRaised
+                            entry.Stroke.Transparency = isSelected and 0.18 or 0.72
+                        end
                         fireChanged()
                     end)
                 end
@@ -2829,6 +3322,18 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 animate(frame, TweenInfo.new(0.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
                     Size = UDim2.new(1, -10, 0, height),
                 })
+                animate(stroke, TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                    Color = opened and COLORS.primary or COLORS.glassRaised,
+                    Transparency = opened and 0.04 or 0.20,
+                    Thickness = opened and 1.5 or 1,
+                })
+                animate(multiChevron, TweenInfo.new(0.20, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+                    Rotation = opened and 180 or 0,
+                })
+                summary.TextColor3 = opened and COLORS.primaryHover or COLORS.cyan
+            end
+            popupClosers[#popupClosers + 1] = function()
+                if opened then setOpen(false) end
             end
             headerButton.MouseButton1Click:Connect(function()
                 playClickSound()
