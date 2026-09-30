@@ -1,5 +1,5 @@
 -- PAYOMBØYZ UI LIBRARY
--- Version: 4.3.0 | Runtime: Roblox Luau | Delivery: single self-contained module
+-- Version: 4.4.0 | Runtime: Roblox Luau | Delivery: single self-contained module
 --
 -- Brand direction: ink-black panels, scarlet action color, white readable type,
 -- manga-inspired framing, restrained electric effects, and touch-friendly controls.
@@ -61,7 +61,7 @@ local COLORS = {
 }
 
 local ObsidianGlassEngine = { Options = {} }
-ObsidianGlassEngine.Version = "4.3.0"
+ObsidianGlassEngine.Version = "4.4.0"
 local ICON_GLYPHS = {
     egg = "◉", farm = "✦", home = "⌂", combat = "刀", quest = "卷", event = "祭",
     player = "◉", travel = "風", visual = "眼", visuals = "眼", settings = "⚙",
@@ -94,7 +94,7 @@ local THEME_PRESETS = {
     },
     ["แดงเปลวเพลิง"] = {
         Accent = Color3.fromRGB(255, 35, 60), Bright = Color3.fromRGB(255, 105, 112), Deep = Color3.fromRGB(166, 12, 35), Tint = Color3.fromRGB(89, 15, 29),
-        Particle = { Glyph = "✦", Style = "Ember", Direction = -1, Speed = 0.045, Drift = 0.008, Sway = 0.005, Spin = 42, Lifetime = 4.8, Opacity = 0.52, Colors = { Color3.fromRGB(255, 228, 193), Color3.fromRGB(255, 62, 48) } },
+        Particle = { Glyph = "✦", Style = "Ember", Direction = -1, Speed = 0.064, Drift = 0.022, Sway = 0.026, Spin = 58, Lifetime = 3.8, Opacity = 0.64, Colors = { Color3.fromRGB(255, 245, 233), Color3.fromRGB(255, 62, 48) } },
     },
     ["เขียวมรกต"] = {
         Accent = Color3.fromRGB(62, 222, 146), Bright = Color3.fromRGB(142, 255, 196), Deep = Color3.fromRGB(23, 133, 88), Tint = Color3.fromRGB(16, 65, 49),
@@ -688,42 +688,97 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     end
 
     local comicPanelSequence = 0
-    local function addAnimeEdge(parent)
+    local function addAnimeEdge(parent, usePanelMotion)
         comicPanelSequence += 1
-        local panelRotation = comicPanelSequence % 2 == 0 and 0.75 or -0.75
-        parent.Rotation = panelRotation
-        -- Comic panels use hard corners, inked borders and speed marks instead of
-        -- the rounded glass-card treatment used by generic dashboard kits.
-        parent.ClipsDescendants = true
-        for _, child in ipairs(parent:GetChildren()) do
-            if child:IsA("UICorner") then child:Destroy() end
-            if child:IsA("UIStroke") then
-                child.Color = COLORS.primary
-                child.Thickness = math.max(child.Thickness, 1.5)
-                child.Transparency = math.min(child.Transparency, 0.18)
+        local panelRotation = comicPanelSequence % 2 == 0 and 1.1 or -1.1
+        if usePanelMotion ~= false then parent.Rotation = panelRotation end
+
+        -- Find the ink/backing color behind this panel so the masks produce real
+        -- clipped corners instead of painting rounded corners over a square card.
+        local backingColor = COLORS.shell
+        local ancestor = parent.Parent
+        while ancestor and ancestor:IsA("GuiObject") do
+            if ancestor.BackgroundTransparency < 0.95 then
+                backingColor = ancestor.BackgroundColor3
+                break
             end
+            ancestor = ancestor.Parent
+        end
+
+        parent.ClipsDescendants = true
+        local outline
+        for _, child in ipairs(parent:GetChildren()) do
+            if child:IsA("UICorner") then
+                child:Destroy()
+            elseif child:IsA("UIStroke") then
+                outline = child
+            end
+        end
+        if not outline then
+            outline = Instance.new("UIStroke")
+            outline.Parent = parent
+        end
+        outline.Color = COLORS.primary
+        outline.Thickness = 1.7
+        outline.Transparency = 0.08
+        local neonUnderstroke = Instance.new("UIStroke")
+        neonUnderstroke.Name = "ComicNeonUnderstroke"
+        neonUnderstroke.Color = COLORS.primary
+        neonUnderstroke.Thickness = 5
+        neonUnderstroke.Transparency = 0.82
+        neonUnderstroke.Parent = parent
+
+        -- Four 45-degree masks plus ink rules create the chamfered manga-panel silhouette.
+        local cuts = {
+            { Name = "TopLeft", Position = UDim2.fromOffset(0, 0), Anchor = Vector2.new(0, 0), Angle = -45, LinePosition = UDim2.fromOffset(7, 7), LineAngle = -45 },
+            { Name = "TopRight", Position = UDim2.new(1, 0, 0, 0), Anchor = Vector2.new(1, 0), Angle = 45, LinePosition = UDim2.new(1, -7, 0, 7), LineAngle = 45 },
+            { Name = "BottomRight", Position = UDim2.new(1, 0, 1, 0), Anchor = Vector2.new(1, 1), Angle = -45, LinePosition = UDim2.new(1, -7, 1, -7), LineAngle = -45 },
+            { Name = "BottomLeft", Position = UDim2.new(0, 0, 1, 0), Anchor = Vector2.new(0, 1), Angle = 45, LinePosition = UDim2.new(0, 7, 1, -7), LineAngle = 45 },
+        }
+        for _, cut in ipairs(cuts) do
+            local mask = Instance.new("Frame")
+            mask.Name = "ComicCutMask_" .. cut.Name
+            mask.AnchorPoint = Vector2.new(0.5, 0.5)
+            mask.Position = cut.Position
+            mask.Size = UDim2.fromOffset(20, 20)
+            mask.Rotation = cut.Angle
+            mask.BackgroundColor3 = backingColor
+            mask.BorderSizePixel = 0
+            mask.ZIndex = parent.ZIndex + 2
+            mask.Parent = parent
+
+            local bevel = Instance.new("Frame")
+            bevel.Name = "ComicCutInk_" .. cut.Name
+            bevel.AnchorPoint = Vector2.new(0.5, 0.5)
+            bevel.Position = cut.LinePosition
+            bevel.Size = UDim2.fromOffset(20, 1.6)
+            bevel.Rotation = cut.LineAngle
+            bevel.BackgroundColor3 = COLORS.primary
+            bevel.BorderSizePixel = 0
+            bevel.ZIndex = parent.ZIndex + 3
+            bevel.Parent = parent
         end
 
         local impactRule = Instance.new("Frame")
         impactRule.Name = "ComicImpactRule"
         impactRule.AnchorPoint = Vector2.new(1, 0)
-        impactRule.Position = UDim2.new(1, -10, 0, 7)
-        impactRule.Size = UDim2.fromOffset(34, 2)
-        impactRule.Rotation = -12
+        impactRule.Position = UDim2.new(1, -18, 0, 8)
+        impactRule.Size = UDim2.fromOffset(42, 3)
+        impactRule.Rotation = -14
         impactRule.BackgroundColor3 = COLORS.primary
         impactRule.BorderSizePixel = 0
         impactRule.ZIndex = parent.ZIndex
         impactRule.Parent = parent
 
-        for index = 1, 2 do
+        for index = 1, 3 do
             local speedLine = Instance.new("Frame")
             speedLine.Name = "ComicSpeedLine"
             speedLine.AnchorPoint = Vector2.new(1, 0)
-            speedLine.Position = UDim2.new(1, -10, 0, 11 + index * 4)
-            speedLine.Size = UDim2.fromOffset(16 - index * 3, 1)
-            speedLine.Rotation = -12
-            speedLine.BackgroundColor3 = index == 1 and COLORS.primaryHover or COLORS.textFaint
-            speedLine.BackgroundTransparency = index == 1 and 0.2 or 0.48
+            speedLine.Position = UDim2.new(1, -18, 0, 11 + index * 5)
+            speedLine.Size = UDim2.fromOffset(24 - index * 4, 1.5)
+            speedLine.Rotation = -14
+            speedLine.BackgroundColor3 = index == 1 and COLORS.primaryHover or COLORS.text
+            speedLine.BackgroundTransparency = index == 1 and 0.1 or 0.36
             speedLine.BorderSizePixel = 0
             speedLine.ZIndex = parent.ZIndex
             speedLine.Parent = parent
@@ -732,8 +787,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         local mainSlash = Instance.new("Frame")
         mainSlash.Name = "AnimeEdgeSlash"
         mainSlash.AnchorPoint = Vector2.new(0.5, 0.5)
-        mainSlash.Position = UDim2.new(0, 6, 0.5, 0)
-        mainSlash.Size = UDim2.fromOffset(2, 17)
+        mainSlash.Position = UDim2.new(0, 7, 0.5, 0)
+        mainSlash.Size = UDim2.fromOffset(3, 23)
         mainSlash.Rotation = 18
         mainSlash.BackgroundColor3 = COLORS.primary
         mainSlash.BorderSizePixel = 0
@@ -743,19 +798,19 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         local glint = Instance.new("Frame")
         glint.Name = "AnimeEdgeGlint"
         glint.AnchorPoint = Vector2.new(0.5, 0.5)
-        glint.Position = UDim2.new(0, 10, 0.5, 2)
-        glint.Size = UDim2.fromOffset(1, 9)
+        glint.Position = UDim2.new(0, 11, 0.5, 2)
+        glint.Size = UDim2.fromOffset(1.5, 13)
         glint.Rotation = 18
-        glint.BackgroundColor3 = COLORS.primaryHover
-        glint.BackgroundTransparency = 0.12
+        glint.BackgroundColor3 = COLORS.lightningCore
+        glint.BackgroundTransparency = 0.08
         glint.BorderSizePixel = 0
         glint.ZIndex = parent.ZIndex
         glint.Parent = parent
 
         local lowerInk = Instance.new("Frame")
         lowerInk.Name = "ComicLowerInk"
-        lowerInk.Position = UDim2.new(0, 14, 1, -3)
-        lowerInk.Size = UDim2.new(0.3, 0, 0, 2)
+        lowerInk.Position = UDim2.new(0, 18, 1, -4)
+        lowerInk.Size = UDim2.new(0.34, 0, 0, 2)
         lowerInk.Rotation = -2
         lowerInk.BackgroundColor3 = COLORS.primary
         lowerInk.BorderSizePixel = 0
@@ -763,28 +818,61 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         lowerInk.Parent = parent
 
         parent.MouseEnter:Connect(function()
-            animate(parent, TweenInfo.new(0.10, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
-                Rotation = panelRotation * 0.2,
+            local motion = panelRotation * 0.12
+            animate(outline, TweenInfo.new(0.09, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                Thickness = 2.4,
+                Transparency = 0,
             })
-            animate(impactRule, TweenInfo.new(0.10, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
-                Size = UDim2.fromOffset(46, 3),
+            animate(neonUnderstroke, TweenInfo.new(0.09, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                Thickness = 7,
+                Transparency = 0.62,
+            })
+            animate(impactRule, TweenInfo.new(0.09, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+                Size = UDim2.fromOffset(56, 4),
                 BackgroundColor3 = COLORS.primaryHover,
             })
-            animate(mainSlash, TweenInfo.new(0.10, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
-                Size = UDim2.fromOffset(3, 22),
+            animate(mainSlash, TweenInfo.new(0.09, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+                Size = UDim2.fromOffset(4, 29),
             })
+            for _, bevel in ipairs(parent:GetChildren()) do
+                if bevel.Name:match("^ComicCutInk_") then
+                    animate(bevel, TweenInfo.new(0.09, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                        BackgroundColor3 = COLORS.lightningCore,
+                        Size = UDim2.fromOffset(24, 2),
+                    })
+                end
+            end
+            if usePanelMotion ~= false then
+                animate(parent, TweenInfo.new(0.09, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Rotation = motion })
+            end
         end)
         parent.MouseLeave:Connect(function()
-            animate(parent, TweenInfo.new(0.14, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
-                Rotation = panelRotation,
+            animate(outline, TweenInfo.new(0.13, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                Thickness = 1.7,
+                Transparency = 0.08,
             })
-            animate(impactRule, TweenInfo.new(0.14, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                Size = UDim2.fromOffset(34, 2),
+            animate(neonUnderstroke, TweenInfo.new(0.13, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                Thickness = 5,
+                Transparency = 0.82,
+            })
+            animate(impactRule, TweenInfo.new(0.13, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                Size = UDim2.fromOffset(42, 3),
                 BackgroundColor3 = COLORS.primary,
             })
-            animate(mainSlash, TweenInfo.new(0.14, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                Size = UDim2.fromOffset(2, 17),
+            animate(mainSlash, TweenInfo.new(0.13, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                Size = UDim2.fromOffset(3, 23),
             })
+            for _, bevel in ipairs(parent:GetChildren()) do
+                if bevel.Name:match("^ComicCutInk_") then
+                    animate(bevel, TweenInfo.new(0.13, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                        BackgroundColor3 = COLORS.primary,
+                        Size = UDim2.fromOffset(20, 1.6),
+                    })
+                end
+            end
+            if usePanelMotion ~= false then
+                animate(parent, TweenInfo.new(0.13, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Rotation = panelRotation })
+            end
         end)
     end
 
@@ -826,6 +914,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     end
 
     local plasmaSparkFrames = {}
+    local plasmaParticleTrails = {}
     local capsuleSparkFrames = {}
 
     local uiScale = Instance.new("UIScale")
@@ -869,6 +958,37 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     shellStroke.Thickness = 1.8
     shellStroke.Transparency = 0.18
     shellStroke.Parent = shell
+    addAnimeEdge(shell, false)
+
+    -- Sparse impact rays sit behind content and break up the empty ink-black canvas.
+    local comicBurstLayer = Instance.new("Frame")
+    comicBurstLayer.Name = "ComicBurstLayer"
+    comicBurstLayer.Size = UDim2.fromScale(1, 1)
+    comicBurstLayer.BackgroundTransparency = 1
+    comicBurstLayer.BorderSizePixel = 0
+    comicBurstLayer.ClipsDescendants = true
+    comicBurstLayer.ZIndex = 2
+    comicBurstLayer.Parent = shell
+    for index = 1, 12 do
+        local ray = Instance.new("Frame")
+        ray.Name = "ImpactRay"
+        ray.AnchorPoint = Vector2.new(0.5, 0.5)
+        ray.Position = UDim2.new(0.52, 0, 0.54, 0)
+        ray.Size = UDim2.new(0.54 + (index % 3) * 0.08, 0, 0, index % 4 == 0 and 2 or 1)
+        ray.Rotation = (index - 6) * 15 + math.random(-4, 4)
+        ray.BackgroundColor3 = index % 3 == 0 and COLORS.primary or COLORS.text
+        ray.BackgroundTransparency = index % 3 == 0 and 0.82 or 0.94
+        ray.BorderSizePixel = 0
+        ray.ZIndex = 2
+        ray.Parent = comicBurstLayer
+        local rayGradient = Instance.new("UIGradient")
+        rayGradient.Transparency = NumberSequence.new({
+            NumberSequenceKeypoint.new(0, 1),
+            NumberSequenceKeypoint.new(0.45, 0.25),
+            NumberSequenceKeypoint.new(1, 1),
+        })
+        rayGradient.Parent = ray
+    end
 
     -- ⚡ AMBIENT LIGHTNING FLASH (ZIndex 80 - OVER PANELS & CARDS)
     local ambientLightningFlash = Instance.new("Frame")
@@ -1020,26 +1140,39 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         local maxSparks = 10
         local sparks = {}
         for i = 1, maxSparks do
+            local particleSize = i % 3 == 0 and 30 or 24
             local spark = Instance.new("TextLabel")
             spark.Name = "AnimeParticle"
-            spark.Size = UDim2.fromOffset(i % 3 == 0 and 22 or 17, i % 3 == 0 and 22 or 17)
+            spark.Size = UDim2.fromOffset(particleSize, particleSize)
             spark.Position = UDim2.new(math.random(), 0, math.random(), 0)
             spark.BackgroundTransparency = 1
             spark.Text = (ACTIVE_THEME_PROFILE.Particle and ACTIVE_THEME_PROFILE.Particle.Glyph) or "✦"
             spark.TextColor3 = COLORS.lightningGlow
             spark.TextTransparency = math.random(18, 48) / 100
             spark.TextStrokeColor3 = COLORS.lightningGlow
-            spark.TextStrokeTransparency = 0.72
+            spark.TextStrokeTransparency = 0.5
             spark.Font = Enum.Font.GothamBold
-            spark.TextSize = i % 3 == 0 and 15 or 12
+            spark.TextSize = i % 3 == 0 and 21 or 17
             spark.TextWrapped = true
             spark.BorderSizePixel = 0
             spark.Active = false
             spark.ZIndex = 88
             spark.Visible = effectState.Sparks and i <= effectState.SparkCount
             spark.Parent = lightningLayer
+            local trail = Instance.new("Frame")
+            trail.Name = "AnimeParticleSlash"
+            trail.AnchorPoint = Vector2.new(0.5, 0.5)
+            trail.Size = UDim2.fromOffset(particleSize + 7, 2)
+            trail.BackgroundColor3 = COLORS.lightningGlow
+            trail.BackgroundTransparency = 0.35
+            trail.BorderSizePixel = 0
+            trail.ZIndex = 87
+            trail.Visible = spark.Visible
+            trail.Parent = lightningLayer
+            plasmaParticleTrails[#plasmaParticleTrails + 1] = trail
             sparks[#sparks + 1] = {
                 frame = spark,
+                trail = trail,
                 baseX = spark.Position.X.Scale,
                 baseY = spark.Position.Y.Scale,
                 phase = math.random() * math.pi * 2,
@@ -1086,6 +1219,9 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                     if direction < 0 and s.baseY < -0.04 then s.baseY = 1.04 end
                     local wave = style == "Wave" and math.sin(now * 1.6 + s.phase) * 0.012 or 0
                     s.frame.Position = UDim2.new(s.baseX, 0, s.baseY + wave, 0)
+                    s.trail.Position = UDim2.new(s.baseX, 11, s.baseY + wave, 12)
+                    s.trail.Rotation = direction >= 0 and -34 or 34
+                    s.trail.BackgroundColor3 = colors[colorIndex]
                     local spinFactor = style == "Wave" and 0.22 or (style == "Ash" and 0.45 or 1)
                     local pulse = style == "Arcane" and (math.sin(now * 2 + s.phase) + 1) * 0.12 or 0
                     local fadeIn = math.clamp(s.age / 0.75, 0, 1)
@@ -1094,6 +1230,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                     s.frame.Rotation = math.sin(now * 0.7 + s.phase) * spin * spinFactor
                     s.frame.TextTransparency = 1 - math.clamp(opacity * s.alpha * visibility, 0, 0.8)
                     s.frame.TextStrokeTransparency = 1 - math.clamp(opacity * s.alpha * visibility * 0.42, 0, 0.55)
+                    s.trail.BackgroundTransparency = 1 - math.clamp(opacity * s.alpha * visibility * 0.75, 0, 0.72)
                 end
             end
         end)
@@ -1772,12 +1909,12 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     local quickCorner = Instance.new("UICorner")
     quickCorner.CornerRadius = UDim.new(0, 8)
     quickCorner.Parent = quickCard
-    addAnimeEdge(quickCard)
     local quickStroke = Instance.new("UIStroke")
     quickStroke.Color = COLORS.glassRaised
     quickStroke.Transparency = 0.16
     quickStroke.Thickness = 1
     quickStroke.Parent = quickCard
+    addAnimeEdge(quickCard)
     local quickHeading = Instance.new("TextLabel")
     quickHeading.Size = UDim2.new(1, -16, 0, 18)
     quickHeading.Position = UDim2.fromOffset(8, 5)
@@ -1940,8 +2077,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     mainTitle.Text = "PAYOMBØYZ HUB"
     mainTitle.Text = cfg.Title or mainTitle.Text
     mainTitle.TextColor3 = COLORS.primary
-    mainTitle.Font = Enum.Font.GothamBold
-    mainTitle.TextSize = 18
+    mainTitle.Font = Enum.Font.PermanentMarker
+    mainTitle.TextSize = 21
     mainTitle.TextXAlignment = Enum.TextXAlignment.Left
     mainTitle.Parent = headerBar
 
@@ -2271,6 +2408,21 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         pageScroll.Parent = pagesContainer
 
         pageScroll.ScrollingDirection = Enum.ScrollingDirection.Y
+        local pageStamp = Instance.new("TextLabel")
+        pageStamp.Name = "ComicBrandStamp"
+        pageStamp.AnchorPoint = Vector2.new(0.5, 0.5)
+        pageStamp.Position = UDim2.new(0.72, 0, 0.58, 0)
+        pageStamp.Size = UDim2.new(0, 440, 0, 82)
+        pageStamp.BackgroundTransparency = 1
+        pageStamp.Text = "PAYOMBØYZ"
+        pageStamp.TextColor3 = COLORS.primary
+        pageStamp.TextTransparency = 0.92
+        pageStamp.Font = Enum.Font.PermanentMarker
+        pageStamp.TextSize = 54
+        pageStamp.Rotation = -12
+        pageStamp.ZIndex = 1
+        pageStamp.Active = false
+        pageStamp.Parent = pageScroll
         local columns = {}
         for index = 1, 2 do
             local column = Instance.new("Frame")
@@ -2535,8 +2687,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             sTitle.BackgroundTransparency = 1
             sTitle.Text = (sectionIcon ~= "" and (sectionIcon .. "  ") or "") .. tostring(secTitle)
             sTitle.TextColor3 = COLORS.primary
-            sTitle.Font = Enum.Font.GothamBold
-            sTitle.TextSize = 13
+            sTitle.Font = Enum.Font.PermanentMarker
+            sTitle.TextSize = 15
             sTitle.TextXAlignment = Enum.TextXAlignment.Left
             sTitle.Parent = header
             if sectionDescription ~= "" then
@@ -2939,8 +3091,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             btn.BackgroundTransparency = 1
             btn.Text = originalText
             btn.TextColor3 = COLORS.text
-            btn.Font = Enum.Font.GothamBold
-            btn.TextSize = 12
+            btn.Font = Enum.Font.PermanentMarker
+            btn.TextSize = 14
             btn.Parent = frame
             sharpenText(btn, 0.40)
             local buttonHovered = false
@@ -4156,6 +4308,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             local fCorner = Instance.new("UICorner")
             fCorner.CornerRadius = UDim.new(0, 8)
             fCorner.Parent = frame
+            addAnimeEdge(frame)
 
             local pTitle = Instance.new("TextLabel")
             pTitle.Size = UDim2.new(1, -20, 0, 22)
@@ -4549,6 +4702,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             if name == "Sound" then ObsidianGlassEngine.SoundsEnabled = effectState.Sound end
             for index, spark in ipairs(plasmaSparkFrames) do
                 spark.Visible = effectState.Sparks and index <= effectState.SparkCount
+                local trail = plasmaParticleTrails[index]
+                if trail then trail.Visible = spark.Visible end
             end
             for index, spark in ipairs(capsuleSparkFrames) do
                 spark.Visible = effectState.CapsuleSparks and index <= effectState.CapsuleSparkCount
