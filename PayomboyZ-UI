@@ -1,5 +1,5 @@
 -- PAYOMBØYZ UI LIBRARY
--- Version: 4.8.0 | Runtime: Roblox Luau | Delivery: single self-contained module
+-- Version: 4.8.1 | Runtime: Roblox Luau | Delivery: single self-contained module
 --
 -- Brand direction: ink-black panels, scarlet action color, white readable type,
 -- manga-inspired framing, restrained electric effects, and touch-friendly controls.
@@ -61,7 +61,7 @@ local COLORS = {
 }
 
 local ObsidianGlassEngine = { Options = {} }
-ObsidianGlassEngine.Version = "4.8.0"
+ObsidianGlassEngine.Version = "4.8.1"
 local ICON_GLYPHS = {
     egg = "E", farm = "F", home = "H", combat = "C", quest = "Q", event = "!",
     player = "P", travel = "T", visual = "V", visuals = "V", settings = "S",
@@ -1225,7 +1225,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     introTitle.BackgroundTransparency = 1
     introTitle.Text = "PAYOMBØYZ HUB"
     introTitle.TextColor3 = COLORS.text
-    introTitle.Font = Enum.Font.Fondamento
+    introTitle.Font = Enum.Font.GrenzeGotisch
     introTitle.TextSize = 27
     introTitle.TextXAlignment = Enum.TextXAlignment.Left
     introTitle.TextTransparency = 1
@@ -2002,7 +2002,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     mainTitle.Text = "PAYOMBØYZ HUB"
     mainTitle.Text = cfg.Title or mainTitle.Text
     mainTitle.TextColor3 = COLORS.text
-    mainTitle.Font = Enum.Font.Fondamento
+    mainTitle.Font = Enum.Font.GrenzeGotisch
     mainTitle.TextSize = 27
     mainTitle.TextXAlignment = Enum.TextXAlignment.Left
     mainTitle.TextStrokeColor3 = COLORS.primaryPressed
@@ -2460,6 +2460,9 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
         local controlRegistry = {}
         TabObj.Controls = controlRegistry
+        local defaultSectionBody
+        local activeControlContainer
+        local getControlContainer
 
         function TabObj:SetVisible(visible)
             pageScroll.Visible = visible == true
@@ -2701,9 +2704,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             return sec, body, setExpanded
         end
 
-        local defaultSectionBody
-        local activeControlContainer
-        local function getControlContainer()
+        getControlContainer = function()
             if activeControlContainer and activeControlContainer.Parent then return activeControlContainer end
             if TabObj.CurrentContainer then return TabObj.CurrentContainer end
             if not defaultSectionBody then
@@ -4748,7 +4749,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     function WindowObj:SetTitle(value)
         mainTitle.Text = tostring(value or "")
-        mainTitle.Font = Enum.Font.Fondamento
+        mainTitle.Font = Enum.Font.GrenzeGotisch
     end
     WindowObj.Logo = cfg.Logo or DEFAULT_BRAND_LOGO
     function WindowObj:SetLogo(source)
