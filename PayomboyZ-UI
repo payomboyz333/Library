@@ -2140,8 +2140,13 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     tabScroll.Size = UDim2.new(1, -24, 0, 46)
     tabScroll.Position = UDim2.new(0, 12, 1, -54)
     tabScroll.BackgroundTransparency = 1
-    tabScroll.ScrollBarThickness = 0
+    tabScroll.ScrollBarThickness = 4
     tabScroll.ScrollBarImageColor3 = COLORS.cyan
+    tabScroll.ScrollBarImageTransparency = 0.12
+    tabScroll.ScrollingDirection = Enum.ScrollingDirection.X
+    tabScroll.ScrollingEnabled = true
+    tabScroll.Active = true
+    tabScroll.ElasticBehavior = Enum.ElasticBehavior.Always
     tabScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
     tabScroll.ZIndex = 10
     tabScroll.Parent = userPanel
@@ -2172,58 +2177,69 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     tabScroll.Size = UDim2.new(1, -20, 0, 46)
     tabScroll.Position = UDim2.new(0, 10, 1, -50)
 
+    local tabScrollCue = Instance.new("TextLabel")
+    tabScrollCue.Name = "TabScrollCue"
+    tabScrollCue.AnchorPoint = Vector2.new(1, 1)
+    tabScrollCue.Position = UDim2.new(1, -14, 1, -70)
+    tabScrollCue.Size = UDim2.fromOffset(166, 18)
+    tabScrollCue.BackgroundColor3 = COLORS.glassDeep
+    tabScrollCue.BackgroundTransparency = 0.08
+    tabScrollCue.BorderSizePixel = 0
+    tabScrollCue.Text = "‹   SWIPE TO NAVIGATE   ›"
+    tabScrollCue.TextColor3 = COLORS.primaryHover
+    tabScrollCue.Font = Enum.Font.GothamBold
+    tabScrollCue.TextSize = 9
+    tabScrollCue.TextXAlignment = Enum.TextXAlignment.Center
+    tabScrollCue.ZIndex = 16
+    tabScrollCue.Parent = mainPanel
+    local tabScrollCueCorner = Instance.new("UICorner", tabScrollCue)
+    tabScrollCueCorner.CornerRadius = UDim.new(0, 5)
+    local tabScrollCueStroke = Instance.new("UIStroke", tabScrollCue)
+    tabScrollCueStroke.Color = COLORS.primary
+    tabScrollCueStroke.Thickness = 1
+    tabScrollCueStroke.Transparency = 0.12
+    tabScrollCue.Visible = false
+
+    local function refreshTabScrollCue()
+        local hasOverflow = tabScroll.CanvasSize.X.Offset > tabScroll.AbsoluteSize.X + 2
+        tabScrollCue.Visible = hasOverflow
+    end
+    tabLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(refreshTabScrollCue)
+    tabScroll:GetPropertyChangedSignal("AbsoluteSize"):Connect(refreshTabScrollCue)
+
     local headerBar = Instance.new("Frame")
     headerBar.Size = UDim2.new(1, 0, 0, 56)
     headerBar.BackgroundTransparency = 1
     headerBar.Parent = mainPanel
 
-    local headerLogoFrame = Instance.new("Frame")
-    headerLogoFrame.Name = "BrandLogoFrame"
-    headerLogoFrame.Size = UDim2.fromOffset(40, 40)
-    headerLogoFrame.Position = UDim2.fromOffset(12, 8)
-    headerLogoFrame.BackgroundColor3 = COLORS.glassDeep
-    headerLogoFrame.BorderSizePixel = 0
-    headerLogoFrame.ZIndex = 6
-    headerLogoFrame.Parent = headerBar
-    local headerLogoCorner = Instance.new("UICorner", headerLogoFrame)
-    headerLogoCorner.CornerRadius = UDim.new(1, 0)
-    local headerLogoStroke = Instance.new("UIStroke", headerLogoFrame)
-    headerLogoStroke.Color = COLORS.primary
-    headerLogoStroke.Thickness = 1.5
-    local headerLogoImage = Instance.new("ImageLabel")
-    headerLogoImage.Name = "BrandLogo"
-    headerLogoImage.Size = UDim2.new(1, -4, 1, -4)
-    headerLogoImage.Position = UDim2.fromOffset(2, 2)
-    headerLogoImage.BackgroundTransparency = 1
-    headerLogoImage.Image = loadIntroLogoImage(cfg.Logo, function(asset)
-        if headerLogoImage.Parent then headerLogoImage.Image = asset end
-    end)
-    headerLogoImage.ScaleType = Enum.ScaleType.Fit
-    headerLogoImage.ZIndex = 7
-    headerLogoImage.Parent = headerLogoFrame
-    local headerLogoImageCorner = Instance.new("UICorner", headerLogoImage)
-    headerLogoImageCorner.CornerRadius = UDim.new(1, 0)
-
-    -- PAYOMBØYZ masthead: a readable wordmark that breaks above the outer contour.
+    -- The profile avatar is the only logo image in the main window. Use a large
+    -- text masthead here so the brand breaks through the outer frame cleanly.
     local mainTitle = Instance.new("TextLabel")
-    mainTitle.Size = UDim2.new(0, 252, 0, 54)
-    mainTitle.Position = UDim2.new(0, 58, 0, -27)
+    mainTitle.Name = "BrandMasthead"
+    mainTitle.Size = UDim2.new(0, 300, 0, 62)
+    mainTitle.Position = UDim2.new(0, 14, 0, -31)
     mainTitle.BackgroundColor3 = COLORS.shell
-    mainTitle.BackgroundTransparency = 1
-    mainTitle.Text = "PAYOMBØYZ HUB"
-    mainTitle.Text = cfg.Title or mainTitle.Text
+    mainTitle.BackgroundTransparency = 0.02
+    mainTitle.BorderSizePixel = 0
+    mainTitle.Text = "PAYOMBØYZ"
     mainTitle.TextColor3 = COLORS.text
     mainTitle.Font = Enum.Font.GrenzeGotisch
-    mainTitle.TextSize = 27
+    mainTitle.TextSize = 38
     mainTitle.TextXAlignment = Enum.TextXAlignment.Left
-    mainTitle.TextStrokeColor3 = COLORS.primaryPressed
-    mainTitle.TextStrokeTransparency = 0.20
+    mainTitle.TextYAlignment = Enum.TextYAlignment.Center
+    mainTitle.TextScaled = true
+    mainTitle.TextStrokeColor3 = COLORS.primary
+    mainTitle.TextStrokeTransparency = 0.05
     mainTitle.ZIndex = 30
     mainTitle.Parent = headerBar
+    local mastheadTextSize = Instance.new("UITextSizeConstraint")
+    mastheadTextSize.MinTextSize = 22
+    mastheadTextSize.MaxTextSize = 38
+    mastheadTextSize.Parent = mainTitle
 
     local vvipTag = Instance.new("Frame")
     vvipTag.Name = "TitleVvipTag"
-    vvipTag.Position = UDim2.new(0, 322, 0, -12)
+    vvipTag.Position = UDim2.new(0, 292, 0, -16)
     vvipTag.Size = UDim2.fromOffset(92, 20)
     vvipTag.BackgroundColor3 = COLORS.surfaceRaised
     vvipTag.BorderSizePixel = 0
@@ -2250,7 +2266,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     local mainSubTitle = Instance.new("TextLabel")
     mainSubTitle.Size = UDim2.new(0, 380, 0, 16)
-    mainSubTitle.Position = UDim2.new(0, 62, 0, 34)
+    mainSubTitle.Position = UDim2.new(0, 16, 0, 34)
     mainSubTitle.BackgroundTransparency = 1
     mainSubTitle.Text = cfg.Subtitle or cfg.SubTitle or cfg.Name or "PAYOMBØYZ ANIME HUB"
     mainSubTitle.TextColor3 = COLORS.cyan
@@ -2295,6 +2311,16 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             WindowObj:Search(headerSearch.Text)
         end
     end)
+
+    local function fitHeaderToWidth()
+        local width = mainPanel.AbsoluteSize.X
+        local compact = width < 560
+        mainTitle.Size = UDim2.new(0, math.max(180, math.min(300, width - 28)), 0, 62)
+        vvipTag.Visible = not compact
+        headerSearch.Visible = not compact
+    end
+    mainPanel:GetPropertyChangedSignal("AbsoluteSize"):Connect(fitHeaderToWidth)
+    fitHeaderToWidth()
 
     -- Close & Minimize Buttons
     local closeBtn = Instance.new("TextButton")
@@ -2609,6 +2635,20 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             table.insert(trackedConnections, camera:GetPropertyChangedSignal("ViewportSize"):Connect(updateColumnLayout))
         end
 
+        local function revealTabButton()
+            local currentX = tabScroll.CanvasPosition.X
+            local left = tabBtn.AbsolutePosition.X - tabScroll.AbsolutePosition.X + currentX
+            local right = left + tabBtn.AbsoluteSize.X
+            local nextX = currentX
+            if left < currentX then
+                nextX = left - 8
+            elseif right > currentX + tabScroll.AbsoluteSize.X then
+                nextX = right - tabScroll.AbsoluteSize.X + 8
+            end
+            local maxX = math.max(0, tabScroll.CanvasSize.X.Offset - tabScroll.AbsoluteSize.X)
+            tabScroll.CanvasPosition = Vector2.new(math.clamp(nextX, 0, maxX), 0)
+        end
+
         local function activateTab()
             if WindowObj.CurrentTab == TabObj then return end
             local previousTab = WindowObj.CurrentTab
@@ -2616,7 +2656,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             if previousTab and previousTab.ClosePopups then previousTab:ClosePopups() end
             for _, t in ipairs(WindowObj.Tabs) do
                 t.Page.Visible = false
-                animate(t.Button, TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { BackgroundColor3 = COLORS.surface, BackgroundTransparency = 0.28 })
+                animate(t.Button, TweenInfo.new(0.16, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { BackgroundColor3 = COLORS.surface, BackgroundTransparency = 0.18 })
                 t.TitleLabel.TextColor3 = COLORS.textMuted
                 t.IconLabel.TextColor3 = COLORS.textMuted
                 animate(t.Stroke, TweenInfo.new(0.16), { Color = COLORS.glassRaised, Transparency = 0.45 })
@@ -2625,11 +2665,12 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             pageScroll.Position = UDim2.new(0, slideDirection * 16, 0, 0)
             pageScroll.Visible = true
             animate(pageScroll, TweenInfo.new(0.24, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), { Position = UDim2.new(0, 0, 0, 0) })
-            animate(tabBtn, TweenInfo.new(0.18, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { BackgroundColor3 = COLORS.surfaceRaised, BackgroundTransparency = 0 })
+            animate(tabBtn, TweenInfo.new(0.18, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { BackgroundColor3 = COLORS.primary, BackgroundTransparency = 0 })
             titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-            iconLabel.TextColor3 = COLORS.cyan
-            animate(tbStroke, TweenInfo.new(0.18), { Color = COLORS.cyan, Transparency = 0 })
+            iconLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            animate(tbStroke, TweenInfo.new(0.18), { Color = COLORS.primaryHover, Transparency = 0 })
             animate(tabEdge, TweenInfo.new(0.22, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Size = UDim2.new(0, 3, 0, 24) })
+            task.defer(revealTabButton)
             pageScroll.CanvasPosition = Vector2.zero
             WindowObj.CurrentTab = TabObj
             if effectState.Lightning then pcall(strikeLightning, lightningLayer, math.random(4, 6)) end
@@ -2932,7 +2973,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             local cb = tCfg.Callback or function() end
 
             local frame = Instance.new("Frame")
-            frame.Size = UDim2.new(1, -10, 0, desc ~= "" and 50 or 42)
+            -- Reserve a right rail for the switch so long labels cannot run below it.
+            frame.Size = UDim2.new(1, -10, 0, desc ~= "" and 58 or 42)
             frame.BackgroundColor3 = COLORS.glassDeep
             frame.BackgroundTransparency = 0.18
             frame.BorderSizePixel = 0
@@ -2949,7 +2991,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             addAnimeEdge(frame)
 
             local tTitle = Instance.new("TextLabel")
-            tTitle.Size = UDim2.new(1, -70, 0, 20)
+            tTitle.Size = UDim2.new(1, -112, 0, 20)
             tTitle.Position = UDim2.new(0, 12, 0, desc ~= "" and 6 or 11)
             tTitle.BackgroundTransparency = 1
             tTitle.Text = title
@@ -2957,19 +2999,23 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             tTitle.Font = Enum.Font.GothamBold
             tTitle.TextSize = 13
             tTitle.TextXAlignment = Enum.TextXAlignment.Left
+            tTitle.TextTruncate = Enum.TextTruncate.AtEnd
             tTitle.Parent = frame
             sharpenText(tTitle, 0.42)
 
             if desc ~= "" then
                 local tDesc = Instance.new("TextLabel")
-                tDesc.Size = UDim2.new(1, -70, 0, 16)
+                tDesc.Size = UDim2.new(1, -112, 0, 28)
                 tDesc.Position = UDim2.new(0, 12, 0, 26)
                 tDesc.BackgroundTransparency = 1
                 tDesc.Text = desc
                 tDesc.TextColor3 = COLORS.textMuted
                 tDesc.Font = Enum.Font.Gotham
                 tDesc.TextSize = 10
+                tDesc.TextWrapped = true
+                tDesc.TextYAlignment = Enum.TextYAlignment.Top
                 tDesc.TextXAlignment = Enum.TextXAlignment.Left
+                tDesc.TextTruncate = Enum.TextTruncate.AtEnd
                 tDesc.Parent = frame
                 sharpenText(tDesc, 0.72)
             end
@@ -3067,7 +3113,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             addAnimeEdge(frame)
 
             local sTitle = Instance.new("TextLabel")
-            sTitle.Size = UDim2.new(1, -70, 0, 20)
+            sTitle.Size = UDim2.new(1, -92, 0, 20)
             sTitle.Position = UDim2.new(0, 12, 0, 6)
             sTitle.BackgroundTransparency = 1
             sTitle.Text = title
@@ -3075,6 +3121,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             sTitle.Font = Enum.Font.GothamBold
             sTitle.TextSize = 13
             sTitle.TextXAlignment = Enum.TextXAlignment.Left
+            sTitle.TextTruncate = Enum.TextTruncate.AtEnd
             sTitle.Parent = frame
             sharpenText(sTitle, 0.42)
 
@@ -3257,6 +3304,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             btn.TextColor3 = COLORS.text
             btn.Font = Enum.Font.GothamBold
             btn.TextSize = 14
+            btn.TextTruncate = Enum.TextTruncate.AtEnd
             btn.Parent = frame
             sharpenText(btn, 0.40)
             local buttonHovered = false
@@ -3343,6 +3391,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             dTitle.Font = Enum.Font.GothamBold
             dTitle.TextSize = 13
             dTitle.TextXAlignment = Enum.TextXAlignment.Left
+            dTitle.TextTruncate = Enum.TextTruncate.AtEnd
             dTitle.Parent = frame
             sharpenText(dTitle, 0.42)
 
@@ -3776,7 +3825,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             addAnimeEdge(frame)
 
             local iTitle = Instance.new("TextLabel")
-            iTitle.Size = UDim2.new(1, -24, 0, 22)
+            iTitle.Size = UDim2.new(1, multiline and -24 or -170, 0, 22)
             iTitle.Position = UDim2.fromOffset(12, multiline and 3 or 0)
             iTitle.BackgroundTransparency = 1
             iTitle.Text = title
@@ -3784,6 +3833,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             iTitle.Font = Enum.Font.GothamBold
             iTitle.TextSize = 13
             iTitle.TextXAlignment = Enum.TextXAlignment.Left
+            iTitle.TextTruncate = Enum.TextTruncate.AtEnd
             iTitle.Parent = frame
 
             local textBox = Instance.new("TextBox")
@@ -3882,6 +3932,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             label.Font = Enum.Font.GothamMedium
             label.TextSize = 12
             label.TextXAlignment = Enum.TextXAlignment.Left
+            label.TextTruncate = Enum.TextTruncate.AtEnd
             label.Parent = frame
 
             local keyButton = Instance.new("TextButton")
@@ -3990,6 +4041,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             titleLabel.Font = Enum.Font.GothamBold
             titleLabel.TextSize = 12
             titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+            titleLabel.TextTruncate = Enum.TextTruncate.AtEnd
             titleLabel.Parent = frame
             local object = { Value = current, Instance = frame, Options = values }
             local buttons = {}
@@ -4967,7 +5019,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         source = type(source) == "string" and source ~= "" and source or DEFAULT_BRAND_LOGO
         self.Logo = source
         local function applyLogo(asset)
-        for _, image in ipairs({ introLogo, capAvatarImg, avatarImg, headerLogoImage }) do
+        for _, image in ipairs({ introLogo, capAvatarImg, avatarImg }) do
                 if image and image.Parent then image.Image = asset end
             end
         end
