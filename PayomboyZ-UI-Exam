@@ -1,0 +1,415 @@
+-- PAYOMBØYZ HUB / Dynamic Comic showcase
+-- This is a UI composition demo. Replace the sample callbacks with your own logic.
+
+local moduleUrls = {
+	"https://raw.githubusercontent.com/payomboyz333/Library/refs/heads/main/PayomboyZ-UI",
+	"https://raw.githubusercontent.com/payomboyz333/Library/main/PayomboyZ-UI",
+	"https://cdn.jsdelivr.net/gh/payomboyz333/Library@main/PayomboyZ-UI",
+	"https://raw.githubusercontent.com/payomboyz333/Library/refs/heads/master/PayomboyZ-UI",
+	"https://cdn.jsdelivr.net/gh/payomboyz333/Library@master/PayomboyZ-UI",
+}
+
+local compiler = loadstring
+if type(compiler) ~= "function" then
+	error("PAYOMBØYZ Example needs a runtime that provides loadstring. Enable it, then run Example.lua again.", 0)
+end
+
+local httpService = game:GetService("HttpService")
+local moduleSource
+local moduleSourceOrigin
+local loadErrors = {}
+local localModulePaths = {
+	"PayomboyZ-UI/Obsidain_Glassmophic2.txt",
+	"Obsidain_Glassmophic2.txt",
+	"Library/PayomboyZ-UI/Obsidain_Glassmophic2.txt",
+}
+local localReader = type(readfile) == "function" and readfile or nil
+if localReader then
+	for _, path in ipairs(localModulePaths) do
+		local ok, result = pcall(localReader, path)
+		if ok and type(result) == "string" and #result > 100000 then
+			moduleSource = result
+			moduleSourceOrigin = "local file " .. path
+			break
+		end
+		if not ok then loadErrors[#loadErrors + 1] = path .. ": " .. tostring(result) end
+	end
+end
+if not moduleSource then
+	for _, url in ipairs(moduleUrls) do
+		local ok, result = pcall(function() return game:HttpGet(url, true) end)
+		if not ok then ok, result = pcall(function() return httpService:GetAsync(url) end) end
+		if ok and type(result) == "string" and #result > 100000 then
+			moduleSource = result
+			moduleSourceOrigin = url
+			break
+		end
+		loadErrors[#loadErrors + 1] = url .. ": " .. tostring(result)
+	end
+end
+if not moduleSource then
+	error("PAYOMBØYZ UI could not be downloaded. Check HTTP access and that Library/PayomboyZ-UI is public. " .. table.concat(loadErrors, " | "), 0)
+end
+if not moduleSource:find("local outerContour = {", 1, true)
+	or not moduleSource:find("function WindowObj:SetAccent(color)", 1, true)
+	or not moduleSource:find("local function refreshSectionSize()", 1, true)
+	or not moduleSource:find('ObsidianGlassEngine.Version = "4.9.2"', 1, true) then
+	error("Example.lua found an older PAYOMBØYZ UI module at " .. tostring(moduleSourceOrigin)
+		.. ". Put the current 4.9.2 Obsidain_Glassmophic2.txt in the executor workspace or publish the matching module, then run Example.lua again.", 0)
+end
+
+local compileOk, moduleChunk, compileError = pcall(compiler, moduleSource)
+if not compileOk then compileError, moduleChunk = moduleChunk, nil end
+if type(moduleChunk) ~= "function" then
+	error("PAYOMBØYZ UI source could not be compiled: " .. tostring(compileError), 0)
+end
+local moduleOk, Library = pcall(moduleChunk)
+if not moduleOk then error("PAYOMBØYZ UI failed to initialize: " .. tostring(Library), 0) end
+if type(Library) ~= "table" or type(Library.CreateWindow) ~= "function" then
+	error("Downloaded file did not return the full PAYOMBØYZ UI library.", 0)
+end
+
+local RED = Color3.fromRGB(255, 36, 66)
+local GOLD = Color3.fromRGB(255, 198, 62)
+local GREEN = Color3.fromRGB(76, 238, 133)
+
+-- Local phrasebook for the showcase. This changes visible copy, not callback values.
+local language = "th"
+local languagePairs = {
+	{ "หน้าแรก", "Home" }, { "ภารกิจ", "Missions" }, { "คลังแสง", "Arsenal" },
+	{ "แต่งสไตล์", "Style Lab" }, { "คู่มือ", "Guide" },
+	{ "THE CRIMSON ARCHIVE", "คลังบันทึกสีชาด" },
+	{ "QUICK COMMAND DECK", "แผงคำสั่งด่วน" }, { "LIVE INTEL", "ข้อมูลสด" },
+	{ "HUNT / GROW / REPEAT", "ล่า / สะสม / วนซ้ำ" },
+	{ "ARSENAL CONFIG", "ตั้งค่าคลังแสง" },
+	{ "YOUR COLOR. YOUR PANEL.", "สีของคุณ แผงของคุณ" },
+	{ "FIELD GUIDE", "คู่มือภาคสนาม" }, { "SYSTEM ONLINE", "ระบบออนไลน์" },
+	{ "NAVIGATION", "การนำทาง" }, { "MOBILE / TOUCH", "มือถือ / สัมผัส" },
+	{ "Auto Assist", "ระบบช่วยเหลือ" }, { "Action Tempo", "จังหวะการทำงาน" },
+	{ "Combat Style", "รูปแบบการต่อสู้" }, { "Quick Burst", "โจมตีด่วน" },
+	{ "Run Demo Command", "ทดลองคำสั่ง" }, { "Target Rotation", "เป้าหมายหมุนเวียน" },
+	{ "Run Profile", "โปรไฟล์การทำงาน" }, { "Route Preset", "ชุดเส้นทาง" },
+	{ "Loadout", "ชุดอุปกรณ์" }, { "Impact Frame", "เฟรมกระแทก" },
+	{ "Interface Accent", "สีหลักของหน้าต่าง" }, { "Particle Mood", "บรรยากาศอนุภาค" },
+	{ "Lightning Cuts", "สายฟ้าฟาด" }, { "Floating Spark Sprites", "ประกายลอย" },
+	{ "Spark Count", "จำนวนประกาย" }, { "Sync Sequence", "ลำดับการซิงก์" },
+	{ "SESSION UPTIME", "เวลาใช้งาน" }, { "ACTIVITY TRACE", "บันทึกกิจกรรม" },
+	{ "DESIGN RULE", "แนวทางการออกแบบ" }, { "Balanced", "สมดุล" },
+	{ "Blitz", "จู่โจมเร็ว" }, { "Silent", "เงียบ" },
+	{ "Steady", "สม่ำเสมอ" }, { "Rapid", "รวดเร็ว" }, { "Low Impact", "รบกวนน้อย" },
+	{ "Jade Bloom", "หยกผลิบาน" }, { "Ocean Surge", "คลื่นสมุทร" },
+	{ "Arcane Rift", "รอยแยกอาคม" }, { "Solar Petal", "กลีบสุริยัน" },
+	{ "Frost Sigil", "ตราน้ำแข็ง" }, { "Obsidian Ash", "เถ้าทมิฬ" },
+}
+
+local function replacePlain(text, findText, replacement)
+	local startAt = 1
+	while true do
+		local first, last = string.find(text, findText, startAt, true)
+		if not first then break end
+		text = string.sub(text, 1, first - 1) .. replacement .. string.sub(text, last + 1)
+		startAt = first + #replacement
+	end
+	return text
+end
+
+local function translateVisibleText(root, targetLanguage)
+	for _, instance in ipairs(root:GetDescendants()) do
+		for _, property in ipairs({ "Text", "PlaceholderText" }) do
+			local ok, current = pcall(function() return instance[property] end)
+			if ok and type(current) == "string" and current ~= "" then
+				local translated = current
+				for _, pair in ipairs(languagePairs) do
+					local source, destination = pair[1], pair[2]
+					if targetLanguage == "th" then source, destination = destination, source end
+					translated = replacePlain(translated, source, destination)
+				end
+				if translated ~= current then pcall(function() instance[property] = translated end) end
+			end
+		end
+	end
+end
+local logoSource = "https://raw.githubusercontent.com/payomboyz333/Library/refs/heads/main/LogoPayomboyZ.png"
+if localReader and (type(getcustomasset) == "function" or type(getsynasset) == "function") then
+	for _, path in ipairs({ "PayomboyZ-UI/LogoPayomboyZ.png", "LogoPayomboyZ.png" }) do
+		local ok, imageBytes = pcall(localReader, path)
+		if ok and type(imageBytes) == "string" and #imageBytes > 1024 then
+			logoSource = path
+			break
+		end
+	end
+end
+
+local Window = Library:CreateWindow({
+	Title = "PAYOMBØYZ HUB",
+	Name = "THE CRIMSON ARCHIVE",
+	Subtitle = "MANGA INTERFACE  /  PLAY MORE • WORK LESS",
+	VersionTag = "DYNAMIC COMIC",
+	DefaultTab = "หน้าแรก",
+	Theme = "Crimson",
+	Motion = "Full",
+	Logo = logoSource,
+	Effects = {
+		Lightning = false,
+		Sparks = true,
+		CapsuleSparks = false,
+		Sound = true,
+		Intro = true,
+		SparkCount = 7,
+		CapsuleSparkCount = 0,
+	},
+})
+
+local home = Window:AddTab({ Title = "หน้าแรก", Icon = "crown" })
+local titlePanel = home:CreateSection({
+	Name = "THE CRIMSON ARCHIVE",
+	Description = "PAYOMBØYZ HUB  /  ระบบพร้อมใช้งาน • เลือกหมวดจากแถบด้านล่าง",
+	Icon = "spark",
+})
+titlePanel:CreateCallout({
+	Name = "01  /  SYSTEM ONLINE",
+	Text = "MANGA MODE ACTIVE  —  YOUR HUB, YOUR RULES. ปรับแต่งหน้าตาได้จาก Appearance",
+	Kind = "Success",
+})
+titlePanel:CreateButton({
+	Name = "เปิดสัญญาณ • Show Welcome Toast",
+	Icon = "flame",
+	Callback = function()
+		Library:Notify({
+			Type = "Success",
+			Title = "PAYOMBØYZ HUB  /  ONLINE",
+			Content = "ระบบพร้อมแล้ว • เลือกแท็บเพื่อเข้าสู่แต่ละส่วน",
+			Duration = 4,
+			Action = { Name = "ไปหน้า Appearance", Callback = function() Window:SelectTab("Appearance") end },
+		})
+	end,
+})
+
+local mission = home:CreateSection({
+	Name = "QUICK COMMAND DECK",
+	Description = "ตัวอย่างคำสั่งย่อยอยู่คอลัมน์ด้านขวา • ปรับค่าแล้วดูผลได้ทันที",
+	Icon = "terminal",
+})
+mission:CreateToggle({
+	Name = "Auto Assist  /  ระบบช่วยเหลือ",
+	Note = "สถานะตัวอย่าง • เชื่อม callback เข้ากับระบบของคุณ",
+	Default = false,
+	Callback = function(enabled) print("Auto Assist:", enabled) end,
+})
+mission:CreateSlider({
+	Name = "Action Tempo  /  ความเร็ว",
+	Min = 1,
+	Max = 10,
+	Default = 6,
+	Rounding = 0,
+	Callback = function(value) print("Action tempo:", value) end,
+})
+mission:CreateDropdown({
+	Name = "Combat Style  /  โหมดการทำงาน",
+	Options = { "Balanced", "Blitz", "Silent" },
+	Default = "Blitz",
+	Callback = function(value) print("Combat style:", value) end,
+})
+mission:CreateKeybind({
+	Name = "Quick Burst  /  กดเพื่อสลับ",
+	Default = "K",
+	Mode = "Toggle",
+	Callback = function(key, active) print("Quick Burst:", key.Name, active) end,
+})
+mission:CreateButton({
+	Name = "Run Demo Command  /  ทดลองคำสั่ง",
+	Icon = "shuriken",
+	Callback = function()
+		Library:Notify({
+			Type = "Success",
+			Title = "COMMAND DECK",
+			Content = "ตัวอย่างคำสั่งทำงานแล้ว • เปลี่ยน callback ให้เรียกฟังก์ชันของ Hub ได้",
+			Duration = 3,
+		})
+	end,
+})
+
+local status = home:CreateSection({ Name = "LIVE INTEL", Icon = "chart" })
+local progress = status:CreateProgressBar({ Name = "Sync Sequence", Min = 0, Max = 100, Default = 72 })
+local session = status:CreateStatCard({
+	Name = "SESSION UPTIME",
+	Default = "00:24:18",
+	Caption = "LIVE LINK  •  REGION: ASIA",
+	Color = RED,
+})
+local chart = status:CreateBarChart({
+	Name = "ACTIVITY TRACE  /  LAST 10 CYCLES",
+	Values = { 14, 21, 18, 34, 28, 43, 39, 52, 48, 67 },
+	MaxPoints = 16,
+	Color = GOLD,
+})
+progress:SetValue(84)
+session:SetCaption("LIVE LINK  •  REGION: ASIA  •  PING STABLE")
+chart:Push(73)
+
+local languageSection = home:CreateSection({
+	Name = "LANGUAGE / ภาษา",
+	Description = "สลับข้อความตัวอย่างระหว่างภาษาไทยและภาษาอังกฤษ",
+	Icon = "visual",
+	Expanded = true,
+})
+languageSection:CreateButton({
+	Name = "เปลี่ยนภาษา / SWITCH LANGUAGE",
+	Icon = "terminal",
+	Callback = function()
+		language = language == "th" and "en" or "th"
+		translateVisibleText(Window.Gui, language)
+	end,
+})
+
+local farm = Window:AddTab({ Title = "ภารกิจ", Icon = "quest" })
+local farmSection = farm:CreateSection({
+	Name = "HUNT / GROW / REPEAT",
+	Description = "ตั้งค่ารอบฟาร์มให้พอดี • แบ่งกลุ่มไว้ให้หาเจอทันที",
+	Icon = "farm",
+})
+farmSection:CreateMultiDropdown({
+	Name = "Target Rotation  /  เป้าหมาย",
+	Options = { "Daily Quest", "Rare Drop", "Boss Route", "Event Reward" },
+	Default = { "Daily Quest", "Boss Route" },
+	Callback = function() print("Target rotation updated") end,
+})
+farmSection:CreateRadioGroup({
+	Name = "Run Profile  /  เลือกจังหวะ",
+	Values = { "Steady", "Rapid", "Low Impact" },
+	Default = "Steady",
+	Callback = function(value) print("Run profile:", value) end,
+})
+farmSection:CreateInput({
+	Name = "Route Preset  /  ชื่อชุดคำสั่ง",
+	Placeholder = "e.g. Crimson Night",
+	Default = "Crimson Night",
+	MaxLength = 28,
+	Callback = function(value) print("Route preset:", value) end,
+})
+farmSection:CreateCallout({
+	Name = "FIELD NOTE  /  หมายเหตุ",
+	Text = "เก็บตัวเลือกที่ใช้บ่อยไว้หน้าเดียว และใช้ Search ด้านบนเพื่อกรองคอนโทรลได้",
+	Kind = "Warning",
+})
+
+local combat = Window:AddTab({ Title = "คลังแสง", Icon = "katana" })
+local combatSection = combat:CreateSection({
+	Name = "ARSENAL CONFIG",
+	Description = "ข้อมูลอ่านง่าย • ค่าที่เลือกเห็นชัดโดยไม่รบกวนพื้นที่ข้อความ",
+	Icon = "sword",
+})
+combatSection:CreateDropdown({
+	Name = "Loadout  /  ชุดอุปกรณ์",
+	Options = { "Crimson Edge", "Moonlit Guard", "Storm Breaker" },
+	Default = "Crimson Edge",
+	Callback = function(value) print("Loadout:", value) end,
+})
+combatSection:CreateToggle({
+	Name = "Impact Frame  /  เอฟเฟกต์ตอนสลับ",
+	Note = "เปิดเอฟเฟกต์ภาพตอนเปลี่ยนสถานะ",
+	Default = true,
+	Callback = function(enabled) print("Impact frame:", enabled) end,
+})
+combatSection:CreateDivider("VISUAL READOUT")
+combatSection:CreateStatCard({
+	Name = "LOADOUT RANK",
+	Default = "S  /  ELITE",
+	Caption = "พร้อมปรับแต่ง • ใช้ Color Picker เปลี่ยนสีธีมได้",
+	Color = GOLD,
+})
+combatSection:CreateButton({
+	Name = "ส่งสัญญาณทดสอบ  /  Test Ping",
+	Icon = "wifi",
+	Callback = function() Library:Notify({ Type = "Info", Title = "SIGNAL CHECK", Content = "เส้นทางตอบสนองปกติ • READY", Duration = 3 }) end,
+})
+
+local style = Window:AddTab({ Title = "แต่งสไตล์", Icon = "spark" })
+local styleSection = style:CreateSection({
+	Name = "YOUR COLOR. YOUR PANEL.",
+	Description = "เลือกสีด้านล่าง • เปลี่ยนเส้นขอบและแสง accent ของ UI ทันที",
+	Icon = "crown",
+})
+styleSection:CreateColorPicker({
+	Name = "Interface Accent  /  สีประจำตัว",
+	Default = RED,
+	Callback = function(color)
+		local ok, reason = Window:SetAccent(color)
+		if not ok then warn("Accent update failed:", reason) end
+	end,
+})
+styleSection:CreateDropdown({
+	Name = "Particle Mood  /  บรรยากาศ",
+	Options = { "Crimson Ember", "Jade Bloom", "Ocean Surge", "Arcane Rift", "Solar Petal", "Frost Sigil", "Obsidian Ash" },
+	Default = "Crimson Ember",
+	Callback = function(value)
+		local themeByMood = {
+			["Crimson Ember"] = "Crimson",
+			["Jade Bloom"] = "Jade",
+			["Ocean Surge"] = "Azure",
+			["Arcane Rift"] = "Amethyst",
+			["Solar Petal"] = "Amber",
+			["Frost Sigil"] = "Purity",
+			["Obsidian Ash"] = "Obsidian",
+		}
+		local theme = themeByMood[value]
+		if not theme then return end
+		Window:SetTheme(theme)
+	end,
+})
+styleSection:CreateToggle({
+	Name = "Lightning Cuts  /  เส้นฟาดสายฟ้า",
+	Default = true,
+	Callback = function(enabled) Window:SetEffects("Lightning", enabled) end,
+})
+styleSection:CreateToggle({
+	Name = "Floating Spark Sprites  /  ประกาย",
+	Default = true,
+	Callback = function(enabled) Window:SetEffects("Sparks", enabled) end,
+})
+styleSection:CreateSlider({
+	Name = "Spark Count  /  จำนวนประกาย",
+	Min = 0,
+	Max = 7,
+	Default = 7,
+	Rounding = 0,
+	Callback = function(value) Window:SetEffects("SparkCount", value) end,
+})
+
+local help = Window:AddTab({ Title = "คู่มือ", Icon = "help" })
+local guide = help:CreateSection({
+	Name = "FIELD GUIDE",
+	Description = "เมนูชัด • ค้นหาไว • ปรับการเคลื่อนไหวตามอุปกรณ์",
+	Icon = "scroll",
+})
+guide:CreateLabel({
+	Name = "NAVIGATION",
+	Text = "แตะแถบด้านล่างเพื่อเปลี่ยนหน้า • พิมพ์ใน Search เพื่อกรองฟังก์ชัน • ย่อหน้าต่างได้จากปุ่มโลโก้",
+})
+guide:CreateLabel({
+	Name = "MOBILE / TOUCH",
+	Text = "หน้าต่างปรับสเกลตาม viewport และจัด section เป็นคอลัมน์เดียวบนจอแคบ",
+})
+guide:CreateDropdown({
+	Name = "Motion Preference  /  การเคลื่อนไหว",
+	Options = { "Full", "Subtle", "Off" },
+	Default = "Full",
+	Callback = function(value) Window:SetMotion(value) end,
+})
+guide:CreateCallout({
+	Name = "DESIGN RULE",
+	Text = "ขอบตัดแบบ manga และเส้น accent ใช้สร้างบุคลิก ส่วนข้อความกับพื้นที่กดคงช่องไฟให้อ่านง่าย",
+	Kind = "Info",
+})
+
+Window:CreateAppearanceTab()
+Window:CreateCommandPalette({
+	{ Name = "Open Home", Description = "Return to the main system page", Category = "Navigation", Callback = function() home:Activate() end },
+	{ Name = "Open Style Lab", Description = "Change accent color and motion", Category = "Navigation", Callback = function() style:Activate() end },
+	{ Name = "Center Window", Description = "Bring the panel back to center", Category = "Window", Callback = function(window) window:Center() end },
+	{ Name = "Show System Toast", Description = "Check the notification treatment", Category = "System", Callback = function() Library:Notify({ Type = "Success", Title = "PAYOMBØYZ HUB", Content = "SYSTEM READY", Duration = 3 }) end },
+})
+
+local configManager = Window:CreateConfigManager()
+configManager:Save("Crimson Archive")
+Library:Finalize({ Window = Window })
