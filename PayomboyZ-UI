@@ -1,5 +1,5 @@
 -- PAYOMBØYZ UI LIBRARY
--- Version: 4.5.0 | Runtime: Roblox Luau | Delivery: single self-contained module
+-- Version: 4.6.0 | Runtime: Roblox Luau | Delivery: single self-contained module
 --
 -- Brand direction: ink-black panels, scarlet action color, white readable type,
 -- manga-inspired framing, restrained electric effects, and touch-friendly controls.
@@ -61,7 +61,7 @@ local COLORS = {
 }
 
 local ObsidianGlassEngine = { Options = {} }
-ObsidianGlassEngine.Version = "4.5.0"
+ObsidianGlassEngine.Version = "4.6.0"
 local ICON_GLYPHS = {
     egg = "◉", farm = "✦", home = "⌂", combat = "刀", quest = "卷", event = "祭",
     player = "◉", travel = "風", visual = "眼", visuals = "眼", settings = "⚙",
@@ -124,6 +124,7 @@ local THEME_ALIASES = {
 }
 local ACTIVE_THEME_PROFILE = THEME_PRESETS["แดงเปลวเพลิง"]
 local PARTICLE_STYLES = { Ash = true, Ember = true, Leaf = true, Wave = true, Arcane = true, Petal = true, Snow = true }
+local PARTICLE_STYLE_MOTION = { Ash = 0.45, Ember = 1, Leaf = 0.72, Wave = 0.58, Arcane = 0.78, Petal = 0.55, Snow = 0.66 }
 
 local function normalizeParticleProfile(source, accent, bright)
     source = type(source) == "table" and source or {}
@@ -657,13 +658,13 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     local configuredEffects = type(cfg.Effects) == "table" and cfg.Effects or {}
     local touchOnly = UserInputService.TouchEnabled and not UserInputService.MouseEnabled
     local effectState = {
-        Lightning = configuredEffects.Lightning ~= false and cfg.Lightning ~= false,
+        Lightning = configuredEffects.Lightning == true or cfg.Lightning == true,
         Sparks = configuredEffects.Sparks ~= false and cfg.Sparks ~= false,
-        CapsuleSparks = configuredEffects.CapsuleSparks ~= false and cfg.CapsuleSparks ~= false,
+        CapsuleSparks = configuredEffects.CapsuleSparks == true or cfg.CapsuleSparks == true,
         Intro = configuredEffects.Intro ~= false and cfg.Intro ~= false,
         Sound = configuredEffects.Sound ~= false and cfg.Sound ~= false,
-        SparkCount = math.clamp(tonumber(configuredEffects.SparkCount or cfg.SparkCount) or (touchOnly and 3 or 5), 0, 10),
-        CapsuleSparkCount = math.clamp(tonumber(configuredEffects.CapsuleSparkCount or cfg.CapsuleSparkCount) or (touchOnly and 2 or 3), 0, 6),
+        SparkCount = math.clamp(tonumber(configuredEffects.SparkCount or cfg.SparkCount) or (touchOnly and 2 or 3), 0, 4),
+        CapsuleSparkCount = math.clamp(tonumber(configuredEffects.CapsuleSparkCount or cfg.CapsuleSparkCount) or (touchOnly and 0 or 1), 0, 2),
     }
     local motionMode = cfg.Motion or "Full"
     if motionMode ~= "Full" and motionMode ~= "Subtle" and motionMode ~= "Off" then motionMode = "Full" end
@@ -687,17 +688,19 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         label.TextStrokeTransparency = transparency or 0.58
     end
 
-    local comicPanelSequence = 0
     local function addAnimeEdge(parent, usePanelMotion, explicitBackingColor)
-        comicPanelSequence += 1
-        local panelRotation = comicPanelSequence % 2 == 0 and 1.1 or -1.1
-        if usePanelMotion ~= false then parent.Rotation = panelRotation end
-
-        -- Find the ink/backing color behind this panel so the masks produce real
-        -- clipped corners instead of painting rounded corners over a square card.
+        -- Only major panels get the cut silhouette. Repeating slash art on every
+        -- control created a noisy wall of lines and hundreds of extra Instances.
+        local majorPanel = explicitBackingColor ~= nil
+            or parent.Name == "MainShell"
+            or parent.Name == "UserPanel"
+            or parent.Name == "QuickUtilitiesCard"
+            or parent.Name == "LibraryStatusCard"
+            or parent.Name == "MetricsBox"
+            or string.match(parent.Name, "^SectionCard_") ~= nil
         local backingColor = explicitBackingColor or COLORS.shell
-        local ancestor = parent.Parent
         if not explicitBackingColor then
+            local ancestor = parent.Parent
             while ancestor and ancestor:IsA("GuiObject") do
                 if ancestor.BackgroundTransparency < 0.95 then
                     backingColor = ancestor.BackgroundColor3
@@ -707,7 +710,11 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             end
         end
 
-        parent.ClipsDescendants = true
+        if explicitBackingColor then
+            parent.ClipsDescendants = false
+        elseif majorPanel then
+            parent.ClipsDescendants = true
+        end
         local outline
         for _, child in ipairs(parent:GetChildren()) do
             if child:IsA("UICorner") then
@@ -716,166 +723,52 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 outline = child
             end
         end
-        if not outline then
+        if not outline and not explicitBackingColor then
             outline = Instance.new("UIStroke")
             outline.Parent = parent
         end
-        outline.Color = COLORS.primary
-        outline.Thickness = 1.7
-        outline.Transparency = 0.08
-        local neonUnderstroke = Instance.new("UIStroke")
-        neonUnderstroke.Name = "ComicNeonUnderstroke"
-        neonUnderstroke.Color = COLORS.primary
-        neonUnderstroke.Thickness = 5
-        neonUnderstroke.Transparency = 0.82
-        neonUnderstroke.Parent = parent
-
-        -- Four 45-degree masks plus ink rules create the chamfered manga-panel silhouette.
-        local cuts = {
-            { Name = "TopLeft", Position = UDim2.fromOffset(0, 0), Anchor = Vector2.new(0, 0), Angle = -45, LinePosition = UDim2.fromOffset(9, 9), LineAngle = -45 },
-            { Name = "TopRight", Position = UDim2.new(1, 0, 0, 0), Anchor = Vector2.new(1, 0), Angle = 45, LinePosition = UDim2.new(1, -9, 0, 9), LineAngle = 45 },
-            { Name = "BottomRight", Position = UDim2.new(1, 0, 1, 0), Anchor = Vector2.new(1, 1), Angle = -45, LinePosition = UDim2.new(1, -9, 1, -9), LineAngle = -45 },
-            { Name = "BottomLeft", Position = UDim2.new(0, 0, 1, 0), Anchor = Vector2.new(0, 1), Angle = 45, LinePosition = UDim2.new(0, 9, 1, -9), LineAngle = 45 },
-        }
-        for _, cut in ipairs(cuts) do
-            local mask = Instance.new("Frame")
-            mask.Name = "ComicCutMask_" .. cut.Name
-            mask.AnchorPoint = Vector2.new(0.5, 0.5)
-            mask.Position = cut.Position
-            mask.Size = UDim2.fromOffset(28, 28)
-            mask.Rotation = cut.Angle
-            mask.BackgroundColor3 = backingColor
-            mask.BorderSizePixel = 0
-            mask.ZIndex = parent.ZIndex + 2
-            mask.Parent = parent
-
-            local bevel = Instance.new("Frame")
-            bevel.Name = "ComicCutInk_" .. cut.Name
-            bevel.AnchorPoint = Vector2.new(0.5, 0.5)
-            bevel.Position = cut.LinePosition
-            bevel.Size = UDim2.fromOffset(28, 2)
-            bevel.Rotation = cut.LineAngle
-            bevel.BackgroundColor3 = COLORS.primary
-            bevel.BorderSizePixel = 0
-            bevel.ZIndex = parent.ZIndex + 3
-            bevel.Parent = parent
+        if outline then
+            outline.Color = majorPanel and COLORS.primary or COLORS.glassRaised
+            outline.Thickness = majorPanel and 1.5 or 1
+            outline.Transparency = majorPanel and 0.08 or 0.32
         end
 
-        local impactRule = Instance.new("Frame")
-        impactRule.Name = "ComicImpactRule"
-        impactRule.AnchorPoint = Vector2.new(1, 0)
-        impactRule.Position = UDim2.new(1, -18, 0, 8)
-        impactRule.Size = UDim2.fromOffset(42, 3)
-        impactRule.Rotation = -14
-        impactRule.BackgroundColor3 = COLORS.primary
-        impactRule.BorderSizePixel = 0
-        impactRule.ZIndex = parent.ZIndex
-        impactRule.Parent = parent
+        if majorPanel then
+            local cuts = {
+                { "TopLeft", UDim2.fromOffset(0, 0), -45, UDim2.fromOffset(7, 7), -45 },
+                { "TopRight", UDim2.new(1, 0, 0, 0), 45, UDim2.new(1, -7, 0, 7), 45 },
+                { "BottomRight", UDim2.new(1, 0, 1, 0), -45, UDim2.new(1, -7, 1, -7), -45 },
+                { "BottomLeft", UDim2.new(0, 0, 1, 0), 45, UDim2.new(0, 7, 1, -7), 45 },
+            }
+            for _, cut in ipairs(cuts) do
+                local mask = Instance.new("Frame")
+                mask.Name = "ComicCutMask_" .. cut[1]
+                mask.AnchorPoint = Vector2.new(0.5, 0.5)
+                mask.Position = cut[2]
+                mask.Size = UDim2.fromOffset(explicitBackingColor and 52 or 22, explicitBackingColor and 52 or 22)
+                mask.Rotation = cut[3]
+                mask.BackgroundColor3 = backingColor
+                mask.BorderSizePixel = 0
+                mask.ZIndex = parent.ZIndex + 2
+                mask.Parent = parent
 
-        for index = 1, 3 do
-            local speedLine = Instance.new("Frame")
-            speedLine.Name = "ComicSpeedLine"
-            speedLine.AnchorPoint = Vector2.new(1, 0)
-            speedLine.Position = UDim2.new(1, -18, 0, 11 + index * 5)
-            speedLine.Size = UDim2.fromOffset(24 - index * 4, 1.5)
-            speedLine.Rotation = -14
-            speedLine.BackgroundColor3 = index == 1 and COLORS.primaryHover or COLORS.text
-            speedLine.BackgroundTransparency = index == 1 and 0.1 or 0.36
-            speedLine.BorderSizePixel = 0
-            speedLine.ZIndex = parent.ZIndex
-            speedLine.Parent = parent
+                local bevel = Instance.new("Frame")
+                bevel.Name = "ComicCutInk_" .. cut[1]
+                bevel.AnchorPoint = Vector2.new(0.5, 0.5)
+                bevel.Position = cut[4]
+                bevel.Size = UDim2.fromOffset(explicitBackingColor and 52 or 22, 1.7)
+                bevel.Rotation = cut[5]
+                bevel.BackgroundColor3 = COLORS.primary
+                bevel.BorderSizePixel = 0
+                bevel.ZIndex = parent.ZIndex + 3
+                bevel.Parent = parent
+            end
         end
 
-        local mainSlash = Instance.new("Frame")
-        mainSlash.Name = "AnimeEdgeSlash"
-        mainSlash.AnchorPoint = Vector2.new(0.5, 0.5)
-        mainSlash.Position = UDim2.new(0, 7, 0.5, 0)
-        mainSlash.Size = UDim2.fromOffset(3, 23)
-        mainSlash.Rotation = 18
-        mainSlash.BackgroundColor3 = COLORS.primary
-        mainSlash.BorderSizePixel = 0
-        mainSlash.ZIndex = parent.ZIndex
-        mainSlash.Parent = parent
-
-        local glint = Instance.new("Frame")
-        glint.Name = "AnimeEdgeGlint"
-        glint.AnchorPoint = Vector2.new(0.5, 0.5)
-        glint.Position = UDim2.new(0, 11, 0.5, 2)
-        glint.Size = UDim2.fromOffset(1.5, 13)
-        glint.Rotation = 18
-        glint.BackgroundColor3 = COLORS.lightningCore
-        glint.BackgroundTransparency = 0.08
-        glint.BorderSizePixel = 0
-        glint.ZIndex = parent.ZIndex
-        glint.Parent = parent
-
-        local lowerInk = Instance.new("Frame")
-        lowerInk.Name = "ComicLowerInk"
-        lowerInk.Position = UDim2.new(0, 18, 1, -4)
-        lowerInk.Size = UDim2.new(0.34, 0, 0, 2)
-        lowerInk.Rotation = -2
-        lowerInk.BackgroundColor3 = COLORS.primary
-        lowerInk.BorderSizePixel = 0
-        lowerInk.ZIndex = parent.ZIndex
-        lowerInk.Parent = parent
-
-        parent.MouseEnter:Connect(function()
-            local motion = panelRotation * 0.12
-            animate(outline, TweenInfo.new(0.09, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                Thickness = 2.4,
-                Transparency = 0,
-            })
-            animate(neonUnderstroke, TweenInfo.new(0.09, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                Thickness = 7,
-                Transparency = 0.62,
-            })
-            animate(impactRule, TweenInfo.new(0.09, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
-                Size = UDim2.fromOffset(56, 4),
-                BackgroundColor3 = COLORS.primaryHover,
-            })
-            animate(mainSlash, TweenInfo.new(0.09, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
-                Size = UDim2.fromOffset(4, 29),
-            })
-            for _, bevel in ipairs(parent:GetChildren()) do
-                if bevel.Name:match("^ComicCutInk_") then
-                    animate(bevel, TweenInfo.new(0.09, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                        BackgroundColor3 = COLORS.lightningCore,
-                        Size = UDim2.fromOffset(32, 2.4),
-                    })
-                end
-            end
-            if usePanelMotion ~= false then
-                animate(parent, TweenInfo.new(0.09, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Rotation = motion })
-            end
-        end)
-        parent.MouseLeave:Connect(function()
-            animate(outline, TweenInfo.new(0.13, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                Thickness = 1.7,
-                Transparency = 0.08,
-            })
-            animate(neonUnderstroke, TweenInfo.new(0.13, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                Thickness = 5,
-                Transparency = 0.82,
-            })
-            animate(impactRule, TweenInfo.new(0.13, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                Size = UDim2.fromOffset(42, 3),
-                BackgroundColor3 = COLORS.primary,
-            })
-            animate(mainSlash, TweenInfo.new(0.13, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                Size = UDim2.fromOffset(3, 23),
-            })
-            for _, bevel in ipairs(parent:GetChildren()) do
-                if bevel.Name:match("^ComicCutInk_") then
-                    animate(bevel, TweenInfo.new(0.13, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                        BackgroundColor3 = COLORS.primary,
-                        Size = UDim2.fromOffset(28, 2),
-                    })
-                end
-            end
-            if usePanelMotion ~= false then
-                animate(parent, TweenInfo.new(0.13, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Rotation = panelRotation })
-            end
-        end)
+        if majorPanel and outline then
+            parent.MouseEnter:Connect(function() outline.Thickness = 1.9; outline.Transparency = 0 end)
+            parent.MouseLeave:Connect(function() outline.Thickness = 1.5; outline.Transparency = 0.08 end)
+        end
     end
 
     if cfg.Theme then self:SetTheme(cfg.Theme) end
@@ -916,7 +809,6 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     end
 
     local plasmaSparkFrames = {}
-    local plasmaParticleTrails = {}
     local capsuleSparkFrames = {}
 
     local uiScale = Instance.new("UIScale")
@@ -950,21 +842,72 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     shell.BackgroundColor3 = COLORS.shell
     shell.BackgroundTransparency = 0.08
     shell.BorderSizePixel = 0
-    shell.ClipsDescendants = true
+    shell.ClipsDescendants = false
     shell.Parent = gui
 
-    local shellCorner = Instance.new("UICorner")
-    shellCorner.CornerRadius = UDim.new(0, 3)
-    shellCorner.Parent = shell
+    local shellGradient = Instance.new("UIGradient")
+    shellGradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(20, 7, 12)),
+        ColorSequenceKeypoint.new(0.42, COLORS.shell),
+        ColorSequenceKeypoint.new(0.76, Color3.fromRGB(10, 11, 15)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 7, 12)),
+    })
+    shellGradient.Rotation = -12
+    shellGradient.Parent = shell
 
-    local shellStroke = Instance.new("UIStroke")
-    shellStroke.Color = COLORS.primary
-    shellStroke.Thickness = 1.8
-    shellStroke.Transparency = 0.18
-    shellStroke.Parent = shell
+    -- Asymmetric perimeter: the top brand tab and lower-right notch deliberately
+    -- interrupt the rectangle. Segment frames let the silhouette extend beyond
+    -- the shell without drawing a standard rectangular UIStroke.
+    local outerContour = {
+        { 0.05, 0.17 }, { 0.05, 0.11 }, { 0.28, 0.04 },
+        { 0.55, 0.04 }, { 0.60, -0.025 }, { 0.81, -0.025 },
+        { 0.855, 0.04 }, { 0.95, 0.04 }, { 1.005, 0.11 },
+        { 1.005, 0.63 }, { 0.975, 0.70 }, { 1.005, 0.76 },
+        { 1.005, 0.91 }, { 0.95, 0.98 }, { 0.70, 0.98 },
+        { 0.65, 1.025 }, { 0.23, 1.025 }, { 0.18, 0.98 },
+        { 0.05, 0.98 }, { -0.005, 0.91 }, { -0.005, 0.24 },
+    }
+    local outerFrameLines = {}
+    local showContourImmediately = not effectState.Intro or motionMode == "Off"
+    local function addOuterLine(pointA, pointB, color, thickness)
+        local ax, ay = pointA[1] * 920, pointA[2] * 600
+        local bx, by = pointB[1] * 920, pointB[2] * 600
+        local dx, dy = bx - ax, by - ay
+        local line = Instance.new("Frame")
+        line.Name = "OuterComicContour"
+        line.AnchorPoint = Vector2.new(0.5, 0.5)
+        line.Position = UDim2.new((pointA[1] + pointB[1]) * 0.5, 0, (pointA[2] + pointB[2]) * 0.5, 0)
+        line.Size = UDim2.fromOffset(math.sqrt(dx * dx + dy * dy), thickness or 2.6)
+        line.Rotation = math.deg(math.atan2(dy, dx))
+        line.BackgroundColor3 = color or COLORS.primary
+        line.BorderSizePixel = 0
+        line.ZIndex = 4
+        line.Visible = showContourImmediately
+        line.Parent = shell
+        outerFrameLines[#outerFrameLines + 1] = line
+        return line
+    end
+    local shellStroke
+    for index, point in ipairs(outerContour) do
+        local nextPoint = outerContour[index % #outerContour + 1]
+        local color = (index == 5 or index == 6 or index == 7) and COLORS.primaryHover or COLORS.primary
+        local line = addOuterLine(point, nextPoint, color, 2.6)
+        if index == 3 then shellStroke = line end
+    end
     addAnimeEdge(shell, false, COLORS.backdrop)
+    local notchMask = Instance.new("Frame")
+    notchMask.Name = "OuterRightImpactCut"
+    notchMask.AnchorPoint = Vector2.new(0.5, 0.5)
+    notchMask.Position = UDim2.new(1, 0, 0.73, 0)
+    notchMask.Size = UDim2.fromOffset(58, 58)
+    notchMask.Rotation = 45
+    notchMask.BackgroundColor3 = COLORS.backdrop
+    notchMask.BorderSizePixel = 0
+    notchMask.ZIndex = 3
+    notchMask.Parent = shell
 
-    -- Sparse impact rays sit behind content and break up the empty ink-black canvas.
+    -- A low-cost ink gradient and two halftone clusters give the backdrop texture
+    -- without the distracting spokes that converged behind every page.
     local comicBurstLayer = Instance.new("Frame")
     comicBurstLayer.Name = "ComicBurstLayer"
     comicBurstLayer.Size = UDim2.fromScale(1, 1)
@@ -974,24 +917,17 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     comicBurstLayer.ZIndex = 2
     comicBurstLayer.Parent = shell
     for index = 1, 12 do
-        local ray = Instance.new("Frame")
-        ray.Name = "ImpactRay"
-        ray.AnchorPoint = Vector2.new(0.5, 0.5)
-        ray.Position = UDim2.new(0.52, 0, 0.54, 0)
-        ray.Size = UDim2.new(0.54 + (index % 3) * 0.08, 0, 0, index % 4 == 0 and 2 or 1)
-        ray.Rotation = (index - 6) * 15 + math.random(-4, 4)
-        ray.BackgroundColor3 = index % 3 == 0 and COLORS.primary or COLORS.text
-        ray.BackgroundTransparency = index % 3 == 0 and 0.82 or 0.94
-        ray.BorderSizePixel = 0
-        ray.ZIndex = 2
-        ray.Parent = comicBurstLayer
-        local rayGradient = Instance.new("UIGradient")
-        rayGradient.Transparency = NumberSequence.new({
-            NumberSequenceKeypoint.new(0, 1),
-            NumberSequenceKeypoint.new(0.45, 0.25),
-            NumberSequenceKeypoint.new(1, 1),
-        })
-        rayGradient.Parent = ray
+        local dot = Instance.new("Frame")
+        dot.Name = "HalftoneDot"
+        dot.Size = UDim2.fromOffset(3, 3)
+        dot.Position = index <= 6
+            and UDim2.new(0.84 + ((index - 1) % 3) * 0.024, 0, 0.09 + math.floor((index - 1) / 3) * 0.018, 0)
+            or UDim2.new(0.10 + ((index - 7) % 3) * 0.024, 0, 0.87 + math.floor((index - 7) / 3) * 0.018, 0)
+        dot.BackgroundColor3 = index % 3 == 0 and COLORS.primary or COLORS.textFaint
+        dot.BackgroundTransparency = 0.76
+        dot.BorderSizePixel = 0
+        dot.ZIndex = 2
+        dot.Parent = comicBurstLayer
     end
 
     -- ⚡ AMBIENT LIGHTNING FLASH (ZIndex 80 - OVER PANELS & CARDS)
@@ -1002,7 +938,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     ambientLightningFlash.BackgroundTransparency = 1
     ambientLightningFlash.BorderSizePixel = 0
     ambientLightningFlash.Active = false
-    ambientLightningFlash.ZIndex = 80
+    ambientLightningFlash.ZIndex = 2
     ambientLightningFlash.Parent = shell
     local fCorner = Instance.new("UICorner")
     fCorner.CornerRadius = UDim.new(0, 18)
@@ -1016,7 +952,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     lightningLayer.BorderSizePixel = 0
     lightningLayer.ClipsDescendants = true
     lightningLayer.Active = false
-    lightningLayer.ZIndex = 85
+    lightningLayer.ZIndex = 3
     lightningLayer.Parent = shell
 
     -- Procedural High-Voltage Crimson Lightning Bolt Strike Function
@@ -1079,7 +1015,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 seg.BackgroundColor3 = coreColor or Color3.fromRGB(255, 245, 252)
                 seg.BorderSizePixel = 0
                 seg.Active = false
-                seg.ZIndex = zIdx or 95
+        seg.ZIndex = zIdx or 4
                 seg.Parent = targetFrame
 
                 local st = Instance.new("UIStroke")
@@ -1093,9 +1029,9 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         end
 
         -- Render primary bolt & secondary fork
-        renderSegments(pts, Color3.fromRGB(255, 248, 252), COLORS.lightningGlow, 3.2, 95)
+        renderSegments(pts, Color3.fromRGB(255, 248, 252), COLORS.lightningGlow, 2.2, 4)
         if #forkPts > 1 then
-            renderSegments(forkPts, Color3.fromRGB(255, 220, 235), COLORS.primaryHover, 2.2, 94)
+            renderSegments(forkPts, Color3.fromRGB(255, 220, 235), COLORS.primaryHover, 1.6, 4)
         end
 
         -- Flash ambient crimson glow across entire shell
@@ -1139,121 +1075,44 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         end)
     end
 
-    -- Anime atmosphere particles: every theme supplies its own glyph, palette, and motion.
-    task.spawn(function()
-        local maxSparks = 10
-        local sparks = {}
-        for i = 1, maxSparks do
-            local particleSize = i % 3 == 0 and 30 or 24
-            local spark = Instance.new("TextLabel")
-            spark.Name = "AnimeParticle"
-            spark.Size = UDim2.fromOffset(particleSize, particleSize)
-            spark.Position = UDim2.new(math.random(), 0, math.random(), 0)
-            spark.BackgroundTransparency = 1
-            spark.Text = (ACTIVE_THEME_PROFILE.Particle and ACTIVE_THEME_PROFILE.Particle.Glyph) or "✦"
-            spark.TextColor3 = COLORS.lightningGlow
-            spark.TextTransparency = math.random(18, 48) / 100
-            spark.TextStrokeColor3 = COLORS.lightningGlow
-            spark.TextStrokeTransparency = 0.5
-            spark.Font = Enum.Font.GothamBold
-            spark.TextSize = i % 3 == 0 and 21 or 17
-            spark.TextWrapped = true
-            spark.BorderSizePixel = 0
-            spark.Active = false
-            spark.ZIndex = 88
-            spark.Visible = effectState.Sparks and i <= effectState.SparkCount
-            spark.Parent = lightningLayer
-            local trail = Instance.new("Frame")
-            trail.Name = "AnimeParticleSlash"
-            trail.AnchorPoint = Vector2.new(0.5, 0.5)
-            trail.Size = UDim2.fromOffset(particleSize + 7, 2)
-            trail.BackgroundColor3 = COLORS.lightningGlow
-            trail.BackgroundTransparency = 0.35
-            trail.BorderSizePixel = 0
-            trail.ZIndex = 87
-            trail.Visible = spark.Visible
-            trail.Parent = lightningLayer
-            plasmaParticleTrails[#plasmaParticleTrails + 1] = trail
-            sparks[#sparks + 1] = {
-                frame = spark,
-                trail = trail,
-                baseX = spark.Position.X.Scale,
-                baseY = spark.Position.Y.Scale,
-                phase = math.random() * math.pi * 2,
-                alpha = math.random(70, 130) / 100,
-                age = math.random() * 8,
-            }
+    -- Pooled GUI sprites follow the supplied GuiParticleEmitter model (texture,
+    -- life, velocity, rotation), but reuse a handful of ImageLabels instead of
+    -- cloning and destroying a particle every time one expires.
+    local sparkTexture = "rbxasset://textures/particles/sparkles_main.dds"
+    local particleStates = {}
+    for index = 1, 4 do
+        local sprite = Instance.new("ImageLabel")
+        sprite.Name = "ComicSpark"
+        sprite.AnchorPoint = Vector2.new(0.5, 0.5)
+        sprite.Size = UDim2.fromOffset(index % 2 == 0 and 18 or 14, index % 2 == 0 and 18 or 14)
+        sprite.BackgroundTransparency = 1
+        sprite.Image = sparkTexture
+        sprite.ImageColor3 = COLORS.primaryHover
+        sprite.ImageTransparency = 0.48
+        sprite.ScaleType = Enum.ScaleType.Fit
+        sprite.ZIndex = 3
+        sprite.Visible = effectState.Sparks and index <= effectState.SparkCount
+        sprite.Parent = lightningLayer
+        plasmaSparkFrames[#plasmaSparkFrames + 1] = sprite
+        particleStates[#particleStates + 1] = {
+            Frame = sprite,
+            Edge = index % 2 == 0 and 0.965 or 0.035,
+            Y = math.random(10, 90) / 100,
+            Phase = math.random() * math.pi * 2,
+            Age = math.random() * 4,
+            Life = math.random(4, 7),
+        }
+    end
+
+    local boltThread = task.spawn(function()
+        while gui and gui.Parent do
+            task.wait(18)
+            if shell.Visible and effectState.Lightning then
+                pcall(function() strikeLightning(lightningLayer, math.random(4, 6)) end)
+            end
         end
-
-        local sparkConn
-        sparkConn = RunService.Heartbeat:Connect(function(deltaTime)
-            if not gui or not gui.Parent then
-                if sparkConn then sparkConn:Disconnect() end
-                return
-            end
-            if shell and shell.Visible and effectState.Sparks then
-                local profile = ACTIVE_THEME_PROFILE and ACTIVE_THEME_PROFILE.Particle or {}
-                local colors = type(profile.Colors) == "table" and #profile.Colors > 0 and profile.Colors or { COLORS.lightningGlow }
-                local style = profile.Style or "Ember"
-                local direction = tonumber(profile.Direction) or -1
-                local speed = tonumber(profile.Speed) or 0.025
-                local drift = tonumber(profile.Drift) or 0.008
-                local sway = tonumber(profile.Sway) or 0.01
-                local spin = tonumber(profile.Spin) or 24
-                local lifetime = tonumber(profile.Lifetime) or 6.5
-                local opacity = tonumber(profile.Opacity) or 0.4
-                local dt = math.min(tonumber(deltaTime) or 0.016, 0.08)
-                local now = os.clock()
-                for _, s in ipairs(sparks) do
-                    s.age = s.age + dt
-                    if s.age >= lifetime then
-                        s.age = 0
-                        s.baseX = math.random()
-                        s.baseY = direction >= 0 and -0.04 or 1.04
-                        s.phase = math.random() * math.pi * 2
-                        s.alpha = math.random(70, 130) / 100
-                    end
-                    local colorIndex = (math.floor(s.phase * 10) % #colors) + 1
-                    s.frame.Text = profile.Glyph or "✦"
-                    s.frame.TextColor3 = colors[colorIndex]
-                    s.frame.TextStrokeColor3 = COLORS.lightningGlow
-                    s.baseY = s.baseY + (direction * speed * dt)
-                    s.baseX = (s.baseX + (drift * dt) + math.sin(now * 0.8 + s.phase) * sway * dt) % 1
-                    if direction >= 0 and s.baseY > 1.04 then s.baseY = -0.04 end
-                    if direction < 0 and s.baseY < -0.04 then s.baseY = 1.04 end
-                    local wave = style == "Wave" and math.sin(now * 1.6 + s.phase) * 0.012 or 0
-                    s.frame.Position = UDim2.new(s.baseX, 0, s.baseY + wave, 0)
-                    s.trail.Position = UDim2.new(s.baseX, 11, s.baseY + wave, 12)
-                    s.trail.Rotation = direction >= 0 and -34 or 34
-                    s.trail.BackgroundColor3 = colors[colorIndex]
-                    local spinFactor = style == "Wave" and 0.22 or (style == "Ash" and 0.45 or 1)
-                    local pulse = style == "Arcane" and (math.sin(now * 2 + s.phase) + 1) * 0.12 or 0
-                    local fadeIn = math.clamp(s.age / 0.75, 0, 1)
-                    local fadeOut = math.clamp((lifetime - s.age) / 1.1, 0, 1)
-                    local visibility = math.min(fadeIn, fadeOut) * (1 - pulse)
-                    s.frame.Rotation = math.sin(now * 0.7 + s.phase) * spin * spinFactor
-                    s.frame.TextTransparency = 1 - math.clamp(opacity * s.alpha * visibility, 0, 0.8)
-                    s.frame.TextStrokeTransparency = 1 - math.clamp(opacity * s.alpha * visibility * 0.42, 0, 0.55)
-                    s.trail.BackgroundTransparency = 1 - math.clamp(opacity * s.alpha * visibility * 0.75, 0, 0.72)
-                end
-            end
-        end)
-        table.insert(trackedConnections, sparkConn)
-
-        -- Periodic High-Voltage Procedural Lightning Bolt Loop
-        local boltThread = task.spawn(function()
-            task.wait(0.4)
-            while gui and gui.Parent do
-                if shell and shell.Visible and effectState.Lightning then
-                    pcall(function()
-                        strikeLightning(lightningLayer, math.random(6, 9))
-                    end)
-                end
-                task.wait(math.random(70, 110) / 10)
-            end
-        end)
-        table.insert(trackedThreads, boltThread)
     end)
+    table.insert(trackedThreads, boltThread)
 
     -- Cinematic opening card with an anime slash sweep and live boot indicator.
     local introOverlay = Instance.new("Frame")
@@ -1353,8 +1212,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     introTitle.Position = UDim2.new(0, 194, 0.5, -22)
     introTitle.BackgroundTransparency = 1
     introTitle.Text = "PAYOMBØYZ HUB"
-    introTitle.TextColor3 = COLORS.primary
-    introTitle.Font = Enum.Font.Fondamento -- Gothic Style
+    introTitle.TextColor3 = COLORS.text
+    introTitle.Font = Enum.Font.GothamBlack
     introTitle.TextSize = 27
     introTitle.TextXAlignment = Enum.TextXAlignment.Left
     introTitle.TextTransparency = 1
@@ -1362,12 +1221,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     introTitle.ZIndex = 1000
     introTitle.Parent = introOverlay
 
-    local titleStroke = Instance.new("UIStroke")
-    titleStroke.Color = Color3.fromRGB(80, 0, 15) -- Dark Crimson Stroke
-    titleStroke.Thickness = 2.4
-    titleStroke.Transparency = 0.12
-    titleStroke.Parent = introTitle
-    sharpenText(introTitle, 0.34)
+    introTitle.TextStrokeColor3 = COLORS.primaryPressed
+    sharpenText(introTitle, 0.24)
 
     local introSub = Instance.new("TextLabel")
     introSub.Name = "IntroSub"
@@ -1460,7 +1315,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     tcGrad.Rotation = 90
     tcGrad.Parent = tcStroke
 
-    -- ⚡ Mini Capsule Sparks
+    -- Small pooled sprites keep the draggable capsule clean and recognizable.
     local capLightningLayer = Instance.new("Frame")
     capLightningLayer.Name = "CapsuleLightningLayer"
     capLightningLayer.Size = UDim2.fromScale(1, 1)
@@ -1468,69 +1323,112 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     capLightningLayer.ZIndex = 1
     capLightningLayer.Parent = toggleCapsule
 
-    task.spawn(function()
-        local sparks = {}
-        for i = 1, 6 do
-            local sp = Instance.new("TextLabel")
-            sp.Name = "CapsuleAnimeParticle"
-            sp.Size = UDim2.fromOffset(14, 14)
-            sp.Position = UDim2.new(math.random(), 0, math.random(), 0)
-            sp.BackgroundTransparency = 1
-            sp.Text = (ACTIVE_THEME_PROFILE.Particle and ACTIVE_THEME_PROFILE.Particle.Glyph) or "✦"
-            sp.TextColor3 = COLORS.lightningGlow
-            sp.TextStrokeColor3 = COLORS.lightningGlow
-            sp.TextStrokeTransparency = 0.7
-            sp.TextTransparency = math.random(22, 60) / 100
-            sp.TextSize = 10
-            sp.Font = Enum.Font.GothamBold
-            sp.BorderSizePixel = 0
-            sp.ZIndex = 1
-            sp.Visible = effectState.CapsuleSparks and i <= effectState.CapsuleSparkCount
-            sp.Parent = capLightningLayer
-            capsuleSparkFrames[#capsuleSparkFrames + 1] = sp
-            sparks[#sparks + 1] = {
-                frame = sp,
-                vx = math.random(-10, 10) / 10000,
-                vy = math.random(15, 35) / 10000,
-                pos = sp.Position.Y.Scale,
-                phase = math.random() * math.pi * 2,
-                alpha = math.random(75, 130) / 100,
-            }
-        end
+    local capsuleParticleStates = {}
+    for index = 1, 2 do
+        local sprite = Instance.new("ImageLabel")
+        sprite.Name = "CapsuleSpark"
+        sprite.AnchorPoint = Vector2.new(0.5, 0.5)
+        sprite.Size = UDim2.fromOffset(9, 9)
+        sprite.BackgroundTransparency = 1
+        sprite.Image = sparkTexture
+        sprite.ImageColor3 = COLORS.primaryHover
+        sprite.ImageTransparency = 1
+        sprite.ScaleType = Enum.ScaleType.Fit
+        sprite.ZIndex = 1
+        sprite.Visible = effectState.CapsuleSparks and index <= effectState.CapsuleSparkCount
+        sprite.Parent = capLightningLayer
+        capsuleSparkFrames[#capsuleSparkFrames + 1] = sprite
+        capsuleParticleStates[#capsuleParticleStates + 1] = {
+            Frame = sprite,
+            Edge = index == 1 and 0.3 or 0.72,
+            Y = math.random(20, 80) / 100,
+            Phase = math.random() * math.pi * 2,
+            Age = math.random() * 3,
+            Life = math.random(3, 5),
+        }
+    end
 
-        local capSparkConn
-        capSparkConn = RunService.Heartbeat:Connect(function()
-            if not gui or not gui.Parent or not toggleCapsule or not toggleCapsule.Parent then
-                if capSparkConn then capSparkConn:Disconnect() end
-                return
-            end
-            if toggleCapsule and toggleCapsule.Visible and effectState.CapsuleSparks then
-                local profile = ACTIVE_THEME_PROFILE and ACTIVE_THEME_PROFILE.Particle or {}
-                local colors = type(profile.Colors) == "table" and #profile.Colors > 0 and profile.Colors or { COLORS.lightningGlow }
-                local direction = tonumber(profile.Direction) or -1
-                local speedScale = math.clamp((tonumber(profile.Speed) or 0.02) / 0.02, 0.5, 2)
-                local style = profile.Style or "Ember"
-                local sway = tonumber(profile.Sway) or 0.01
-                local opacity = tonumber(profile.Opacity) or 0.4
-                local now = os.clock()
-                for _, d in ipairs(sparks) do
-                    d.pos = d.pos + d.vy * speedScale * direction
-                    if direction >= 0 and d.pos > 1.05 then d.pos = -0.05 end
-                    if direction < 0 and d.pos < -0.05 then d.pos = 1.05 end
-                    local newX = (d.frame.Position.X.Scale + d.vx + math.sin(now + d.phase) * sway * 0.015) % 1.0
-                    d.frame.Position = UDim2.new(newX, 0, d.pos, 0)
-                    d.frame.Text = profile.Glyph or "✦"
-                    d.frame.TextColor3 = colors[(math.floor(d.phase * 10) % #colors) + 1]
-                    d.frame.TextStrokeColor3 = COLORS.lightningGlow
-                    local spinFactor = style == "Wave" and 0.2 or (style == "Ash" and 0.4 or 1)
-                    local pulse = style == "Arcane" and (math.sin(now * 2.2 + d.phase) + 1) * 0.18 or 0
-                    d.frame.Rotation = math.sin(now * 0.8 + d.phase) * (tonumber(profile.Spin) or 12) * spinFactor
-                    d.frame.TextTransparency = 1 - math.clamp(d.alpha * opacity * (0.68 + pulse), 0, 0.82)
+    local particleAccumulator = 0
+    local particleConnection = RunService.Heartbeat:Connect(function(deltaTime)
+        particleAccumulator += deltaTime
+        if particleAccumulator < 1 / 18 then return end
+        local dt = math.min(particleAccumulator, 0.12)
+        particleAccumulator = 0
+        if not gui or not gui.Parent then
+            if particleConnection then particleConnection:Disconnect() end
+            return
+        end
+        local drawMainSparks = shell.Visible and effectState.Sparks and effectState.SparkCount > 0
+        local drawCapsuleSparks = toggleCapsule.Visible and effectState.CapsuleSparks and effectState.CapsuleSparkCount > 0
+        if not drawMainSparks and not drawCapsuleSparks then return end
+        local profile = ACTIVE_THEME_PROFILE and ACTIVE_THEME_PROFILE.Particle or {}
+        local colors = type(profile.Colors) == "table" and #profile.Colors > 0 and profile.Colors or { COLORS.primaryHover }
+        local direction = tonumber(profile.Direction) or -1
+        local speed = math.clamp((tonumber(profile.Speed) or 0.025) * 0.62, 0.008, 0.045)
+        local drift = math.clamp(tonumber(profile.Drift) or 0.008, 0, 0.08)
+        local sway = math.clamp(tonumber(profile.Sway) or 0.01, 0, 0.08)
+        local lifetime = math.clamp(tonumber(profile.Lifetime) or 6.5, 3, 12)
+        local style = profile.Style or "Ember"
+        local styleMotion = PARTICLE_STYLE_MOTION[style] or 1
+        local spin = math.clamp(tonumber(profile.Spin) or 16, 0, 45)
+        local opacity = math.clamp(tonumber(profile.Opacity) or 0.38, 0.15, 0.58)
+        local now = os.clock()
+
+        if drawMainSparks then
+            for index, state in ipairs(particleStates) do
+                if index <= effectState.SparkCount then
+                    state.Life = lifetime
+                    state.Age += dt
+                    if state.Age >= state.Life then
+                        state.Age = 0
+                        state.Y = math.random(12, 88) / 100
+                        state.Phase = math.random() * math.pi * 2
+                    end
+                    state.Y += direction * speed * styleMotion * dt
+                    if state.Y < 0.05 then state.Y = 0.92 end
+                    if state.Y > 0.95 then state.Y = 0.08 end
+                    local phase = math.sin(math.pi * state.Age / state.Life)
+                    local sprite = state.Frame
+                    sprite.Visible = true
+                    local driftX = state.Edge + math.sin(now * 0.16 + state.Phase) * drift + math.sin(now * 0.45 + state.Phase) * sway * 0.35
+                    sprite.Position = UDim2.new(math.clamp(driftX, 0.08, 0.92), 0, state.Y, 0)
+                    sprite.Rotation = (state.Age * spin + state.Phase * 30) % 360
+                    sprite.ImageColor3 = colors[(index - 1) % #colors + 1]
+                    sprite.ImageTransparency = 1 - opacity * phase
+                else
+                    state.Frame.Visible = false
                 end
             end
-        end)
-        table.insert(trackedConnections, capSparkConn)
+        else
+            for _, state in ipairs(particleStates) do state.Frame.Visible = false end
+        end
+
+        if drawCapsuleSparks then
+            for index, state in ipairs(capsuleParticleStates) do
+                if index <= effectState.CapsuleSparkCount then
+                    state.Life = lifetime
+                    state.Age += dt
+                    if state.Age >= state.Life then state.Age = 0 end
+                    state.Y += direction * speed * styleMotion * dt * 0.6
+                    if state.Y < 0.08 then state.Y = 0.9 end
+                    if state.Y > 0.92 then state.Y = 0.1 end
+                    local phase = math.sin(math.pi * state.Age / state.Life)
+                    local sprite = state.Frame
+                    sprite.Visible = true
+                    local driftX = state.Edge + math.sin(now * 0.2 + state.Phase) * drift * 0.3 + math.sin(now * 0.55 + state.Phase) * sway * 0.2
+                    sprite.Position = UDim2.new(math.clamp(driftX, 0.08, 0.92), 0, state.Y, 0)
+                    sprite.Rotation = (state.Age * spin + state.Phase * 25) % 360
+                    sprite.ImageColor3 = colors[(index - 1) % #colors + 1]
+                    sprite.ImageTransparency = 1 - opacity * 0.68 * phase
+                else
+                    state.Frame.Visible = false
+                end
+            end
+        else
+            for _, state in ipairs(capsuleParticleStates) do state.Frame.Visible = false end
+        end
     end)
+    table.insert(trackedConnections, particleConnection)
 
     -- Avatar Box inside Capsule
     local capAvatarFrame = Instance.new("Frame")
@@ -1588,32 +1486,15 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     capMetricsLabel.ZIndex = 3
     capMetricsLabel.Parent = toggleCapsule
 
-    -- FPS & Ping Loop for Capsule
+    -- A slow ping refresh keeps the capsule informative without a RenderStepped listener.
     task.spawn(function()
-        local frameCount = 0
-        local lastFpsTime = tick()
-        local fpsVal = 60
-
-        local renderConn
-        renderConn = RunService.RenderStepped:Connect(function()
-            frameCount = frameCount + 1
-            local now = tick()
-            if now - lastFpsTime >= 1 then
-                fpsVal = frameCount
-                frameCount = 0
-                lastFpsTime = now
-            end
-        end)
-        table.insert(trackedConnections, renderConn)
-
-        while task.wait(0.8) do
+        while task.wait(2) do
             if not gui or not gui.Parent or not toggleCapsule or not toggleCapsule.Parent then
-                if renderConn then renderConn:Disconnect() end
                 break
             end
             local pingVal = 0
             pcall(function() pingVal = math.floor(Stats.Network.ServerStatsItem["Data Ping"]:GetValue()) end)
-            capMetricsLabel.Text = string.format("⚡ %d FPS  •  📡 %d ms", fpsVal, pingVal)
+            capMetricsLabel.Text = string.format("SIGNAL  /  %d ms", pingVal)
         end
     end)
 
@@ -2056,7 +1937,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     -- 🖥️ RIGHT MAIN PANEL (Content & Header)
     local mainPanel = Instance.new("Frame")
     mainPanel.Name = "MainPanel"
-    mainPanel.Size = UDim2.new(1, -196, 1, 0)
+    mainPanel.Size = UDim2.new(1, -228, 1, 0)
     mainPanel.Position = UDim2.new(0, 196, 0, 0)
     mainPanel.BackgroundTransparency = 1
     mainPanel.Visible = false -- Initially false during Intro
@@ -2100,27 +1981,26 @@ function ObsidianGlassEngine:CreateWindow(cfg)
     local headerLogoImageCorner = Instance.new("UICorner", headerLogoImage)
     headerLogoImageCorner.CornerRadius = UDim.new(1, 0)
 
-    -- Gothic Title using Enum.Font.Fondamento & UIStroke
+    -- PAYOMBØYZ masthead: a readable wordmark that breaks above the outer contour.
     local mainTitle = Instance.new("TextLabel")
-    mainTitle.Size = UDim2.new(0, 198, 0, 30)
-    mainTitle.Position = UDim2.new(0, 60, 0, 6)
-    mainTitle.BackgroundTransparency = 1
+    mainTitle.Size = UDim2.new(0, 252, 0, 54)
+    mainTitle.Position = UDim2.new(0, 58, 0, -27)
+    mainTitle.BackgroundColor3 = COLORS.shell
+    mainTitle.BackgroundTransparency = 0.02
     mainTitle.Text = "PAYOMBØYZ HUB"
     mainTitle.Text = cfg.Title or mainTitle.Text
-    mainTitle.TextColor3 = COLORS.primary
-    mainTitle.Font = string.find(mainTitle.Text, "[\224-\239][\128-\191][\128-\191]") and Enum.Font.GothamBold or Enum.Font.PermanentMarker
-    mainTitle.TextSize = 21
+    mainTitle.TextColor3 = COLORS.text
+    mainTitle.Font = Enum.Font.GothamBlack
+    mainTitle.TextSize = 24
     mainTitle.TextXAlignment = Enum.TextXAlignment.Left
+    mainTitle.TextStrokeColor3 = COLORS.primaryPressed
+    mainTitle.TextStrokeTransparency = 0.35
+    mainTitle.ZIndex = 30
     mainTitle.Parent = headerBar
-
-    local mtStroke = Instance.new("UIStroke")
-    mtStroke.Color = Color3.fromRGB(80, 0, 15)
-    mtStroke.Thickness = 1.8
-    mtStroke.Parent = mainTitle
 
     local vvipTag = Instance.new("Frame")
     vvipTag.Name = "TitleVvipTag"
-    vvipTag.Position = UDim2.new(0, 264, 0, 11)
+    vvipTag.Position = UDim2.new(0, 322, 0, -12)
     vvipTag.Size = UDim2.fromOffset(92, 20)
     vvipTag.BackgroundColor3 = COLORS.surfaceRaised
     vvipTag.BorderSizePixel = 0
@@ -2275,8 +2155,9 @@ function ObsidianGlassEngine:CreateWindow(cfg)
         shell.Size = UDim2.fromOffset(920, 600)
         shell.BackgroundColor3 = COLORS.shell
         shell.BackgroundTransparency = 0.12
-        shellStroke.Color = COLORS.primary
-        shellStroke.Transparency = 0.15
+        shellStroke.BackgroundColor3 = COLORS.primary
+        shellStroke.BackgroundTransparency = 0
+        for _, line in ipairs(outerFrameLines) do line.Visible = true end
         userPanel.Visible = true
         mainPanel.Visible = true
     else
@@ -2287,8 +2168,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             BackgroundTransparency = 0.04,
         })
         animate(shellStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-            Color = COLORS.primaryHover,
-            Transparency = 0.02,
+            BackgroundColor3 = COLORS.primaryHover,
+            BackgroundTransparency = 0,
         })
         animate(introSlash, TweenInfo.new(0.42, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
             Position = UDim2.new(1.45, 0, 0.52, 0),
@@ -2342,11 +2223,12 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             BackgroundTransparency = 0.12
         })
         animate(shellStroke, expandInfo, {
-            Color = COLORS.primary,
-            Transparency = 0.15
+            BackgroundColor3 = COLORS.primary,
+            BackgroundTransparency = 0
         })
         
         task.wait(0.58)
+        for _, line in ipairs(outerFrameLines) do line.Visible = true end
         userPanel.Visible = true
         mainPanel.Visible = true
     end)
@@ -2717,8 +2599,8 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             sTitle.Position = UDim2.fromOffset(0, sectionDescription ~= "" and 1 or 0)
             sTitle.BackgroundTransparency = 1
             sTitle.Text = (sectionIcon ~= "" and (sectionIcon .. "  ") or "") .. tostring(secTitle)
-            sTitle.TextColor3 = COLORS.primary
-            sTitle.Font = string.find(tostring(secTitle), "[\224-\239][\128-\191][\128-\191]") and Enum.Font.GothamBold or Enum.Font.PermanentMarker
+            sTitle.TextColor3 = COLORS.text
+            sTitle.Font = Enum.Font.GothamBold
             sTitle.TextSize = 15
             sTitle.TextXAlignment = Enum.TextXAlignment.Left
             sTitle.Parent = header
@@ -2730,7 +2612,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
                 description.Text = sectionDescription
                 description.TextColor3 = COLORS.textMuted
                 description.Font = Enum.Font.Gotham
-                description.TextSize = 9
+                description.TextSize = 11
                 description.TextXAlignment = Enum.TextXAlignment.Left
                 description.TextTruncate = Enum.TextTruncate.AtEnd
                 description.Parent = header
@@ -3122,7 +3004,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             btn.BackgroundTransparency = 1
             btn.Text = originalText
             btn.TextColor3 = COLORS.text
-            btn.Font = string.find(tostring(title), "[\224-\239][\128-\191][\128-\191]") and Enum.Font.GothamBold or Enum.Font.PermanentMarker
+            btn.Font = Enum.Font.GothamBold
             btn.TextSize = 14
             btn.Parent = frame
             sharpenText(btn, 0.40)
@@ -4740,8 +4622,6 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             if name == "Sound" then ObsidianGlassEngine.SoundsEnabled = effectState.Sound end
             for index, spark in ipairs(plasmaSparkFrames) do
                 spark.Visible = effectState.Sparks and index <= effectState.SparkCount
-                local trail = plasmaParticleTrails[index]
-                if trail then trail.Visible = spark.Visible end
             end
             for index, spark in ipairs(capsuleSparkFrames) do
                 spark.Visible = effectState.CapsuleSparks and index <= effectState.CapsuleSparkCount
@@ -4784,13 +4664,13 @@ function ObsidianGlassEngine:CreateWindow(cfg)
             addEffectToggle("Sound", "Click sound")
             effectsSection:CreateDropdown({
                 Name = "Spark density",
-                Options = { "0", "2", "4", "6", "8", "10" },
+                Options = { "0", "1", "2", "3", "4" },
                 Default = tostring(effectState.SparkCount),
                 Callback = function(count) self:SetEffects("SparkCount", tonumber(count)) end,
             })
             effectsSection:CreateDropdown({
                 Name = "Capsule spark density",
-                Options = { "0", "1", "2", "3", "4", "5", "6" },
+                Options = { "0", "1", "2" },
                 Default = tostring(effectState.CapsuleSparkCount),
                 Callback = function(count) self:SetEffects("CapsuleSparkCount", tonumber(count)) end,
             })
@@ -4829,7 +4709,7 @@ function ObsidianGlassEngine:CreateWindow(cfg)
 
     function WindowObj:SetTitle(value)
         mainTitle.Text = tostring(value or "")
-        mainTitle.Font = string.find(mainTitle.Text, "[\224-\239][\128-\191][\128-\191]") and Enum.Font.GothamBold or Enum.Font.PermanentMarker
+        mainTitle.Font = Enum.Font.GothamBlack
     end
     WindowObj.Logo = cfg.Logo or DEFAULT_BRAND_LOGO
     function WindowObj:SetLogo(source)
