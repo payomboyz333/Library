@@ -431,7 +431,7 @@ function library.create(): Window
 	init.protected(sixlyinit)
 
 	local main = Instance.new("Frame",sixlyinit)
-	main.AnchorPoint = Vector2.new(0.5,0.5);main.BackgroundColor3 = Color3.fromRGB(24,23,27);main.BackgroundTransparency = 0;main.Position = UDim2.new(0.5,0,0.5,0);main.Name = "@main"
+	main.AnchorPoint = Vector2.new(0.5,0.5);main.BackgroundColor3 = Color3.fromRGB(18,19,24);main.BackgroundTransparency = 0;main.Position = UDim2.new(0.5,0,0.5,0);main.Name = "@main"
 	main.Active = true
 	local viewport = workspace.CurrentCamera and workspace.CurrentCamera.ViewportSize or Vector2.new(1280, 720)
 	local initialSize = init.device() and Vector2.new(700,500) or Vector2.new(600,400)
@@ -573,17 +573,90 @@ function library.create(): Window
 
 	spawnFestivalParticles()
 
+	-- // Top Tab Bar (Concept 2: Sleek Graphite Pill Navigation)
+	local topTabBar = Instance.new("Frame", main)
+	topTabBar.Name = "@topTabBar"
+	topTabBar.BackgroundTransparency = 1
+	topTabBar.Position = UDim2.new(0, 14, 0, 8)
+	topTabBar.Size = UDim2.new(1, -28, 0, 32)
+	topTabBar.ZIndex = 50
+
+	local brandTitle = Instance.new("TextLabel", topTabBar)
+	brandTitle.Name = "BrandTitle"
+	brandTitle.BackgroundTransparency = 1
+	brandTitle.Position = UDim2.new(0, 0, 0, 0)
+	brandTitle.Size = UDim2.new(0, 100, 1, 0)
+	brandTitle.FontFace = Font.fromName("Montserrat", Enum.FontWeight.Black, Enum.FontStyle.Normal)
+	brandTitle.Text = "PAYOMBØYZ"
+	brandTitle.TextColor3 = PRIMARY_COLOR
+	brandTitle.TextSize = 13
+	brandTitle.TextXAlignment = Enum.TextXAlignment.Left
+
+	local brandDivider = Instance.new("Frame", topTabBar)
+	brandDivider.Name = "BrandDivider"
+	brandDivider.BackgroundColor3 = Color3.fromRGB(48, 50, 58)
+	brandDivider.BorderSizePixel = 0
+	brandDivider.Position = UDim2.new(0, 106, 0.5, -8)
+	brandDivider.Size = UDim2.new(0, 1, 0, 16)
+
+	local tabScroll = Instance.new("ScrollingFrame", topTabBar)
+	tabScroll.Name = "TabScroll"
+	tabScroll.BackgroundTransparency = 1
+	tabScroll.Position = UDim2.new(0, 116, 0, 0)
+	tabScroll.Size = UDim2.new(1, -176, 1, 0)
+	tabScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+	tabScroll.AutomaticCanvasSize = Enum.AutomaticSize.X
+	tabScroll.ScrollBarThickness = 0
+	tabScroll.ScrollingDirection = Enum.ScrollingDirection.X
+
+	local tabListLayout = Instance.new("UIListLayout", tabScroll)
+	tabListLayout.FillDirection = Enum.FillDirection.Horizontal
+	tabListLayout.Padding = UDim.new(0, 6)
+	tabListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	tabListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+
+	local navArrows = Instance.new("Frame", topTabBar)
+	navArrows.Name = "NavArrows"
+	navArrows.BackgroundTransparency = 1
+	navArrows.AnchorPoint = Vector2.new(1, 0.5)
+	navArrows.Position = UDim2.new(1, 0, 0.5, 0)
+	navArrows.Size = UDim2.new(0, 54, 0, 24)
+
+	local prevNavBtn = Instance.new("TextButton", navArrows)
+	prevNavBtn.Name = "PrevBtn"
+	prevNavBtn.BackgroundColor3 = Color3.fromRGB(28, 30, 36)
+	prevNavBtn.Size = UDim2.new(0, 24, 0, 22)
+	prevNavBtn.Position = UDim2.new(0, 0, 0.5, -11)
+	prevNavBtn.Text = "◀"
+	prevNavBtn.TextColor3 = Color3.fromRGB(165, 166, 175)
+	prevNavBtn.TextSize = 10
+	prevNavBtn.FontFace = Font.fromName("Montserrat", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+	init.create_corner(5, prevNavBtn)
+	init.stroke(prevNavBtn, 0.5, 1, Color3.fromRGB(52, 54, 62))
+
+	local nextNavBtn = Instance.new("TextButton", navArrows)
+	nextNavBtn.Name = "NextBtn"
+	nextNavBtn.BackgroundColor3 = Color3.fromRGB(28, 30, 36)
+	nextNavBtn.Size = UDim2.new(0, 24, 0, 22)
+	nextNavBtn.Position = UDim2.new(0, 28, 0.5, -11)
+	nextNavBtn.Text = "▶"
+	nextNavBtn.TextColor3 = Color3.fromRGB(165, 166, 175)
+	nextNavBtn.TextSize = 10
+	nextNavBtn.FontFace = Font.fromName("Montserrat", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+	init.create_corner(5, nextNavBtn)
+	init.stroke(nextNavBtn, 0.5, 1, Color3.fromRGB(52, 54, 62))
+
 	local page = Instance.new("Frame",main)
-	page.AnchorPoint = Vector2.new(0,0.5);page.BackgroundTransparency = 1;page.Position = UDim2.new(0.025,0,0.5,0);page.Size = UDim2.new(0.95,0,0.95,0);page.Name = "@page";
+	page.AnchorPoint = Vector2.new(0,0);page.BackgroundTransparency = 1;page.Position = UDim2.new(0.02,0,0,46);page.Size = UDim2.new(0.96,0,1,-54);page.Name = "@page";
 	page.ClipsDescendants = true;
 
 	local setDetailLayout = function(opened,instant)
 		local target = opened and {
-			Position = UDim2.new(0,18,0.5,0),
-			Size = UDim2.new(1,-326,0.95,0)
+			Position = UDim2.new(0,14,0,46),
+			Size = UDim2.new(1,-320,1,-54)
 		} or {
-			Position = UDim2.new(0.025,0,0.5,0),
-			Size = UDim2.new(0.95,0,0.95,0)
+			Position = UDim2.new(0.02,0,0,46),
+			Size = UDim2.new(0.96,0,1,-54)
 		}
 		if instant then
 			page.Position = target.Position
@@ -595,6 +668,34 @@ function library.create(): Window
 
 	local uipage = Instance.new("UIPageLayout",page)
 	uipage.Animated = true;uipage.Circular = true;uipage.EasingStyle = Enum.EasingStyle.Cubic;uipage.TweenTime = 0.5;
+
+	prevNavBtn.MouseButton1Click:Connect(function()
+		uipage:Previous()
+	end)
+
+	nextNavBtn.MouseButton1Click:Connect(function()
+		uipage:Next()
+	end)
+
+	local tabPills = {}
+	local function updateTabStyles(activeIndex)
+		for idx, item in ipairs(tabPills) do
+			local isActive = (idx - 1) == activeIndex
+			local bgCol = isActive and Color3.fromRGB(42, 43, 48) or Color3.fromRGB(26, 28, 34)
+			local textCol = isActive and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(155, 156, 166)
+			local strokeCol = isActive and PRIMARY_COLOR or Color3.fromRGB(52, 54, 62)
+			local strokeTrans = isActive and 0 or 0.6
+			init.tween(item.Button, 0.15, Enum.EasingStyle.Circular, {BackgroundColor3 = bgCol})
+			init.tween(item.Label, 0.15, Enum.EasingStyle.Circular, {TextColor3 = textCol})
+			init.tween(item.Stroke, 0.15, Enum.EasingStyle.Circular, {Color = strokeCol, Transparency = strokeTrans})
+		end
+	end
+
+	uipage:GetPropertyChangedSignal("CurrentPage"):Connect(function()
+		if uipage.CurrentPage then
+			updateTabStyles(uipage.CurrentPage.LayoutOrder)
+		end
+	end)
 
 	--// folder components
 
@@ -838,9 +939,66 @@ function library.create(): Window
 
 	local activeDetailClose = nil
 	local tabs = {}
-	function tabs.create(): Tab
+	function tabs.create(tabTitle: string?): Tab
 		asset["index"] = asset["index"] + 1
+		local tabIndex = asset["index"]
 		local str_random = Random.new():NextInteger(1,999999)
+
+		local pillBtn = Instance.new("TextButton", tabScroll)
+		pillBtn.Name = "TabPill_" .. tabIndex
+		pillBtn.LayoutOrder = tabIndex
+		pillBtn.Size = UDim2.new(0, 0, 0, 24)
+		pillBtn.AutomaticSize = Enum.AutomaticSize.X
+		pillBtn.BackgroundColor3 = (tabIndex == 0) and Color3.fromRGB(42, 43, 48) or Color3.fromRGB(26, 28, 34)
+		pillBtn.AutoButtonColor = false
+		pillBtn.Text = ""
+		pillBtn.ZIndex = 52
+		init.create_corner(6, pillBtn)
+
+		local pillPadding = Instance.new("UIPadding", pillBtn)
+		pillPadding.PaddingLeft = UDim.new(0, 10); pillPadding.PaddingRight = UDim.new(0, 10)
+
+		local pillStroke = init.stroke(pillBtn, (tabIndex == 0) and 0 or 0.6, 1, (tabIndex == 0) and PRIMARY_COLOR or Color3.fromRGB(52, 54, 62))
+
+		local initialLabel = tabTitle or ("Tab " .. (tabIndex + 1))
+		local pillLabel = Instance.new("TextLabel", pillBtn)
+		pillLabel.Name = "Label"
+		pillLabel.BackgroundTransparency = 1
+		pillLabel.Size = UDim2.new(0, 0, 1, 0)
+		pillLabel.AutomaticSize = Enum.AutomaticSize.X
+		pillLabel.Text = initialLabel
+		pillLabel.TextColor3 = (tabIndex == 0) and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(155, 156, 166)
+		pillLabel.TextSize = 11
+		pillLabel.FontFace = Font.fromName("Montserrat", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
+		pillLabel.ZIndex = 53
+
+		local pillData = {
+			Button = pillBtn,
+			Label = pillLabel,
+			Stroke = pillStroke,
+			Index = tabIndex,
+			CustomSet = (tabTitle ~= nil and tabTitle ~= "")
+		}
+		table.insert(tabPills, pillData)
+
+		pillBtn.MouseEnter:Connect(function()
+			if uipage.CurrentPage and uipage.CurrentPage.LayoutOrder ~= tabIndex then
+				init.tween(pillBtn, 0.15, Enum.EasingStyle.Circular, {BackgroundColor3 = Color3.fromRGB(34, 36, 44)})
+				init.tween(pillLabel, 0.15, Enum.EasingStyle.Circular, {TextColor3 = Color3.fromRGB(220, 222, 230)})
+			end
+		end)
+
+		pillBtn.MouseLeave:Connect(function()
+			if uipage.CurrentPage and uipage.CurrentPage.LayoutOrder ~= tabIndex then
+				init.tween(pillBtn, 0.15, Enum.EasingStyle.Circular, {BackgroundColor3 = Color3.fromRGB(26, 28, 34)})
+				init.tween(pillLabel, 0.15, Enum.EasingStyle.Circular, {TextColor3 = Color3.fromRGB(155, 156, 166)})
+			end
+		end)
+
+		pillBtn.MouseButton1Click:Connect(function()
+			uipage:JumpToIndex(tabIndex)
+			updateTabStyles(tabIndex)
+		end)
 
 		local container = Instance.new("ScrollingFrame",page)
 		container.BackgroundTransparency = 1;container.Size = UDim2.new(1,0,1,0);container.CanvasSize = UDim2.new(0,0,0,0);container.ScrollBarThickness = 0;
@@ -851,7 +1009,7 @@ function library.create(): Window
 		sectionList.SortOrder = Enum.SortOrder.LayoutOrder;sectionList.Padding = UDim.new(0,12)
 
 		local uipadding = Instance.new("UIPadding",container)
-		uipadding.PaddingTop = UDim.new(0,15);
+		uipadding.PaddingTop = UDim.new(0,10);
 
 		if asset["first-executed"] then
 			asset["first-executed"] = false
@@ -920,7 +1078,15 @@ function library.create(): Window
 
 		function func.Header(arr: SectionOptions | string): Tab
 			arr = type(arr) == "table" and arr or {Title = arr}
-			createSection(arr.Title or arr.Name,true)
+			local hTitle = arr.Title or arr.Name
+			if not pillData.CustomSet and hTitle and not string.find(string.lower(hTitle), "edited") then
+				local cleanTabTitle = tostring(hTitle):gsub("%s*%(%d+/%d+%)%s*", ""):gsub("^%s+", ""):gsub("%s+$", "")
+				if cleanTabTitle ~= "" then
+					pillLabel.Text = cleanTabTitle
+					pillData.CustomSet = true
+				end
+			end
+			createSection(hTitle,true)
 			return func
 		end
 
