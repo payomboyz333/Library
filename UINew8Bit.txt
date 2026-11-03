@@ -25,8 +25,11 @@ local Config = {
     AssetDir = "payomboyzhub/assets",
     ConfigRoot = "payomboyzhub/configs",
     DefaultAssets = {
-        logo = "https://raw.githubusercontent.com/xDTaraZz/Roblox-Scripts/main/logo.png",
-        logo_halloween = "https://raw.githubusercontent.com/xDTaraZz/Roblox-Scripts/main/logo_halloween.png",
+        logo = "rbxassetid://81695492880721", -- PayomboyZ Crown Action Logo
+        logo_action = "rbxassetid://81695492880721",
+        logo_hug = "rbxassetid://87106942787227", -- PayomboyZ Discord Hug Mascot Logo
+        float_logo = "rbxassetid://87106942787227",
+        logo_halloween = "rbxassetid://81695492880721",
     },
     SeasonTheme = (function()
         local d = os.date("*t")
@@ -739,10 +742,29 @@ local Draw = {}
 local Sprite = {}
 local Assets = {
     Overrides = {
-        logo        = "rbxassetid://81695492880721", -- PayomboyZ Crown Action Logo
-        logo_action = "rbxassetid://81695492880721",
-        logo_hug    = "rbxassetid://87106942787227", -- PayomboyZ Discord Hug Mascot Logo
-        float_logo  = "rbxassetid://87106942787227",
+        -- Official PayomboyZ Custom Logos
+        logo            = "rbxassetid://81695492880721", -- PayomboyZ Crown Action Logo
+        logo_action     = "rbxassetid://81695492880721",
+        logo_hug        = "rbxassetid://87106942787227", -- PayomboyZ Discord Hug Mascot Logo
+        float_logo      = "rbxassetid://87106942787227",
+
+        -- Official Pokémon Café Sprites (Converted to rbxassetid)
+        poke_pikachu    = "rbxassetid://125098915684378",
+        poke_charmander = "rbxassetid://86114697598274",
+        poke_squirtle   = "rbxassetid://130535835119790",
+        poke_bulbasaur  = "rbxassetid://76019777480380",
+        poke_gengar     = "rbxassetid://70846346171434",
+        poke_eevee      = "rbxassetid://83011097852008",
+        poke_snorlax    = "rbxassetid://72579057927908",
+        poke_ball       = "rbxassetid://134749850572865",
+
+        -- Official Kirby Dream Land Sprites (Converted to rbxassetid)
+        kirby_body      = "rbxassetid://136859376134992",
+        kirby_official  = "rbxassetid://136859376134992",
+        kirby_cursor    = "rbxassetid://138245594673597",
+
+        -- Official Stardew Valley UI Sprites (Converted to rbxassetid)
+        sdv_inventory   = "rbxassetid://105289778439545",
     },
     Cache = {},
 }
@@ -1987,16 +2009,18 @@ end
 -- Resolve theme logo asset or fall back to default logo / vector M emblem
 function Draw.Emblem(parent, size)
     local holder = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.fromOffset(size, size), Parent = parent })
-    local picture = Draw.New("ImageLabel", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.5), Size = UDim2.fromScale(1, 1), ScaleType = Enum.ScaleType.Fit, Visible = false, Parent = holder })
+    local badgeBg = Draw.Box("Frame", { Size = UDim2.fromOffset(size, size), Parent = holder }, "Accent", "Outline", UDim.new(1, 0), 2)
+    local picture = Draw.New("ImageLabel", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.5), Size = UDim2.fromScale(0.88, 0.88), ScaleType = Enum.ScaleType.Fit, Visible = false, Parent = badgeBg })
+    Draw.Corner(picture, UDim.new(1, 0))
     local drawn = Draw.DrawnEmblem(holder, size)
     Theme.OnRender(holder, function()
         local content = (Theme.Colors.Logo and Assets.Resolve(Theme.Colors.Logo)) or Assets.Resolve("logo")
         picture.Image = content or ""
         picture.Visible = content ~= nil
+        badgeBg.Visible = content ~= nil
         drawn.Visible = content == nil
-        picture.Size = UDim2.fromScale(Theme.Colors.Logo and 1.25 or 1, Theme.Colors.Logo and 1.25 or 1)
     end)
-    Anim.Loop("Emblem", picture, { Rotation = 6 }, 1.6, "Sine", true)
+    Anim.Loop("Emblem", holder, { Rotation = 5 }, 1.8, "Sine", true)
     return holder
 end
 
@@ -2043,13 +2067,11 @@ function Draw.DrawnEmblem(parent, size)
             s.AnchorPoint = Vector2.new(0.5, 0.5)
             s.Position = UDim2.fromScale(0.5, 0.5)
         else
-            -- Classic Mario "M" Cap Emblem (Overworld, Castle, Underground)
+            -- PayomboyZ Golden Crown Emblem (Overworld, Castle, Underground)
             local emblem = Draw.Box("Frame", { Size = UDim2.fromOffset(size, size), Parent = holder }, "Accent", "Outline", UDim.new(1, 0), 2)
-            local ring = Draw.New("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.5), Size = UDim2.fromScale(0.7, 0.7), Parent = emblem })
-            Draw.Corner(ring, UDim.new(1, 0))
-            Theme.Bind(ring, { BackgroundColor3 = "White" })
-            local letter = Draw.Text({ Text = "M", Size = UDim2.fromScale(1, 1), TextXAlignment = Enum.TextXAlignment.Center, Position = UDim2.fromOffset(0, 1), Parent = ring }, "Logo", math.floor(size * 0.5), "Accent")
-            letter.TextScaled = false
+            local s = Sprite.New(emblem, "crown", spriteSize)
+            s.AnchorPoint = Vector2.new(0.5, 0.5)
+            s.Position = UDim2.fromScale(0.5, 0.5)
         end
     end
     renderEmblem()
@@ -2084,8 +2106,11 @@ function Assets.Configure(map)
         return
     end
     for name, source in pairs(map) do
-        Assets.Overrides[tostring(name):lower()] = source
-        Assets.Cache[tostring(name):lower()] = nil
+        local k = tostring(name):lower()
+        if not Assets.Overrides[k] or (type(source) == "string" and source:find("^rbxasset")) then
+            Assets.Overrides[k] = source
+            Assets.Cache[k] = nil
+        end
     end
 end
 
@@ -7607,8 +7632,11 @@ function Window:BuildFrameChrome()
         local theme = State.ThemeName or "Overworld"
 
         if theme == "Stardew Valley" then
-            -- 4 Golden Brass Ornamental Metal Corner Brackets
-            local bracketSize = 16
+            -- ═════════════════════════════════════════════════════════════════
+            -- Stardew Valley: Authentic Wooden Dialogue Box Architecture
+            -- 4 Golden Brass Corner Brackets with Screw Rivets & Wood Grain Frame
+            -- ═════════════════════════════════════════════════════════════════
+            local bracketSize = 20
             local positions = {
                 { Vector2.new(0, 0), UDim2.fromOffset(2, 2), 0 },
                 { Vector2.new(1, 0), UDim2.new(1, -2, 0, 2), 90 },
@@ -7624,35 +7652,69 @@ function Window:BuildFrameChrome()
                     Rotation = pos[3],
                     Parent = holder,
                 })
-                -- L-bracket outer strip
-                local hBar = Draw.New("Frame", { Size = UDim2.new(1, 0, 0, 3), BorderSizePixel = 0, Parent = b })
-                local vBar = Draw.New("Frame", { Size = UDim2.new(0, 3, 1, 0), BorderSizePixel = 0, Parent = b })
-                -- Rivet golden screw dot
-                local rivet = Draw.New("Frame", { Position = UDim2.fromOffset(4, 4), Size = UDim2.fromOffset(4, 4), BorderSizePixel = 0, Parent = b })
+                -- Heavy brass L-bracket
+                local hBar = Draw.New("Frame", { Size = UDim2.new(1, 0, 0, 4), BorderSizePixel = 0, Parent = b })
+                local vBar = Draw.New("Frame", { Size = UDim2.new(0, 4, 1, 0), BorderSizePixel = 0, Parent = b })
+                -- Golden rivet screw
+                local rivet = Draw.New("Frame", { Position = UDim2.fromOffset(5, 5), Size = UDim2.fromOffset(5, 5), BorderSizePixel = 0, Parent = b })
                 Draw.Corner(rivet, 2)
                 Theme.Bind(hBar, { BackgroundColor3 = "Coin" })
                 Theme.Bind(vBar, { BackgroundColor3 = "Coin" })
                 Theme.Bind(rivet, { BackgroundColor3 = "CoinDark" })
             end
+            -- Junimo mascot peeking from top-left bracket
+            local jumi = Sprite.New(holder, "sdv_junimo", 18)
+            jumi.Position = UDim2.fromOffset(22, 10)
+            Anim.Loop("SDVCornerJumi", jumi, { Position = UDim2.fromOffset(22, 6), Rotation = 6 }, 1.8, "Sine", true)
 
         elseif theme == "Kirby" then
-            -- Floating Dream Land star sparkles in top corners
-            for _, spot in ipairs({ { UDim2.fromOffset(6, 6), 0 }, { UDim2.new(1, -22, 0, 6), 15 } }) do
-                local star = Sprite.New(holder, "kirby_star", 16)
+            -- ═════════════════════════════════════════════════════════════════
+            -- Kirby: Dream Land Soft Puffball Clouds & Spinning Warp Stars
+            -- ═════════════════════════════════════════════════════════════════
+            for _, spot in ipairs({ { UDim2.fromOffset(8, 8), 0 }, { UDim2.new(1, -24, 0, 8), 15 } }) do
+                local star = Sprite.New(holder, "kirby_star", 18)
                 star.Position = spot[1]
                 star.Rotation = spot[2]
-                Anim.Loop("KirbyCornerStar", star, { Rotation = spot[2] + 45 }, 2.5, "Sine", true)
+                Anim.Loop("KirbyCornerStar", star, { Rotation = spot[2] + 45 }, 2.0, "Sine", true)
             end
+            -- Soft Dream Land ambient cloud puff in bottom corner
+            local puff = Draw.Cloud(holder, 36)
+            puff.Position = UDim2.new(1, -44, 1, -Config.Window.Ground - 24)
+            Anim.Loop("KirbyPuffAnim", puff, { Position = UDim2.new(1, -44, 1, -Config.Window.Ground - 28) }, 2.4, "Sine", true)
+
+        elseif theme == "Pokemon Cafe" then
+            -- ═════════════════════════════════════════════════════════════════
+            -- Pokemon Cafe: Café Counter Trim & Corner Pokéball Badge
+            -- ═════════════════════════════════════════════════════════════════
+            local ballBadge = Sprite.New(holder, "poke_ball", 20)
+            ballBadge.AnchorPoint = Vector2.new(0, 1)
+            ballBadge.Position = UDim2.new(0, 8, 1, -Config.Window.Ground - 6)
+            Anim.Loop("PokeBallCorner", ballBadge, { Rotation = 360 }, 4.0, "Linear", false)
+
+            -- Coffee steam cup in top-right
+            local cupBadge = Sprite.New(holder, "poke_cup", 18)
+            cupBadge.AnchorPoint = Vector2.new(1, 0)
+            cupBadge.Position = UDim2.new(1, -12, 0, 8)
+            Anim.Loop("PokeCupCorner", cupBadge, { Rotation = 6 }, 2.2, "Sine", true)
 
         elseif theme == "Animal Crossing" then
-            -- Nook Leaf emblem embossed in bottom-left corner
-            local leafBadge = Sprite.New(holder, "ac_leaf", 18)
+            -- ═════════════════════════════════════════════════════════════════
+            -- Animal Crossing: Nook Leaf Embossed Badge & Cherry Accent
+            -- ═════════════════════════════════════════════════════════════════
+            local leafBadge = Sprite.New(holder, "ac_leaf", 20)
             leafBadge.AnchorPoint = Vector2.new(0, 1)
-            leafBadge.Position = UDim2.new(0, 6, 1, -Config.Window.Ground - 6)
-            Anim.Loop("ACCornerLeaf", leafBadge, { Rotation = 8 }, 2.0, "Sine", true)
+            leafBadge.Position = UDim2.new(0, 8, 1, -Config.Window.Ground - 6)
+            Anim.Loop("ACCornerLeaf", leafBadge, { Rotation = 10 }, 2.0, "Sine", true)
+
+            local cherry = Sprite.New(holder, "ac_cherry", 16)
+            cherry.AnchorPoint = Vector2.new(1, 0)
+            cherry.Position = UDim2.new(1, -10, 0, 8)
+            Anim.Loop("ACCherryCorner", cherry, { Rotation = -8 }, 1.8, "Sine", true)
 
         elseif theme == "Tamagotchi" then
-            -- Virtual Pet LCD Screen Inset Glare line (diagonal white sheen across topbar)
+            -- ═════════════════════════════════════════════════════════════════
+            -- Tamagotchi: Virtual Pet Handheld Plastic Chassis & LCD Screen Bezel
+            -- ═════════════════════════════════════════════════════════════════
             local glare = Draw.New("Frame", {
                 Position = UDim2.fromOffset(0, 0),
                 Size = UDim2.new(1, 0, 0, 2),
@@ -7662,6 +7724,11 @@ function Window:BuildFrameChrome()
                 Parent = holder,
             })
             Theme.Bind(glare, { BackgroundColor3 = "White" })
+
+            -- Mini LCD Pet Egg in top-left
+            local eggPip = Sprite.New(holder, "tama_egg", 18)
+            eggPip.Position = UDim2.fromOffset(10, 8)
+            Anim.Loop("TamaEggPip", eggPip, { Position = UDim2.fromOffset(10, 4) }, 0.8, "Bounce", true)
         end
     end
 
@@ -7838,15 +7905,18 @@ function Window:BuildPokemonDecor(topbar)
     -- Pikachu electric bolt text sprites shooting across topbar
     self.PokeSprites = {}
     local boltSpots = {
-        { 0.42, 12, "⚡", 14 }, { 0.50, 24, "⚡", 12 }, { 0.58, 8, "⚡", 16 },
-        { 0.65, 22, "⚡", 11 }, { 0.72, 14, "⚡", 13 },
+        { 0.42, 12, 14 }, { 0.50, 24, 12 }, { 0.58, 8, 16 },
+        { 0.65, 22, 12 }, { 0.72, 14, 14 },
     }
     for idx, spot in ipairs(boltSpots) do
-        local bolt = Draw.Text({ AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(spot[4] + 4, spot[4] + 4), TextXAlignment = Enum.TextXAlignment.Center, ZIndex = 3, Parent = topbar }, "Glyph", spot[4], "AccentDark")
-        bolt.Text = spot[3]
-        bolt.TextTransparency = 0.2
-        Anim.Loop("DecorPokemon", bolt, { TextTransparency = 0.9, Position = UDim2.new(spot[1], 6, 0, spot[2] - 4) }, 0.6 + idx * 0.22, "Sine", true)
-        table.insert(self.PokeSprites, bolt)
+        local boltHolder = Draw.New("Frame", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(spot[3], spot[3]), ZIndex = 3, Parent = topbar })
+        -- Draw crisp vector lightning spark
+        local b1 = Draw.New("Frame", { Position = UDim2.fromScale(0.2, 0), Size = UDim2.new(0, 3, 0.6, 0), Rotation = -25, BorderSizePixel = 0, Parent = boltHolder })
+        local b2 = Draw.New("Frame", { Position = UDim2.fromScale(0.4, 0.4), Size = UDim2.new(0, 3, 0.6, 0), Rotation = -25, BorderSizePixel = 0, Parent = boltHolder })
+        Theme.Bind(b1, { BackgroundColor3 = "Coin" })
+        Theme.Bind(b2, { BackgroundColor3 = "Accent" })
+        Anim.Loop("DecorPokemon", boltHolder, { Position = UDim2.new(spot[1], 6, 0, spot[2] - 4), Rotation = 15 }, 0.5 + idx * 0.2, "Sine", true)
+        table.insert(self.PokeSprites, boltHolder)
     end
     -- Pikachu mascot peeking in topbar
     local pikaHolder = Draw.New("Frame", { Name = "PokePika", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.46, 0, 0, 4), Size = UDim2.fromOffset(22, 38), ZIndex = 3, Parent = topbar })
@@ -7862,10 +7932,10 @@ function Window:BuildPokemonDecor(topbar)
     cup.AnchorPoint = Vector2.new(0.5, 0)
     cup.Position    = UDim2.fromOffset(11, 4)
     -- Steam text "˜" rising above cup
-    local steam = Draw.Text({ AnchorPoint = Vector2.new(0.5, 1), Position = UDim2.fromOffset(11, 4), Size = UDim2.fromOffset(20, 16), TextXAlignment = Enum.TextXAlignment.Center, ZIndex = 4, Parent = cupHolder }, "Glyph", 10, "SubText")
-    steam.Text = "〜"
-    steam.TextTransparency = 0.4
-    Anim.Loop("DecorPokemon", steam, { Position = UDim2.fromOffset(11, -2), TextTransparency = 0.9 }, 1.0, "Sine", true)
+    local steam = Draw.New("Frame", { AnchorPoint = Vector2.new(0.5, 1), Position = UDim2.fromOffset(11, 2), Size = UDim2.fromOffset(4, 12), BackgroundTransparency = 0.4, ZIndex = 4, Parent = cupHolder })
+    Draw.Corner(steam, 2)
+    Theme.Bind(steam, { BackgroundColor3 = "White" })
+    Anim.Loop("DecorPokemon", steam, { Position = UDim2.fromOffset(11, -6), BackgroundTransparency = 0.95 }, 1.2, "Sine", true)
     Anim.Loop("DecorPokemon", cup, { Rotation = 4 }, 1.8, "Sine", true)
     self.PokeCup = cupHolder
     table.insert(self.PokeSprites, cupHolder)
@@ -7936,12 +8006,13 @@ function Window:BuildAnimalCrossingDecor(topbar)
         grassBand.BackgroundColor3 = Theme.Colors.Grass or Color3.fromRGB(154, 205, 123)
     end)
     -- Flower / leaf pips along the bottom strip
-    local pipGlyphs = { "❀", "✿", "❀", "✿", "❀", "✿", "❀" }
-    for i, glyph in ipairs(pipGlyphs) do
-        local pip = Draw.Text({ AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.new((i-1)/8, 6, 0.5, 0), Size = UDim2.fromOffset(18, 18), TextXAlignment = Enum.TextXAlignment.Center, ZIndex = 3, Parent = grassBand }, "Glyph", 10, "Grass")
-        pip.Text = glyph
-        pip.TextTransparency = 0.3
-        Anim.Loop("DecorACBody", pip, { TextTransparency = 0.7 }, 1.5 + i * 0.3, "Sine", true)
+    for i = 1, 7 do
+        local spriteKey = (i % 2 == 0) and "ac_leaf" or "ac_cherry"
+        local pip = Sprite.New(grassBand, spriteKey, 14)
+        pip.AnchorPoint = Vector2.new(0, 0.5)
+        pip.Position    = UDim2.new((i-1)/8, 6, 0.5, 0)
+        pip.ZIndex      = 3
+        Anim.Loop("DecorACBody", pip, { Position = UDim2.new((i-1)/8, 6, 0.5, -2) }, 1.5 + i * 0.3, "Sine", true)
     end
     self.ACBand = grassBand
 end
@@ -8087,12 +8158,12 @@ function Window:BuildTamagotchiDecor(topbar)
         lcdBand.BackgroundColor3 = Theme.Colors.Accent or Color3.fromRGB(255, 126, 176)
     end)
     -- Heart icons along the band (Tamagotchi's care meter)
-    local hearts = { "♥", "♥", "♥", "♥", "♥" }
-    for i, h in ipairs(hearts) do
-        local heart = Draw.Text({ AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.new((i-1)/6 + 0.05, 0, 0.5, 0), Size = UDim2.fromOffset(16, 16), TextXAlignment = Enum.TextXAlignment.Center, ZIndex = 3, Parent = lcdBand }, "Glyph", 10, "Accent")
-        heart.Text = h
-        heart.TextTransparency = 0.2 + i * 0.1
-        Anim.Loop("DecorTamaBody", heart, { TextTransparency = 0.8 }, 0.9 + i * 0.28, "Sine", true)
+    for i = 1, 5 do
+        local heart = Sprite.New(lcdBand, "tama_heart", 14)
+        heart.AnchorPoint = Vector2.new(0, 0.5)
+        heart.Position    = UDim2.new((i-1)/6 + 0.05, 0, 0.5, 0)
+        heart.ZIndex      = 3
+        Anim.Loop("DecorTamaBody", heart, { Position = UDim2.new((i-1)/6 + 0.05, 0, 0.5, -3) }, 0.9 + i * 0.25, "Sine", true)
     end
     self.TamaLCDBand = lcdBand
 end
@@ -8377,17 +8448,19 @@ function Window:RenderGround()
 
     if theme == "Animal Crossing" then
         -- ═════════════════════════════════════════════════════════════════
-        -- Animal Crossing: Island Grass Lawn + Daisy Flowers + Soil Border
+        -- Animal Crossing: Island Grass Lawn + Pixel Leaves + River Pebbles
+        -- Zero Unicode Emojis — 100% Native 8-bit Pixel Art Sprites
         -- ═════════════════════════════════════════════════════════════════
         local soil = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BrickDark")
         local grass = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 8), Parent = container }, "Grass")
         local grassEdge = Draw.Box("Frame", { Position = UDim2.fromOffset(0, 8), Size = UDim2.new(1, 0, 0, 2), Parent = container }, "GrassDark")
         Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 2), Parent = container }, "Outline")
-        -- Wild flowers blooming along the lawn edge
-        for i = 1, 12 do
-            local flower = Draw.Text({ Position = UDim2.new((i - 1) / 12 + 0.03, 0, 0, 2), Size = UDim2.fromOffset(12, 12), Parent = container }, "Glyph", 9, "White")
-            flower.Text = (i % 2 == 0) and "✿" or "❀"
-            flower.TextTransparency = 0.15
+        -- Pixel leaves and cherries along lawn edge
+        for i = 1, 8 do
+            local spriteKey = (i % 2 == 0) and "ac_leaf" or "ac_cherry"
+            local s = Sprite.New(container, spriteKey, 14)
+            s.Position = UDim2.new((i - 1) / 8 + 0.04, 0, 0, 2)
+            s.ZIndex = 3
         end
         -- River pebbles in soil
         for p = 1, 8 do
@@ -8398,22 +8471,22 @@ function Window:RenderGround()
 
     elseif theme == "Kirby" then
         -- ═════════════════════════════════════════════════════════════════
-        -- Kirby: Dream Land Pastel Cloud Bank + Golden Warp Star Ribbon
+        -- Kirby: Dream Land Pastel Cloud Bank + Pixel Warp Stars
         -- ═════════════════════════════════════════════════════════════════
         local sky = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "Backdrop")
         local pinkBar = Draw.Box("Frame", { Position = UDim2.fromOffset(0, 0), Size = UDim2.new(1, 0, 0, 6), Parent = container }, "Accent")
         local cloudPuffs = Draw.Box("Frame", { Position = UDim2.fromOffset(0, 6), Size = UDim2.new(1, 0, 1, -6), Parent = container }, "PanelHeader")
         Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 2), Parent = container }, "Outline")
-        -- Embedded glowing stars along Dream Land ground
-        for i = 1, 14 do
-            local star = Draw.Text({ Position = UDim2.new((i - 1) / 14 + 0.02, 0, 0, 7), Size = UDim2.fromOffset(14, 14), Parent = container }, "Glyph", 10, "Coin")
-            star.Text = "★"
-            star.TextTransparency = 0.1
+        -- Embedded Pixel Warp Stars along Dream Land ground
+        for i = 1, 8 do
+            local star = Sprite.New(container, "kirby_star", 14)
+            star.Position = UDim2.new((i - 1) / 8 + 0.04, 0, 0, 6)
+            star.ZIndex = 3
         end
 
     elseif theme == "Pokemon Cafe" then
         -- ═════════════════════════════════════════════════════════════════
-        -- Pokemon Cafe: Cozy Café Parquet Wood Floor + Checkered Tile Strip
+        -- Pokemon Cafe: Cozy Café Parquet Wood Floor + Checkered Tile Runner
         -- ═════════════════════════════════════════════════════════════════
         local floor = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "Brick")
         Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 3), Parent = container }, "Outline")
@@ -8430,7 +8503,8 @@ function Window:RenderGround()
 
     elseif theme == "Stardew Valley" then
         -- ═════════════════════════════════════════════════════════════════
-        -- Stardew Valley: Farm Tilled Rich Soil + Sprouting Green Seedlings
+        -- Stardew Valley: Farm Tilled Soil + Pixel Crop Seedlings
+        -- Zero Unicode Emojis — 100% Native 8-bit Pixel Art Sprites
         -- ═════════════════════════════════════════════════════════════════
         local tilledSoil = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BrickDark")
         local rail = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 4), Parent = container }, "Brick")
@@ -8440,10 +8514,12 @@ function Window:RenderGround()
             local furrow = Draw.New("Frame", { Position = UDim2.new(0, 0, 0, 6 + row * 6), Size = UDim2.new(1, 0, 0, 2), BackgroundTransparency = 0.6, Parent = container })
             Theme.Bind(furrow, { BackgroundColor3 = "Outline" })
         end
-        -- Tiny green crop sprouts
-        for s = 1, 11 do
-            local sprout = Draw.Text({ Position = UDim2.new((s - 1) / 11 + 0.04, 0, 0, 4), Size = UDim2.fromOffset(12, 12), Parent = container }, "Glyph", 10, "Grass")
-            sprout.Text = "🌱"
+        -- Native 8-bit pixel seedlings and crops
+        for s = 1, 7 do
+            local spriteKey = (s % 2 == 0) and "sdv_seed" or "sdv_can"
+            local sprout = Sprite.New(container, spriteKey, 14)
+            sprout.Position = UDim2.new((s - 1) / 7 + 0.05, 0, 0, 5)
+            sprout.ZIndex = 3
         end
 
     elseif theme == "Tamagotchi" then
@@ -8452,14 +8528,17 @@ function Window:RenderGround()
         -- ═════════════════════════════════════════════════════════════════
         local casing = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BackdropAlt")
         local borderTop = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 3), Parent = container }, "Outline")
-        -- 3 Tactile Circular Buttons in center
+        -- 3 Tactile Circular Buttons in center with hover & click feedback
         local btnLabels = { "A", "B", "C" }
         for b = 1, 3 do
-            local btnHolder = Draw.New("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(0.38 + (b - 1) * 0.12, 0, 0.5, 1), Size = UDim2.fromOffset(14, 14), Parent = container })
-            Draw.Corner(btnHolder, 7)
+            local btnHolder = Draw.New("TextButton", { Text = "", AutoButtonColor = false, AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(0.38 + (b - 1) * 0.12, 0, 0.5, 1), Size = UDim2.fromOffset(16, 16), Parent = container })
+            Draw.Corner(btnHolder, 8)
             Theme.Bind(btnHolder, { BackgroundColor3 = "Accent" })
             Draw.Stroke(btnHolder, "Outline", 1.5)
-            local txt = Draw.Text({ Text = btnLabels[b], Size = UDim2.fromScale(1, 1), TextXAlignment = Enum.TextXAlignment.Center, Parent = btnHolder }, "Logo", 8, "White")
+            local txt = Draw.Text({ Text = btnLabels[b], Size = UDim2.fromScale(1, 1), TextXAlignment = Enum.TextXAlignment.Center, Parent = btnHolder }, "Logo", 9, "White")
+            btnHolder.Activated:Connect(function()
+                Anim.Bump(btnHolder, 2)
+            end)
         end
         -- Speaker acoustic dot matrix on the right
         for d = 1, 6 do
