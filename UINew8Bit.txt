@@ -217,10 +217,10 @@ local Themes = {
     }),
     ["Animal Crossing"] = Palette({
         Backdrop = "C8E8C0", BackdropAlt = "DCF2D4", Topbar = "7DC47A", Sidebar = "6BA868", SidebarAlt = "5A9458",
-        SidebarText = "FEFFF4", SidebarMuted = "C4EABC", TabActive = "FFFDE8", TabActiveText = "4A8040",
-        Panel = "F8FDEF", PanelHeader = "E4F5D8", Element = "FEFFF8", Hover = "D8F0C8",
-        Outline = "3A6230", Shadow = "8EC88A", Text = "2C4A24", SubText = "527A46", Muted = "84A878", Track = "C4E0B8",
-        Cloud = "FFFFFF", CloudAlpha = 0.2, Accent = "F5A623", AccentDark = "C07D0E", Grass = "7DC47A", GrassDark = "5A9458", Brick = "D4A56A", BrickDark = "A87C42", Decor = { "Clouds" },
+        SidebarText = "FFFDF7", SidebarMuted = "C4EABC", TabActive = "FFFDE8", TabActiveText = "5C4033",
+        Panel = "FFFDF7", PanelHeader = "E4F5D8", Element = "FEFFF8", Hover = "D8F0C8",
+        Outline = "3A6230", Shadow = "8EC88A", Text = "5C4033", SubText = "8B7355", Muted = "A08A72", Track = "C4E0B8",
+        Cloud = "FFFFFF", CloudAlpha = 0.2, Accent = "FFB347", AccentDark = "D9731B", Grass = "9ACD7B", GrassDark = "5A9458", Brick = "D4B996", BrickDark = "8E511B", Decor = { "Clouds" },
         Particle = { { "✦", "•", "✧", "❀" }, false, "F5D76E" },
     }),
     Kirby = Palette({
@@ -271,28 +271,39 @@ local ThemeMeta = {
 
     -- ═══════════════════════════════════════════════════════════════
     --  ANIMAL CROSSING  — soft, nature, cozy village life
-    --  • Rounded leaf + bell bag + fish icons
+    --  • Mascot: Isabelle (ac_isabelle) & Nook Leaf (ac_leaf)
+    --  • Currency: Bell Bag (ac_bell)
+    --  • Activity: River Fishing (ac_fish)
     --  • Extra-round corners (18/14/10) — marshmallow UI feel
     --  • Gentle sine motion — no hard bounces
     --  • FredokaOne everywhere — bubbly and friendly
     -- ═══════════════════════════════════════════════════════════════
     ["Animal Crossing"] = {
+        IntroTitle = "ISLAND GETAWAY",
+        IntroSprites = {
+            Block    = "ac_leaf",
+            Runner   = "ac_isabelle",
+            Goal     = "ac_fossil",
+            Particle = "ac_leaf",
+        },
         Icons = {
-            main     = "ac_isabelle", hub   = "ac_leaf",  mushroom = "ac_isabelle",
-            coin     = "ac_bell",  bell     = "ac_bell",  money    = "ac_bell",
-            shop     = "ac_bell",  bag      = "ac_bell",
-            quest    = "ac_fish",  flag     = "ac_fish",  play     = "ac_fish",
-            chest    = "chest",    combat   = "sword",    eye      = "boo",
-            gear     = "gear",     settings = "gear",     config   = "gear",
-            heart    = "heart",    health   = "heart",
-            pet      = "paw",      animal   = "paw",
-            auto     = "ac_leaf",  sparkles = "ac_leaf",  wand     = "ac_leaf",
-            craft    = "hammer",   hammer   = "hammer",
-            loot     = "magnet",   magnet   = "magnet",
-            skull    = "skull",    danger   = "bomb",
-            user     = "oneup",    player   = "feather",
-            key      = "key",      lock     = "key",
-            palette  = "flower",   theme    = "flower",
+            main     = "ac_isabelle", hub      = "ac_leaf",      mushroom = "ac_isabelle",
+            coin     = "ac_bell",     bell     = "ac_bell",      money    = "ac_bell",
+            shop     = "ac_bell",     bag      = "ac_bell",      cart     = "ac_bell",
+            quest    = "ac_fish",     flag     = "ac_fish",      play     = "ac_fish",
+            chest    = "chest",       combat   = "ac_fossil",    eye      = "ac_fossil",
+            visuals  = "ac_fossil",   esp      = "ac_fossil",
+            gear     = "ac_nookphone",settings = "ac_nookphone", config   = "ac_nookphone",
+            heart    = "ac_cherry",   health   = "ac_cherry",    heal     = "ac_cherry",
+            fruit    = "ac_cherry",   egg      = "ac_fossil",    fossil   = "ac_fossil",
+            pet      = "ac_isabelle", animal   = "paw",
+            auto     = "ac_leaf",     sparkles = "ac_leaf",      wand     = "ac_leaf",
+            craft    = "hammer",      hammer   = "hammer",
+            loot     = "ac_leaf",     collect  = "ac_leaf",
+            skull    = "skull",       danger   = "bomb",
+            user     = "ac_isabelle", player   = "feather",
+            key      = "key",         lock     = "key",
+            palette  = "flower",      theme    = "flower",
         },
         Shape = {
             WindowRadius     = 18,
@@ -318,27 +329,37 @@ local ThemeMeta = {
 
     -- ═══════════════════════════════════════════════════════════════
     --  KIRBY  — bouncy, puffball, Dream Land energy
-    --  • kirby_star icons for everything active (sucks up the world)
+    --  • Mascot: Pink Kirby (kirby_body) & Warp Star (kirby_star)
+    --  • Healing: Maxim Tomato (kirby_tomato)
     --  • Maximum roundness (24/18/12) — the puffball panel
     --  • Back ease + huge BumpRise (10) — springy floaty bounce
     --  • LuckiestGuy display, FredokaOne body — bold-cute mix
     -- ═══════════════════════════════════════════════════════════════
     Kirby = {
+        IntroTitle = "DREAM LAND",
+        IntroSprites = {
+            Block    = "kirby_star",
+            Runner   = "kirby_body",
+            Goal     = "kirby_tomato",
+            Particle = "kirby_star",
+        },
         Icons = {
-            main     = "kirby_body",  hub      = "kirby_star",  mushroom = "kirby_body",
-            coin     = "coin",       heart    = "heart",      health   = "heart",
-            quest    = "heart",      flag     = "heart",      play     = "heart",
-            auto     = "kirby_star", sparkles = "kirby_star", wand     = "kirby_star",
-            zap      = "kirby_star", bolt     = "kirby_star",
-            chest    = "chest",      combat   = "kirby_body", eye      = "kirby_star",
-            gear     = "gear",       settings = "gear",       config   = "gear",
-            loot     = "magnet",     magnet   = "magnet",
-            skull    = "skull",      danger   = "bomb",
-            craft    = "hammer",     hammer   = "hammer",
-            pet      = "paw",        animal   = "paw",
-            user     = "oneup",      player   = "feather",
-            key      = "key",        lock     = "key",
-            palette  = "flower",     theme    = "flower",
+            main     = "kirby_body",   hub      = "kirby_star",  mushroom = "kirby_body",
+            coin     = "kirby_star",  heart    = "kirby_tomato",health   = "kirby_tomato",
+            heal     = "kirby_tomato",food     = "kirby_tomato",
+            quest    = "kirby_star",  flag     = "kirby_star",  play     = "kirby_star",
+            auto     = "kirby_star",  sparkles = "kirby_star",  wand     = "kirby_star",
+            zap      = "kirby_star",  bolt     = "kirby_star",
+            chest    = "chest",       combat   = "kirby_body",  eye      = "kirby_star",
+            visuals  = "kirby_star",  esp      = "kirby_star",
+            gear     = "gear",        settings = "gear",        config   = "gear",
+            loot     = "kirby_star",  collect  = "kirby_star",
+            skull    = "skull",       danger   = "bomb",
+            craft    = "hammer",      hammer   = "hammer",
+            pet      = "kirby_body",  animal   = "paw",
+            user     = "kirby_body",  player   = "feather",
+            key      = "key",         lock     = "key",
+            palette  = "flower",      theme    = "flower",
         },
         Shape = {
             WindowRadius     = 24,
@@ -363,29 +384,39 @@ local ThemeMeta = {
     },
 
     -- ═══════════════════════════════════════════════════════════════
-    --  POKÉMON CAFÉ  — café warmth, pokéball icons, cup of tea vibes
-    --  • poke_ball / poke_cup icons — instantly recognizable
+    --  POKÉMON CAFÉ  — café warmth, Pikachu & Pokéball & Potion
+    --  • Mascot: Pikachu (poke_pikachu) & Pokéball (poke_ball)
+    --  • Healing: Pokémon Potion (poke_potion)
+    --  • Beverage: Café Cup (poke_cup)
     --  • Moderate round (14/10/8), noticeable depth 3 — solid buttons
     --  • Back ease, moderate bump — a polite satisfying click
     --  • LuckiestGuy display, BuilderSansMedium body — bold-but-readable
     -- ═══════════════════════════════════════════════════════════════
     ["Pokemon Cafe"] = {
+        IntroTitle = "POKEMON CAFE",
+        IntroSprites = {
+            Block    = "poke_cup",
+            Runner   = "poke_pikachu",
+            Goal     = "poke_ball",
+            Particle = "poke_ball",
+        },
         Icons = {
-            main     = "poke_pikachu", hub   = "poke_ball",  mushroom = "poke_pikachu",
-            coin     = "ac_bell",   bell     = "ac_bell",   money    = "ac_bell",
-            shop     = "ac_bell",   bag      = "poke_cup",
-            quest    = "poke_cup",  flag     = "poke_cup",  play     = "poke_cup",
-            auto     = "poke_ball", sparkles = "poke_ball",
-            chest    = "chest",     combat   = "poke_ball", eye      = "poke_ball",
-            gear     = "gear",      settings = "gear",      config   = "gear",
-            heart    = "heart",     health   = "heart",
-            pet      = "paw",       animal   = "paw",
-            loot     = "magnet",    magnet   = "magnet",
-            skull    = "skull",     danger   = "bomb",
-            craft    = "hammer",    hammer   = "hammer",
-            user     = "oneup",     player   = "feather",
-            key      = "key",       lock     = "key",
-            palette  = "flower",    theme    = "flower",
+            main     = "poke_pikachu", hub   = "poke_ball",   mushroom = "poke_pikachu",
+            coin     = "coin",         bell  = "coin",        money    = "coin",
+            shop     = "poke_cup",     bag   = "poke_cup",
+            quest    = "poke_cup",     flag  = "poke_cup",    play     = "poke_cup",
+            auto     = "poke_ball",    sparkles = "poke_ball",
+            chest    = "chest",        combat= "poke_ball",   eye      = "poke_ball",
+            visuals  = "poke_ball",    esp   = "poke_ball",
+            gear     = "gear",         settings = "gear",     config   = "gear",
+            heart    = "poke_potion",  health= "poke_potion", heal     = "poke_potion",
+            pet      = "poke_pikachu", animal= "poke_pikachu",
+            loot     = "magnet",       magnet= "magnet",
+            skull    = "skull",        danger= "bomb",
+            craft    = "hammer",       hammer= "hammer",
+            user     = "poke_pikachu", player= "feather",
+            key      = "key",          lock  = "key",
+            palette  = "flower",       theme = "flower",
         },
         Shape = {
             WindowRadius     = 14,
@@ -410,30 +441,43 @@ local ThemeMeta = {
     },
 
     -- ═══════════════════════════════════════════════════════════════
-    --  STARDEW VALLEY  — pixel farm life, hand-crafted rustic feel
-    --  • sdv_pickaxe / sdv_seed / sdv_gold icons — farm tools
+    --  STARDEW VALLEY  — pixel farm life, Junimo & Farmer & Stardrop
+    --  • Mascot: Junimo (sdv_junimo) & Farmer (sdv_farmer)
+    --  • Artifact: Stardrop (sdv_stardrop) & Gold Coin (sdv_gold)
+    --  • Combat/Tool: Sword (sdv_sword), Shield (sdv_shield), Pickaxe (sdv_pickaxe)
+    --  • Livestock: White Barn Chicken (sdv_chicken)
     --  • Minimal radius (6/6/4) + depth 4 — wooden-frame, chunky
     --  • Slow-pop Out ease + low bump — deliberate, grounded clicks
     --  • LuckiestGuy / BuilderSansMedium — pixel-bold readability
     -- ═══════════════════════════════════════════════════════════════
     ["Stardew Valley"] = {
+        IntroTitle = "PELICAN TOWN",
+        IntroSprites = {
+            Block    = "sdv_seed",
+            Runner   = "sdv_junimo",
+            Goal     = "sdv_stardrop",
+            Particle = "sdv_gold",
+        },
         Icons = {
-            main     = "sdv_farmer",  hub      = "sdv_seed",    mushroom = "sdv_farmer",
-            coin     = "sdv_gold",    bell     = "sdv_gold",    money    = "sdv_gold",
-            shop     = "sdv_gold",    bag      = "sdv_gold",    gem      = "sdv_gold",
-            quest    = "sdv_seed",    flag     = "sdv_seed",    play     = "sdv_seed",
-            farm     = "sdv_seed",    auto     = "sdv_seed",    sparkles = "sdv_seed",
-            combat   = "sdv_pickaxe", craft    = "sdv_pickaxe", hammer   = "sdv_pickaxe",
-            pickaxe  = "sdv_pickaxe", build    = "sdv_pickaxe",
-            chest    = "chest",       eye      = "sdv_seed",
-            gear     = "gear",        settings = "gear",        config   = "gear",
-            heart    = "heart",       health   = "heart",
-            pet      = "paw",         animal   = "paw",
-            loot     = "magnet",      magnet   = "magnet",
-            skull    = "skull",       danger   = "bomb",
-            user     = "oneup",       player   = "feather",
-            key      = "key",         lock     = "key",
-            palette  = "flower",      theme    = "flower",
+            main     = "sdv_junimo",   hub      = "sdv_farmer",   mushroom = "sdv_junimo",
+            coin     = "sdv_gold",     bell     = "sdv_gold",     money    = "sdv_gold",
+            shop     = "sdv_gold",     bag      = "sdv_seed",     gem      = "sdv_stardrop",
+            quest    = "sdv_seed",     flag     = "sdv_seed",     play     = "sdv_seed",
+            farm     = "sdv_seed",     auto     = "sdv_junimo",   sparkles = "sdv_stardrop",
+            combat   = "sdv_sword",    sword    = "sdv_sword",    weapon   = "sdv_sword",
+            shield   = "sdv_shield",   defense  = "sdv_shield",   armor    = "sdv_shield",
+            craft    = "sdv_pickaxe",  hammer   = "sdv_pickaxe",
+            pickaxe  = "sdv_pickaxe",  build    = "sdv_pickaxe",
+            chest    = "chest",        eye      = "sdv_stardrop", visuals  = "sdv_stardrop",
+            gear     = "gear",         settings = "gear",         config   = "gear",
+            heart    = "sdv_stardrop", health   = "sdv_stardrop", heal     = "sdv_stardrop",
+            star     = "sdv_stardrop", luck     = "sdv_stardrop",
+            pet      = "sdv_chicken",  animal   = "sdv_chicken",  egg      = "sdv_chicken",
+            loot     = "magnet",       magnet   = "magnet",
+            skull    = "skull",        danger   = "bomb",
+            user     = "sdv_farmer",   player   = "feather",
+            key      = "key",          lock     = "key",
+            palette  = "flower",       theme    = "flower",
         },
         Shape = {
             WindowRadius     = 6,
@@ -458,26 +502,37 @@ local ThemeMeta = {
     },
 
     -- ═══════════════════════════════════════════════════════════════
-    --  TAMAGOTCHI  — LCD pixel pet, beep-boop digital nostalgia
-    --  • tama_heart / tama_egg icons — the pet and the egg
+    --  TAMAGOTCHI  — LCD pixel pet, Mametchi & Care Tools
+    --  • Mascot: Mametchi (tama_pet) & Egg (tama_egg) & Tama Heart (tama_heart)
+    --  • Care: Food Meal (tama_food), Lightbulb (tama_light), Clean Poop (tama_poop)
     --  • Very low radius (4/4/4) — square pixel-art LCD feel
     --  • Bounce ease + mid bump — that satisfying egg-bounce
     --  • BuilderSansBold — bold pixel-display aesthetic
     -- ═══════════════════════════════════════════════════════════════
     Tamagotchi = {
+        IntroTitle = "TAMATOWN",
+        IntroSprites = {
+            Block    = "tama_egg",
+            Runner   = "tama_pet",
+            Goal     = "tama_heart",
+            Particle = "tama_heart",
+        },
         Icons = {
             main     = "tama_pet",   hub      = "tama_egg",   mushroom = "tama_pet",
-            coin     = "coin",       heart    = "tama_heart", health   = "tama_heart",
+            coin     = "tama_heart", heart    = "tama_heart", health   = "tama_heart",
             quest    = "tama_egg",   flag     = "tama_egg",   play     = "tama_egg",
-            pet      = "tama_egg",   egg      = "tama_egg",   hatch    = "tama_egg",
+            pet      = "tama_pet",   egg      = "tama_egg",   hatch    = "tama_egg",
             auto     = "tama_heart", sparkles = "tama_heart",
-            chest    = "chest",      combat   = "tama_heart", eye      = "tama_pet",
+            chest    = "chest",      combat   = "tama_heart",
+            eye      = "tama_light", visuals  = "tama_light", esp      = "tama_light",
             gear     = "gear",       settings = "gear",       config   = "gear",
-            bag      = "tama_egg",   animal   = "paw",
+            shop     = "tama_food",  bag      = "tama_food",  heal     = "tama_food",
+            trash    = "tama_poop",  danger   = "tama_poop",  bomb     = "tama_poop",
+            animal   = "tama_pet",
             loot     = "magnet",     magnet   = "magnet",
-            skull    = "skull",      danger   = "bomb",
+            skull    = "tama_poop",
             craft    = "hammer",     hammer   = "hammer",
-            user     = "oneup",      player   = "feather",
+            user     = "tama_pet",   player   = "feather",
             key      = "key",        lock     = "key",
             palette  = "flower",     theme    = "flower",
         },
@@ -503,6 +558,9 @@ local ThemeMeta = {
         },
     },
 }
+-- Forward declarations for theme restore snapshot
+local OriginalConfig, OriginalFontsLatin, OriginalSpriteAlias
+
 local State = {
     Gui = nil,
     Overlay = nil,
@@ -1627,7 +1685,26 @@ function Draw.New(className, props)
 end
 
 function Draw.Corner(parent, radius)
-    return Draw.New("UICorner", { CornerRadius = typeof(radius) == "UDim" and radius or UDim.new(0, radius or 8), Parent = parent })
+    local corner = Draw.New("UICorner", { Parent = parent })
+    if radius == "Window" or radius == "Group" or radius == "Selectable" then
+        local key = radius
+        corner.CornerRadius = UDim.new(0, Config[key].Radius)
+        Theme.OnRender(corner, function()
+            if corner.Parent then
+                corner.CornerRadius = UDim.new(0, Config[key].Radius)
+            end
+        end)
+    elseif type(radius) == "function" then
+        corner.CornerRadius = UDim.new(0, radius())
+        Theme.OnRender(corner, function()
+            if corner.Parent then
+                corner.CornerRadius = UDim.new(0, radius())
+            end
+        end)
+    else
+        corner.CornerRadius = typeof(radius) == "UDim" and radius or UDim.new(0, radius or 8)
+    end
+    return corner
 end
 
 function Draw.Stroke(parent, token, thickness, border)
@@ -1853,6 +1930,7 @@ Sprite.Palette = {
     n = Color3.fromRGB(154, 160, 166), N = Color3.fromRGB(46, 46, 58), B = Color3.fromRGB(200, 86, 28),
     m = Color3.fromRGB(90, 42, 14), b = Color3.fromRGB(4, 156, 216),
     p = Color3.fromRGB(156, 92, 220), P = Color3.fromRGB(96, 44, 150),
+    K = Color3.fromRGB(255, 140, 185), d = Color3.fromRGB(224, 60, 130), -- Authentic Kirby Pink body (K) & Cheek Blush (d)
 }
 
 Sprite.Art = {
@@ -2244,62 +2322,72 @@ local ExtraSprites = {
         "..knnnnnnk..", "....kkkk....", "............", "............",
     },
     -- ──────────────────── CHARACTER SPRITES (authentic per-theme mascots) ────────────────────
-    -- Pikachu — Pokémon Café mascot
-    --   Palette: y=body, k=outline+pupils, r=signature red cheeks, B=lightning tail hint
-    --   Read: round yellow head, triangular ears (row1-2), black dot eyes (row4),
-    --         red cheek circles (row6), tail stub (row10), stubby feet (row11)
+    -- Pikachu — Pokémon mascot
+    -- Black ear-tips, bright yellow body, signature red cheek-pouches, black eyes, tiny smile
     poke_pikachu = {
-        "....kk.kk...",
-        "..kyykkyyyk.",
+        ".kk......kk.",
+        ".kyk....kyk.",
+        "..kyk..kyk..",
+        "..kkkkkkkk..",
         ".kyyyyyyyyk.",
-        ".kyykyykyyk.",
+        "kyykyyyykyyk",
+        "kyyryyyyryyk",
+        "kyyyyrryyyyk",
+        "kyyyyyyyyyyk",
         ".kyyyyyyyyk.",
-        ".kyyryyyryk.",
-        ".kyyyyyyyyk.",
-        "..kyyyyyyyk.",
-        "...kyyyyyk..",
-        ".....kBk....",
-        "...kyykyyk..",
-        "....kk.kk...",
+        "..kyk..kyk..",
+        "...kk..kk...",
     },
-    -- Kirby — Kirby Dream Land mascot
-    --   Palette: s=body(warm peach/cream), b=blue eyes, r=open round mouth + red feet
-    --   Read: round puffy head (rows1-8), tiny body (rows9-10), two stubby red feet (rows11-12)
+    -- Kirby — Kirby's Dream Land mascot
+    -- Authentic Pink body (K), deep blue eyes with gleam (wb), cheek blush (d), open smile, red feet (r)
     kirby_body = {
         "....kkkk....",
-        "..kksssskk..",
-        ".kssssssssk.",
-        ".kssbbssbbk.",
-        ".kssssssssk.",
-        ".kssrrrrssk.",
-        ".kssssssssk.",
-        "..kksssskk..",
-        "....ksssk...",
-        "...ksssssk..",
-        "..krk..krk..",
-        "...kk...kk..",
+        "..kkKKKKkk..",
+        ".kKKKKKKKKk.",
+        ".kKbKKKbKKk.",
+        "kKKwbKKwbKKk",
+        "kKKdKKKKdKKk",
+        ".kKKrrrrKKk.",
+        ".kKKKKKKKKk.",
+        "..kkKKKKkk..",
+        "..krrrrrrk..",
+        ".krrk..krrk.",
+        ".kk......kk.",
     },
-    -- Isabelle — Animal Crossing mascot (yellow shih-tzu secretary)
-    --   Palette: y=golden coat, m=dark brown eyes, s=cream/peach snout
-    --   Read: round yellow head (rows1-7), wide snout (row6-7), neck (row9-10)
+    -- Isabelle — Animal Crossing: New Horizons / Leaf mascot
+    -- Red topknot ribbon (r), yellow puppy face (y), floppy brown ear tips (m), cream muzzle (s), sweet smile
     ac_isabelle = {
-        "....kkkk....",
-        ".kkyyyyyykk.",
-        ".kyyyyyyyyk.",
-        ".kyymyymyyk.",
-        ".kyyyyyyyyk.",
-        ".kyyysssyyk.",
-        ".kyssssssyk.",
-        "..kyyyyyyk..",
+        "....krrk....",
+        "...krrrrk...",
+        "..kkkrrkkk..",
+        ".kmyyyyyymk.",
+        ".kmyykyykmk.",
+        "kmyyyyyyyymk",
+        "kmyyswwsyymk",
+        ".kyyswwsyk..",
+        "..kyyrryk...",
         "...kyyyyk...",
-        "....kyyk....",
+        "...kssssk...",
         "....kkkk....",
-        "............",
     },
-    -- Farmer — Stardew Valley protagonist
-    --   Palette: y=straw hat, s=face/skin, k=pupils+outlines, r=tiny mouth,
-    --            b=blue denim shirt, m=dark brown pants
-    --   Read: wide straw hat (row1-2), skin face + eyes (rows3-5), blue shirt (rows7-9), pants+boots (rows10-12)
+    -- Junimo — Stardew Valley magical forest spirit mascot
+    -- Green apple body (l/g), top leaf/stem (k/g), black dot eyes, holding tiny gold star (y)
+    sdv_junimo = {
+        ".....kg.....",
+        "....kggk....",
+        ".....kk.....",
+        "...kkkkkk...",
+        ".kllllllllk.",
+        "kllllkllkllk",
+        "kllllkllkllk",
+        "kllllllllllk",
+        "klllyyyylllk",
+        ".kllllllllk.",
+        "..kll..llk..",
+        "...kk..kk...",
+    },
+    -- Farmer — Stardew Valley player
+    -- Straw hat (y), face (s), blue denim overalls (b), brown boots (m)
     sdv_farmer = {
         "...kyyyyyk..",
         ".kkkkkkkkkk.",
@@ -2314,22 +2402,217 @@ local ExtraSprites = {
         "...kmmkmmk..",
         "....kk.kk...",
     },
-    -- Tama Pet — Tamagotchi original LCD creature (Mametchi-inspired)
-    --   Palette: n=gray LCD pixels, k=pixel outlines + pupils
-    --   Read: round LCD head (rows1-6), tiny neck (row7-8),
-    --         chunky body (rows9-10), stubby feet (row11)
+    -- Mametchi — Tamagotchi official #1 mascot
+    -- Iconic black/navy upright ears (N), round bright yellow head (y), black eyes, red shoes (r)
     tama_pet = {
+        ".kk......kk.",
+        ".kNNk..kNNk.",
+        ".kNNk..kNNk.",
+        "..kkkkkkkk..",
+        ".kyyyyyyyyk.",
+        "kyykyyyykyyk",
+        "kyykyyyykyyk",
+        "kyyyyrryyyyk",
+        "kyyyyyyyyyyk",
+        ".kyyyyyyyyk.",
+        "..krr..rrk..",
+        "...kk..kk...",
+    },
+    -- ──────────────────── THEME ICONS (extracted from official games & design repositories) ────────────────────
+    -- Stardrop — Stardew Valley legendary magical purple star fruit (grants maximum energy)
+    sdv_stardrop = {
+        ".....gG.....",
+        "....gGG.....",
+        ".....kk.....",
+        "....kppk....",
+        "...kppppk...",
+        "kkkkppppkkkk",
+        "kppppppppppk",
+        ".kpppPpPppk.",
+        "..kppPPppk..",
+        ".kppk..kppk.",
+        "kppk....kppk",
+        "kkk......kkk",
+    },
+    -- Iron Edge / Galaxy Sword — Stardew Valley combat sword (from cursors.json AttackIcon)
+    sdv_sword = {
+        ".........kww",
+        "........kwwk",
+        ".......knnbk",
+        "......knnbk.",
+        ".....knnbk..",
+        "....knnbk...",
+        ".ky.knbk....",
+        ".kyyyyk.....",
+        "..kyykmm....",
+        "....kmmk....",
+        "...kmmk.....",
+        "...kk.......",
+    },
+    -- Defense Shield — Stardew Valley defense badge (from cursors.json DefenseIcon)
+    sdv_shield = {
+        "...kkkkkk...",
+        "..kYYYYYYk..",
+        ".kYybbbbyYk.",
+        "kYybbwwbbyYk",
+        "kYybwwwwbyYk",
+        "kYybbwwbbyYk",
+        ".kYybbbbyYk.",
+        "..kYybbbyYk.",
+        "...kYybbyYk.",
+        "....kYbyYk..",
+        ".....kYk....",
+        "......k.....",
+    },
+    -- Farm Chicken — Stardew Valley iconic white barn chicken with red comb & wattle
+    sdv_chicken = {
+        "....krrk....",
+        "...krrrrk...",
+        "..kwwwwwwk..",
+        ".kwwkwwykk..",
+        ".kwwwwyrrk..",
+        "kwwwwwwwwwwk",
+        "kwwwwwwwwwwk",
+        "kwwwwwwwwwwk",
+        ".kwwwwwwwwk.",
+        "..kwwwwwwk..",
+        "...ky..yk...",
+        "...kk..kk...",
+    },
+    -- Maxim Tomato — Kirby's Dream Land legendary full-heal item (red tomato with 'M' logo)
+    kirby_tomato = {
+        "....kggk....",
+        "...kggggk...",
+        "..kkkgkkkk..",
+        ".krrrrrrrrk.",
+        "krrrrrrrrrrk",
+        "krrkrrrkrrrk",
+        "krrkkrkkrrrk",
+        "krrkrkkkrrrk",
+        "krrkrrrkrrrk",
+        ".krrrrrrrrk.",
+        "..krrrrrrk..",
         "....kkkk....",
+    },
+    -- Potion — Pokémon signature spray-bottle medicine for Pokémon recovery
+    poke_potion = {
+        "......kk....",
+        "....kkwwkk..",
+        "....kwwwwk..",
+        ".....kwwk...",
+        "....kppppk..",
+        "...kppppppk.",
+        "..kppwwpppk.",
+        "..kppwwpppk.",
+        "..kpppppppk.",
+        "..kpppppppk.",
+        "...kpppppk..",
+        "....kkkk....",
+    },
+    -- Light Bulb — Tamagotchi essential sleep care icon (turn off lights when pet sleeps)
+    tama_light = {
+        "....kkkk....",
+        "...kyyyyk...",
+        "..kyyyyyyyk.",
+        ".kyywwyyyyk.",
+        ".kyywyyyyyyk",
+        "kyyyyyyyyyyk",
+        ".kyyyyyyyyk.",
+        "..kyyyyyyk..",
         "...knnnnk...",
-        "..knnnnnnk..",
-        "..knknnknk..",
-        "..knnnnnnk..",
-        "..knnkknnk..",
         "...knnnnk...",
         "....knnk....",
-        ".kknnnnnkk..",
-        "..knnnnnnk..",
-        "...kk..kk...",
+        "....kkkk....",
+    },
+    -- Food Burger — Tamagotchi essential meal icon (feed burger / rice bowl when hungry)
+    tama_food = {
+        "...kkkkkk...",
+        "..kYYYYYYk..",
+        ".kyyyyyyyyk.",
+        "kQQQQQQQQQQk",
+        "kggggggggggk",
+        "krrrrrrrrrrk",
+        "kmmmmmmmmmmk",
+        "kQQQQQQQQQQk",
+        ".kyyyyyyyyk.",
+        "..kYYYYYYk..",
+        "...kkkkkk...",
+        "............",
+    },
+    -- Poop Swirl — Tamagotchi iconic oops accident icon (clean up when pet poops)
+    tama_poop = {
+        ".....mm.....",
+        "....kmmk....",
+        "...kmmmmk...",
+        "..kmmmmmmk..",
+        ".kmmmmmmmmk.",
+        "kmmkmmmmkmmk",
+        "kmmkmmmmkmmk",
+        "kmmmmmmmmmmk",
+        "kmmmmmmmmmmk",
+        ".kmmmmmmmmk.",
+        "..kmmmmmmk..",
+        "...kkkkkk...",
+    },
+    -- ──────────────────── ANIMAL CROSSING & KIRBY REPO ASSETS ────────────────────
+    -- Fossil — Animal Crossing museum fossil (blue spiral ammonite stone)
+    ac_fossil = {
+        "....kkkk....",
+        "..kkbbbbkk..",
+        ".kbbbbbbbbk.",
+        ".kbbwwwwbbk.",
+        "kbbwbbbbwbk.",
+        "kbbwbbwwbwk.",
+        "kbbwbbwbbwk.",
+        "kbbwbbwwwwk.",
+        ".kbbwbbbbk..",
+        ".kbbwwwwwk..",
+        "..kkbbbbkk..",
+        "....kkkk....",
+    },
+    -- NookPhone — Animal Crossing island smartphone with green leaf logo
+    ac_nookphone = {
+        "...kkkkkk...",
+        "..kbbbbbbk..",
+        ".kbbbbbbbbk.",
+        ".kbNNNNNNbk.",
+        ".kbNNggNNbk.",
+        ".kbNggggNbk.",
+        ".kbNggggNbk.",
+        ".kbNNggNNbk.",
+        ".kbNNNNNNbk.",
+        ".kbbbbbbbbk.",
+        "..kbkkkkbk..",
+        "...kkkkkk...",
+    },
+    -- Island Cherries — Animal Crossing fruit tree cherries
+    ac_cherry = {
+        ".....kg.....",
+        "....kggk....",
+        "...kg..gk...",
+        "..kg....gk..",
+        "..kg....gk..",
+        ".krrk..krrk.",
+        "krwwrkkrwwrk",
+        "krrrrkkrrrrk",
+        "krrrrkkrrrrk",
+        ".krrk..krrk.",
+        "..kk....kk..",
+        "............",
+    },
+    -- Star Cursor — Kirby Project star sparkle cursor (from Project cursor.png)
+    kirby_cursor = {
+        ".....kk.....",
+        "....kyyk....",
+        "...kyyyyk...",
+        "kkkkyyyykkkk",
+        ".kyyyyyyyyk.",
+        "..kyyyyyyk..",
+        ".kyyyyyyyyk.",
+        "kkkkyyyykkkk",
+        "...kyyyyk...",
+        "....kyyk....",
+        ".....kk.....",
         "............",
     },
 }
@@ -2379,11 +2662,11 @@ for aliasKey, targetSprite in pairs(ExtraAliases) do
 end
 
 -- Snapshots for theme-restore (captured once after all defaults are registered)
-local OriginalSpriteAlias = {}
+OriginalSpriteAlias = {}
 for k, v in pairs(Sprite.Alias) do OriginalSpriteAlias[k] = v end
-local OriginalFontsLatin  = {}
+OriginalFontsLatin = {}
 for k, v in pairs(Fonts.Latin) do OriginalFontsLatin[k] = v end
-local OriginalConfig = {
+OriginalConfig = {
     WindowRadius     = Config.Window.Radius,
     GroupRadius      = Config.Group.Radius,
     SelectableRadius = Config.Selectable.Radius,
@@ -3879,7 +4162,7 @@ function Gui.Selectable(parent, spec)
         ClipsDescendants = true,
         Size = UDim2.new(spec.Width or 1, 0, 0, height),
         Parent = host,
-    }, "Hover", nil, Config.Selectable.Radius)
+    }, "Hover", nil, "Selectable")
     local bar, thumb, thumbSize = BuildSelectableVisuals(row, spec, height)
     local hasMedia = thumb ~= nil
     local textOffset = hasMedia and (thumbSize + 18) or 12
@@ -4003,6 +4286,7 @@ end
 
 function Widget.Register(option, idx, spec)
     option.Idx = idx
+    option.Info = spec
     option.Callback = spec.Callback or spec.Func
     option.Changed = {}
     option.NoSave = spec.NoSave == true or idx == nil
@@ -6539,8 +6823,8 @@ function Window:BuildFrame()
     self.UserScale = Draw.New("UIScale", { Parent = self.Root })
     self.Pop = Draw.New("Frame", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.5), Size = UDim2.fromScale(1, 1), Parent = self.Root })
     self.PopScale = Draw.New("UIScale", { Parent = self.Pop })
-    Draw.Box("Frame", { Position = UDim2.fromOffset(shadow, shadow), Size = UDim2.new(1, -shadow, 1, -shadow), Parent = self.Pop }, "Shadow", nil, radius)
-    self.Body = Draw.Box("Frame", { Size = UDim2.new(1, -shadow, 1, -shadow), BackgroundColor3 = Color3.new(1, 1, 1), BackgroundTransparency = 0, ClipsDescendants = true, Parent = self.Pop }, nil, "Outline", radius, Config.Window.Stroke)
+    Draw.Box("Frame", { Position = UDim2.fromOffset(shadow, shadow), Size = UDim2.new(1, -shadow, 1, -shadow), Parent = self.Pop }, "Shadow", nil, "Window")
+    self.Body = Draw.Box("Frame", { Size = UDim2.new(1, -shadow, 1, -shadow), BackgroundColor3 = Color3.new(1, 1, 1), BackgroundTransparency = 0, ClipsDescendants = true, Parent = self.Pop }, nil, "Outline", "Window", Config.Window.Stroke)
     local gradient = Draw.New("UIGradient", { Rotation = 90, Parent = self.Body })
     Theme.OnRender(gradient, function()
         gradient.Color = ColorSequence.new(Theme.Colors.Backdrop, Theme.Colors.BackdropAlt)
@@ -6549,7 +6833,7 @@ end
 
 function Window:BuildTopbar()
     local height, radius = Config.Window.Topbar, Config.Window.Radius
-    local topbar = Draw.Box("Frame", { Name = "Topbar", Size = UDim2.new(1, 0, 0, height), ClipsDescendants = true, ZIndex = 5, Parent = self.Body }, "Topbar", nil, radius)
+    local topbar = Draw.Box("Frame", { Name = "Topbar", Size = UDim2.new(1, 0, 0, height), ClipsDescendants = true, ZIndex = 5, Parent = self.Body }, "Topbar", nil, "Window")
     self.TopbarFill = Draw.Box("Frame", { Position = UDim2.new(0, 0, 1, -radius), Size = UDim2.new(1, 0, 0, radius), Parent = topbar }, "Topbar")
     self.TopbarLine = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, 3), ZIndex = 3, Parent = topbar }, "Outline")
     self.Topbar = topbar
@@ -6830,7 +7114,7 @@ end
 
 function Window:BuildGround()
     local height, radius = Config.Window.Ground, Config.Window.Radius
-    local ground = Draw.Box("Frame", { Name = "Ground", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, height), ClipsDescendants = true, ZIndex = 3, Parent = self.Body }, "Brick", nil, radius)
+    local ground = Draw.Box("Frame", { Name = "Ground", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, height), ClipsDescendants = true, ZIndex = 3, Parent = self.Body }, "Brick", nil, "Window")
     Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, radius), Parent = ground }, "Brick")
     local bricks = Draw.New("Frame", { BackgroundTransparency = 1, Position = UDim2.fromOffset(6, 6), Size = UDim2.new(1, -12, 1, -8), ClipsDescendants = true, Parent = ground })
     Draw.Bricks(bricks, 28, "BrickDark")
@@ -7290,8 +7574,8 @@ function Tab:AddGroupbox(info, side)
     local collapsed = info.Collapsed == true
     local initOpen = collapsed and 0 or 1
     local holder = Draw.New("Frame", { Name = "Groupbox", BackgroundTransparency = 1 })
-    Draw.Box("Frame", { Position = UDim2.fromOffset(shadow, shadow), Size = UDim2.new(1, -shadow, 1, -shadow), Parent = holder }, "Shadow", nil, radius)
-    local card = Draw.Box("Frame", { Size = UDim2.new(1, -shadow, 1, -shadow), Parent = holder }, "Panel", "Outline", radius, Config.Group.Stroke)
+    Draw.Box("Frame", { Position = UDim2.fromOffset(shadow, shadow), Size = UDim2.new(1, -shadow, 1, -shadow), Parent = holder }, "Shadow", nil, "Group")
+    local card = Draw.Box("Frame", { Size = UDim2.new(1, -shadow, 1, -shadow), Parent = holder }, "Panel", "Outline", "Group", Config.Group.Stroke)
     local body = Draw.New("Frame", { BackgroundTransparency = 1, Position = UDim2.fromOffset(0, header), Size = UDim2.new(1, 0, 1, -header), ClipsDescendants = true, Visible = not collapsed, Parent = card })
     local box = Container.New(body, { PadX = Config.Group.PadX, PadY = Config.Group.PadY, Window = self.Window, Tab = self })
     setmetatable(box, Groupbox)
@@ -7358,7 +7642,7 @@ end
 function Groupbox:BuildHeader(card, info)
     local height, radius = Config.Group.Header, Config.Group.Radius
     local collapsed = info.Collapsed == true
-    local bar = Draw.Box("TextButton", { Name = "Header", Size = UDim2.new(1, 0, 0, height), Parent = card }, "PanelHeader", nil, radius)
+    local bar = Draw.Box("TextButton", { Name = "Header", Size = UDim2.new(1, 0, 0, height), Parent = card }, "PanelHeader", nil, "Group")
     self.HeaderPatch = Draw.Box("Frame", { Position = UDim2.new(0, 0, 1, -radius), Size = UDim2.new(1, 0, 0, radius), Visible = not collapsed, BackgroundTransparency = collapsed and 1 or 0, Parent = bar }, "PanelHeader")
     self.HeaderDivider = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, 2), ZIndex = 2, Visible = not collapsed, BackgroundTransparency = collapsed and 1 or 0, Parent = bar }, "Outline")
     local iconSpec = (info.Icon and info.Icon ~= "") and info.Icon or Icons.FromTitle(info.Name, "qblock")
@@ -7586,7 +7870,7 @@ function Particles.SetEnabled(enabled)
     end
 end
 
-Notify.Icons = { Info = "qblock", Success = "star", Warning = "bomb", Error = "bomb", Coin = "coin", Power = "mushroom" }
+Notify.Icons = { Info = "qblock", Success = "star", Warning = "bomb", Warn = "bomb", Error = "bomb", Coin = "coin", Power = "mushroom" }
 
 function Notify.Build()
     local width = State.Touch and Config.Notify.TouchWidth or Config.Notify.Width
@@ -7654,7 +7938,9 @@ function Intro.Show(settings, screen)
     Anim.Tween(screen, { BackgroundTransparency = 0.35 }, 0.3)
     local card, scene, scale = Intro.BuildCard(screen)
     Intro.BuildScenery(scene)
-    local block = Sprite.New(scene, "qblock", 48)
+    local _tMeta = ThemeMeta and ThemeMeta[State.ThemeName]
+    local blockSprite = (_tMeta and _tMeta.IntroSprites and _tMeta.IntroSprites.Block) or "qblock"
+    local block = Sprite.New(scene, blockSprite, 48)
     block.AnchorPoint = Vector2.new(0.5, 0)
     block.Position = UDim2.new(0.5, 0, 0, -70)
     local letters = Intro.Letters(scene, settings.Title)
@@ -7735,7 +8021,9 @@ end
 function Intro.Pill(scene, text)
     local pill = Draw.Box("Frame", { AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.5, 0, 0, 156), AutomaticSize = Enum.AutomaticSize.X, Size = UDim2.fromOffset(0, 26), BackgroundTransparency = 1, ZIndex = 5, Parent = scene }, "Shadow", nil, UDim.new(1, 0))
     Draw.Padding(pill, 0, 14, 0, 14)
-    local label = Draw.Text({ Text = "WORLD 1-1" .. ((text and text ~= "") and ("  ·  " .. text) or ""), AutomaticSize = Enum.AutomaticSize.X, Size = UDim2.fromScale(0, 1), TextTransparency = 1, ZIndex = 6, Parent = pill }, "Body", 14, "White")
+    local _tMeta = ThemeMeta and ThemeMeta[State.ThemeName]
+    local introTitle = (_tMeta and _tMeta.IntroTitle) or "WORLD 1-1"
+    local label = Draw.Text({ Text = introTitle .. ((text and text ~= "") and ("  ·  " .. text) or ""), AutomaticSize = Enum.AutomaticSize.X, Size = UDim2.fromScale(0, 1), TextTransparency = 1, ZIndex = 6, Parent = pill }, "Body", 14, "White")
     return { Frame = pill, Label = label }
 end
 
@@ -7745,12 +8033,15 @@ function Intro.Track(scene)
     Draw.Stroke(status, "Ink", 1.5)
     local percent = Draw.Text({ AnchorPoint = Vector2.new(1, 0), Position = UDim2.new(1, -22, 1, -(ground + 60)), Size = UDim2.fromOffset(80, 22), TextXAlignment = Enum.TextXAlignment.Right, Text = "0%", ZIndex = 6, Parent = scene }, "Logo", 20, "Coin")
     Draw.Stroke(percent, "Ink", 2)
-    local flag = Sprite.New(scene, "flag", 36)
+    local _tMeta = ThemeMeta and ThemeMeta[State.ThemeName]
+    local goalSprite = (_tMeta and _tMeta.IntroSprites and _tMeta.IntroSprites.Goal) or "flag"
+    local runnerSprite = (_tMeta and _tMeta.IntroSprites and _tMeta.IntroSprites.Runner) or "mushroom"
+    local flag = Sprite.New(scene, goalSprite, 36)
     flag.AnchorPoint = Vector2.new(1, 1)
     flag.Position = UDim2.new(1, -18, 1, -ground)
     flag.ZIndex = 5
     local runner = Draw.New("Frame", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0, 1), Position = UDim2.new(0, 18, 1, -ground), Size = UDim2.fromOffset(28, 28), ZIndex = 6, Parent = scene })
-    local body = Sprite.New(runner, "mushroom", 24)
+    local body = Sprite.New(runner, runnerSprite, 24)
     body.Position = UDim2.fromOffset(2, 4)
     Anim.Tween(body, { Position = UDim2.fromOffset(2, 0) }, 0.16, "Sine", -1, true)
     local progress = Draw.New("NumberValue", { Value = 0 })
@@ -7812,7 +8103,9 @@ function Intro.Finale(scene, track)
     local origin = UDim2.new(1, -36, 1, -(Intro.Ground + 30))
     for index = 1, 8 do
         local angle = math.rad(index * 45)
-        local star = Sprite.New(scene, "star", 18)
+        local _tMeta = ThemeMeta and ThemeMeta[State.ThemeName]
+        local starSprite = (_tMeta and _tMeta.IntroSprites and _tMeta.IntroSprites.Particle) or "star"
+        local star = Sprite.New(scene, starSprite, 18)
         star.AnchorPoint = Vector2.new(0.5, 0.5)
         star.Position = origin
         star.ZIndex = 7
@@ -8207,7 +8500,7 @@ function Visuals.PreviewBuild()
     if not window or Visuals.Preview.Frame then
         return
     end
-    local panel = Draw.Box("Frame", { Name = "EspPreview", Position = UDim2.new(1, 6, 0, 0), Size = UDim2.new(0, 230, 1, -Config.Window.Shadow), BackgroundTransparency = 0, Visible = false, ClipsDescendants = true, Parent = window.Root }, "Backdrop", "Outline", Config.Window.Radius, Config.Window.Stroke)
+    local panel = Draw.Box("Frame", { Name = "EspPreview", Position = UDim2.new(1, 6, 0, 0), Size = UDim2.new(0, 230, 1, -Config.Window.Shadow), BackgroundTransparency = 0, Visible = false, ClipsDescendants = true, Parent = window.Root }, "Backdrop", "Outline", "Window", Config.Window.Stroke)
     local title = Draw.Text({ Position = UDim2.fromOffset(12, 8), Size = UDim2.new(1, -24, 0, 22) }, "Display", Util.TextSize("Group"), "Text", { EN = "ESP Preview", TH = "ตัวอย่าง ESP" })
     title.Parent = panel
     local view = Draw.New("ViewportFrame", { Position = UDim2.fromOffset(10, 38), Size = UDim2.new(1, -20, 1, -48), BackgroundColor3 = Color3.fromRGB(18, 18, 24), BackgroundTransparency = 0.15, Ambient = Color3.fromRGB(180, 180, 190), LightColor = Color3.new(1, 1, 1), Parent = panel })
