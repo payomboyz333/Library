@@ -167,7 +167,7 @@ local Themes = {
         SidebarText = "ECF0FF", SidebarMuted = "98A8E0", TabActive = "F0C448", TabActiveText = "1E1B2E",
         Panel = "1F2749", PanelHeader = "27305A", Element = "2C3666", Hover = "36417A",
         Outline = "05060F", Shadow = "05060F", Text = "F2F4FF", SubText = "AEB6E2", Muted = "7C86B8", Track = "3C4780",
-        Cloud = "96AAFF", CloudAlpha = 0.8, Accent = "5B8CF0", AccentDark = "3A62C0", Grass = "3A5BC8", GrassDark = "2A469E", Brick = "2F4AA8", BrickDark = "142058", Decor = { "Stars", "✦", "8FA8FF" },
+        Cloud = "96AAFF", CloudAlpha = 0.8, Accent = "5B8CF0", AccentDark = "3A62C0", Grass = "3A5BC8", GrassDark = "2A469E", Brick = "2F4AA8", BrickDark = "142058", Decor = { "Underground", "✦", "8FA8FF" },
         Particle = { "✦", false, "8FA8FF" },
     }),
     Castle = Palette({
@@ -175,7 +175,7 @@ local Themes = {
         SidebarText = "FFF1E6", SidebarMuted = "C8B0A4", TabActive = "E8703A", TabActiveText = "FFFFFF",
         Panel = "2B2323", PanelHeader = "352B2B", Element = "3D3232", Hover = "4A3D3D",
         Outline = "0A0707", Shadow = "0A0707", Text = "FFF1E6", SubText = "D9BFB0", Muted = "9F8579", Track = "524242",
-        Cloud = "FF8A50", CloudAlpha = 0.85, Accent = "E8703A", AccentDark = "B04A1E", Grass = "FF7A2E", GrassDark = "C8481A", Brick = "5A5050", BrickDark = "2A2222", Decor = { "Stars", "•", "FF8A3C" },
+        Cloud = "FF8A50", CloudAlpha = 0.85, Accent = "E8703A", AccentDark = "B04A1E", Grass = "FF7A2E", GrassDark = "C8481A", Brick = "5A5050", BrickDark = "2A2222", Decor = { "Castle", "•", "FF8A3C" },
         Particle = { "•", false, "FF8A3C" },
     }),
     ["Ghost House"] = Palette({
@@ -183,7 +183,7 @@ local Themes = {
         SidebarText = "E6F2EE", SidebarMuted = "8FB0A8", TabActive = "B8E0D2", TabActiveText = "1C2126",
         Panel = "242C31", PanelHeader = "2B353B", Element = "303B42", Hover = "39454D",
         Outline = "0B0E10", Shadow = "0B0E10", Text = "EAF4F1", SubText = "A3BDB6", Muted = "71898A", Track = "3E4B52",
-        Cloud = "CFF5E7", CloudAlpha = 0.85, Accent = "4FB89C", AccentDark = "348A72", Grass = "6B5040", GrassDark = "4A362A", Brick = "5A4334", BrickDark = "2E2219", Decor = { "Stars", "•", "B8F0DC" },
+        Cloud = "CFF5E7", CloudAlpha = 0.85, Accent = "4FB89C", AccentDark = "348A72", Grass = "6B5040", GrassDark = "4A362A", Brick = "5A4334", BrickDark = "2E2219", Decor = { "GhostHouse", "•", "B8F0DC" },
         Particle = { "•", false, "9FE8D0" },
     }),
     ["Star Road"] = Palette({
@@ -191,7 +191,7 @@ local Themes = {
         SidebarText = "FFF7FF", SidebarMuted = "CDB9F2", TabActive = "F0C448", TabActiveText = "26144A",
         Panel = "251749", PanelHeader = "2E1D5A", Element = "34225F", Hover = "412A72",
         Outline = "07030F", Shadow = "07030F", Text = "FFF7FF", SubText = "CDB9F2", Muted = "9580C4", Track = "4A3480",
-        Cloud = "FFE680", CloudAlpha = 0.8, Accent = "E85CA8", AccentDark = "B03C7E", Grass = "F0C448", GrassDark = "BA8C28", Brick = "5A38A8", BrickDark = "2A1858", Decor = { "Stars", "★", "FFD95A" },
+        Cloud = "FFE680", CloudAlpha = 0.8, Accent = "E85CA8", AccentDark = "B03C7E", Grass = "F0C448", GrassDark = "BA8C28", Brick = "5A38A8", BrickDark = "2A1858", Decor = { "StarRoad", "★", "FFD95A" },
         Particle = { "★", false, "FFD95A" },
     }),
     Desert = Palette({
@@ -199,7 +199,7 @@ local Themes = {
         SidebarText = "FFF6E8", SidebarMuted = "EED4B2", TabActive = "FFF8EC", TabActiveText = "B0502C",
         Panel = "FFF9EE", PanelHeader = "F4E6CC", Element = "FFFCF6", Hover = "F0DFC0",
         Outline = "5A4632", Shadow = "C2A07A", Text = "4A3828", SubText = "86705A", Muted = "B09A80", Track = "E6D6BC",
-        Cloud = "FFFFFF", CloudAlpha = 0.3, Accent = "C8643A", AccentDark = "964626", Grass = "EACB8C", GrassDark = "C9A866", Brick = "C08A5A", BrickDark = "8A5E38", Decor = { "Clouds" },
+        Cloud = "FFFFFF", CloudAlpha = 0.3, Accent = "C8643A", AccentDark = "964626", Grass = "EACB8C", GrassDark = "C9A866", Brick = "C08A5A", BrickDark = "8A5E38", Decor = { "Desert" },
         Particle = { "•", false, "C9964E" },
     }),
     ["Ice Land"] = Palette({
@@ -207,7 +207,7 @@ local Themes = {
         SidebarText = "F4FAFF", SidebarMuted = "CFE3F2", TabActive = "F6FBFF", TabActiveText = "3A78A8",
         Panel = "F8FCFF", PanelHeader = "E6F0F8", Element = "FFFFFF", Hover = "DCEAF5",
         Outline = "3E4F63", Shadow = "A6BACE", Text = "2E3D4D", SubText = "62788E", Muted = "95A8BA", Track = "D4E1EC",
-        Cloud = "FFFFFF", CloudAlpha = 0.2, Accent = "3A8AC8", AccentDark = "2A6698", Grass = "FFFFFF", GrassDark = "CFE3F2", Brick = "7FA8CC", BrickDark = "4F7699", Decor = { "Clouds" },
+        Cloud = "FFFFFF", CloudAlpha = 0.2, Accent = "3A8AC8", AccentDark = "2A6698", Grass = "FFFFFF", GrassDark = "CFE3F2", Brick = "7FA8CC", BrickDark = "4F7699", Decor = { "IceLand" },
         Particle = { "❄", true, "FFFFFF" },
     }),
     Jungle = Palette({
@@ -215,7 +215,7 @@ local Themes = {
         SidebarText = "EEF7EA", SidebarMuted = "A3C29C", TabActive = "F0C84A", TabActiveText = "1F2A1F",
         Panel = "26382A", PanelHeader = "2E4332", Element = "334A37", Hover = "3D5641",
         Outline = "0C120D", Shadow = "0C120D", Text = "EEF6EA", SubText = "AFC6A8", Muted = "7E957A", Track = "445C47",
-        Cloud = "D8F5C8", CloudAlpha = 0.85, Accent = "E08A3A", AccentDark = "A86024", Grass = "5AAE4E", GrassDark = "3A7A34", Brick = "5A4A32", BrickDark = "30261A", Decor = { "Stars", "•", "D8F07A" },
+        Cloud = "D8F5C8", CloudAlpha = 0.85, Accent = "E08A3A", AccentDark = "A86024", Grass = "5AAE4E", GrassDark = "3A7A34", Brick = "5A4A32", BrickDark = "30261A", Decor = { "Jungle", "•", "D8F07A" },
         Particle = { "•", false, "D8F07A" },
     }),
     ["Sky World"] = Palette({
@@ -223,7 +223,7 @@ local Themes = {
         SidebarText = "FFFFFF", SidebarMuted = "E3EBFA", TabActive = "FFFFFF", TabActiveText = "4A6FB5",
         Panel = "FFFFFF", PanelHeader = "EEF3FC", Element = "FFFFFF", Hover = "E4ECFA",
         Outline = "46506A", Shadow = "B6C2DA", Text = "333C52", SubText = "6A7590", Muted = "9AA4BC", Track = "DCE3F0",
-        Cloud = "FFFFFF", CloudAlpha = 0.1, Accent = "4A6FB5", AccentDark = "34528A", Grass = "FFFFFF", GrassDark = "DCE6F8", Brick = "C4D4F0", BrickDark = "98AED8", Decor = { "Clouds" },
+        Cloud = "FFFFFF", CloudAlpha = 0.1, Accent = "4A6FB5", AccentDark = "34528A", Grass = "FFFFFF", GrassDark = "DCE6F8", Brick = "C4D4F0", BrickDark = "98AED8", Decor = { "SkyWorld" },
         Particle = { "✦", false, "FFFFFF" },
     }),
     ["Animal Crossing"] = Palette({
@@ -279,250 +279,13 @@ local Themes = {
 -- Per-theme metadata: Icon aliases, Shape tweaks, Motion style, Font override
 -- Each key is optional — absent keys fall back to the base Mario Hub defaults.
 local ThemeMeta = {
-
-    -- ═══════════════════════════════════════════════════════════════
-    --  ANIMAL CROSSING  — soft, nature, cozy village life
-    --  • Mascot: Isabelle (ac_isabelle) & Nook Leaf (ac_leaf)
-    --  • Currency: Bell Bag (ac_bell)
-    --  • Activity: River Fishing (ac_fish)
-    --  • Extra-round corners (18/14/10) — marshmallow UI feel
-    --  • Gentle sine motion — no hard bounces
-    --  • FredokaOne everywhere — bubbly and friendly
-    -- ═══════════════════════════════════════════════════════════════
-    ["Animal Crossing"] = {
-        IntroTitle = "ISLAND GETAWAY",
+    ["Overworld"] = {
+        IntroTitle = "WORLD 1-1",
         IntroSprites = {
-            Block    = "ac_leaf",
-            Runner   = "ac_isabelle",
-            Goal     = "ac_tomnook",
-            Particle = "ac_leaf",
-        },
-        Icons = {
-            -- Mario sprite aliases bridged to theme cartoon mascots
-            mushroom = "sdv_farmer", flower = "sdv_abigail", boo = "sdv_krobus",
-            feather = "sdv_wizard", star = "sdv_can", chest = "sdv_seed",
-            bag = "sdv_seed", shell = "sdv_shield", coin = "sdv_gold",
-            pipe = "sdv_wizard", flag = "sdv_wizard", qblock = "sdv_farmer",
-            brick = "sdv_pickaxe", bomb = "sdv_abigail", oneup = "sdv_farmer",
-            castle = "sdv_farmer", kart = "sdv_wizard", gear = "sdv_farmer",
-            key = "sdv_farmer", heart = "sdv_stardrop", trophy = "sdv_stardrop",
-
-            -- Mario sprite aliases bridged to theme cartoon mascots
-            mushroom = "poke_pikachu", flower = "poke_charmander", boo = "poke_gengar",
-            feather = "poke_running", star = "poke_bulbasaur", chest = "poke_snorlax",
-            bag = "poke_snorlax", shell = "poke_squirtle", coin = "poke_meowth",
-            pipe = "poke_running", flag = "poke_running", qblock = "poke_pikachu",
-            brick = "poke_cup", bomb = "poke_charmander", oneup = "poke_pikachu",
-            castle = "poke_pikachu", kart = "poke_running", gear = "poke_pikachu",
-            key = "poke_pikachu", heart = "poke_potion", trophy = "poke_candy",
-
-            -- Mario sprite aliases bridged to theme cartoon mascots
-            mushroom = "ac_isabelle", flower = "ac_blathers", boo = "ac_fish",
-            feather = "ac_dodo", star = "ac_wateringcan", chest = "ac_timmy",
-            bag = "ac_timmy", shell = "ac_blathers", coin = "ac_tomnook",
-            pipe = "ac_dodo", flag = "ac_kkslider", qblock = "ac_isabelle",
-            brick = "ac_wateringcan", bomb = "ac_blathers", oneup = "ac_isabelle",
-            castle = "ac_isabelle", kart = "ac_dodo", gear = "ac_nookphone",
-            key = "ac_nookphone", heart = "ac_brewster", trophy = "ac_blathers",
-
-            afk        = "ac_isabelle", aim        = "ac_slingshot", aimbot     = "ac_slingshot", airdrop    = "ac_timmy",
-            alert      = "ac_blathers", animal     = "ac_fish", armor      = "ac_blathers", auto       = "ac_wateringcan",
-            backpack   = "ac_timmy", bag        = "ac_timmy", bell       = "ac_tomnook", bolt       = "ac_dodo",
-            bomb       = "ac_blathers", bot        = "ac_wateringcan", box        = "ac_timmy", build      = "ac_wateringcan",
-            camera     = "ac_fish", candy      = "ac_brewster", car        = "ac_dodo", cart       = "ac_tomnook",
-            cash       = "ac_tomnook", chart      = "ac_blathers", check      = "ac_kkslider", chest      = "ac_timmy",
-            code       = "ac_nookphone", cog        = "ac_nookphone", coin       = "ac_tomnook", collect    = "ac_timmy",
-            combat     = "ac_blathers", compass    = "ac_dodo", config     = "ac_nookphone", craft      = "ac_wateringcan",
-            crate      = "ac_timmy", crop       = "ac_wateringcan", crops      = "ac_wateringcan", crosshair  = "ac_slingshot",
-            crown      = "ac_isabelle", danger     = "ac_blathers", defense    = "ac_blathers", diamond    = "ac_blathers",
-            dice       = "ac_kkslider", drive      = "ac_dodo", egg        = "ac_blathers", esp        = "ac_fish",
-            eye        = "ac_fish", farm       = "ac_wateringcan", fish       = "ac_fish", fishing    = "ac_fish",
-            flag       = "ac_kkslider", fly        = "ac_dodo", forge      = "ac_wateringcan", game       = "ac_kkslider",
-            garden     = "ac_wateringcan", gem        = "ac_blathers", general    = "ac_isabelle", gift       = "ac_timmy",
-            globe      = "ac_dodo", god        = "ac_isabelle", gun        = "ac_slingshot", hammer     = "ac_wateringcan",
-            hatch      = "ac_blathers", heal       = "ac_brewster", health     = "ac_brewster", heart      = "ac_brewster",
-            home       = "ac_isabelle", hub        = "ac_isabelle", info       = "ac_blathers", inventory  = "ac_timmy",
-            item       = "ac_timmy", items      = "ac_timmy", jump       = "ac_dodo", key        = "ac_nookphone",
-            kill       = "ac_blathers", knife      = "ac_blathers", lock       = "ac_nookphone", loot       = "ac_timmy",
-            luck       = "ac_tomnook", magnet     = "ac_leaf", main       = "ac_isabelle", map        = "ac_dodo",
-            mine       = "ac_wateringcan", mining     = "ac_wateringcan", misc       = "ac_leaf", money      = "ac_tomnook",
-            mount      = "ac_fish", movement   = "ac_dodo", murder     = "ac_blathers", package    = "ac_timmy",
-            palette    = "ac_nookphone", paw        = "ac_fish", pet        = "ac_fish", pickaxe    = "ac_wateringcan",
-            play       = "ac_kkslider", player     = "ac_isabelle", potion     = "ac_brewster", potions    = "ac_brewster",
-            quest      = "ac_kkslider", race       = "ac_dodo", radar      = "ac_slingshot", rank       = "ac_blathers",
-            refresh    = "ac_dodo", roll       = "ac_kkslider", run        = "ac_dodo", safe       = "ac_blathers",
-            save       = "ac_nookphone", search     = "ac_fish", seed       = "ac_wateringcan", seeds      = "ac_wateringcan",
-            settings   = "ac_nookphone", shield     = "ac_blathers", shop       = "ac_tomnook", skull      = "ac_blathers",
-            sleep      = "ac_nookphone", sliders    = "ac_nookphone", sniper     = "ac_slingshot", sparkles   = "ac_tomnook",
-            speed      = "ac_dodo", spin       = "ac_kkslider", stats      = "ac_blathers", sword      = "ac_blathers",
-            swords     = "ac_blathers", target     = "ac_slingshot", teleport   = "ac_dodo", terminal   = "ac_nookphone",
-            theme      = "ac_nookphone", trash      = "ac_blathers", trophy     = "ac_blathers", unlock     = "ac_nookphone",
-            user       = "ac_isabelle", users      = "ac_isabelle", vehicle    = "ac_dodo", vip        = "ac_isabelle",
-            visuals    = "ac_fish", wand       = "ac_slingshot", warning    = "ac_blathers", warp       = "ac_dodo",
-            watering   = "ac_wateringcan", waypoint   = "ac_dodo", waypoints  = "ac_dodo", weapon     = "ac_blathers",
-            zap        = "ac_dodo",
-        },
-        Shape = {
-            WindowRadius     = 18,
-            GroupRadius      = 14,
-            SelectableRadius = 10,
-            ButtonDepth      = 2,
-        },
-        Motion = {
-            BumpRise = 3,
-            PopSpeed = Config.Tween.Pop * 1.10,
-            PopEase  = "Sine",
-        },
-        Font = {
-            Display = Enum.Font.FredokaOne,
-            Body    = Enum.Font.FredokaOne,
-            Logo    = Enum.Font.FredokaOne,
-        },
-        IntroSteps = {
-            EN = { "Inviting Tom Nook...", "Digging up fossils...", "Planting flowers...", "Ready to relax!" },
-            TH = { "กำลังเชิญ Tom Nook...", "กำลังขุดซากดึกดำบรรพ์...", "กำลังปลูกดอกไม้...", "พร้อมพักผ่อนแล้ว!" },
-        },
-    },
-
-    -- ═══════════════════════════════════════════════════════════════
-    --  KIRBY  — bouncy, puffball, Dream Land energy
-    --  • Mascot: Pink Kirby (kirby_body) & Warp Star (kirby_star)
-    --  • Healing: Maxim Tomato (kirby_tomato)
-    --  • Maximum roundness (24/18/12) — the puffball panel
-    --  • Back ease + huge BumpRise (10) — springy floaty bounce
-    --  • LuckiestGuy display, FredokaOne body — bold-cute mix
-    -- ═══════════════════════════════════════════════════════════════
-    Kirby = {
-        IntroTitle = "DREAM LAND",
-        IntroSprites = {
-            Block    = "kirby_star",
-            Runner   = "kirby_body",
-            Goal     = "kirby_dedede",
-            Particle = "kirby_star",
-        },
-        Icons = {
-            
-            -- Mario sprite aliases bridged to theme cartoon mascots
-            mushroom = "kirby_body", flower = "kirby_metaknight", boo = "kirby_cursor",
-            feather = "kirby_star", star = "kirby_rod", chest = "kirby_waddledee",
-            bag = "kirby_waddledee", shell = "kirby_metaknight", coin = "kirby_star",
-            pipe = "kirby_star", flag = "kirby_star", qblock = "kirby_body",
-            brick = "kirby_dedede", bomb = "kirby_metaknight", oneup = "kirby_body",
-            castle = "kirby_body", kart = "kirby_star", gear = "kirby_body",
-            key = "kirby_body", heart = "kirby_tomato", trophy = "kirby_dedede",
-afk        = "kirby_body", aim        = "kirby_cursor", aimbot     = "kirby_cursor", airdrop    = "kirby_waddledee",
-            alert      = "kirby_metaknight", animal     = "kirby_waddledee", armor      = "kirby_metaknight", auto       = "kirby_rod",
-            backpack   = "kirby_waddledee", bag        = "kirby_waddledee", bell       = "kirby_star", bolt       = "kirby_rod",
-            bomb       = "kirby_metaknight", bot        = "kirby_rod", box        = "kirby_waddledee", build      = "kirby_dedede",
-            camera     = "kirby_cursor", candy      = "kirby_star", car        = "kirby_star", cart       = "kirby_star",
-            cash       = "kirby_star", chart      = "kirby_dedede", check      = "kirby_star", chest      = "kirby_waddledee",
-            code       = "kirby_body", cog        = "kirby_body", coin       = "kirby_star", collect    = "kirby_waddledee",
-            combat     = "kirby_metaknight", compass    = "kirby_star", config     = "kirby_body", craft      = "kirby_dedede",
-            crate      = "kirby_waddledee", crop       = "kirby_star", crops      = "kirby_star", crosshair  = "kirby_cursor",
-            crown      = "kirby_dedede", danger     = "kirby_metaknight", defense    = "kirby_metaknight", diamond    = "kirby_star",
-            dice       = "kirby_star", drive      = "kirby_star", egg        = "kirby_waddledee", esp        = "kirby_cursor",
-            eye        = "kirby_cursor", farm       = "kirby_rod", fish       = "kirby_star", fishing    = "kirby_star",
-            flag       = "kirby_star", fly        = "kirby_star", forge      = "kirby_dedede", game       = "kirby_star",
-            garden     = "kirby_star", gem        = "kirby_star", general    = "kirby_body", gift       = "kirby_waddledee",
-            globe      = "kirby_star", god        = "kirby_dedede", gun        = "kirby_cursor", hammer     = "kirby_dedede",
-            hatch      = "kirby_waddledee", heal       = "kirby_tomato", health     = "kirby_tomato", heart      = "kirby_tomato",
-            home       = "kirby_body", hub        = "kirby_body", info       = "kirby_body", inventory  = "kirby_waddledee",
-            item       = "kirby_waddledee", items      = "kirby_waddledee", jump       = "kirby_star", key        = "kirby_star",
-            kill       = "kirby_metaknight", knife      = "kirby_metaknight", lock       = "kirby_star", loot       = "kirby_waddledee",
-            luck       = "kirby_star", magnet     = "kirby_waddledee", main       = "kirby_body", map        = "kirby_star",
-            mine       = "kirby_dedede", mining     = "kirby_dedede", misc       = "kirby_waddledee", money      = "kirby_star",
-            mount      = "kirby_waddledee", movement   = "kirby_star", murder     = "kirby_metaknight", package    = "kirby_waddledee",
-            palette    = "kirby_body", paw        = "kirby_waddledee", pet        = "kirby_waddledee", pickaxe    = "kirby_dedede",
-            play       = "kirby_star", player     = "kirby_body", potion     = "kirby_tomato", potions    = "kirby_tomato",
-            quest      = "kirby_star", race       = "kirby_star", radar      = "kirby_cursor", rank       = "kirby_dedede",
-            refresh    = "kirby_star", roll       = "kirby_star", run        = "kirby_star", safe       = "kirby_metaknight",
-            save       = "kirby_body", search     = "kirby_cursor", seed       = "kirby_star", seeds      = "kirby_star",
-            settings   = "kirby_body", shield     = "kirby_metaknight", shop       = "kirby_star", skull      = "kirby_metaknight",
-            sleep      = "kirby_body", sliders    = "kirby_body", sniper     = "kirby_cursor", sparkles   = "kirby_star",
-            speed      = "kirby_star", spin       = "kirby_star", stats      = "kirby_dedede", sword      = "kirby_metaknight",
-            swords     = "kirby_metaknight", target     = "kirby_cursor", teleport   = "kirby_star", terminal   = "kirby_body",
-            theme      = "kirby_body", trash      = "kirby_metaknight", trophy     = "kirby_dedede", unlock     = "kirby_star",
-            user       = "kirby_body", users      = "kirby_body", vehicle    = "kirby_star", vip        = "kirby_dedede",
-            visuals    = "kirby_cursor", wand       = "kirby_rod", warning    = "kirby_metaknight", warp       = "kirby_star",
-            watering   = "kirby_star", waypoint   = "kirby_star", waypoints  = "kirby_star", weapon     = "kirby_metaknight",
-            zap        = "kirby_rod",
-        },
-        Shape = {
-            WindowRadius     = 24,
-            GroupRadius      = 18,
-            SelectableRadius = 12,
-            ButtonDepth      = 2,
-        },
-        Motion = {
-            BumpRise = 10,
-            PopSpeed = Config.Tween.Pop * 0.80,
-            PopEase  = "Back",
-        },
-        Font = {
-            Display = Enum.Font.LuckiestGuy,
-            Body    = Enum.Font.FredokaOne,
-            Logo    = Enum.Font.LuckiestGuy,
-        },
-        IntroSteps = {
-            EN = { "Inhaling stars...", "Copying abilities...", "Floating through Dream Land...", "Poyo!" },
-            TH = { "กำลังดูดดาว...", "กำลังก็อปปี้ความสามารถ...", "ลอยผ่าน Dream Land...", "Poyo!" },
-        },
-    },
-
-    -- ═══════════════════════════════════════════════════════════════
-    --  POKÉMON CAFÉ  — café warmth, Pikachu & Pokéball & Potion
-    --  • Mascot: Pikachu (poke_pikachu) & Pokéball (poke_ball)
-    --  • Healing: Pokémon Potion (poke_potion)
-    --  • Beverage: Café Cup (poke_cup)
-    --  • Moderate round (14/10/8), noticeable depth 3 — solid buttons
-    --  • Back ease, moderate bump — a polite satisfying click
-    --  • LuckiestGuy display, BuilderSansMedium body — bold-but-readable
-    -- ═══════════════════════════════════════════════════════════════
-    ["Pokemon Cafe"] = {
-        IntroTitle = "POKEMON CAFE",
-        IntroSprites = {
-            Block    = "poke_cup",
-            Runner   = "poke_eevee",
-            Goal     = "poke_pikachu",
-            Particle = "poke_ball",
-        },
-        Icons = {
-            afk        = "poke_snorlax", aim        = "poke_charmander", aimbot     = "poke_charmander", airdrop    = "poke_snorlax",
-            alert      = "poke_charmander", animal     = "poke_eevee", armor      = "poke_squirtle", auto       = "poke_bulbasaur",
-            backpack   = "poke_snorlax", bag        = "poke_snorlax", bell       = "poke_meowth", bolt       = "poke_pikachu",
-            bomb       = "poke_charmander", bot        = "poke_bulbasaur", box        = "poke_snorlax", build      = "poke_cup",
-            camera     = "poke_gengar", candy      = "poke_candy", car        = "poke_running", cart       = "poke_meowth",
-            cash       = "poke_meowth", chart      = "poke_candy", check      = "poke_candy", chest      = "poke_snorlax",
-            code       = "poke_pikachu", cog        = "poke_pikachu", coin       = "poke_meowth", collect    = "poke_snorlax",
-            combat     = "poke_charmander", compass    = "poke_running", config     = "poke_pikachu", craft      = "poke_cup",
-            crate      = "poke_snorlax", crop       = "poke_bulbasaur", crops      = "poke_bulbasaur", crosshair  = "poke_charmander",
-            crown      = "poke_pikachu", danger     = "poke_charmander", defense    = "poke_squirtle", diamond    = "poke_candy",
-            dice       = "poke_candy", drive      = "poke_running", egg        = "poke_eevee", esp        = "poke_gengar",
-            eye        = "poke_gengar", farm       = "poke_bulbasaur", fish       = "poke_squirtle", fishing    = "poke_squirtle",
-            flag       = "poke_running", fly        = "poke_running", forge      = "poke_cup", game       = "poke_candy",
-            garden     = "poke_bulbasaur", gem        = "poke_candy", general    = "poke_pikachu", gift       = "poke_snorlax",
-            globe      = "poke_running", god        = "poke_pikachu", gun        = "poke_charmander", hammer     = "poke_cup",
-            hatch      = "poke_eevee", heal       = "poke_potion", health     = "poke_potion", heart      = "poke_potion",
-            home       = "poke_pikachu", hub        = "poke_pikachu", info       = "poke_pikachu", inventory  = "poke_snorlax",
-            item       = "poke_snorlax", items      = "poke_snorlax", jump       = "poke_running", key        = "poke_ball",
-            kill       = "poke_charmander", knife      = "poke_charmander", lock       = "poke_ball", loot       = "poke_snorlax",
-            luck       = "poke_candy", magnet     = "poke_snorlax", main       = "poke_pikachu", map        = "poke_running",
-            mine       = "poke_cup", mining     = "poke_cup", misc       = "poke_cup", money      = "poke_meowth",
-            mount      = "poke_eevee", movement   = "poke_running", murder     = "poke_charmander", package    = "poke_snorlax",
-            palette    = "poke_pikachu", paw        = "poke_eevee", pet        = "poke_eevee", pickaxe    = "poke_cup",
-            play       = "poke_running", player     = "poke_eevee", potion     = "poke_potion", potions    = "poke_potion",
-            quest      = "poke_running", race       = "poke_running", radar      = "poke_charmander", rank       = "poke_candy",
-            refresh    = "poke_running", roll       = "poke_candy", run        = "poke_running", safe       = "poke_squirtle",
-            save       = "poke_pikachu", search     = "poke_gengar", seed       = "poke_bulbasaur", seeds      = "poke_bulbasaur",
-            settings   = "poke_pikachu", shield     = "poke_squirtle", shop       = "poke_meowth", skull      = "poke_charmander",
-            sleep      = "poke_snorlax", sliders    = "poke_pikachu", sniper     = "poke_charmander", sparkles   = "poke_candy",
-            speed      = "poke_running", spin       = "poke_candy", stats      = "poke_candy", sword      = "poke_charmander",
-            swords     = "poke_charmander", target     = "poke_charmander", teleport   = "poke_running", terminal   = "poke_pikachu",
-            theme      = "poke_pikachu", trash      = "poke_charmander", trophy     = "poke_candy", unlock     = "poke_ball",
-            user       = "poke_eevee", users      = "poke_eevee", vehicle    = "poke_running", vip        = "poke_pikachu",
-            visuals    = "poke_gengar", wand       = "poke_candy", warning    = "poke_charmander", warp       = "poke_running",
-            watering   = "poke_bulbasaur", waypoint   = "poke_running", waypoints  = "poke_running", weapon     = "poke_charmander",
-            zap        = "poke_pikachu",
+            Block    = "qblock",
+            Runner   = "mushroom",
+            Goal     = "star",
+            Particle = "coin",
         },
         Shape = {
             WindowRadius     = 14,
@@ -531,186 +294,998 @@ afk        = "kirby_body", aim        = "kirby_cursor", aimbot     = "kirby_curs
             ButtonDepth      = 3,
         },
         Motion = {
-            BumpRise = 5,
-            PopSpeed = Config.Tween.Pop,
-            PopEase  = "Back",
+            BumpRise     = 2,
+            PopSpeed     = 0.16,
+            PopEase      = "Quad",
         },
-        Font = {
-            Display = Enum.Font.LuckiestGuy,
-            Body    = Enum.Font.BuilderSansMedium,
-            Logo    = Enum.Font.LuckiestGuy,
-        },
-        IntroSteps = {
-            EN = { "Brewing Cafe coffee...", "Setting the tables...", "Welcoming Pokemon guests...", "Cafe is open!" },
-            TH = { "กำลังชงกาแฟ...", "กำลังจัดโต๊ะ...", "ต้อนรับแขกโปเกมอน...", "เปิดคาเฟ่แล้ว!" },
+        Icons = {
+            mushroom = "mushroom", flower = "flower", boo = "boo",
+            feather = "feather", star = "star", chest = "qblock",
+            bag = "qblock", shell = "flower", coin = "star",
+            pipe = "feather", flag = "feather", qblock = "mushroom",
+            brick = "qblock", bomb = "flower", oneup = "mushroom",
+            castle = "mushroom", kart = "feather", gear = "gear",
+            key = "qblock", heart = "star", trophy = "star",
+
+            afk        = "mushroom", aim        = "flower", aimbot     = "flower", airdrop    = "qblock",
+            alert      = "flower", animal     = "boo", armor      = "flower", auto       = "star",
+            backpack   = "qblock", bag        = "qblock", bell       = "star", bolt       = "feather",
+            bomb       = "flower", bot        = "star", box        = "qblock", build      = "star",
+            camera     = "boo", candy      = "star", car        = "feather", cart       = "feather",
+            cash       = "star", chart      = "coin", check      = "mushroom", chest      = "qblock",
+            code       = "gear", cog        = "gear", coin       = "star", collect    = "qblock",
+            combat     = "flower", compass    = "feather", config     = "gear", craft      = "star",
+            crate      = "qblock", crop       = "star", crops      = "star", crosshair  = "flower",
+            crown      = "mushroom", danger     = "flower", defense    = "flower", diamond    = "qblock",
+            dice       = "mushroom", drive      = "feather", egg        = "mushroom", esp        = "boo",
+            eye        = "boo", farm       = "star", farming    = "star", fish       = "boo",
+            fishing    = "boo", flag       = "feather", fly        = "feather", forge      = "star",
+            game       = "mushroom", garden     = "star", gem        = "qblock", general    = "mushroom",
+            gift       = "qblock", globe      = "feather", god        = "mushroom", gun        = "flower",
+            hammer     = "flower", hatch      = "mushroom", heal       = "star", health     = "star",
+            heart      = "star", home       = "mushroom", hub        = "mushroom", info       = "mushroom",
+            inventory  = "qblock", item       = "qblock", items      = "qblock", jump       = "feather",
+            key        = "qblock", kill       = "flower", knife      = "flower", lock       = "gear",
+            loot       = "qblock", luck       = "star", magnet     = "feather", main       = "mushroom",
+            map        = "feather", mine       = "star", mining     = "star", misc       = "pipe",
+            money      = "star", mount      = "feather", movement   = "feather", murder     = "flower",
+            package    = "qblock", palette    = "gear", paw        = "boo", pet        = "boo",
+            pickaxe    = "star", play       = "mushroom", player     = "mushroom", players    = "mushroom",
+            potion     = "star", potions    = "star", quest      = "mushroom", race       = "feather",
+            radar      = "boo", rank       = "coin", refresh    = "feather", roll       = "mushroom",
+            run        = "feather", safe       = "gear", save       = "gear", search     = "boo",
+            seed       = "star", seeds      = "star", settings   = "gear", shield     = "flower",
+            shop       = "qblock", skull      = "flower", sleep      = "gear", sliders    = "gear",
+            sniper     = "flower", sparkles   = "star", speed      = "feather", spin       = "feather",
+            stats      = "coin", status     = "coin", sword      = "flower", swords     = "flower",
+            target     = "flower", teleport   = "feather", terminal   = "gear", theme      = "gear",
+            trash      = "qblock", trophy     = "coin", unlock     = "qblock", user       = "mushroom",
+            users      = "mushroom", vehicle    = "feather", vip        = "mushroom", wallhack   = "boo",
+            warp       = "feather", water      = "star", waypoint   = "feather", weapon     = "flower",
+            weapons    = "flower", world      = "feather",
         },
     },
 
-    -- ═══════════════════════════════════════════════════════════════
-    --  STARDEW VALLEY  — pixel farm life, Junimo & Farmer & Stardrop
-    --  • Mascot: Junimo (sdv_junimo) & Farmer (sdv_farmer)
-    --  • Artifact: Stardrop (sdv_stardrop) & Gold Coin (sdv_gold)
-    --  • Combat/Tool: Sword (sdv_sword), Shield (sdv_shield), Pickaxe (sdv_pickaxe)
-    --  • Livestock: White Barn Chicken (sdv_chicken)
-    --  • Minimal radius (6/6/4) + depth 4 — wooden-frame, chunky
-    --  • Slow-pop Out ease + low bump — deliberate, grounded clicks
-    --  • LuckiestGuy / BuilderSansMedium — pixel-bold readability
-    -- ═══════════════════════════════════════════════════════════════
-    ["Stardew Valley"] = {
-        IntroTitle = "PELICAN TOWN",
+    ["Castle"] = {
+        IntroTitle = "DUNGEON KEEP",
         IntroSprites = {
-            Block    = "sdv_seed",
-            Runner   = "sdv_farmer",
-            Goal     = "sdv_krobus",
-            Particle = "sdv_gold",
-        },
-        Icons = {
-            afk        = "sdv_farmer", aim        = "sdv_abigail", aimbot     = "sdv_abigail", airdrop    = "sdv_seed",
-            alert      = "sdv_abigail", animal     = "sdv_cow", armor      = "sdv_shield", auto       = "sdv_can",
-            backpack   = "sdv_seed", bag        = "sdv_seed", bell       = "sdv_gold", bolt       = "sdv_wizard",
-            bomb       = "sdv_abigail", bot        = "sdv_can", box        = "sdv_seed", build      = "sdv_pickaxe",
-            camera     = "sdv_krobus", candy      = "sdv_stardrop", car        = "sdv_wizard", cart       = "sdv_gold",
-            cash       = "sdv_gold", chart      = "sdv_stardrop", check      = "sdv_junimo", chest      = "sdv_seed",
-            code       = "sdv_farmer", cog        = "sdv_farmer", coin       = "sdv_gold", collect    = "sdv_seed",
-            combat     = "sdv_abigail", compass    = "sdv_wizard", config     = "sdv_farmer", craft      = "sdv_pickaxe",
-            crate      = "sdv_seed", crop       = "sdv_can", crops      = "sdv_can", crosshair  = "sdv_abigail",
-            crown      = "sdv_stardrop", danger     = "sdv_abigail", defense    = "sdv_shield", diamond    = "sdv_junimo",
-            dice       = "sdv_junimo", drive      = "sdv_wizard", egg        = "sdv_chicken", esp        = "sdv_krobus",
-            eye        = "sdv_krobus", farm       = "sdv_can", fish       = "sdv_chicken", fishing    = "sdv_chicken",
-            flag       = "sdv_wizard", fly        = "sdv_wizard", forge      = "sdv_pickaxe", game       = "sdv_junimo",
-            garden     = "sdv_can", gem        = "sdv_junimo", general    = "sdv_farmer", gift       = "sdv_seed",
-            globe      = "sdv_wizard", god        = "sdv_stardrop", gun        = "sdv_abigail", hammer     = "sdv_pickaxe",
-            hatch      = "sdv_chicken", heal       = "sdv_stardrop", health     = "sdv_stardrop", heart      = "sdv_stardrop",
-            home       = "sdv_farmer", hub        = "sdv_farmer", info       = "sdv_farmer", inventory  = "sdv_seed",
-            item       = "sdv_seed", items      = "sdv_seed", jump       = "sdv_wizard", key        = "sdv_shield",
-            kill       = "sdv_abigail", knife      = "sdv_abigail", lock       = "sdv_shield", loot       = "sdv_seed",
-            luck       = "sdv_junimo", magnet     = "sdv_seed", main       = "sdv_farmer", map        = "sdv_wizard",
-            mine       = "sdv_pickaxe", mining     = "sdv_pickaxe", misc       = "sdv_krobus", money      = "sdv_gold",
-            mount      = "sdv_cow", movement   = "sdv_wizard", murder     = "sdv_abigail", package    = "sdv_seed",
-            palette    = "sdv_farmer", paw        = "sdv_cow", pet        = "sdv_cow", pickaxe    = "sdv_pickaxe",
-            play       = "sdv_wizard", player     = "sdv_farmer", potion     = "sdv_stardrop", potions    = "sdv_stardrop",
-            quest      = "sdv_wizard", race       = "sdv_wizard", radar      = "sdv_abigail", rank       = "sdv_stardrop",
-            refresh    = "sdv_wizard", roll       = "sdv_junimo", run        = "sdv_wizard", safe       = "sdv_shield",
-            save       = "sdv_farmer", search     = "sdv_krobus", seed       = "sdv_seed", seeds      = "sdv_seed",
-            settings   = "sdv_farmer", shield     = "sdv_shield", shop       = "sdv_gold", skull      = "sdv_abigail",
-            sleep      = "sdv_farmer", sliders    = "sdv_farmer", sniper     = "sdv_abigail", sparkles   = "sdv_junimo",
-            speed      = "sdv_wizard", spin       = "sdv_junimo", stats      = "sdv_stardrop", sword      = "sdv_abigail",
-            swords     = "sdv_abigail", target     = "sdv_abigail", teleport   = "sdv_wizard", terminal   = "sdv_farmer",
-            theme      = "sdv_farmer", trash      = "sdv_abigail", trophy     = "sdv_stardrop", unlock     = "sdv_shield",
-            user       = "sdv_farmer", users      = "sdv_farmer", vehicle    = "sdv_wizard", vip        = "sdv_stardrop",
-            visuals    = "sdv_krobus", wand       = "sdv_wizard", warning    = "sdv_abigail", warp       = "sdv_wizard",
-            watering   = "sdv_can", waypoint   = "sdv_wizard", waypoints  = "sdv_wizard", weapon     = "sdv_abigail",
-            zap        = "sdv_wizard",
+            Block    = "dungeon_chest",
+            Runner   = "knight_helm",
+            Goal     = "dungeon_sword",
+            Particle = "torch_flame",
         },
         Shape = {
-            WindowRadius     = 6,
-            GroupRadius      = 6,
-            SelectableRadius = 4,
+            WindowRadius     = 10,
+            GroupRadius      = 8,
+            SelectableRadius = 6,
             ButtonDepth      = 4,
         },
         Motion = {
-            BumpRise = 3,
-            PopSpeed = Config.Tween.Pop * 1.15,
-            PopEase  = "Out",
+            BumpRise     = 3,
+            PopSpeed     = 0.14,
+            PopEase      = "Back",
         },
-        Font = {
-            Display = Enum.Font.LuckiestGuy,
-            Body    = Enum.Font.BuilderSansMedium,
-            Logo    = Enum.Font.LuckiestGuy,
-        },
-        IntroSteps = {
-            EN = { "Tending the farm...", "Watering the crops...", "Chatting with villagers...", "Farm life begins!" },
-            TH = { "กำลังดูแลฟาร์ม...", "กำลังรดน้ำต้นไม้...", "คุยกับชาวบ้าน...", "ชีวิตฟาร์มเริ่มต้น!" },
+        Icons = {
+            mushroom = "knight_helm", flower = "dungeon_sword", boo = "flame_skull",
+            feather = "winged_boots", star = "dungeon_chest", chest = "dungeon_chest",
+            bag = "dungeon_chest", shell = "dungeon_sword", coin = "dungeon_chest",
+            pipe = "winged_boots", flag = "winged_boots", qblock = "knight_helm",
+            brick = "dungeon_chest", bomb = "dungeon_sword", oneup = "knight_helm",
+            castle = "knight_helm", kart = "winged_boots", gear = "iron_gear",
+            key = "dungeon_chest", heart = "dungeon_chest", trophy = "dungeon_chest",
+
+            afk        = "knight_helm", aim        = "dungeon_sword", aimbot     = "dungeon_sword", airdrop    = "dungeon_chest",
+            alert      = "dungeon_sword", animal     = "flame_skull", armor      = "dungeon_sword", auto       = "dungeon_chest",
+            backpack   = "dungeon_chest", bag        = "dungeon_chest", bell       = "dungeon_chest", bolt       = "winged_boots",
+            bomb       = "dungeon_sword", bot        = "dungeon_chest", box        = "dungeon_chest", build      = "dungeon_chest",
+            camera     = "flame_skull", candy      = "dungeon_chest", car        = "winged_boots", cart       = "winged_boots",
+            cash       = "dungeon_chest", chart      = "torch_flame", check      = "knight_helm", chest      = "dungeon_chest",
+            code       = "iron_gear", cog        = "iron_gear", coin       = "dungeon_chest", collect    = "dungeon_chest",
+            combat     = "dungeon_sword", compass    = "winged_boots", config     = "iron_gear", craft      = "dungeon_chest",
+            crate      = "dungeon_chest", crop       = "dungeon_chest", crops      = "dungeon_chest", crosshair  = "dungeon_sword",
+            crown      = "knight_helm", danger     = "dungeon_sword", defense    = "dungeon_sword", diamond    = "dungeon_chest",
+            dice       = "knight_helm", drive      = "winged_boots", egg        = "knight_helm", esp        = "flame_skull",
+            eye        = "flame_skull", farm       = "dungeon_chest", farming    = "dungeon_chest", fish       = "flame_skull",
+            fishing    = "flame_skull", flag       = "winged_boots", fly        = "winged_boots", forge      = "dungeon_chest",
+            game       = "knight_helm", garden     = "dungeon_chest", gem        = "dungeon_chest", general    = "knight_helm",
+            gift       = "dungeon_chest", globe      = "winged_boots", god        = "knight_helm", gun        = "dungeon_sword",
+            hammer     = "dungeon_sword", hatch      = "knight_helm", heal       = "dungeon_chest", health     = "dungeon_chest",
+            heart      = "dungeon_chest", home       = "knight_helm", hub        = "knight_helm", info       = "knight_helm",
+            inventory  = "dungeon_chest", item       = "dungeon_chest", items      = "dungeon_chest", jump       = "winged_boots",
+            key        = "dungeon_chest", kill       = "dungeon_sword", knife      = "dungeon_sword", lock       = "iron_gear",
+            loot       = "dungeon_chest", luck       = "dungeon_chest", magnet     = "winged_boots", main       = "knight_helm",
+            map        = "winged_boots", mine       = "dungeon_chest", mining     = "dungeon_chest", misc       = "iron_gear",
+            money      = "dungeon_chest", mount      = "winged_boots", movement   = "winged_boots", murder     = "dungeon_sword",
+            package    = "dungeon_chest", palette    = "iron_gear", paw        = "flame_skull", pet        = "flame_skull",
+            pickaxe    = "dungeon_chest", play       = "knight_helm", player     = "knight_helm", players    = "knight_helm",
+            potion     = "dungeon_chest", potions    = "dungeon_chest", quest      = "knight_helm", race       = "winged_boots",
+            radar      = "flame_skull", rank       = "torch_flame", refresh    = "winged_boots", roll       = "knight_helm",
+            run        = "winged_boots", safe       = "iron_gear", save       = "iron_gear", search     = "flame_skull",
+            seed       = "dungeon_chest", seeds      = "dungeon_chest", settings   = "iron_gear", shield     = "dungeon_sword",
+            shop       = "dungeon_chest", skull      = "dungeon_sword", sleep      = "iron_gear", sliders    = "iron_gear",
+            sniper     = "dungeon_sword", sparkles   = "dungeon_chest", speed      = "winged_boots", spin       = "winged_boots",
+            stats      = "torch_flame", status     = "torch_flame", sword      = "dungeon_sword", swords     = "dungeon_sword",
+            target     = "dungeon_sword", teleport   = "winged_boots", terminal   = "iron_gear", theme      = "iron_gear",
+            trash      = "dungeon_chest", trophy     = "torch_flame", unlock     = "dungeon_chest", user       = "knight_helm",
+            users      = "knight_helm", vehicle    = "winged_boots", vip        = "knight_helm", wallhack   = "flame_skull",
+            warp       = "winged_boots", water      = "dungeon_chest", waypoint   = "winged_boots", weapon     = "dungeon_sword",
+            weapons    = "dungeon_sword", world      = "winged_boots",
         },
     },
 
-    -- ═══════════════════════════════════════════════════════════════
-    --  TAMAGOTCHI  — LCD pixel pet, Mametchi & Care Tools
-    --  • Mascot: Mametchi (tama_pet) & Egg (tama_egg) & Tama Heart (tama_heart)
-    --  • Care: Food Meal (tama_food), Lightbulb (tama_light), Clean Poop (tama_poop)
-    --  • Very low radius (4/4/4) — square pixel-art LCD feel
-    --  • Bounce ease + mid bump — that satisfying egg-bounce
-    --  • BuilderSansBold — bold pixel-display aesthetic
-    -- ═══════════════════════════════════════════════════════════════
-    Tamagotchi = {
-        IntroTitle = "TAMATOWN",
+    ["Underground"] = {
+        IntroTitle = "DEEP CAVERN",
         IntroSprites = {
-            Block    = "tama_egg",
-            Runner   = "tama_babytchi",
-            Goal     = "tama_mametchi",
-            Particle = "tama_heart",
-        },
-        Icons = {
-            
-            -- Mario sprite aliases bridged to theme cartoon mascots
-            mushroom = "tama_mametchi", flower = "tama_oyajitchi", boo = "tama_memetchi",
-            feather = "tama_mametchi", star = "tama_kuchipatchi", chest = "tama_kuchipatchi",
-            bag = "tama_kuchipatchi", shell = "tama_heart", coin = "tama_kuchipatchi",
-            pipe = "tama_mametchi", flag = "tama_babytchi", qblock = "tama_mametchi",
-            brick = "tama_game", bomb = "tama_oyajitchi", oneup = "tama_mametchi",
-            castle = "tama_mametchi", kart = "tama_mametchi", gear = "tama_memetchi",
-            key = "tama_memetchi", heart = "tama_heart", trophy = "tama_oyajitchi",
-afk        = "tama_sleep", aim        = "tama_game", aimbot     = "tama_game", airdrop    = "tama_kuchipatchi",
-            alert      = "tama_poop", animal     = "tama_mametchi", armor      = "tama_heart", auto       = "tama_game",
-            backpack   = "tama_kuchipatchi", bag        = "tama_kuchipatchi", bell       = "tama_kuchipatchi", bolt       = "tama_game",
-            bomb       = "tama_poop", bot        = "tama_game", box        = "tama_kuchipatchi", build      = "tama_game",
-            camera     = "tama_memetchi", candy      = "tama_kuchipatchi", car        = "tama_mametchi", cart       = "tama_kuchipatchi",
-            cash       = "tama_kuchipatchi", chart      = "tama_oyajitchi", check      = "tama_game", chest      = "tama_kuchipatchi",
-            code       = "tama_sleep", cog        = "tama_memetchi", coin       = "tama_kuchipatchi", collect    = "tama_kuchipatchi",
-            combat     = "tama_oyajitchi", compass    = "tama_mametchi", config     = "tama_memetchi", craft      = "tama_game",
-            crate      = "tama_kuchipatchi", crop       = "tama_kuchipatchi", crops      = "tama_kuchipatchi", crosshair  = "tama_game",
-            crown      = "tama_oyajitchi", danger     = "tama_poop", defense    = "tama_heart", diamond    = "tama_game",
-            dice       = "tama_game", drive      = "tama_mametchi", egg        = "tama_babytchi", esp        = "tama_memetchi",
-            eye        = "tama_memetchi", farm       = "tama_game", fish       = "tama_mametchi", fishing    = "tama_mametchi",
-            flag       = "tama_babytchi", fly        = "tama_mametchi", forge      = "tama_game", game       = "tama_game",
-            garden     = "tama_kuchipatchi", gem        = "tama_game", general    = "tama_mametchi", gift       = "tama_kuchipatchi",
-            globe      = "tama_mametchi", god        = "tama_oyajitchi", gun        = "tama_game", hammer     = "tama_game",
-            hatch      = "tama_babytchi", heal       = "tama_heart", health     = "tama_heart", heart      = "tama_heart",
-            home       = "tama_mametchi", hub        = "tama_mametchi", info       = "tama_mametchi", inventory  = "tama_kuchipatchi",
-            item       = "tama_kuchipatchi", items      = "tama_kuchipatchi", jump       = "tama_mametchi", key        = "tama_sleep",
-            kill       = "tama_poop", knife      = "tama_oyajitchi", lock       = "tama_sleep", loot       = "tama_kuchipatchi",
-            luck       = "tama_game", magnet     = "tama_kuchipatchi", main       = "tama_mametchi", map        = "tama_mametchi",
-            mine       = "tama_game", mining     = "tama_game", misc       = "tama_mametchi", money      = "tama_kuchipatchi",
-            mount      = "tama_mametchi", movement   = "tama_mametchi", murder     = "tama_poop", package    = "tama_kuchipatchi",
-            palette    = "tama_memetchi", paw        = "tama_mametchi", pet        = "tama_mametchi", pickaxe    = "tama_game",
-            play       = "tama_babytchi", player     = "tama_mametchi", potion     = "tama_heart", potions    = "tama_heart",
-            quest      = "tama_babytchi", race       = "tama_mametchi", radar      = "tama_game", rank       = "tama_oyajitchi",
-            refresh    = "tama_mametchi", roll       = "tama_game", run        = "tama_mametchi", safe       = "tama_heart",
-            save       = "tama_memetchi", search     = "tama_memetchi", seed       = "tama_kuchipatchi", seeds      = "tama_kuchipatchi",
-            settings   = "tama_memetchi", shield     = "tama_heart", shop       = "tama_kuchipatchi", skull      = "tama_poop",
-            sleep      = "tama_sleep", sliders    = "tama_memetchi", sniper     = "tama_game", sparkles   = "tama_game",
-            speed      = "tama_mametchi", spin       = "tama_game", stats      = "tama_oyajitchi", sword      = "tama_oyajitchi",
-            swords     = "tama_oyajitchi", target     = "tama_game", teleport   = "tama_mametchi", terminal   = "tama_sleep",
-            theme      = "tama_memetchi", trash      = "tama_poop", trophy     = "tama_oyajitchi", unlock     = "tama_sleep",
-            user       = "tama_mametchi", users      = "tama_mametchi", vehicle    = "tama_mametchi", vip        = "tama_oyajitchi",
-            visuals    = "tama_memetchi", wand       = "tama_game", warning    = "tama_poop", warp       = "tama_mametchi",
-            watering   = "tama_kuchipatchi", waypoint   = "tama_babytchi", waypoints  = "tama_babytchi", weapon     = "tama_oyajitchi",
-            zap        = "tama_game",
+            Block    = "ore_sack",
+            Runner   = "cavern_pick",
+            Goal     = "crystal_gem",
+            Particle = "crystal_gem",
         },
         Shape = {
-            WindowRadius     = 4,
-            GroupRadius      = 4,
+            WindowRadius     = 12,
+            GroupRadius      = 8,
+            SelectableRadius = 6,
+            ButtonDepth      = 3,
+        },
+        Motion = {
+            BumpRise     = 2,
+            PopSpeed     = 0.15,
+            PopEase      = "Quad",
+        },
+        Icons = {
+            mushroom = "cavern_pick", flower = "cavern_dynamite", boo = "crystal_gem",
+            feather = "cavern_cart", star = "cavern_shroom", chest = "ore_sack",
+            bag = "ore_sack", shell = "cavern_dynamite", coin = "cavern_shroom",
+            pipe = "cavern_cart", flag = "cavern_cart", qblock = "cavern_pick",
+            brick = "ore_sack", bomb = "cavern_dynamite", oneup = "cavern_pick",
+            castle = "cavern_pick", kart = "cavern_cart", gear = "cavern_cog",
+            key = "ore_sack", heart = "cavern_shroom", trophy = "cavern_shroom",
+
+            afk        = "cavern_pick", aim        = "cavern_dynamite", aimbot     = "cavern_dynamite", airdrop    = "ore_sack",
+            alert      = "cavern_dynamite", animal     = "crystal_gem", armor      = "cavern_dynamite", auto       = "cavern_shroom",
+            backpack   = "ore_sack", bag        = "ore_sack", bell       = "cavern_shroom", bolt       = "cavern_cart",
+            bomb       = "cavern_dynamite", bot        = "cavern_shroom", box        = "ore_sack", build      = "cavern_shroom",
+            camera     = "crystal_gem", candy      = "cavern_shroom", car        = "cavern_cart", cart       = "cavern_cart",
+            cash       = "cavern_shroom", chart      = "crystal_gem", check      = "cavern_pick", chest      = "ore_sack",
+            code       = "cavern_cog", cog        = "cavern_cog", coin       = "cavern_shroom", collect    = "ore_sack",
+            combat     = "cavern_dynamite", compass    = "cavern_cart", config     = "cavern_cog", craft      = "cavern_shroom",
+            crate      = "ore_sack", crop       = "cavern_shroom", crops      = "cavern_shroom", crosshair  = "cavern_dynamite",
+            crown      = "cavern_pick", danger     = "cavern_dynamite", defense    = "cavern_dynamite", diamond    = "ore_sack",
+            dice       = "cavern_pick", drive      = "cavern_cart", egg        = "cavern_pick", esp        = "crystal_gem",
+            eye        = "crystal_gem", farm       = "cavern_shroom", farming    = "cavern_shroom", fish       = "crystal_gem",
+            fishing    = "crystal_gem", flag       = "cavern_cart", fly        = "cavern_cart", forge      = "cavern_shroom",
+            game       = "cavern_pick", garden     = "cavern_shroom", gem        = "ore_sack", general    = "cavern_pick",
+            gift       = "ore_sack", globe      = "cavern_cart", god        = "cavern_pick", gun        = "cavern_dynamite",
+            hammer     = "cavern_dynamite", hatch      = "cavern_pick", heal       = "cavern_shroom", health     = "cavern_shroom",
+            heart      = "cavern_shroom", home       = "cavern_pick", hub        = "cavern_pick", info       = "cavern_pick",
+            inventory  = "ore_sack", item       = "ore_sack", items      = "ore_sack", jump       = "cavern_cart",
+            key        = "ore_sack", kill       = "cavern_dynamite", knife      = "cavern_dynamite", lock       = "cavern_cog",
+            loot       = "ore_sack", luck       = "cavern_shroom", magnet     = "cavern_cart", main       = "cavern_pick",
+            map        = "cavern_cart", mine       = "cavern_shroom", mining     = "cavern_shroom", misc       = "cavern_cog",
+            money      = "cavern_shroom", mount      = "cavern_cart", movement   = "cavern_cart", murder     = "cavern_dynamite",
+            package    = "ore_sack", palette    = "cavern_cog", paw        = "crystal_gem", pet        = "crystal_gem",
+            pickaxe    = "cavern_shroom", play       = "cavern_pick", player     = "cavern_pick", players    = "cavern_pick",
+            potion     = "cavern_shroom", potions    = "cavern_shroom", quest      = "cavern_pick", race       = "cavern_cart",
+            radar      = "crystal_gem", rank       = "crystal_gem", refresh    = "cavern_cart", roll       = "cavern_pick",
+            run        = "cavern_cart", safe       = "cavern_cog", save       = "cavern_cog", search     = "crystal_gem",
+            seed       = "cavern_shroom", seeds      = "cavern_shroom", settings   = "cavern_cog", shield     = "cavern_dynamite",
+            shop       = "ore_sack", skull      = "cavern_dynamite", sleep      = "cavern_cog", sliders    = "cavern_cog",
+            sniper     = "cavern_dynamite", sparkles   = "cavern_shroom", speed      = "cavern_cart", spin       = "cavern_cart",
+            stats      = "crystal_gem", status     = "crystal_gem", sword      = "cavern_dynamite", swords     = "cavern_dynamite",
+            target     = "cavern_dynamite", teleport   = "cavern_cart", terminal   = "cavern_cog", theme      = "cavern_cog",
+            trash      = "ore_sack", trophy     = "crystal_gem", unlock     = "ore_sack", user       = "cavern_pick",
+            users      = "cavern_pick", vehicle    = "cavern_cart", vip        = "cavern_pick", wallhack   = "crystal_gem",
+            warp       = "cavern_cart", water      = "cavern_shroom", waypoint   = "cavern_cart", weapon     = "cavern_dynamite",
+            weapons    = "cavern_dynamite", world      = "cavern_cart",
+        },
+    },
+
+    ["Ice Land"] = {
+        IntroTitle = "FROZEN TUNDRA",
+        IntroSprites = {
+            Block    = "frozen_gift",
+            Runner   = "snowman_face",
+            Goal     = "snowflake_crystal",
+            Particle = "snowflake_crystal",
+        },
+        Shape = {
+            WindowRadius     = 14,
+            GroupRadius      = 10,
+            SelectableRadius = 8,
+            ButtonDepth      = 3,
+        },
+        Motion = {
+            BumpRise     = 2,
+            PopSpeed     = 0.18,
+            PopEase      = "Sine",
+        },
+        Icons = {
+            mushroom = "snowman_face", flower = "ice_shard", boo = "snowflake_crystal",
+            feather = "ice_sled", star = "holly_berry", chest = "frozen_gift",
+            bag = "frozen_gift", shell = "ice_shard", coin = "holly_berry",
+            pipe = "ice_sled", flag = "ice_sled", qblock = "snowman_face",
+            brick = "frozen_gift", bomb = "ice_shard", oneup = "snowman_face",
+            castle = "snowman_face", kart = "ice_sled", gear = "frost_gear",
+            key = "frozen_gift", heart = "holly_berry", trophy = "holly_berry",
+
+            afk        = "snowman_face", aim        = "ice_shard", aimbot     = "ice_shard", airdrop    = "frozen_gift",
+            alert      = "ice_shard", animal     = "snowflake_crystal", armor      = "ice_shard", auto       = "holly_berry",
+            backpack   = "frozen_gift", bag        = "frozen_gift", bell       = "holly_berry", bolt       = "ice_sled",
+            bomb       = "ice_shard", bot        = "holly_berry", box        = "frozen_gift", build      = "holly_berry",
+            camera     = "snowflake_crystal", candy      = "holly_berry", car        = "ice_sled", cart       = "ice_sled",
+            cash       = "holly_berry", chart      = "snowflake_crystal", check      = "snowman_face", chest      = "frozen_gift",
+            code       = "frost_gear", cog        = "frost_gear", coin       = "holly_berry", collect    = "frozen_gift",
+            combat     = "ice_shard", compass    = "ice_sled", config     = "frost_gear", craft      = "holly_berry",
+            crate      = "frozen_gift", crop       = "holly_berry", crops      = "holly_berry", crosshair  = "ice_shard",
+            crown      = "snowman_face", danger     = "ice_shard", defense    = "ice_shard", diamond    = "frozen_gift",
+            dice       = "snowman_face", drive      = "ice_sled", egg        = "snowman_face", esp        = "snowflake_crystal",
+            eye        = "snowflake_crystal", farm       = "holly_berry", farming    = "holly_berry", fish       = "snowflake_crystal",
+            fishing    = "snowflake_crystal", flag       = "ice_sled", fly        = "ice_sled", forge      = "holly_berry",
+            game       = "snowman_face", garden     = "holly_berry", gem        = "frozen_gift", general    = "snowman_face",
+            gift       = "frozen_gift", globe      = "ice_sled", god        = "snowman_face", gun        = "ice_shard",
+            hammer     = "ice_shard", hatch      = "snowman_face", heal       = "holly_berry", health     = "holly_berry",
+            heart      = "holly_berry", home       = "snowman_face", hub        = "snowman_face", info       = "snowman_face",
+            inventory  = "frozen_gift", item       = "frozen_gift", items      = "frozen_gift", jump       = "ice_sled",
+            key        = "frozen_gift", kill       = "ice_shard", knife      = "ice_shard", lock       = "frost_gear",
+            loot       = "frozen_gift", luck       = "holly_berry", magnet     = "ice_sled", main       = "snowman_face",
+            map        = "ice_sled", mine       = "holly_berry", mining     = "holly_berry", misc       = "frost_gear",
+            money      = "holly_berry", mount      = "ice_sled", movement   = "ice_sled", murder     = "ice_shard",
+            package    = "frozen_gift", palette    = "frost_gear", paw        = "snowflake_crystal", pet        = "snowflake_crystal",
+            pickaxe    = "holly_berry", play       = "snowman_face", player     = "snowman_face", players    = "snowman_face",
+            potion     = "holly_berry", potions    = "holly_berry", quest      = "snowman_face", race       = "ice_sled",
+            radar      = "snowflake_crystal", rank       = "snowflake_crystal", refresh    = "ice_sled", roll       = "snowman_face",
+            run        = "ice_sled", safe       = "frost_gear", save       = "frost_gear", search     = "snowflake_crystal",
+            seed       = "holly_berry", seeds      = "holly_berry", settings   = "frost_gear", shield     = "ice_shard",
+            shop       = "frozen_gift", skull      = "ice_shard", sleep      = "frost_gear", sliders    = "frost_gear",
+            sniper     = "ice_shard", sparkles   = "holly_berry", speed      = "ice_sled", spin       = "ice_sled",
+            stats      = "snowflake_crystal", status     = "snowflake_crystal", sword      = "ice_shard", swords     = "ice_shard",
+            target     = "ice_shard", teleport   = "ice_sled", terminal   = "frost_gear", theme      = "frost_gear",
+            trash      = "frozen_gift", trophy     = "snowflake_crystal", unlock     = "frozen_gift", user       = "snowman_face",
+            users      = "snowman_face", vehicle    = "ice_sled", vip        = "snowman_face", wallhack   = "snowflake_crystal",
+            warp       = "ice_sled", water      = "holly_berry", waypoint   = "ice_sled", weapon     = "ice_shard",
+            weapons    = "ice_shard", world      = "ice_sled",
+        },
+    },
+
+    ["Desert"] = {
+        IntroTitle = "DESERT OASIS",
+        IntroSprites = {
+            Block    = "ancient_urn",
+            Runner   = "desert_sun",
+            Goal     = "desert_blade",
+            Particle = "desert_sun",
+        },
+        Shape = {
+            WindowRadius     = 12,
+            GroupRadius      = 8,
+            SelectableRadius = 6,
+            ButtonDepth      = 3,
+        },
+        Motion = {
+            BumpRise     = 2,
+            PopSpeed     = 0.16,
+            PopEase      = "Quad",
+        },
+        Icons = {
+            mushroom = "desert_sun", flower = "desert_blade", boo = "desert_mirage",
+            feather = "desert_carpet", star = "desert_cactus", chest = "ancient_urn",
+            bag = "ancient_urn", shell = "desert_blade", coin = "desert_cactus",
+            pipe = "desert_carpet", flag = "desert_carpet", qblock = "desert_sun",
+            brick = "ancient_urn", bomb = "desert_blade", oneup = "desert_sun",
+            castle = "desert_sun", kart = "desert_carpet", gear = "sundial_gear",
+            key = "ancient_urn", heart = "desert_cactus", trophy = "desert_cactus",
+
+            afk        = "desert_sun", aim        = "desert_blade", aimbot     = "desert_blade", airdrop    = "ancient_urn",
+            alert      = "desert_blade", animal     = "desert_mirage", armor      = "desert_blade", auto       = "desert_cactus",
+            backpack   = "ancient_urn", bag        = "ancient_urn", bell       = "desert_cactus", bolt       = "desert_carpet",
+            bomb       = "desert_blade", bot        = "desert_cactus", box        = "ancient_urn", build      = "desert_cactus",
+            camera     = "desert_mirage", candy      = "desert_cactus", car        = "desert_carpet", cart       = "desert_carpet",
+            cash       = "desert_cactus", chart      = "desert_sun", check      = "desert_sun", chest      = "ancient_urn",
+            code       = "sundial_gear", cog        = "sundial_gear", coin       = "desert_cactus", collect    = "ancient_urn",
+            combat     = "desert_blade", compass    = "desert_carpet", config     = "sundial_gear", craft      = "desert_cactus",
+            crate      = "ancient_urn", crop       = "desert_cactus", crops      = "desert_cactus", crosshair  = "desert_blade",
+            crown      = "desert_sun", danger     = "desert_blade", defense    = "desert_blade", diamond    = "ancient_urn",
+            dice       = "desert_sun", drive      = "desert_carpet", egg        = "desert_sun", esp        = "desert_mirage",
+            eye        = "desert_mirage", farm       = "desert_cactus", farming    = "desert_cactus", fish       = "desert_mirage",
+            fishing    = "desert_mirage", flag       = "desert_carpet", fly        = "desert_carpet", forge      = "desert_cactus",
+            game       = "desert_sun", garden     = "desert_cactus", gem        = "ancient_urn", general    = "desert_sun",
+            gift       = "ancient_urn", globe      = "desert_carpet", god        = "desert_sun", gun        = "desert_blade",
+            hammer     = "desert_blade", hatch      = "desert_sun", heal       = "desert_cactus", health     = "desert_cactus",
+            heart      = "desert_cactus", home       = "desert_sun", hub        = "desert_sun", info       = "desert_sun",
+            inventory  = "ancient_urn", item       = "ancient_urn", items      = "ancient_urn", jump       = "desert_carpet",
+            key        = "ancient_urn", kill       = "desert_blade", knife      = "desert_blade", lock       = "sundial_gear",
+            loot       = "ancient_urn", luck       = "desert_cactus", magnet     = "desert_carpet", main       = "desert_sun",
+            map        = "desert_carpet", mine       = "desert_cactus", mining     = "desert_cactus", misc       = "sundial_gear",
+            money      = "desert_cactus", mount      = "desert_carpet", movement   = "desert_carpet", murder     = "desert_blade",
+            package    = "ancient_urn", palette    = "sundial_gear", paw        = "desert_mirage", pet        = "desert_mirage",
+            pickaxe    = "desert_cactus", play       = "desert_sun", player     = "desert_sun", players    = "desert_sun",
+            potion     = "desert_cactus", potions    = "desert_cactus", quest      = "desert_sun", race       = "desert_carpet",
+            radar      = "desert_mirage", rank       = "desert_sun", refresh    = "desert_carpet", roll       = "desert_sun",
+            run        = "desert_carpet", safe       = "sundial_gear", save       = "sundial_gear", search     = "desert_mirage",
+            seed       = "desert_cactus", seeds      = "desert_cactus", settings   = "sundial_gear", shield     = "desert_blade",
+            shop       = "ancient_urn", skull      = "desert_blade", sleep      = "sundial_gear", sliders    = "sundial_gear",
+            sniper     = "desert_blade", sparkles   = "desert_cactus", speed      = "desert_carpet", spin       = "desert_carpet",
+            stats      = "desert_sun", status     = "desert_sun", sword      = "desert_blade", swords     = "desert_blade",
+            target     = "desert_blade", teleport   = "desert_carpet", terminal   = "sundial_gear", theme      = "sundial_gear",
+            trash      = "ancient_urn", trophy     = "desert_sun", unlock     = "ancient_urn", user       = "desert_sun",
+            users      = "desert_sun", vehicle    = "desert_carpet", vip        = "desert_sun", wallhack   = "desert_mirage",
+            warp       = "desert_carpet", water      = "desert_cactus", waypoint   = "desert_carpet", weapon     = "desert_blade",
+            weapons    = "desert_blade", world      = "desert_carpet",
+        },
+    },
+
+    ["Ghost House"] = {
+        IntroTitle = "HAUNTED MANOR",
+        IntroSprites = {
+            Block    = "cursed_book",
+            Runner   = "phantom_spook",
+            Goal     = "specter_eye",
+            Particle = "spirit_mist",
+        },
+        Shape = {
+            WindowRadius     = 16,
+            GroupRadius      = 12,
+            SelectableRadius = 8,
+            ButtonDepth      = 3,
+        },
+        Motion = {
+            BumpRise     = 3,
+            PopSpeed     = 0.22,
+            PopEase      = "Sine",
+        },
+        Icons = {
+            mushroom = "phantom_spook", flower = "cursed_scythe", boo = "specter_eye",
+            feather = "spirit_mist", star = "cursed_cauldron", chest = "cursed_book",
+            bag = "cursed_book", shell = "cursed_scythe", coin = "cursed_cauldron",
+            pipe = "spirit_mist", flag = "spirit_mist", qblock = "phantom_spook",
+            brick = "cursed_book", bomb = "cursed_scythe", oneup = "phantom_spook",
+            castle = "phantom_spook", kart = "spirit_mist", gear = "haunted_clock",
+            key = "cursed_book", heart = "cursed_cauldron", trophy = "cursed_cauldron",
+
+            afk        = "phantom_spook", aim        = "cursed_scythe", aimbot     = "cursed_scythe", airdrop    = "cursed_book",
+            alert      = "cursed_scythe", animal     = "specter_eye", armor      = "cursed_scythe", auto       = "cursed_cauldron",
+            backpack   = "cursed_book", bag        = "cursed_book", bell       = "cursed_cauldron", bolt       = "spirit_mist",
+            bomb       = "cursed_scythe", bot        = "cursed_cauldron", box        = "cursed_book", build      = "cursed_cauldron",
+            camera     = "specter_eye", candy      = "cursed_cauldron", car        = "spirit_mist", cart       = "spirit_mist",
+            cash       = "cursed_cauldron", chart      = "specter_eye", check      = "phantom_spook", chest      = "cursed_book",
+            code       = "haunted_clock", cog        = "haunted_clock", coin       = "cursed_cauldron", collect    = "cursed_book",
+            combat     = "cursed_scythe", compass    = "spirit_mist", config     = "haunted_clock", craft      = "cursed_cauldron",
+            crate      = "cursed_book", crop       = "cursed_cauldron", crops      = "cursed_cauldron", crosshair  = "cursed_scythe",
+            crown      = "phantom_spook", danger     = "cursed_scythe", defense    = "cursed_scythe", diamond    = "cursed_book",
+            dice       = "phantom_spook", drive      = "spirit_mist", egg        = "phantom_spook", esp        = "specter_eye",
+            eye        = "specter_eye", farm       = "cursed_cauldron", farming    = "cursed_cauldron", fish       = "specter_eye",
+            fishing    = "specter_eye", flag       = "spirit_mist", fly        = "spirit_mist", forge      = "cursed_cauldron",
+            game       = "phantom_spook", garden     = "cursed_cauldron", gem        = "cursed_book", general    = "phantom_spook",
+            gift       = "cursed_book", globe      = "spirit_mist", god        = "phantom_spook", gun        = "cursed_scythe",
+            hammer     = "cursed_scythe", hatch      = "phantom_spook", heal       = "cursed_cauldron", health     = "cursed_cauldron",
+            heart      = "cursed_cauldron", home       = "phantom_spook", hub        = "phantom_spook", info       = "phantom_spook",
+            inventory  = "cursed_book", item       = "cursed_book", items      = "cursed_book", jump       = "spirit_mist",
+            key        = "cursed_book", kill       = "cursed_scythe", knife      = "cursed_scythe", lock       = "haunted_clock",
+            loot       = "cursed_book", luck       = "cursed_cauldron", magnet     = "spirit_mist", main       = "phantom_spook",
+            map        = "spirit_mist", mine       = "cursed_cauldron", mining     = "cursed_cauldron", misc       = "haunted_clock",
+            money      = "cursed_cauldron", mount      = "spirit_mist", movement   = "spirit_mist", murder     = "cursed_scythe",
+            package    = "cursed_book", palette    = "haunted_clock", paw        = "specter_eye", pet        = "specter_eye",
+            pickaxe    = "cursed_cauldron", play       = "phantom_spook", player     = "phantom_spook", players    = "phantom_spook",
+            potion     = "cursed_cauldron", potions    = "cursed_cauldron", quest      = "phantom_spook", race       = "spirit_mist",
+            radar      = "specter_eye", rank       = "specter_eye", refresh    = "spirit_mist", roll       = "phantom_spook",
+            run        = "spirit_mist", safe       = "haunted_clock", save       = "haunted_clock", search     = "specter_eye",
+            seed       = "cursed_cauldron", seeds      = "cursed_cauldron", settings   = "haunted_clock", shield     = "cursed_scythe",
+            shop       = "cursed_book", skull      = "cursed_scythe", sleep      = "haunted_clock", sliders    = "haunted_clock",
+            sniper     = "cursed_scythe", sparkles   = "cursed_cauldron", speed      = "spirit_mist", spin       = "spirit_mist",
+            stats      = "specter_eye", status     = "specter_eye", sword      = "cursed_scythe", swords     = "cursed_scythe",
+            target     = "cursed_scythe", teleport   = "spirit_mist", terminal   = "haunted_clock", theme      = "haunted_clock",
+            trash      = "cursed_book", trophy     = "specter_eye", unlock     = "cursed_book", user       = "phantom_spook",
+            users      = "phantom_spook", vehicle    = "spirit_mist", vip        = "phantom_spook", wallhack   = "specter_eye",
+            warp       = "spirit_mist", water      = "cursed_cauldron", waypoint   = "spirit_mist", weapon     = "cursed_scythe",
+            weapons    = "cursed_scythe", world      = "spirit_mist",
+        },
+    },
+
+    ["Star Road"] = {
+        IntroTitle = "STAR ODYSSEY",
+        IntroSprites = {
+            Block    = "cargo_pod",
+            Runner   = "arcade_ship",
+            Goal     = "cosmic_star",
+            Particle = "cosmic_star",
+        },
+        Shape = {
+            WindowRadius     = 8,
+            GroupRadius      = 6,
             SelectableRadius = 4,
             ButtonDepth      = 3,
         },
         Motion = {
-            BumpRise = 6,
-            PopSpeed = Config.Tween.Pop,
-            PopEase  = "Bounce",
+            BumpRise     = 2,
+            PopSpeed     = 0.12,
+            PopEase      = "Linear",
         },
-        Font = {
-            Display = Enum.Font.BuilderSansBold,
-            Body    = Enum.Font.BuilderSansMedium,
-            Logo    = Enum.Font.BuilderSansBold,
-        },
-        IntroSteps = {
-            EN = { "Hatching your Tama...", "Feeding your pet...", "Playing mini-games...", "Beep! Ready!" },
-            TH = { "กำลังฟักทามา...", "กำลังให้อาหารสัตว์เลี้ยง...", "เล่นมินิเกม...", "บี๊ป! พร้อมแล้ว!" },
+        Icons = {
+            mushroom = "arcade_ship", flower = "laser_blaster", boo = "radar_screen",
+            feather = "hyper_thruster", star = "cosmic_star", chest = "cargo_pod",
+            bag = "cargo_pod", shell = "laser_blaster", coin = "cosmic_star",
+            pipe = "hyper_thruster", flag = "hyper_thruster", qblock = "arcade_ship",
+            brick = "cargo_pod", bomb = "laser_blaster", oneup = "arcade_ship",
+            castle = "arcade_ship", kart = "hyper_thruster", gear = "chip_gear",
+            key = "cargo_pod", heart = "cosmic_star", trophy = "cosmic_star",
+
+            afk        = "arcade_ship", aim        = "laser_blaster", aimbot     = "laser_blaster", airdrop    = "cargo_pod",
+            alert      = "laser_blaster", animal     = "radar_screen", armor      = "laser_blaster", auto       = "cosmic_star",
+            backpack   = "cargo_pod", bag        = "cargo_pod", bell       = "cosmic_star", bolt       = "hyper_thruster",
+            bomb       = "laser_blaster", bot        = "cosmic_star", box        = "cargo_pod", build      = "cosmic_star",
+            camera     = "radar_screen", candy      = "cosmic_star", car        = "hyper_thruster", cart       = "hyper_thruster",
+            cash       = "cosmic_star", chart      = "radar_screen", check      = "arcade_ship", chest      = "cargo_pod",
+            code       = "chip_gear", cog        = "chip_gear", coin       = "cosmic_star", collect    = "cargo_pod",
+            combat     = "laser_blaster", compass    = "hyper_thruster", config     = "chip_gear", craft      = "cosmic_star",
+            crate      = "cargo_pod", crop       = "cosmic_star", crops      = "cosmic_star", crosshair  = "laser_blaster",
+            crown      = "arcade_ship", danger     = "laser_blaster", defense    = "laser_blaster", diamond    = "cargo_pod",
+            dice       = "arcade_ship", drive      = "hyper_thruster", egg        = "arcade_ship", esp        = "radar_screen",
+            eye        = "radar_screen", farm       = "cosmic_star", farming    = "cosmic_star", fish       = "radar_screen",
+            fishing    = "radar_screen", flag       = "hyper_thruster", fly        = "hyper_thruster", forge      = "cosmic_star",
+            game       = "arcade_ship", garden     = "cosmic_star", gem        = "cargo_pod", general    = "arcade_ship",
+            gift       = "cargo_pod", globe      = "hyper_thruster", god        = "arcade_ship", gun        = "laser_blaster",
+            hammer     = "laser_blaster", hatch      = "arcade_ship", heal       = "cosmic_star", health     = "cosmic_star",
+            heart      = "cosmic_star", home       = "arcade_ship", hub        = "arcade_ship", info       = "arcade_ship",
+            inventory  = "cargo_pod", item       = "cargo_pod", items      = "cargo_pod", jump       = "hyper_thruster",
+            key        = "cargo_pod", kill       = "laser_blaster", knife      = "laser_blaster", lock       = "chip_gear",
+            loot       = "cargo_pod", luck       = "cosmic_star", magnet     = "hyper_thruster", main       = "arcade_ship",
+            map        = "hyper_thruster", mine       = "cosmic_star", mining     = "cosmic_star", misc       = "chip_gear",
+            money      = "cosmic_star", mount      = "hyper_thruster", movement   = "hyper_thruster", murder     = "laser_blaster",
+            package    = "cargo_pod", palette    = "chip_gear", paw        = "radar_screen", pet        = "radar_screen",
+            pickaxe    = "cosmic_star", play       = "arcade_ship", player     = "arcade_ship", players    = "arcade_ship",
+            potion     = "cosmic_star", potions    = "cosmic_star", quest      = "arcade_ship", race       = "hyper_thruster",
+            radar      = "radar_screen", rank       = "radar_screen", refresh    = "hyper_thruster", roll       = "arcade_ship",
+            run        = "hyper_thruster", safe       = "chip_gear", save       = "chip_gear", search     = "radar_screen",
+            seed       = "cosmic_star", seeds      = "cosmic_star", settings   = "chip_gear", shield     = "laser_blaster",
+            shop       = "cargo_pod", skull      = "laser_blaster", sleep      = "chip_gear", sliders    = "chip_gear",
+            sniper     = "laser_blaster", sparkles   = "cosmic_star", speed      = "hyper_thruster", spin       = "hyper_thruster",
+            stats      = "radar_screen", status     = "radar_screen", sword      = "laser_blaster", swords     = "laser_blaster",
+            target     = "laser_blaster", teleport   = "hyper_thruster", terminal   = "chip_gear", theme      = "chip_gear",
+            trash      = "cargo_pod", trophy     = "radar_screen", unlock     = "cargo_pod", user       = "arcade_ship",
+            users      = "arcade_ship", vehicle    = "hyper_thruster", vip        = "arcade_ship", wallhack   = "radar_screen",
+            warp       = "hyper_thruster", water      = "cosmic_star", waypoint   = "hyper_thruster", weapon     = "laser_blaster",
+            weapons    = "laser_blaster", world      = "hyper_thruster",
         },
     },
+
+    ["Jungle"] = {
+        IntroTitle = "TROPICAL CANOPY",
+        IntroSprites = {
+            Block    = "bamboo_crate",
+            Runner   = "tribal_mask",
+            Goal     = "jungle_fruit",
+            Particle = "jungle_fruit",
+        },
+        Shape = {
+            WindowRadius     = 14,
+            GroupRadius      = 10,
+            SelectableRadius = 8,
+            ButtonDepth      = 3,
+        },
+        Motion = {
+            BumpRise     = 2,
+            PopSpeed     = 0.16,
+            PopEase      = "Quad",
+        },
+        Icons = {
+            mushroom = "tribal_mask", flower = "bamboo_spear", boo = "jungle_eye",
+            feather = "vine_boots", star = "jungle_fruit", chest = "bamboo_crate",
+            bag = "bamboo_crate", shell = "bamboo_spear", coin = "jungle_fruit",
+            pipe = "vine_boots", flag = "vine_boots", qblock = "tribal_mask",
+            brick = "bamboo_crate", bomb = "bamboo_spear", oneup = "tribal_mask",
+            castle = "tribal_mask", kart = "vine_boots", gear = "stone_wheel",
+            key = "bamboo_crate", heart = "jungle_fruit", trophy = "jungle_fruit",
+
+            afk        = "tribal_mask", aim        = "bamboo_spear", aimbot     = "bamboo_spear", airdrop    = "bamboo_crate",
+            alert      = "bamboo_spear", animal     = "jungle_eye", armor      = "bamboo_spear", auto       = "jungle_fruit",
+            backpack   = "bamboo_crate", bag        = "bamboo_crate", bell       = "jungle_fruit", bolt       = "vine_boots",
+            bomb       = "bamboo_spear", bot        = "jungle_fruit", box        = "bamboo_crate", build      = "jungle_fruit",
+            camera     = "jungle_eye", candy      = "jungle_fruit", car        = "vine_boots", cart       = "vine_boots",
+            cash       = "jungle_fruit", chart      = "jungle_fruit", check      = "tribal_mask", chest      = "bamboo_crate",
+            code       = "stone_wheel", cog        = "stone_wheel", coin       = "jungle_fruit", collect    = "bamboo_crate",
+            combat     = "bamboo_spear", compass    = "vine_boots", config     = "stone_wheel", craft      = "jungle_fruit",
+            crate      = "bamboo_crate", crop       = "jungle_fruit", crops      = "jungle_fruit", crosshair  = "bamboo_spear",
+            crown      = "tribal_mask", danger     = "bamboo_spear", defense    = "bamboo_spear", diamond    = "bamboo_crate",
+            dice       = "tribal_mask", drive      = "vine_boots", egg        = "tribal_mask", esp        = "jungle_eye",
+            eye        = "jungle_eye", farm       = "jungle_fruit", farming    = "jungle_fruit", fish       = "jungle_eye",
+            fishing    = "jungle_eye", flag       = "vine_boots", fly        = "vine_boots", forge      = "jungle_fruit",
+            game       = "tribal_mask", garden     = "jungle_fruit", gem        = "bamboo_crate", general    = "tribal_mask",
+            gift       = "bamboo_crate", globe      = "vine_boots", god        = "tribal_mask", gun        = "bamboo_spear",
+            hammer     = "bamboo_spear", hatch      = "tribal_mask", heal       = "jungle_fruit", health     = "jungle_fruit",
+            heart      = "jungle_fruit", home       = "tribal_mask", hub        = "tribal_mask", info       = "tribal_mask",
+            inventory  = "bamboo_crate", item       = "bamboo_crate", items      = "bamboo_crate", jump       = "vine_boots",
+            key        = "bamboo_crate", kill       = "bamboo_spear", knife      = "bamboo_spear", lock       = "stone_wheel",
+            loot       = "bamboo_crate", luck       = "jungle_fruit", magnet     = "vine_boots", main       = "tribal_mask",
+            map        = "vine_boots", mine       = "jungle_fruit", mining     = "jungle_fruit", misc       = "stone_wheel",
+            money      = "jungle_fruit", mount      = "vine_boots", movement   = "vine_boots", murder     = "bamboo_spear",
+            package    = "bamboo_crate", palette    = "stone_wheel", paw        = "jungle_eye", pet        = "jungle_eye",
+            pickaxe    = "jungle_fruit", play       = "tribal_mask", player     = "tribal_mask", players    = "tribal_mask",
+            potion     = "jungle_fruit", potions    = "jungle_fruit", quest      = "tribal_mask", race       = "vine_boots",
+            radar      = "jungle_eye", rank       = "jungle_fruit", refresh    = "vine_boots", roll       = "tribal_mask",
+            run        = "vine_boots", safe       = "stone_wheel", save       = "stone_wheel", search     = "jungle_eye",
+            seed       = "jungle_fruit", seeds      = "jungle_fruit", settings   = "stone_wheel", shield     = "bamboo_spear",
+            shop       = "bamboo_crate", skull      = "bamboo_spear", sleep      = "stone_wheel", sliders    = "stone_wheel",
+            sniper     = "bamboo_spear", sparkles   = "jungle_fruit", speed      = "vine_boots", spin       = "vine_boots",
+            stats      = "jungle_fruit", status     = "jungle_fruit", sword      = "bamboo_spear", swords     = "bamboo_spear",
+            target     = "bamboo_spear", teleport   = "vine_boots", terminal   = "stone_wheel", theme      = "stone_wheel",
+            trash      = "bamboo_crate", trophy     = "jungle_fruit", unlock     = "bamboo_crate", user       = "tribal_mask",
+            users      = "tribal_mask", vehicle    = "vine_boots", vip        = "tribal_mask", wallhack   = "jungle_eye",
+            warp       = "vine_boots", water      = "jungle_fruit", waypoint   = "vine_boots", weapon     = "bamboo_spear",
+            weapons    = "bamboo_spear", world      = "vine_boots",
+        },
+    },
+
+    ["Sky World"] = {
+        IntroTitle = "CELESTIAL REALM",
+        IntroSprites = {
+            Block    = "cloud_chest",
+            Runner   = "angel_halo",
+            Goal     = "sun_flower",
+            Particle = "feather_bow",
+        },
+        Shape = {
+            WindowRadius     = 16,
+            GroupRadius      = 12,
+            SelectableRadius = 10,
+            ButtonDepth      = 3,
+        },
+        Motion = {
+            BumpRise     = 2,
+            PopSpeed     = 0.2,
+            PopEase      = "Sine",
+        },
+        Icons = {
+            mushroom = "angel_halo", flower = "feather_bow", boo = "sky_lens",
+            feather = "airship_prop", star = "sun_flower", chest = "cloud_chest",
+            bag = "cloud_chest", shell = "feather_bow", coin = "sun_flower",
+            pipe = "airship_prop", flag = "airship_prop", qblock = "angel_halo",
+            brick = "cloud_chest", bomb = "feather_bow", oneup = "angel_halo",
+            castle = "angel_halo", kart = "airship_prop", gear = "sky_compass",
+            key = "cloud_chest", heart = "sun_flower", trophy = "sun_flower",
+
+            afk        = "angel_halo", aim        = "feather_bow", aimbot     = "feather_bow", airdrop    = "cloud_chest",
+            alert      = "feather_bow", animal     = "sky_lens", armor      = "feather_bow", auto       = "sun_flower",
+            backpack   = "cloud_chest", bag        = "cloud_chest", bell       = "sun_flower", bolt       = "airship_prop",
+            bomb       = "feather_bow", bot        = "sun_flower", box        = "cloud_chest", build      = "sun_flower",
+            camera     = "sky_lens", candy      = "sun_flower", car        = "airship_prop", cart       = "airship_prop",
+            cash       = "sun_flower", chart      = "sun_flower", check      = "angel_halo", chest      = "cloud_chest",
+            code       = "sky_compass", cog        = "sky_compass", coin       = "sun_flower", collect    = "cloud_chest",
+            combat     = "feather_bow", compass    = "airship_prop", config     = "sky_compass", craft      = "sun_flower",
+            crate      = "cloud_chest", crop       = "sun_flower", crops      = "sun_flower", crosshair  = "feather_bow",
+            crown      = "angel_halo", danger     = "feather_bow", defense    = "feather_bow", diamond    = "cloud_chest",
+            dice       = "angel_halo", drive      = "airship_prop", egg        = "angel_halo", esp        = "sky_lens",
+            eye        = "sky_lens", farm       = "sun_flower", farming    = "sun_flower", fish       = "sky_lens",
+            fishing    = "sky_lens", flag       = "airship_prop", fly        = "airship_prop", forge      = "sun_flower",
+            game       = "angel_halo", garden     = "sun_flower", gem        = "cloud_chest", general    = "angel_halo",
+            gift       = "cloud_chest", globe      = "airship_prop", god        = "angel_halo", gun        = "feather_bow",
+            hammer     = "feather_bow", hatch      = "angel_halo", heal       = "sun_flower", health     = "sun_flower",
+            heart      = "sun_flower", home       = "angel_halo", hub        = "angel_halo", info       = "angel_halo",
+            inventory  = "cloud_chest", item       = "cloud_chest", items      = "cloud_chest", jump       = "airship_prop",
+            key        = "cloud_chest", kill       = "feather_bow", knife      = "feather_bow", lock       = "sky_compass",
+            loot       = "cloud_chest", luck       = "sun_flower", magnet     = "airship_prop", main       = "angel_halo",
+            map        = "airship_prop", mine       = "sun_flower", mining     = "sun_flower", misc       = "sky_compass",
+            money      = "sun_flower", mount      = "airship_prop", movement   = "airship_prop", murder     = "feather_bow",
+            package    = "cloud_chest", palette    = "sky_compass", paw        = "sky_lens", pet        = "sky_lens",
+            pickaxe    = "sun_flower", play       = "angel_halo", player     = "angel_halo", players    = "angel_halo",
+            potion     = "sun_flower", potions    = "sun_flower", quest      = "angel_halo", race       = "airship_prop",
+            radar      = "sky_lens", rank       = "sun_flower", refresh    = "airship_prop", roll       = "angel_halo",
+            run        = "airship_prop", safe       = "sky_compass", save       = "sky_compass", search     = "sky_lens",
+            seed       = "sun_flower", seeds      = "sun_flower", settings   = "sky_compass", shield     = "feather_bow",
+            shop       = "cloud_chest", skull      = "feather_bow", sleep      = "sky_compass", sliders    = "sky_compass",
+            sniper     = "feather_bow", sparkles   = "sun_flower", speed      = "airship_prop", spin       = "airship_prop",
+            stats      = "sun_flower", status     = "sun_flower", sword      = "feather_bow", swords     = "feather_bow",
+            target     = "feather_bow", teleport   = "airship_prop", terminal   = "sky_compass", theme      = "sky_compass",
+            trash      = "cloud_chest", trophy     = "sun_flower", unlock     = "cloud_chest", user       = "angel_halo",
+            users      = "angel_halo", vehicle    = "airship_prop", vip        = "angel_halo", wallhack   = "sky_lens",
+            warp       = "airship_prop", water      = "sun_flower", waypoint   = "airship_prop", weapon     = "feather_bow",
+            weapons    = "feather_bow", world      = "airship_prop",
+        },
+    },
+
+    ["Halloween"] = {
+        IntroTitle = "SPOOKY NIGHT",
+        IntroSprites = {
+            Block    = "candy",
+            Runner   = "pumpkin",
+            Goal     = "boo",
+            Particle = "bat",
+        },
+        Shape = {
+            WindowRadius     = 14,
+            GroupRadius      = 10,
+            SelectableRadius = 8,
+            ButtonDepth      = 3,
+        },
+        Motion = {
+            BumpRise     = 3,
+            PopSpeed     = 0.18,
+            PopEase      = "Back",
+        },
+        Icons = {
+            mushroom = "pumpkin", flower = "bat", boo = "boo",
+            feather = "broomstick", star = "candy", chest = "cauldron",
+            bag = "cauldron", shell = "bat", coin = "candy",
+            pipe = "broomstick", flag = "broomstick", qblock = "pumpkin",
+            brick = "cauldron", bomb = "bat", oneup = "pumpkin",
+            castle = "pumpkin", kart = "broomstick", gear = "spiderweb",
+            key = "cauldron", heart = "candy", trophy = "candy",
+
+            afk        = "pumpkin", aim        = "bat", aimbot     = "bat", airdrop    = "cauldron",
+            alert      = "bat", animal     = "boo", armor      = "bat", auto       = "candy",
+            backpack   = "cauldron", bag        = "cauldron", bell       = "candy", bolt       = "broomstick",
+            bomb       = "bat", bot        = "candy", box        = "cauldron", build      = "candy",
+            camera     = "boo", candy      = "candy", car        = "broomstick", cart       = "broomstick",
+            cash       = "candy", chart      = "pumpkin", check      = "pumpkin", chest      = "cauldron",
+            code       = "spiderweb", cog        = "spiderweb", coin       = "candy", collect    = "cauldron",
+            combat     = "bat", compass    = "broomstick", config     = "spiderweb", craft      = "candy",
+            crate      = "cauldron", crop       = "candy", crops      = "candy", crosshair  = "bat",
+            crown      = "pumpkin", danger     = "bat", defense    = "bat", diamond    = "cauldron",
+            dice       = "pumpkin", drive      = "broomstick", egg        = "pumpkin", esp        = "boo",
+            eye        = "boo", farm       = "candy", farming    = "candy", fish       = "boo",
+            fishing    = "boo", flag       = "broomstick", fly        = "broomstick", forge      = "candy",
+            game       = "pumpkin", garden     = "candy", gem        = "cauldron", general    = "pumpkin",
+            gift       = "cauldron", globe      = "broomstick", god        = "pumpkin", gun        = "bat",
+            hammer     = "bat", hatch      = "pumpkin", heal       = "candy", health     = "candy",
+            heart      = "candy", home       = "pumpkin", hub        = "pumpkin", info       = "pumpkin",
+            inventory  = "cauldron", item       = "cauldron", items      = "cauldron", jump       = "broomstick",
+            key        = "cauldron", kill       = "bat", knife      = "bat", lock       = "spiderweb",
+            loot       = "cauldron", luck       = "candy", magnet     = "broomstick", main       = "pumpkin",
+            map        = "broomstick", mine       = "candy", mining     = "candy", misc       = "spiderweb",
+            money      = "candy", mount      = "broomstick", movement   = "broomstick", murder     = "bat",
+            package    = "cauldron", palette    = "spiderweb", paw        = "boo", pet        = "boo",
+            pickaxe    = "candy", play       = "pumpkin", player     = "pumpkin", players    = "pumpkin",
+            potion     = "candy", potions    = "candy", quest      = "pumpkin", race       = "broomstick",
+            radar      = "boo", rank       = "pumpkin", refresh    = "broomstick", roll       = "pumpkin",
+            run        = "broomstick", safe       = "spiderweb", save       = "spiderweb", search     = "boo",
+            seed       = "candy", seeds      = "candy", settings   = "spiderweb", shield     = "bat",
+            shop       = "cauldron", skull      = "bat", sleep      = "spiderweb", sliders    = "spiderweb",
+            sniper     = "bat", sparkles   = "candy", speed      = "broomstick", spin       = "broomstick",
+            stats      = "pumpkin", status     = "pumpkin", sword      = "bat", swords     = "bat",
+            target     = "bat", teleport   = "broomstick", terminal   = "spiderweb", theme      = "spiderweb",
+            trash      = "cauldron", trophy     = "pumpkin", unlock     = "cauldron", user       = "pumpkin",
+            users      = "pumpkin", vehicle    = "broomstick", vip        = "pumpkin", wallhack   = "boo",
+            warp       = "broomstick", water      = "candy", waypoint   = "broomstick", weapon     = "bat",
+            weapons    = "bat", world      = "broomstick",
+        },
+    },
+
+    ["Kirby"] = {
+        IntroTitle = "DREAM LAND",
+        IntroSprites = {
+            Block    = "kirby_star",
+            Runner   = "kirby_body",
+            Goal     = "kirby_waddledee",
+            Particle = "kirby_star",
+        },
+        Shape = {
+            WindowRadius     = 18,
+            GroupRadius      = 14,
+            SelectableRadius = 10,
+            ButtonDepth      = 3,
+        },
+        Motion = {
+            BumpRise     = 2,
+            PopSpeed     = 0.16,
+            PopEase      = "Sine",
+        },
+        Icons = {
+            mushroom = "kirby_body", flower = "kirby_meta", boo = "kirby_cursor",
+            feather = "kirby_warpstar", star = "kirby_starrod", chest = "kirby_waddledee",
+            bag = "kirby_waddledee", shell = "kirby_meta", coin = "kirby_starrod",
+            pipe = "kirby_warpstar", flag = "kirby_warpstar", qblock = "kirby_body",
+            brick = "kirby_waddledee", bomb = "kirby_meta", oneup = "kirby_body",
+            castle = "kirby_body", kart = "kirby_warpstar", gear = "kirby_tomato",
+            key = "kirby_waddledee", heart = "kirby_starrod", trophy = "kirby_starrod",
+
+            afk        = "kirby_body", aim        = "kirby_meta", aimbot     = "kirby_meta", airdrop    = "kirby_waddledee",
+            alert      = "kirby_meta", animal     = "kirby_cursor", armor      = "kirby_meta", auto       = "kirby_starrod",
+            backpack   = "kirby_waddledee", bag        = "kirby_waddledee", bell       = "kirby_starrod", bolt       = "kirby_warpstar",
+            bomb       = "kirby_meta", bot        = "kirby_starrod", box        = "kirby_waddledee", build      = "kirby_starrod",
+            camera     = "kirby_cursor", candy      = "kirby_starrod", car        = "kirby_warpstar", cart       = "kirby_warpstar",
+            cash       = "kirby_starrod", chart      = "kirby_star", check      = "kirby_body", chest      = "kirby_waddledee",
+            code       = "kirby_tomato", cog        = "kirby_tomato", coin       = "kirby_starrod", collect    = "kirby_waddledee",
+            combat     = "kirby_meta", compass    = "kirby_warpstar", config     = "kirby_tomato", craft      = "kirby_starrod",
+            crate      = "kirby_waddledee", crop       = "kirby_starrod", crops      = "kirby_starrod", crosshair  = "kirby_meta",
+            crown      = "kirby_body", danger     = "kirby_meta", defense    = "kirby_meta", diamond    = "kirby_waddledee",
+            dice       = "kirby_body", drive      = "kirby_warpstar", egg        = "kirby_body", esp        = "kirby_cursor",
+            eye        = "kirby_cursor", farm       = "kirby_starrod", farming    = "kirby_starrod", fish       = "kirby_cursor",
+            fishing    = "kirby_cursor", flag       = "kirby_warpstar", fly        = "kirby_warpstar", forge      = "kirby_starrod",
+            game       = "kirby_body", garden     = "kirby_starrod", gem        = "kirby_waddledee", general    = "kirby_body",
+            gift       = "kirby_waddledee", globe      = "kirby_warpstar", god        = "kirby_body", gun        = "kirby_meta",
+            hammer     = "kirby_meta", hatch      = "kirby_body", heal       = "kirby_starrod", health     = "kirby_starrod",
+            heart      = "kirby_starrod", home       = "kirby_body", hub        = "kirby_body", info       = "kirby_body",
+            inventory  = "kirby_waddledee", item       = "kirby_waddledee", items      = "kirby_waddledee", jump       = "kirby_warpstar",
+            key        = "kirby_waddledee", kill       = "kirby_meta", knife      = "kirby_meta", lock       = "kirby_tomato",
+            loot       = "kirby_waddledee", luck       = "kirby_starrod", magnet     = "kirby_warpstar", main       = "kirby_body",
+            map        = "kirby_warpstar", mine       = "kirby_starrod", mining     = "kirby_starrod", misc       = "kirby_cursor",
+            money      = "kirby_starrod", mount      = "kirby_warpstar", movement   = "kirby_warpstar", murder     = "kirby_meta",
+            package    = "kirby_waddledee", palette    = "kirby_tomato", paw        = "kirby_cursor", pet        = "kirby_cursor",
+            pickaxe    = "kirby_starrod", play       = "kirby_body", player     = "kirby_body", players    = "kirby_body",
+            potion     = "kirby_starrod", potions    = "kirby_starrod", quest      = "kirby_body", race       = "kirby_warpstar",
+            radar      = "kirby_cursor", rank       = "kirby_star", refresh    = "kirby_warpstar", roll       = "kirby_body",
+            run        = "kirby_warpstar", safe       = "kirby_tomato", save       = "kirby_tomato", search     = "kirby_cursor",
+            seed       = "kirby_starrod", seeds      = "kirby_starrod", settings   = "kirby_tomato", shield     = "kirby_meta",
+            shop       = "kirby_waddledee", skull      = "kirby_meta", sleep      = "kirby_tomato", sliders    = "kirby_tomato",
+            sniper     = "kirby_meta", sparkles   = "kirby_starrod", speed      = "kirby_warpstar", spin       = "kirby_warpstar",
+            stats      = "kirby_star", status     = "kirby_star", sword      = "kirby_meta", swords     = "kirby_meta",
+            target     = "kirby_meta", teleport   = "kirby_warpstar", terminal   = "kirby_tomato", theme      = "kirby_tomato",
+            trash      = "kirby_waddledee", trophy     = "kirby_star", unlock     = "kirby_waddledee", user       = "kirby_body",
+            users      = "kirby_body", vehicle    = "kirby_warpstar", vip        = "kirby_body", wallhack   = "kirby_cursor",
+            warp       = "kirby_warpstar", water      = "kirby_starrod", waypoint   = "kirby_warpstar", weapon     = "kirby_meta",
+            weapons    = "kirby_meta", world      = "kirby_warpstar",
+        },
+    },
+
+    ["Pokemon Cafe"] = {
+        IntroTitle = "POKEMON CAFE",
+        IntroSprites = {
+            Block    = "poke_cup",
+            Runner   = "poke_pikachu",
+            Goal     = "poke_eevee",
+            Particle = "poke_ball",
+        },
+        Shape = {
+            WindowRadius     = 14,
+            GroupRadius      = 10,
+            SelectableRadius = 8,
+            ButtonDepth      = 3,
+        },
+        Motion = {
+            BumpRise     = 2,
+            PopSpeed     = 0.16,
+            PopEase      = "Quad",
+        },
+        Icons = {
+            mushroom = "poke_pikachu", flower = "poke_charmander", boo = "poke_gengar",
+            feather = "poke_running", star = "poke_bulbasaur", chest = "poke_snorlax",
+            bag = "poke_snorlax", shell = "poke_charmander", coin = "poke_bulbasaur",
+            pipe = "poke_running", flag = "poke_running", qblock = "poke_pikachu",
+            brick = "poke_snorlax", bomb = "poke_charmander", oneup = "poke_pikachu",
+            castle = "poke_pikachu", kart = "poke_running", gear = "poke_ball",
+            key = "poke_snorlax", heart = "poke_bulbasaur", trophy = "poke_bulbasaur",
+
+            afk        = "poke_pikachu", aim        = "poke_charmander", aimbot     = "poke_charmander", airdrop    = "poke_snorlax",
+            alert      = "poke_charmander", animal     = "poke_gengar", armor      = "poke_charmander", auto       = "poke_bulbasaur",
+            backpack   = "poke_snorlax", bag        = "poke_snorlax", bell       = "poke_bulbasaur", bolt       = "poke_running",
+            bomb       = "poke_charmander", bot        = "poke_bulbasaur", box        = "poke_snorlax", build      = "poke_bulbasaur",
+            camera     = "poke_gengar", candy      = "poke_bulbasaur", car        = "poke_running", cart       = "poke_running",
+            cash       = "poke_bulbasaur", chart      = "poke_ball", check      = "poke_pikachu", chest      = "poke_snorlax",
+            code       = "poke_ball", cog        = "poke_ball", coin       = "poke_bulbasaur", collect    = "poke_snorlax",
+            combat     = "poke_charmander", compass    = "poke_running", config     = "poke_ball", craft      = "poke_bulbasaur",
+            crate      = "poke_snorlax", crop       = "poke_bulbasaur", crops      = "poke_bulbasaur", crosshair  = "poke_charmander",
+            crown      = "poke_pikachu", danger     = "poke_charmander", defense    = "poke_charmander", diamond    = "poke_snorlax",
+            dice       = "poke_pikachu", drive      = "poke_running", egg        = "poke_pikachu", esp        = "poke_gengar",
+            eye        = "poke_gengar", farm       = "poke_bulbasaur", farming    = "poke_bulbasaur", fish       = "poke_gengar",
+            fishing    = "poke_gengar", flag       = "poke_running", fly        = "poke_running", forge      = "poke_bulbasaur",
+            game       = "poke_pikachu", garden     = "poke_bulbasaur", gem        = "poke_snorlax", general    = "poke_pikachu",
+            gift       = "poke_snorlax", globe      = "poke_running", god        = "poke_pikachu", gun        = "poke_charmander",
+            hammer     = "poke_charmander", hatch      = "poke_pikachu", heal       = "poke_bulbasaur", health     = "poke_bulbasaur",
+            heart      = "poke_bulbasaur", home       = "poke_pikachu", hub        = "poke_pikachu", info       = "poke_pikachu",
+            inventory  = "poke_snorlax", item       = "poke_snorlax", items      = "poke_snorlax", jump       = "poke_running",
+            key        = "poke_snorlax", kill       = "poke_charmander", knife      = "poke_charmander", lock       = "poke_ball",
+            loot       = "poke_snorlax", luck       = "poke_bulbasaur", magnet     = "poke_running", main       = "poke_pikachu",
+            map        = "poke_running", mine       = "poke_bulbasaur", mining     = "poke_bulbasaur", misc       = "poke_potion",
+            money      = "poke_bulbasaur", mount      = "poke_running", movement   = "poke_running", murder     = "poke_charmander",
+            package    = "poke_snorlax", palette    = "poke_ball", paw        = "poke_gengar", pet        = "poke_gengar",
+            pickaxe    = "poke_bulbasaur", play       = "poke_pikachu", player     = "poke_pikachu", players    = "poke_pikachu",
+            potion     = "poke_bulbasaur", potions    = "poke_bulbasaur", quest      = "poke_pikachu", race       = "poke_running",
+            radar      = "poke_gengar", rank       = "poke_ball", refresh    = "poke_running", roll       = "poke_pikachu",
+            run        = "poke_running", safe       = "poke_ball", save       = "poke_ball", search     = "poke_gengar",
+            seed       = "poke_bulbasaur", seeds      = "poke_bulbasaur", settings   = "poke_ball", shield     = "poke_charmander",
+            shop       = "poke_snorlax", skull      = "poke_charmander", sleep      = "poke_ball", sliders    = "poke_ball",
+            sniper     = "poke_charmander", sparkles   = "poke_bulbasaur", speed      = "poke_running", spin       = "poke_running",
+            stats      = "poke_ball", status     = "poke_ball", sword      = "poke_charmander", swords     = "poke_charmander",
+            target     = "poke_charmander", teleport   = "poke_running", terminal   = "poke_ball", theme      = "poke_ball",
+            trash      = "poke_snorlax", trophy     = "poke_ball", unlock     = "poke_snorlax", user       = "poke_pikachu",
+            users      = "poke_pikachu", vehicle    = "poke_running", vip        = "poke_pikachu", wallhack   = "poke_gengar",
+            warp       = "poke_running", water      = "poke_bulbasaur", waypoint   = "poke_running", weapon     = "poke_charmander",
+            weapons    = "poke_charmander", world      = "poke_running",
+        },
+    },
+
+    ["Animal Crossing"] = {
+        IntroTitle = "ISLAND GETAWAY",
+        IntroSprites = {
+            Block    = "ac_leaf",
+            Runner   = "ac_isabelle",
+            Goal     = "ac_tomnook",
+            Particle = "ac_leaf",
+        },
+        Shape = {
+            WindowRadius     = 18,
+            GroupRadius      = 14,
+            SelectableRadius = 10,
+            ButtonDepth      = 3,
+        },
+        Motion = {
+            BumpRise     = 2,
+            PopSpeed     = 0.2,
+            PopEase      = "Sine",
+        },
+        Icons = {
+            mushroom = "ac_isabelle", flower = "ac_blathers", boo = "ac_fish",
+            feather = "ac_dodo", star = "ac_wateringcan", chest = "ac_timmy",
+            bag = "ac_timmy", shell = "ac_blathers", coin = "ac_wateringcan",
+            pipe = "ac_dodo", flag = "ac_dodo", qblock = "ac_isabelle",
+            brick = "ac_timmy", bomb = "ac_blathers", oneup = "ac_isabelle",
+            castle = "ac_isabelle", kart = "ac_dodo", gear = "ac_nookphone",
+            key = "ac_timmy", heart = "ac_wateringcan", trophy = "ac_wateringcan",
+
+            afk        = "ac_isabelle", aim        = "ac_blathers", aimbot     = "ac_blathers", airdrop    = "ac_timmy",
+            alert      = "ac_blathers", animal     = "ac_fish", armor      = "ac_blathers", auto       = "ac_wateringcan",
+            backpack   = "ac_timmy", bag        = "ac_timmy", bell       = "ac_wateringcan", bolt       = "ac_dodo",
+            bomb       = "ac_blathers", bot        = "ac_wateringcan", box        = "ac_timmy", build      = "ac_wateringcan",
+            camera     = "ac_fish", candy      = "ac_wateringcan", car        = "ac_dodo", cart       = "ac_dodo",
+            cash       = "ac_wateringcan", chart      = "ac_tomnook", check      = "ac_isabelle", chest      = "ac_timmy",
+            code       = "ac_nookphone", cog        = "ac_nookphone", coin       = "ac_wateringcan", collect    = "ac_timmy",
+            combat     = "ac_blathers", compass    = "ac_dodo", config     = "ac_nookphone", craft      = "ac_wateringcan",
+            crate      = "ac_timmy", crop       = "ac_wateringcan", crops      = "ac_wateringcan", crosshair  = "ac_blathers",
+            crown      = "ac_isabelle", danger     = "ac_blathers", defense    = "ac_blathers", diamond    = "ac_timmy",
+            dice       = "ac_isabelle", drive      = "ac_dodo", egg        = "ac_isabelle", esp        = "ac_fish",
+            eye        = "ac_fish", farm       = "ac_wateringcan", farming    = "ac_wateringcan", fish       = "ac_fish",
+            fishing    = "ac_fish", flag       = "ac_dodo", fly        = "ac_dodo", forge      = "ac_wateringcan",
+            game       = "ac_isabelle", garden     = "ac_wateringcan", gem        = "ac_timmy", general    = "ac_isabelle",
+            gift       = "ac_timmy", globe      = "ac_dodo", god        = "ac_isabelle", gun        = "ac_blathers",
+            hammer     = "ac_blathers", hatch      = "ac_isabelle", heal       = "ac_wateringcan", health     = "ac_wateringcan",
+            heart      = "ac_wateringcan", home       = "ac_isabelle", hub        = "ac_isabelle", info       = "ac_isabelle",
+            inventory  = "ac_timmy", item       = "ac_timmy", items      = "ac_timmy", jump       = "ac_dodo",
+            key        = "ac_timmy", kill       = "ac_blathers", knife      = "ac_blathers", lock       = "ac_nookphone",
+            loot       = "ac_timmy", luck       = "ac_wateringcan", magnet     = "ac_dodo", main       = "ac_isabelle",
+            map        = "ac_dodo", mine       = "ac_wateringcan", mining     = "ac_wateringcan", misc       = "ac_leaf",
+            money      = "ac_wateringcan", mount      = "ac_dodo", movement   = "ac_dodo", murder     = "ac_blathers",
+            package    = "ac_timmy", palette    = "ac_nookphone", paw        = "ac_fish", pet        = "ac_fish",
+            pickaxe    = "ac_wateringcan", play       = "ac_isabelle", player     = "ac_isabelle", players    = "ac_isabelle",
+            potion     = "ac_wateringcan", potions    = "ac_wateringcan", quest      = "ac_isabelle", race       = "ac_dodo",
+            radar      = "ac_fish", rank       = "ac_tomnook", refresh    = "ac_dodo", roll       = "ac_isabelle",
+            run        = "ac_dodo", safe       = "ac_nookphone", save       = "ac_nookphone", search     = "ac_fish",
+            seed       = "ac_wateringcan", seeds      = "ac_wateringcan", settings   = "ac_nookphone", shield     = "ac_blathers",
+            shop       = "ac_timmy", skull      = "ac_blathers", sleep      = "ac_nookphone", sliders    = "ac_nookphone",
+            sniper     = "ac_blathers", sparkles   = "ac_wateringcan", speed      = "ac_dodo", spin       = "ac_dodo",
+            stats      = "ac_tomnook", status     = "ac_tomnook", sword      = "ac_blathers", swords     = "ac_blathers",
+            target     = "ac_blathers", teleport   = "ac_dodo", terminal   = "ac_nookphone", theme      = "ac_nookphone",
+            trash      = "ac_timmy", trophy     = "ac_tomnook", unlock     = "ac_timmy", user       = "ac_isabelle",
+            users      = "ac_isabelle", vehicle    = "ac_dodo", vip        = "ac_isabelle", wallhack   = "ac_fish",
+            warp       = "ac_dodo", water      = "ac_wateringcan", waypoint   = "ac_dodo", weapon     = "ac_blathers",
+            weapons    = "ac_blathers", world      = "ac_dodo",
+        },
+    },
+
+    ["Stardew Valley"] = {
+        IntroTitle = "PELICAN TOWN",
+        IntroSprites = {
+            Block    = "sdv_stardrop",
+            Runner   = "sdv_farmer",
+            Goal     = "sdv_junimo",
+            Particle = "sdv_stardrop",
+        },
+        Shape = {
+            WindowRadius     = 12,
+            GroupRadius      = 8,
+            SelectableRadius = 6,
+            ButtonDepth      = 3,
+        },
+        Motion = {
+            BumpRise     = 2,
+            PopSpeed     = 0.16,
+            PopEase      = "Quad",
+        },
+        Icons = {
+            mushroom = "sdv_farmer", flower = "sdv_abigail", boo = "sdv_krobus",
+            feather = "sdv_wizard", star = "sdv_can", chest = "sdv_seed",
+            bag = "sdv_seed", shell = "sdv_abigail", coin = "sdv_can",
+            pipe = "sdv_wizard", flag = "sdv_wizard", qblock = "sdv_farmer",
+            brick = "sdv_seed", bomb = "sdv_abigail", oneup = "sdv_farmer",
+            castle = "sdv_farmer", kart = "sdv_wizard", gear = "sdv_stardrop",
+            key = "sdv_seed", heart = "sdv_can", trophy = "sdv_can",
+
+            afk        = "sdv_farmer", aim        = "sdv_abigail", aimbot     = "sdv_abigail", airdrop    = "sdv_seed",
+            alert      = "sdv_abigail", animal     = "sdv_krobus", armor      = "sdv_abigail", auto       = "sdv_can",
+            backpack   = "sdv_seed", bag        = "sdv_seed", bell       = "sdv_can", bolt       = "sdv_wizard",
+            bomb       = "sdv_abigail", bot        = "sdv_can", box        = "sdv_seed", build      = "sdv_can",
+            camera     = "sdv_krobus", candy      = "sdv_can", car        = "sdv_wizard", cart       = "sdv_wizard",
+            cash       = "sdv_can", chart      = "sdv_stardrop", check      = "sdv_farmer", chest      = "sdv_seed",
+            code       = "sdv_stardrop", cog        = "sdv_stardrop", coin       = "sdv_can", collect    = "sdv_seed",
+            combat     = "sdv_abigail", compass    = "sdv_wizard", config     = "sdv_stardrop", craft      = "sdv_can",
+            crate      = "sdv_seed", crop       = "sdv_can", crops      = "sdv_can", crosshair  = "sdv_abigail",
+            crown      = "sdv_farmer", danger     = "sdv_abigail", defense    = "sdv_abigail", diamond    = "sdv_seed",
+            dice       = "sdv_farmer", drive      = "sdv_wizard", egg        = "sdv_farmer", esp        = "sdv_krobus",
+            eye        = "sdv_krobus", farm       = "sdv_can", farming    = "sdv_can", fish       = "sdv_krobus",
+            fishing    = "sdv_krobus", flag       = "sdv_wizard", fly        = "sdv_wizard", forge      = "sdv_can",
+            game       = "sdv_farmer", garden     = "sdv_can", gem        = "sdv_seed", general    = "sdv_farmer",
+            gift       = "sdv_seed", globe      = "sdv_wizard", god        = "sdv_farmer", gun        = "sdv_abigail",
+            hammer     = "sdv_abigail", hatch      = "sdv_farmer", heal       = "sdv_can", health     = "sdv_can",
+            heart      = "sdv_can", home       = "sdv_farmer", hub        = "sdv_farmer", info       = "sdv_farmer",
+            inventory  = "sdv_seed", item       = "sdv_seed", items      = "sdv_seed", jump       = "sdv_wizard",
+            key        = "sdv_seed", kill       = "sdv_abigail", knife      = "sdv_abigail", lock       = "sdv_stardrop",
+            loot       = "sdv_seed", luck       = "sdv_can", magnet     = "sdv_wizard", main       = "sdv_farmer",
+            map        = "sdv_wizard", mine       = "sdv_can", mining     = "sdv_can", misc       = "sdv_pickaxe",
+            money      = "sdv_can", mount      = "sdv_wizard", movement   = "sdv_wizard", murder     = "sdv_abigail",
+            package    = "sdv_seed", palette    = "sdv_stardrop", paw        = "sdv_krobus", pet        = "sdv_krobus",
+            pickaxe    = "sdv_can", play       = "sdv_farmer", player     = "sdv_farmer", players    = "sdv_farmer",
+            potion     = "sdv_can", potions    = "sdv_can", quest      = "sdv_farmer", race       = "sdv_wizard",
+            radar      = "sdv_krobus", rank       = "sdv_stardrop", refresh    = "sdv_wizard", roll       = "sdv_farmer",
+            run        = "sdv_wizard", safe       = "sdv_stardrop", save       = "sdv_stardrop", search     = "sdv_krobus",
+            seed       = "sdv_can", seeds      = "sdv_can", settings   = "sdv_stardrop", shield     = "sdv_abigail",
+            shop       = "sdv_seed", skull      = "sdv_abigail", sleep      = "sdv_stardrop", sliders    = "sdv_stardrop",
+            sniper     = "sdv_abigail", sparkles   = "sdv_can", speed      = "sdv_wizard", spin       = "sdv_wizard",
+            stats      = "sdv_stardrop", status     = "sdv_stardrop", sword      = "sdv_abigail", swords     = "sdv_abigail",
+            target     = "sdv_abigail", teleport   = "sdv_wizard", terminal   = "sdv_stardrop", theme      = "sdv_stardrop",
+            trash      = "sdv_seed", trophy     = "sdv_stardrop", unlock     = "sdv_seed", user       = "sdv_farmer",
+            users      = "sdv_farmer", vehicle    = "sdv_wizard", vip        = "sdv_farmer", wallhack   = "sdv_krobus",
+            warp       = "sdv_wizard", water      = "sdv_can", waypoint   = "sdv_wizard", weapon     = "sdv_abigail",
+            weapons    = "sdv_abigail", world      = "sdv_wizard",
+        },
+    },
+
+    ["Tamagotchi"] = {
+        IntroTitle = "VIRTUAL PET",
+        IntroSprites = {
+            Block    = "tama_egg",
+            Runner   = "tama_mametchi",
+            Goal     = "tama_kuchipatchi",
+            Particle = "tama_heart",
+        },
+        Shape = {
+            WindowRadius     = 16,
+            GroupRadius      = 12,
+            SelectableRadius = 8,
+            ButtonDepth      = 3,
+        },
+        Motion = {
+            BumpRise     = 2,
+            PopSpeed     = 0.18,
+            PopEase      = "Sine",
+        },
+        Icons = {
+            mushroom = "tama_mametchi", flower = "tama_oyajitchi", boo = "tama_memetchi",
+            feather = "tama_pochitchi", star = "tama_kuchipatchi", chest = "tama_ginjirotchi",
+            bag = "tama_ginjirotchi", shell = "tama_oyajitchi", coin = "tama_kuchipatchi",
+            pipe = "tama_pochitchi", flag = "tama_pochitchi", qblock = "tama_mametchi",
+            brick = "tama_ginjirotchi", bomb = "tama_oyajitchi", oneup = "tama_mametchi",
+            castle = "tama_mametchi", kart = "tama_pochitchi", gear = "tama_egg",
+            key = "tama_ginjirotchi", heart = "tama_kuchipatchi", trophy = "tama_kuchipatchi",
+
+            afk        = "tama_mametchi", aim        = "tama_oyajitchi", aimbot     = "tama_oyajitchi", airdrop    = "tama_ginjirotchi",
+            alert      = "tama_oyajitchi", animal     = "tama_memetchi", armor      = "tama_oyajitchi", auto       = "tama_kuchipatchi",
+            backpack   = "tama_ginjirotchi", bag        = "tama_ginjirotchi", bell       = "tama_kuchipatchi", bolt       = "tama_pochitchi",
+            bomb       = "tama_oyajitchi", bot        = "tama_kuchipatchi", box        = "tama_ginjirotchi", build      = "tama_kuchipatchi",
+            camera     = "tama_memetchi", candy      = "tama_kuchipatchi", car        = "tama_pochitchi", cart       = "tama_pochitchi",
+            cash       = "tama_kuchipatchi", chart      = "tama_heart", check      = "tama_mametchi", chest      = "tama_ginjirotchi",
+            code       = "tama_egg", cog        = "tama_egg", coin       = "tama_kuchipatchi", collect    = "tama_ginjirotchi",
+            combat     = "tama_oyajitchi", compass    = "tama_pochitchi", config     = "tama_egg", craft      = "tama_kuchipatchi",
+            crate      = "tama_ginjirotchi", crop       = "tama_kuchipatchi", crops      = "tama_kuchipatchi", crosshair  = "tama_oyajitchi",
+            crown      = "tama_mametchi", danger     = "tama_oyajitchi", defense    = "tama_oyajitchi", diamond    = "tama_ginjirotchi",
+            dice       = "tama_mametchi", drive      = "tama_pochitchi", egg        = "tama_mametchi", esp        = "tama_memetchi",
+            eye        = "tama_memetchi", farm       = "tama_kuchipatchi", farming    = "tama_kuchipatchi", fish       = "tama_memetchi",
+            fishing    = "tama_memetchi", flag       = "tama_pochitchi", fly        = "tama_pochitchi", forge      = "tama_kuchipatchi",
+            game       = "tama_mametchi", garden     = "tama_kuchipatchi", gem        = "tama_ginjirotchi", general    = "tama_mametchi",
+            gift       = "tama_ginjirotchi", globe      = "tama_pochitchi", god        = "tama_mametchi", gun        = "tama_oyajitchi",
+            hammer     = "tama_oyajitchi", hatch      = "tama_mametchi", heal       = "tama_kuchipatchi", health     = "tama_kuchipatchi",
+            heart      = "tama_kuchipatchi", home       = "tama_mametchi", hub        = "tama_mametchi", info       = "tama_mametchi",
+            inventory  = "tama_ginjirotchi", item       = "tama_ginjirotchi", items      = "tama_ginjirotchi", jump       = "tama_pochitchi",
+            key        = "tama_ginjirotchi", kill       = "tama_oyajitchi", knife      = "tama_oyajitchi", lock       = "tama_egg",
+            loot       = "tama_ginjirotchi", luck       = "tama_kuchipatchi", magnet     = "tama_pochitchi", main       = "tama_mametchi",
+            map        = "tama_pochitchi", mine       = "tama_kuchipatchi", mining     = "tama_kuchipatchi", misc       = "tama_poop",
+            money      = "tama_kuchipatchi", mount      = "tama_pochitchi", movement   = "tama_pochitchi", murder     = "tama_oyajitchi",
+            package    = "tama_ginjirotchi", palette    = "tama_egg", paw        = "tama_memetchi", pet        = "tama_memetchi",
+            pickaxe    = "tama_kuchipatchi", play       = "tama_mametchi", player     = "tama_mametchi", players    = "tama_mametchi",
+            potion     = "tama_kuchipatchi", potions    = "tama_kuchipatchi", quest      = "tama_mametchi", race       = "tama_pochitchi",
+            radar      = "tama_memetchi", rank       = "tama_heart", refresh    = "tama_pochitchi", roll       = "tama_mametchi",
+            run        = "tama_pochitchi", safe       = "tama_egg", save       = "tama_egg", search     = "tama_memetchi",
+            seed       = "tama_kuchipatchi", seeds      = "tama_kuchipatchi", settings   = "tama_egg", shield     = "tama_oyajitchi",
+            shop       = "tama_ginjirotchi", skull      = "tama_oyajitchi", sleep      = "tama_egg", sliders    = "tama_egg",
+            sniper     = "tama_oyajitchi", sparkles   = "tama_kuchipatchi", speed      = "tama_pochitchi", spin       = "tama_pochitchi",
+            stats      = "tama_heart", status     = "tama_heart", sword      = "tama_oyajitchi", swords     = "tama_oyajitchi",
+            target     = "tama_oyajitchi", teleport   = "tama_pochitchi", terminal   = "tama_egg", theme      = "tama_egg",
+            trash      = "tama_ginjirotchi", trophy     = "tama_heart", unlock     = "tama_ginjirotchi", user       = "tama_mametchi",
+            users      = "tama_mametchi", vehicle    = "tama_pochitchi", vip        = "tama_mametchi", wallhack   = "tama_memetchi",
+            warp       = "tama_pochitchi", water      = "tama_kuchipatchi", waypoint   = "tama_pochitchi", weapon     = "tama_oyajitchi",
+            weapons    = "tama_oyajitchi", world      = "tama_pochitchi",
+        },
+    },
+
 }
--- Forward declarations for theme restore snapshot
-local OriginalConfig, OriginalFontsLatin, OriginalSpriteAlias
+ThemeMeta["Snow"] = ThemeMeta["Ice Land"]
 
 local State = {
     Gui = nil,
@@ -2165,9 +2740,852 @@ Sprite.Palette = {
     m = Color3.fromRGB(90, 42, 14), b = Color3.fromRGB(4, 156, 216),
     p = Color3.fromRGB(156, 92, 220), P = Color3.fromRGB(96, 44, 150),
     K = Color3.fromRGB(255, 140, 185), d = Color3.fromRGB(224, 60, 130), -- Authentic Kirby Pink body (K) & Cheek Blush (d)
+    c = Color3.fromRGB(0, 229, 255), C = Color3.fromRGB(0, 131, 143),
+    v = Color3.fromRGB(179, 136, 255), t = Color3.fromRGB(0, 191, 165),
+    e = Color3.fromRGB(0, 230, 118), a = Color3.fromRGB(255, 215, 0),
 }
 
 Sprite.Art = {
+    knight_helm = {
+        "....rrrr....",
+        "...rrrrrr...",
+        "..nnnnnnnn..",
+        ".nwwwwwwwwn.",
+        ".nNkkkkkkNn.",
+        ".nNkkkkkkNn.",
+        ".nNnnnnnnNn.",
+        ".nNnnrknnNn.",
+        "..nnnnnnnn..",
+        "...nNNNNn...",
+        "...nNNNNn...",
+        "....nnnn....",
+    },
+    dungeon_sword = {
+        ".......rr...",
+        "......rwwr..",
+        ".....rwwr...",
+        "....rwwr....",
+        "...rwwr.....",
+        "..rwwr..yy..",
+        ".raar..yyyy.",
+        "raar..yyyy..",
+        "yya..mmy....",
+        ".yyyy..mm...",
+        "..yy....mm..",
+        ".........mm.",
+    },
+    flame_skull = {
+        "...ooyooy...",
+        "..ooyyyyyo..",
+        ".oyywwyywyo.",
+        ".oywwwwwwoy.",
+        "ooywkwkwyo..",
+        "oyywwkkwyyo.",
+        "oyywwwwwwyo.",
+        ".oyywkkwyo..",
+        "..oywwwwyo..",
+        "...oyyyyo...",
+        "....oyyo....",
+        ".....oo.....",
+    },
+    winged_boots = {
+        "..ww........",
+        ".wwww.......",
+        ".wwbww......",
+        "..wwbww.....",
+        "...wwbbbb...",
+        "....wbbbbb..",
+        "....bbbbbb..",
+        "...bbbbbb...",
+        "...bbbbbb...",
+        "..bbbbbbbb..",
+        "..bbbbbbbb..",
+        "..kkkkkkkk..",
+    },
+    dungeon_chest = {
+        "..mmmmmmmm..",
+        ".mByyyyyyBm.",
+        ".mByyyyyyBm.",
+        "mBBykNNkyBBm",
+        "mmmmkNNkmmmm",
+        "mBBBykkyBBBm",
+        "mBBByyyyBBBm",
+        "mBBByyyyBBBm",
+        "mBBByyyyBBBm",
+        "mBBByyyyBBBm",
+        "mmmmmmmmmmmm",
+        ".kkkkkkkkkk.",
+    },
+    torch_flame = {
+        "....yy......",
+        "...yyyy.....",
+        "..yywwyy....",
+        ".yywwwwyy...",
+        ".oywwwwyo...",
+        "..oywwo.....",
+        "...oyyo.....",
+        "....oo......",
+        "...mmmm.....",
+        "...mNNm.....",
+        "...mmmm.....",
+        "....mm......",
+    },
+    iron_gear = {
+        "...nnnnnn...",
+        "..nNnnnnNn..",
+        ".nN.nnnn.Nn.",
+        "nn...nn...nn",
+        "nn..nNNn..nn",
+        "nn..nNNn..nn",
+        "nn...nn...nn",
+        ".nN.nnnn.Nn.",
+        "..nNnnnnNn..",
+        "...nnnnnn...",
+        "....nnnn....",
+        ".....nn.....",
+    },
+    cavern_pick = {
+        "....nnnN....",
+        "...nnnnnn...",
+        "..nnwnnwnn..",
+        ".nnw..m..nn.",
+        "nn....m...nn",
+        "......m.....",
+        ".....mm.....",
+        ".....m......",
+        "....mm......",
+        "....m.......",
+        "...mm.......",
+        "...m........",
+    },
+    crystal_gem = {
+        ".....cc.....",
+        "....cccc....",
+        "...ccwwcc...",
+        "..ccwwwwcc..",
+        "..cwwwpwwc..",
+        ".ccwwpppwcC.",
+        ".ccwppPppcC.",
+        "..cppPPppC..",
+        "..cpPPPPpC..",
+        "...cPPPPCC..",
+        "....cPPCC...",
+        ".....CCC....",
+    },
+    cavern_dynamite = {
+        "........yy..",
+        ".......yy...",
+        "......nn....",
+        "....rrrr....",
+        "...rrrrrr...",
+        "..rwwrwrr...",
+        "..rrrrrrr...",
+        "..rwrrrwr...",
+        "..rrrrrrr...",
+        "..rwrrrwr...",
+        "..rrrrrrr...",
+        "..kkkkkkk...",
+    },
+    cavern_cart = {
+        "............",
+        "..ccccpcc...",
+        ".ccccccccp..",
+        "NNNNNNNNNNNN",
+        "NnNnnnnnnNnN",
+        "NnNnnnnnnNnN",
+        "NnNnnnnnnNnN",
+        "NNNNNNNNNNNN",
+        ".nNNn..nNNn.",
+        ".NNNN..NNNN.",
+        "..nn....nn..",
+        "............",
+    },
+    cavern_shroom = {
+        "....pppp....",
+        "..ppwwwwpp..",
+        ".ppwwwwwwpp.",
+        "ppwwccwwccpp",
+        "ppwccccwccpp",
+        "ppppccccpppp",
+        " pppppppppp ",
+        "....nnnn....",
+        "...nnnnnn...",
+        "...nnnnnn...",
+        "...nnnnnn...",
+        "....nnnn....",
+    },
+    ore_sack = {
+        ".....mm.....",
+        "....mqqm....",
+        ".....mm.....",
+        "...mBBBBm...",
+        "..mBccBppBm.",
+        ".mBccccBppBm",
+        ".mBccccBppBm",
+        ".mBBBBBBBBm.",
+        ".mBBBBBBBBm.",
+        "..mBBBBBBm..",
+        "...mmmmmm...",
+        "....kkkk....",
+    },
+    cavern_cog = {
+        "...NNNNNN...",
+        "..NnNNNNnN..",
+        ".Nn.NNNN.nN.",
+        "NN...NN...NN",
+        "NN..NccN..NN",
+        "NN..NccN..NN",
+        "NN...NN...NN",
+        ".Nn.NNNN.nN.",
+        "..NnNNNNnN..",
+        "...NNNNNN...",
+        "....NNNN....",
+        ".....NN.....",
+    },
+    snowman_face = {
+        "....NNNN....",
+        "....NNNN....",
+        "...NNNNNN...",
+        "..wwwwwwww..",
+        ".wwkwwwwkww.",
+        ".wwkwwwwkww.",
+        ".wwwwowwwww.",
+        ".wwwoooooww.",
+        ".wwkwwwwkww.",
+        "..wwkkkkww..",
+        "...wwwwww...",
+        "..rrrrrrrr..",
+    },
+    ice_shard = {
+        "......cc....",
+        ".....cccc...",
+        "....ccwwcc..",
+        "...ccwwwcc..",
+        "..ccwwwccc..",
+        "..cwwwcccC..",
+        ".ccwwwccCC..",
+        ".ccwcccCCC..",
+        "..ccccCCC...",
+        "..cccCCC....",
+        "...cCCC.....",
+        "....CC......",
+    },
+    snowflake_crystal = {
+        "....c..c....",
+        "...ccwwcc...",
+        "....cwwc....",
+        ".c..cwwc..c.",
+        ".ccwwwwwwcc.",
+        "..cwwwwwwc..",
+        "..cwwwwwwc..",
+        ".ccwwwwwwcc.",
+        ".c..cwwc..c.",
+        "....cwwc....",
+        "...ccwwcc...",
+        "....c..c....",
+    },
+    ice_sled = {
+        "............",
+        "...mmmmm....",
+        "..mBBBBBm...",
+        ".mBBBBBBBm..",
+        "mmmmmmmmmmmm",
+        "...m....m...",
+        "...m....m...",
+        ".n.n....n.n.",
+        "nnnnnnnnnnnn",
+        "nwnnnnnnnnnn",
+        ".ww.........",
+        "............",
+    },
+    holly_berry = {
+        "...gg..gg...",
+        "..GGg..gGG..",
+        ".GGGG..GGGG.",
+        "..GG....GG..",
+        "...rrr.rrr..",
+        "..rrwrrrwrr.",
+        "..rrrrrrrrr.",
+        "...rrr.rrr..",
+        "....GG.GG...",
+        "...GGGGGG...",
+        "..GGggggGG..",
+        "...gg..gg...",
+    },
+    frozen_gift = {
+        "....cccc....",
+        "...cwwcww...",
+        "...cwwcww...",
+        "cccccccccccc",
+        "cbbccwwccbbc",
+        "cbbccwwccbbc",
+        "cccccccccccc",
+        "cbbccwwccbbc",
+        "cbbccwwccbbc",
+        "cbbccwwccbbc",
+        "cccccccccccc",
+        ".kkkkkkkkkk.",
+    },
+    frost_gear = {
+        "...cccccc...",
+        "..cCccccCc..",
+        ".cC.cccc.Cc.",
+        "cc...cc...cc",
+        "cc..cwwc..cc",
+        "cc..cwwc..cc",
+        "cc...cc...cc",
+        ".cC.cccc.Cc.",
+        "..cCccccCc..",
+        "...cccccc...",
+        "....cccc....",
+        ".....cc.....",
+    },
+    desert_sun = {
+        "....q..q....",
+        "...qqyyqq...",
+        "....yyyy....",
+        ".q..yyyy..q.",
+        ".qqyyyyyyqq.",
+        "..yyyyyyyy..",
+        "..yyyyyyyy..",
+        ".qqyyyyyyqq.",
+        ".q..yyyy..q.",
+        "....yyyy....",
+        "...qqyyqq...",
+        "....q..q....",
+    },
+    desert_blade = {
+        ".....aa.....",
+        "....aaaa....",
+        "...aawwaa...",
+        "..aawwwaa...",
+        "..aawwaaa...",
+        "..aawaaa....",
+        "..aaaa......",
+        "..aa........",
+        ".aa..mm.....",
+        "aa..mmmm....",
+        ".aa..mm.....",
+        "......m.....",
+    },
+    desert_mirage = {
+        "....aaaa....",
+        "..aayyyyaa..",
+        ".aaywwwwyaa.",
+        "aaywkkkkwyaa",
+        "aaywkkkkwyaa",
+        ".aaywwwwyaa.",
+        "..aayyyyaa..",
+        "....aaaa....",
+        ".....aa.....",
+        "....aaaa....",
+        ".....aa.....",
+        "....aaaa....",
+    },
+    desert_carpet = {
+        "rr.rr.rr.rr.",
+        "qqqqqqqqqqqq",
+        "qaaqqaaqqaaq",
+        "qaawwaawwaaq",
+        "qaaqqaaqqaaq",
+        "qqqqqqqqqqqq",
+        "qppqqppqqppq",
+        "qpwwqqwwqqpq",
+        "qppqqppqqppq",
+        "qqqqqqqqqqqq",
+        "rr.rr.rr.rr.",
+        "............",
+    },
+    desert_cactus = {
+        ".....GG.....",
+        "..g..Gg.....",
+        ".gg..Gg..g..",
+        ".gg..Gg.gg..",
+        ".ggGgGgGgg..",
+        "..GGGGGGg...",
+        ".....Gg.....",
+        ".....Gg.....",
+        ".....Gg.....",
+        ".....Gg.....",
+        "....gggg....",
+        "....GGGG....",
+    },
+    ancient_urn = {
+        "....aaaa....",
+        "...aQQQQa...",
+        "....aQQa....",
+        "...aQQQQa...",
+        "..aQQaaQQa..",
+        ".aQQqwwqQQa.",
+        ".aQQqwwqQQa.",
+        ".aQQQQQQQQa.",
+        "..aQQQQQQa..",
+        "...aQQQQa...",
+        "....aQQa....",
+        "....aaaa....",
+    },
+    sundial_gear = {
+        "...qqqqqq...",
+        "..qQqqqqQq..",
+        ".qQ.qqqq.Qq.",
+        "qq...qq...qq",
+        "qq..qaaq..qq",
+        "qq..qaaq..qq",
+        "qq...qq...qq",
+        ".qQ.qqqq.Qq.",
+        "..qQqqqqQq..",
+        "...qqqqqq...",
+        "....qqqq....",
+        ".....qq.....",
+    },
+    phantom_spook = {
+        "....pppp....",
+        "..ppwwwwpp..",
+        ".ppwwwwwwpp.",
+        "ppwwkkwwkkpp",
+        "ppwwkkwwkkpp",
+        "ppwwwwwwwwpp",
+        "ppwwwwwwwwpp",
+        ".ppwkkkkwpp.",
+        "..ppwwwwpp..",
+        "...pp..pp...",
+        "....p..p....",
+        "............",
+    },
+    cursed_scythe = {
+        "....PPPP....",
+        "...PPvvPP...",
+        "..PPvvvvPP..",
+        ".PPvv..vvPP.",
+        "PPvv...vvm..",
+        "PPv.....m...",
+        "........m...",
+        ".......mm...",
+        ".......m....",
+        "......mm....",
+        "......m.....",
+        ".....mm.....",
+    },
+    specter_eye = {
+        "....vvvv....",
+        "..vvppppvv..",
+        ".vvpwwwwpvv.",
+        "vvpwwwwwwpvv",
+        "vvpwwkkwwpvv",
+        "vvpwwkkwwpvv",
+        "vvpwwwwwwpvv",
+        ".vvpwwwwpvv.",
+        "..vvppppvv..",
+        "....vvvv....",
+        ".....vv.....",
+        "....vvvv....",
+    },
+    spirit_mist = {
+        "...vv..vv...",
+        "..vvvvvvvv..",
+        ".vvpwwwwpvv.",
+        ".vvwwwwwwvv.",
+        "..vvwwwwvv..",
+        "...vvvvvv...",
+        "....vvvv....",
+        ".....vv.....",
+        "....vvvv....",
+        "...vv..vv...",
+        "............",
+        "............",
+    },
+    cursed_cauldron = {
+        "....eeee....",
+        "...eeeweee..",
+        "..eeeeeeee..",
+        ".NNNNNNNNNN.",
+        "NNeeNNeeNNNN",
+        "NNNNNNNNNNNN",
+        "NNNNNNNNNNNN",
+        ".NNNNNNNNNN.",
+        "..NNNNNNNN..",
+        "...NN..NN...",
+        "..NN....NN..",
+        "..kk....kk..",
+    },
+    cursed_book = {
+        "...PPPPP....",
+        "..PvvvvvP...",
+        ".PvvavvvvP..",
+        "PvvwaawvvvP.",
+        "PvvwaawvvvP.",
+        "PvvvaavvvvP.",
+        "PvvvvvvvvvP.",
+        "PvvvvvvvvvP.",
+        "PvvvvvvvvvP.",
+        "PvvvvvvvvvP.",
+        ".PPPPPPPPP..",
+        "..kkkkkkk...",
+    },
+    haunted_clock = {
+        "...PPPPPP...",
+        "..PvPPPPvP..",
+        ".Pv.PPPP.vP.",
+        "PP...PP...PP",
+        "PP..PvvP..PP",
+        "PP..PvvP..PP",
+        "PP...PP...PP",
+        ".Pv.PPPP.vP.",
+        "..PvPPPPvP..",
+        "...PPPPPP...",
+        "....PPPP....",
+        ".....PP.....",
+    },
+    arcade_ship = {
+        ".....cc.....",
+        "....cccc....",
+        "....cwwc....",
+        "...ccwwcc...",
+        "..cccwwccc..",
+        "..cccyyccc..",
+        ".ccccyycccc.",
+        "ccccccccccc.",
+        "cc..roor..cc",
+        "c...roor...c",
+        "....roor....",
+        ".....oo.....",
+    },
+    laser_blaster = {
+        ".....cc.....",
+        "....cwwc....",
+        "...ccwwcc...",
+        "..cccccccccc",
+        "..c..nnnn..c",
+        ".....nnnn...",
+        "....nnkknn..",
+        "....nn..nn..",
+        "....nn..nn..",
+        "....nn......",
+        "....nn......",
+        "....kk......",
+    },
+    radar_screen = {
+        "....GGGG....",
+        "..GGeeeeGG..",
+        ".GGeeeeeeGG.",
+        "GGeeggeeggGG",
+        "GGeegeeeegGG",
+        "GGeeegeeeeGG",
+        "GGeeeeggeeGG",
+        ".GGeeeeeeGG.",
+        "..GGeeeeGG..",
+        "....GGGG....",
+        ".....GG.....",
+        "....GGGG....",
+    },
+    hyper_thruster = {
+        "...nnnnnn...",
+        "..nwwwwwnn..",
+        ".nnnwwwwwnn.",
+        "nnnwwwwwnnn.",
+        "nnnnnnnnnnnn",
+        "..cc....cc..",
+        ".cccc..cccc.",
+        "cccccc.ccccc",
+        ".cccccccccc.",
+        "..cccccccc..",
+        "...cccccc...",
+        "....cccc....",
+    },
+    cosmic_star = {
+        ".....cc.....",
+        "....cccc....",
+        "c...cwwc...c",
+        ".c..cwwc..c.",
+        "..ccwwwwcc..",
+        "ccccwwwwcccc",
+        "..ccwwwwcc..",
+        ".c..cwwc..c.",
+        "c...cwwc...c",
+        "....cccc....",
+        ".....cc.....",
+        "............",
+    },
+    cargo_pod = {
+        "....cccc....",
+        "...cwwwwc...",
+        "..cwwwwwwc..",
+        ".cccccccccc.",
+        ".cnnnnNnnnc.",
+        ".cnnwnNnnnc.",
+        ".cnnwnNnnnc.",
+        ".cnnnnNnnnc.",
+        ".cccccccccc.",
+        "..cwwwwwwc..",
+        "...cwwwwc...",
+        "....cccc....",
+    },
+    chip_gear = {
+        "...cccccc...",
+        "..ccNccNcc..",
+        "..ccNccNcc..",
+        "cccccccccccc",
+        "cNNcwwwwcNNc",
+        "ccccwwwwcccc",
+        "cNNcwwwwcNNc",
+        "cccccccccccc",
+        "..ccNccNcc..",
+        "..ccNccNcc..",
+        "...cccccc...",
+        "....cccc....",
+    },
+    tribal_mask = {
+        "....eeee....",
+        "..eeyyyyee..",
+        ".eeyrrrrrree",
+        "eeyrkwrrwkre",
+        "eeyrkwrrwkre",
+        "eeyrrrrrrrre",
+        "eeyyrrwwrrye",
+        ".eeyrrrrrree",
+        "..eeyyyyee..",
+        "...eerrrree.",
+        "....eeee....",
+        ".....ee.....",
+    },
+    bamboo_spear = {
+        ".......nn...",
+        "......nwn...",
+        ".....nwnn...",
+        "....nn..G...",
+        "...rr..GGg..",
+        "..rr..GGgG..",
+        "..G..GGgG...",
+        ".GGgGGgG....",
+        ".GgGGgG.....",
+        "GGgGGg......",
+        "GgGg........",
+        "GGg.........",
+    },
+    jungle_eye = {
+        "....GGGG....",
+        "..GGeeeeGG..",
+        ".GGeeaaeeGG.",
+        "GGeeaakkaakG",
+        "GGeeaakkaakG",
+        ".GGeeaaeeGG.",
+        "..GGeeeeGG..",
+        "....GGGG....",
+        ".....GG.....",
+        "....GGGG....",
+        ".....GG.....",
+        "....GGGG....",
+    },
+    vine_boots = {
+        "...GG.......",
+        "..GgGG......",
+        "..GggG......",
+        "..GggG......",
+        "...GG.......",
+        "...GgGGGG...",
+        "...GgggggG..",
+        "...GgggggG..",
+        "..GGGGGGGG..",
+        "..GGGGGGGG..",
+        "..kkkkkkkk..",
+        "............",
+    },
+    jungle_fruit = {
+        "....GG.GG...",
+        "...GGGGGG...",
+        "....GGGG....",
+        "...aaaaaa...",
+        "..aayyyyaa..",
+        ".aaywwyyaaa.",
+        ".aayyyyaaaa.",
+        ".aayyyyaaaa.",
+        "..aayyyyaa..",
+        "...aaaaaa...",
+        "....aaaa....",
+        ".....aa.....",
+    },
+    bamboo_crate = {
+        "..GGGGGGGG..",
+        ".GGgGGGGgGG.",
+        "GGgGGGGGGgGG",
+        "GGGGgGGgGGGG",
+        "GGGGgGGgGGGG",
+        "GGgGGGGGGgGG",
+        "GGGGgGGgGGGG",
+        "GGGGgGGgGGGG",
+        "GGgGGGGGGgGG",
+        ".GGgGGGGgGG.",
+        "..GGGGGGGG..",
+        "...kkkkkk...",
+    },
+    stone_wheel = {
+        "...GGGGGG...",
+        "..GgGGGGgG..",
+        ".Gg.GGGG.gG.",
+        "GG...GG...GG",
+        "GG..GeeG..GG",
+        "GG..GeeG..GG",
+        "GG...GG...GG",
+        ".Gg.GGGG.gG.",
+        "..GgGGGGgG..",
+        "...GGGGGG...",
+        "....GGGG....",
+        ".....GG.....",
+    },
+    angel_halo = {
+        "....aaaa....",
+        "..aayyyyaa..",
+        ".aaywwwwyaa.",
+        "aayw....wyaa",
+        "aayw....wyaa",
+        ".aaywwwwyaa.",
+        "..aayyyyaa..",
+        "....aaaa....",
+        "...yy..yy...",
+        "..yy....yy..",
+        "............",
+        "............",
+    },
+    feather_bow = {
+        ".....ww.....",
+        "....wwww....",
+        "...wwwwww...",
+        "..ww..b..ww.",
+        ".ww...b...ww",
+        "ww....b....w",
+        "ww....b....w",
+        ".ww...b...ww",
+        "..ww..b..ww.",
+        "...wwwwww...",
+        "....wwww....",
+        ".....ww.....",
+    },
+    sky_lens = {
+        ".......aa...",
+        "......aaaa..",
+        ".....aawwaa.",
+        "....aawwwaa.",
+        "...aaaaaa...",
+        "..aaaa......",
+        ".aaaa.......",
+        "aaaa........",
+        ".aa..mm.....",
+        "aa..mmmm....",
+        ".....mm.....",
+        "......m.....",
+    },
+    airship_prop = {
+        "...ww..ww...",
+        "..wwwwwwww..",
+        ".wwbwwwwbww.",
+        "..wwbwwbww..",
+        "...wwbwbw...",
+        "....wwww....",
+        "...wbwbww...",
+        "..wwbwwbww..",
+        ".wwbwwwwbww.",
+        "..wwwwwwww..",
+        "...ww..ww...",
+        "............",
+    },
+    sun_flower = {
+        "...yy..yy...",
+        "..yyyyyyyy..",
+        ".yyyymmyyyy.",
+        "yyyymmmmyyyy",
+        "yyyymmmmyyyy",
+        ".yyyymmyyyy.",
+        "..yyyyyyyy..",
+        "...yy..yy...",
+        ".....GG.....",
+        "....GGGG....",
+        ".....GG.....",
+        "....GGGG....",
+    },
+    cloud_chest = {
+        "..wwwwwwww..",
+        ".wbbbaaabbw.",
+        ".wbbbaaabbw.",
+        "wbaakNNkaabw",
+        "wwwwkNNkwwww",
+        "wbaaykKyaabw",
+        "wbaaaaaaaabw",
+        "wbaaaaaaaabw",
+        "wbaaaaaaaabw",
+        "wbaaaaaaaabw",
+        "wwwwwwwwwwww",
+        ".kkkkkkkkkk.",
+    },
+    sky_compass = {
+        "...aaaaaa...",
+        "..aayyyyaa..",
+        ".aay.aa.yaa.",
+        "aa...rr...aa",
+        "aa..rwwr..aa",
+        "aa..rwwr..aa",
+        "aa...bb...aa",
+        ".aay.aa.yaa.",
+        "..aayyyyaa..",
+        "...aaaaaa...",
+        "....aaaa....",
+        ".....aa.....",
+    },
+    tombstone = {
+        "....nnnn....",
+        "...nNNNNn...",
+        "..nNNNNNNn..",
+        ".nNNNkNNNNn.",
+        ".nNNkkkNNNn.",
+        ".nNNNkNNNNn.",
+        ".nNNNNNNNNn.",
+        ".nNNkkNNNNn.",
+        ".nNNNNNNNNn.",
+        "nnnnnnnnnnnn",
+        "nNNNNNNNNNNn",
+        "kkkkkkkkkkkk",
+    },
+    broomstick = {
+        ".......mm...",
+        "......mmm...",
+        ".....mm.....",
+        "....mm......",
+        "...mm.......",
+        "..mm........",
+        ".mqq........",
+        "qqqqq.......",
+        "qqqqqq......",
+        "qqq.qqq.....",
+        "qq...qq.....",
+        "............",
+    },
+    cauldron = {
+        "....pppp....",
+        "...pppwppp..",
+        "..pppppppp..",
+        ".NNNNNNNNNN.",
+        "NNppNNppNNNN",
+        "NNNNNNNNNNNN",
+        "NNNNNNNNNNNN",
+        ".NNNNNNNNNN.",
+        "..NNNNNNNN..",
+        "...NN..NN...",
+        "..NN....NN..",
+        "..kk....kk..",
+    },
+    spiderweb = {
+        "w..........w",
+        "ww........ww",
+        ".ww......ww.",
+        "..ww....ww..",
+        "...ww..ww...",
+        "....wwww....",
+        "....wwww....",
+        "...ww..ww...",
+        "..ww....ww..",
+        ".ww......ww.",
+        "ww........ww",
+        "w..........w",
+    },
     pumpkin = {
         ".....mm.....", "....kmGk....", "..kkkkkkkk..", ".koooBBooook",
         "kooyyooyyook", "koyyyooyyyok", "koooooooooBk", "kooyoyyoyook",
@@ -7773,6 +9191,161 @@ end
 
 -- Theme topbar decor: drifting clouds for day themes, twinkling stars/embers for night themes,
 -- and unique franchise decorations for each game universe theme.
+
+function Window:BuildCastleDecor(topbar)
+    self.CastleDecor = {}
+    -- 2 Wall Torch Braziers with flickering flame
+    for index, spot in ipairs({ { 0.44, 6 }, { 0.68, 6 } }) do
+        local holder = Draw.New("Frame", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(18, 26), ZIndex = 2, Parent = topbar })
+        local torch = Sprite.New(holder, "torch_flame", 18)
+        torch.AnchorPoint = Vector2.new(0.5, 0.5)
+        torch.Position = UDim2.fromScale(0.5, 0.5)
+        Anim.Loop("DecorCastle", torch, { Position = UDim2.fromScale(0.5, 0.44), Rotation = (index % 2 == 0) and 4 or -4 }, 0.8 + index * 0.25, "Sine", true)
+        table.insert(self.CastleDecor, holder)
+    end
+    -- 2 Hanging Iron Chains that sway gently
+    for index, spot in ipairs({ { 0.52, 0 }, { 0.60, 0 } }) do
+        local chain = Draw.New("Frame", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(4, 22), ZIndex = 2, Parent = topbar })
+        for link = 0, 3 do
+            local l = Draw.New("Frame", { Position = UDim2.fromOffset(0, link * 5), Size = UDim2.fromOffset(4, 4), BackgroundColor3 = Color3.fromRGB(80, 75, 75), Parent = chain })
+            Draw.Corner(l, 1)
+        end
+        Anim.Loop("DecorCastle", chain, { Rotation = (index % 2 == 0) and 6 or -6 }, 1.8 + index * 0.4, "Sine", true)
+        table.insert(self.CastleDecor, chain)
+    end
+end
+
+function Window:BuildUndergroundDecor(topbar)
+    self.UndergroundDecor = {}
+    -- Hanging Cavern Stalactites
+    for index, spot in ipairs({ { 0.44, 0, 8, 16 }, { 0.52, 0, 6, 20 }, { 0.61, 0, 8, 14 }, { 0.69, 0, 6, 18 } }) do
+        local stal = Draw.New("Frame", { BackgroundTransparency = 1, Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(spot[3], spot[4]), ZIndex = 2, Parent = topbar })
+        local body = Draw.New("Frame", { Size = UDim2.fromScale(1, 1), BackgroundColor3 = Color3.fromRGB(35, 55, 120), Parent = stal })
+        Draw.Corner(body, 2)
+        table.insert(self.UndergroundDecor, stal)
+    end
+    -- Glowing Cyan Crystal Geodes
+    for index, spot in ipairs({ { 0.48, 8 }, { 0.65, 10 } }) do
+        local gem = Sprite.New(topbar, "crystal_gem", 16)
+        gem.AnchorPoint = Vector2.new(0.5, 0)
+        gem.Position = UDim2.new(spot[1], 0, 0, spot[2])
+        gem.ZIndex = 2
+        Anim.Loop("DecorUnderground", gem, { Position = UDim2.new(spot[1], 0, 0, spot[2] + 2) }, 1.4 + index * 0.3, "Sine", true)
+        table.insert(self.UndergroundDecor, gem)
+    end
+end
+
+function Window:BuildIceDecor(topbar)
+    self.IceDecor = {}
+    -- Translucent Hanging Icicles
+    for index, spot in ipairs({ { 0.43, 0, 6, 16 }, { 0.49, 0, 8, 22 }, { 0.56, 0, 6, 14 }, { 0.62, 0, 7, 20 }, { 0.68, 0, 6, 15 } }) do
+        local icicle = Draw.New("Frame", { BackgroundTransparency = 0.25, Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(spot[3], spot[4]), BackgroundColor3 = Color3.fromRGB(180, 225, 255), ZIndex = 2, Parent = topbar })
+        Draw.Corner(icicle, 2)
+        table.insert(self.IceDecor, icicle)
+    end
+    -- Drifting Snowflakes
+    for index, spot in ipairs({ { 0.46, 14 }, { 0.53, 24 }, { 0.59, 12 }, { 0.66, 22 } }) do
+        local flake = Sprite.New(topbar, "snowflake_crystal", 12)
+        flake.AnchorPoint = Vector2.new(0.5, 0)
+        flake.Position = UDim2.new(spot[1], 0, 0, spot[2])
+        flake.ZIndex = 2
+        Anim.Loop("DecorIce", flake, { Position = UDim2.new(spot[1], 10, 0, spot[2] + 6), Rotation = (index % 2 == 0) and 25 or -25 }, 2.5 + index * 0.5, "Sine", true)
+        table.insert(self.IceDecor, flake)
+    end
+end
+
+function Window:BuildDesertDecor(topbar)
+    self.DesertDecor = {}
+    -- Radiant Desert Sun with heat pulse
+    local sun = Sprite.New(topbar, "desert_sun", 24)
+    sun.AnchorPoint = Vector2.new(0.5, 0.5)
+    sun.Position = UDim2.new(0.68, 0, 0.5, 0)
+    sun.ZIndex = 2
+    Anim.Loop("DecorDesert", sun, { Rotation = 30 }, 6.0, "Linear", true)
+    table.insert(self.DesertDecor, sun)
+    -- Drifting Sand Motes
+    for index, spot in ipairs({ { 0.44, 12 }, { 0.50, 24 }, { 0.56, 14 }, { 0.62, 26 } }) do
+        local mote = Draw.New("Frame", { BackgroundTransparency = 0.3, Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(4, 3), BackgroundColor3 = Color3.fromRGB(250, 210, 120), ZIndex = 2, Parent = topbar })
+        Draw.Corner(mote, 1)
+        Anim.Loop("DecorDesert", mote, { Position = UDim2.new(spot[1], 14, 0, spot[2] - 2) }, 1.8 + index * 0.4, "Sine", true)
+        table.insert(self.DesertDecor, mote)
+    end
+end
+
+function Window:BuildGhostHouseDecor(topbar)
+    self.GhostHouseDecor = {}
+    -- Floating Translucent Specters
+    for index, spot in ipairs({ { 0.47, 8 }, { 0.63, 10 } }) do
+        local spook = Sprite.New(topbar, "phantom_spook", 20)
+        spook.AnchorPoint = Vector2.new(0.5, 0)
+        spook.Position = UDim2.new(spot[1], 0, 0, spot[2])
+        spook.ZIndex = 2
+        Anim.Loop("DecorGhostHouse", spook, { Position = UDim2.new(spot[1], (index % 2 == 0) and 8 or -8, 0, spot[2] + 4) }, 2.0 + index * 0.5, "Sine", true)
+        table.insert(self.GhostHouseDecor, spook)
+    end
+    -- Eerie Floating Spirit Mist Orbs
+    for index, spot in ipairs({ { 0.53, 20 }, { 0.58, 8 } }) do
+        local mist = Sprite.New(topbar, "spirit_mist", 14)
+        mist.AnchorPoint = Vector2.new(0.5, 0)
+        mist.Position = UDim2.new(spot[1], 0, 0, spot[2])
+        mist.ZIndex = 2
+        Anim.Loop("DecorGhostHouse", mist, { Position = UDim2.new(spot[1], 4, 0, spot[2] - 4) }, 1.5 + index * 0.3, "Sine", true)
+        table.insert(self.GhostHouseDecor, mist)
+    end
+end
+
+function Window:BuildStarRoadDecor(topbar)
+    self.StarRoadDecor = {}
+    -- Retro Arcade Spaceship cruising
+    local ship = Sprite.New(topbar, "arcade_ship", 20)
+    ship.AnchorPoint = Vector2.new(0.5, 0.5)
+    ship.Position = UDim2.new(0.48, 0, 0.5, 0)
+    ship.ZIndex = 2
+    Anim.Loop("DecorStarRoad", ship, { Position = UDim2.new(0.50, 0, 0.5, -3), Rotation = 6 }, 1.6, "Sine", true)
+    table.insert(self.StarRoadDecor, ship)
+    -- Twinkling Cosmic Stars
+    for index, spot in ipairs({ { 0.43, 8 }, { 0.55, 22 }, { 0.62, 10 }, { 0.68, 20 } }) do
+        local star = Sprite.New(topbar, "cosmic_star", 14)
+        star.AnchorPoint = Vector2.new(0.5, 0.5)
+        star.Position = UDim2.new(spot[1], 0, 0, spot[2])
+        star.ZIndex = 2
+        Anim.Loop("DecorStarRoad", star, { Rotation = 45 }, 2.0 + index * 0.4, "Linear", true)
+        table.insert(self.StarRoadDecor, star)
+    end
+end
+
+function Window:BuildJungleDecor(topbar)
+    self.JungleDecor = {}
+    -- Hanging Jungle Vines and Tendrils
+    for index, spot in ipairs({ { 0.44, 0, 4, 18 }, { 0.51, 0, 5, 24 }, { 0.58, 0, 4, 16 }, { 0.65, 0, 5, 20 } }) do
+        local vine = Draw.New("Frame", { BackgroundColor3 = Color3.fromRGB(45, 130, 45), Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(spot[3], spot[4]), ZIndex = 2, Parent = topbar })
+        Draw.Corner(vine, 2)
+        Anim.Loop("DecorJungle", vine, { Rotation = (index % 2 == 0) and 5 or -5 }, 2.2 + index * 0.3, "Sine", true)
+        table.insert(self.JungleDecor, vine)
+    end
+    -- Exotic Jungle Flower Blooms
+    for index, spot in ipairs({ { 0.47, 10 }, { 0.61, 12 } }) do
+        local bloom = Sprite.New(topbar, "jungle_fruit", 14)
+        bloom.AnchorPoint = Vector2.new(0.5, 0)
+        bloom.Position = UDim2.new(spot[1], 0, 0, spot[2])
+        bloom.ZIndex = 2
+        table.insert(self.JungleDecor, bloom)
+    end
+end
+
+function Window:BuildSkyWorldDecor(topbar)
+    self.SkyWorldDecor = {}
+    -- Floating Angel Feathers
+    for index, spot in ipairs({ { 0.45, 8 }, { 0.52, 22 }, { 0.60, 10 }, { 0.67, 24 } }) do
+        local feather = Sprite.New(topbar, "feather_bow", 14)
+        feather.AnchorPoint = Vector2.new(0.5, 0)
+        feather.Position = UDim2.new(spot[1], 0, 0, spot[2])
+        feather.ZIndex = 2
+        Anim.Loop("DecorSkyWorld", feather, { Position = UDim2.new(spot[1], 8, 0, spot[2] + 4), Rotation = (index % 2 == 0) and 12 or -12 }, 2.4 + index * 0.4, "Sine", true)
+        table.insert(self.SkyWorldDecor, feather)
+    end
+end
+
 function Window:BuildDecor(topbar)
     self.Clouds, self.Stars = {}, {}
     for index, spot in ipairs({ { 0.44, 8, 42 }, { 0.6, 22, 30 } }) do
@@ -7804,6 +9377,14 @@ function Window:BuildDecor(topbar)
     self:BuildAnimalCrossingDecor(topbar)
     self:BuildStardewDecor(topbar)
     self:BuildTamagotchiDecor(topbar)
+    self:BuildCastleDecor(topbar)
+    self:BuildUndergroundDecor(topbar)
+    self:BuildIceDecor(topbar)
+    self:BuildDesertDecor(topbar)
+    self:BuildGhostHouseDecor(topbar)
+    self:BuildStarRoadDecor(topbar)
+    self:BuildJungleDecor(topbar)
+    self:BuildSkyWorldDecor(topbar)
     Theme.OnRender(self.Stars, function()
         self:RenderDecor()
     end)
@@ -8169,101 +9750,72 @@ function Window:BuildTamagotchiDecor(topbar)
 end
 
 function Window:RenderDecor()
-    local wide = self.Size and self.Size.X >= 700
+    local wide = self.Size and self.Size.X >= 640
     local decor = Theme.Colors.Decor
     local shown = self.Visible ~= false
     local expanded = shown and not self.Minimized
-    -- Standard Mario/generic decors
-    local showClouds  = shown and wide and decor == "Clouds"
+
+    -- Overworld / Standard
+    local showClouds  = shown and wide and (decor == "Clouds" or decor == "Overworld")
     local showStars   = shown and wide and decor == "Stars"
-    -- Halloween
-    local showSpooky     = shown and wide and decor == "Halloween"
-    local showGlow       = shown and decor == "Halloween"
-    local showSpookyBody = expanded and decor == "Halloween"
-    -- Franchise themes
-    local showKirby      = shown and wide and decor == "Kirby"
-    local showKirbyBody  = expanded and decor == "Kirby"
-    local showPokemon    = shown and wide and decor == "PokemonCafe"
-    local showPokemonBody = expanded and decor == "PokemonCafe"
-    local showAC         = shown and wide and decor == "AnimalCrossing"
-    local showACBody     = expanded and decor == "AnimalCrossing"
-    local showSDV        = shown and wide and decor == "StardewValley"
-    local showSDVBody    = expanded and decor == "StardewValley"
-    local showTama       = shown and wide and decor == "Tamagotchi"
-    local showTamaBody   = expanded and decor == "Tamagotchi"
 
-    -- Clouds
-    for _, cloud in ipairs(self.Clouds) do
-        cloud.Visible = showClouds
-    end
-    -- Generic stars
-    for _, star in ipairs(self.Stars) do
-        star.Text = Theme.Colors.DecorGlyph or "✦"
-        star.Visible = showStars
-    end
-    -- Halloween
-    for _, item in ipairs(self.Spooky or {}) do
-        item.Visible = showSpooky
-    end
-    if self.SpookyGlow  then self.SpookyGlow.Visible  = showGlow       end
-    if self.SpookyFog   then self.SpookyFog.Visible   = showSpookyBody  end
-    if self.SpookySpider then self.SpookySpider.Visible = showSpookyBody end
+    -- Individual themes
+    local showHalloween    = shown and wide and decor == "Halloween"
+    local showSpookyBody   = expanded and decor == "Halloween"
+    local showKirby        = shown and wide and decor == "Kirby"
+    local showKirbyBody    = expanded and decor == "Kirby"
+    local showPokemon      = shown and wide and decor == "PokemonCafe"
+    local showPokemonBody  = expanded and decor == "PokemonCafe"
+    local showAC           = shown and wide and decor == "AnimalCrossing"
+    local showACBody       = expanded and decor == "AnimalCrossing"
+    local showSDV          = shown and wide and decor == "StardewValley"
+    local showSDVBody      = expanded and decor == "StardewValley"
+    local showTama         = shown and wide and decor == "Tamagotchi"
+    local showTamaBody     = expanded and decor == "Tamagotchi"
+    local showCastle       = shown and wide and decor == "Castle"
+    local showUnderground  = shown and wide and decor == "Underground"
+    local showIce          = shown and wide and (decor == "IceLand" or decor == "Snow")
+    local showDesert       = shown and wide and decor == "Desert"
+    local showGhostHouse   = shown and wide and decor == "GhostHouse"
+    local showStarRoad     = shown and wide and decor == "StarRoad"
+    local showJungle       = shown and wide and decor == "Jungle"
+    local showSkyWorld     = shown and wide and decor == "SkyWorld"
 
-    -- Kirby
-    for _, item in ipairs(self.KirbyStars or {}) do
-        item.Visible = showKirby
-    end
-    if self.KirbyBand then self.KirbyBand.Visible = showKirbyBody end
+    for _, c in ipairs(self.Clouds or {}) do c.Visible = showClouds end
+    for _, s in ipairs(self.Stars or {}) do s.Visible = showStars end
+    for _, item in ipairs(self.Spooky or {}) do item.Visible = showHalloween end
+    for _, part in ipairs(self.SpookyBody or {}) do part.Visible = showSpookyBody end
+    for _, item in ipairs(self.KirbyDecor or {}) do item.Visible = showKirby end
+    for _, item in ipairs(self.PokemonDecor or {}) do item.Visible = showPokemon end
+    for _, item in ipairs(self.AnimalCrossingDecor or {}) do item.Visible = showAC end
+    for _, item in ipairs(self.StardewDecor or {}) do item.Visible = showSDV end
+    for _, item in ipairs(self.TamagotchiDecor or {}) do item.Visible = showTama end
+    for _, item in ipairs(self.CastleDecor or {}) do item.Visible = showCastle end
+    for _, item in ipairs(self.UndergroundDecor or {}) do item.Visible = showUnderground end
+    for _, item in ipairs(self.IceDecor or {}) do item.Visible = showIce end
+    for _, item in ipairs(self.DesertDecor or {}) do item.Visible = showDesert end
+    for _, item in ipairs(self.GhostHouseDecor or {}) do item.Visible = showGhostHouse end
+    for _, item in ipairs(self.StarRoadDecor or {}) do item.Visible = showStarRoad end
+    for _, item in ipairs(self.JungleDecor or {}) do item.Visible = showJungle end
+    for _, item in ipairs(self.SkyWorldDecor or {}) do item.Visible = showSkyWorld end
 
-    -- Pokemon Cafe
-    for _, item in ipairs(self.PokeSprites or {}) do
-        item.Visible = showPokemon
-    end
-    if self.PokeBand     then self.PokeBand.Visible     = showPokemonBody end
-    if self.PokeBallRoll then self.PokeBallRoll.Visible = showPokemonBody end
-
-    -- Animal Crossing
-    for _, item in ipairs(self.ACSprites or {}) do
-        item.Visible = showAC
-    end
-    if self.ACBand then self.ACBand.Visible = showACBody end
-
-    -- Stardew Valley
-    for _, item in ipairs(self.SDVSprites or {}) do
-        item.Visible = showSDV
-    end
-    if self.SDVBand then self.SDVBand.Visible = showSDVBody end
-    if self.SDVGlow then self.SDVGlow.Visible = shown and decor == "StardewValley" end
-
-    -- Tamagotchi
-    for _, item in ipairs(self.TamaSprites or {}) do
-        item.Visible = showTama
-    end
-    if self.TamaEgg      then self.TamaEgg.Visible      = showTama      end
-    if self.TamaBezel    then self.TamaBezel.Visible     = shown and decor == "Tamagotchi" end
-    if self.TamaGrill    then self.TamaGrill.Visible     = showTamaBody  end
-    if self.TamaScanlines then self.TamaScanlines.Visible = showTamaBody end
-    if self.TamaLCDBand  then self.TamaLCDBand.Visible   = showTamaBody  end
-
-    -- Anim group toggles
-    Anim.SetGroupActive("Emblem",         shown)
-    Anim.SetGroupActive("DecorClouds",    showClouds)
-    Anim.SetGroupActive("DecorStars",     showStars)
-    Anim.SetGroupActive("DecorSpooky",    showSpooky)
-    Anim.SetGroupActive("DecorSpookyGlow",showGlow)
-    Anim.SetGroupActive("DecorSpookyBody",showSpookyBody)
-    Anim.SetGroupActive("DecorKirby",     showKirby)
-    Anim.SetGroupActive("DecorKirbyBody", showKirbyBody)
-    Anim.SetGroupActive("DecorPokemon",   showPokemon)
-    Anim.SetGroupActive("DecorPokemonBody",showPokemonBody)
-    Anim.SetGroupActive("DecorAC",        showAC)
-    Anim.SetGroupActive("DecorACBody",    showACBody)
-    Anim.SetGroupActive("DecorSDV",       showSDV)
-    Anim.SetGroupActive("DecorSDVBody",   showSDVBody)
-    Anim.SetGroupActive("DecorSDVGlow",   shown and decor == "StardewValley")
-    Anim.SetGroupActive("DecorTama",      showTama)
-    Anim.SetGroupActive("DecorTamaGlow",  shown and decor == "Tamagotchi")
-    Anim.SetGroupActive("DecorTamaBody",  showTamaBody)
+    Anim.SetGroupActive("DecorClouds", showClouds)
+    Anim.SetGroupActive("DecorStars", showStars)
+    Anim.SetGroupActive("DecorSpooky", showHalloween)
+    Anim.SetGroupActive("DecorSpookyBody", showSpookyBody)
+    Anim.SetGroupActive("DecorKirby", showKirby)
+    Anim.SetGroupActive("DecorPokemon", showPokemon)
+    Anim.SetGroupActive("DecorAC", showAC)
+    Anim.SetGroupActive("DecorSDV", showSDV)
+    Anim.SetGroupActive("DecorTama", showTama)
+    Anim.SetGroupActive("DecorCastle", showCastle)
+    Anim.SetGroupActive("DecorUnderground", showUnderground)
+    Anim.SetGroupActive("DecorIce", showIce)
+    Anim.SetGroupActive("DecorDesert", showDesert)
+    Anim.SetGroupActive("DecorGhostHouse", showGhostHouse)
+    Anim.SetGroupActive("DecorStarRoad", showStarRoad)
+    Anim.SetGroupActive("DecorJungle", showJungle)
+    Anim.SetGroupActive("DecorSkyWorld", showSkyWorld)
 end
 
 function Window:BuildTitle(parent)
@@ -8448,21 +10000,18 @@ function Window:RenderGround()
 
     if theme == "Animal Crossing" then
         -- ═════════════════════════════════════════════════════════════════
-        -- Animal Crossing: Island Grass Lawn + Pixel Leaves + River Pebbles
-        -- Zero Unicode Emojis — 100% Native 8-bit Pixel Art Sprites
+        -- Animal Crossing: Island Grass Lawn + Leaves + Cherries + Pebbles
         -- ═════════════════════════════════════════════════════════════════
         local soil = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BrickDark")
         local grass = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 8), Parent = container }, "Grass")
         local grassEdge = Draw.Box("Frame", { Position = UDim2.fromOffset(0, 8), Size = UDim2.new(1, 0, 0, 2), Parent = container }, "GrassDark")
         Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 2), Parent = container }, "Outline")
-        -- Pixel leaves and cherries along lawn edge
         for i = 1, 8 do
             local spriteKey = (i % 2 == 0) and "ac_leaf" or "ac_cherry"
             local s = Sprite.New(container, spriteKey, 14)
             s.Position = UDim2.new((i - 1) / 8 + 0.04, 0, 0, 2)
             s.ZIndex = 3
         end
-        -- River pebbles in soil
         for p = 1, 8 do
             local pebble = Draw.New("Frame", { Position = UDim2.new((p - 1) / 8 + 0.05, 0, 0, 14), Size = UDim2.fromOffset(6, 4), BackgroundTransparency = 0.4, Parent = container })
             Draw.Corner(pebble, 2)
@@ -8477,7 +10026,6 @@ function Window:RenderGround()
         local pinkBar = Draw.Box("Frame", { Position = UDim2.fromOffset(0, 0), Size = UDim2.new(1, 0, 0, 6), Parent = container }, "Accent")
         local cloudPuffs = Draw.Box("Frame", { Position = UDim2.fromOffset(0, 6), Size = UDim2.new(1, 0, 1, -6), Parent = container }, "PanelHeader")
         Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 2), Parent = container }, "Outline")
-        -- Embedded Pixel Warp Stars along Dream Land ground
         for i = 1, 8 do
             local star = Sprite.New(container, "kirby_star", 14)
             star.Position = UDim2.new((i - 1) / 8 + 0.04, 0, 0, 6)
@@ -8490,31 +10038,30 @@ function Window:RenderGround()
         -- ═════════════════════════════════════════════════════════════════
         local floor = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "Brick")
         Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 3), Parent = container }, "Outline")
-        -- Checkered cafe tile runner
         for c = 0, 24 do
             local tile = Draw.New("Frame", { Position = UDim2.new(c / 25, 0, 0, 3), Size = UDim2.new(1 / 25, 0, 0, 5), BorderSizePixel = 0, Parent = container })
             Theme.Bind(tile, { BackgroundColor3 = (c % 2 == 0) and "White" or "BrickDark" })
         end
-        -- Wood plank vertical joints
         for j = 1, 10 do
             local joint = Draw.New("Frame", { Position = UDim2.new(j / 11, 0, 0, 8), Size = UDim2.new(0, 2, 1, -8), BorderSizePixel = 0, BackgroundTransparency = 0.5, Parent = container })
             Theme.Bind(joint, { BackgroundColor3 = "Outline" })
         end
+        local ball = Sprite.New(container, "poke_ball", 14)
+        ball.AnchorPoint = Vector2.new(0.5, 0.5)
+        ball.Position = UDim2.new(0.92, 0, 0.5, 2)
+        ball.ZIndex = 4
 
     elseif theme == "Stardew Valley" then
         -- ═════════════════════════════════════════════════════════════════
-        -- Stardew Valley: Farm Tilled Soil + Pixel Crop Seedlings
-        -- Zero Unicode Emojis — 100% Native 8-bit Pixel Art Sprites
+        -- Stardew Valley: Farm Timber Planks + Crop Seedlings + Watering Can
         -- ═════════════════════════════════════════════════════════════════
         local tilledSoil = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BrickDark")
         local rail = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 4), Parent = container }, "Brick")
         Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 2), Parent = container }, "Outline")
-        -- Farm crop furrows
         for row = 1, 2 do
             local furrow = Draw.New("Frame", { Position = UDim2.new(0, 0, 0, 6 + row * 6), Size = UDim2.new(1, 0, 0, 2), BackgroundTransparency = 0.6, Parent = container })
             Theme.Bind(furrow, { BackgroundColor3 = "Outline" })
         end
-        -- Native 8-bit pixel seedlings and crops
         for s = 1, 7 do
             local spriteKey = (s % 2 == 0) and "sdv_seed" or "sdv_can"
             local sprout = Sprite.New(container, spriteKey, 14)
@@ -8524,11 +10071,10 @@ function Window:RenderGround()
 
     elseif theme == "Tamagotchi" then
         -- ═════════════════════════════════════════════════════════════════
-        -- Tamagotchi: Virtual Pet Handheld Casing + 3 Tactile Buttons (A, B, C)
+        -- Tamagotchi: Virtual Pet Handheld Lower Casing + 3 Tactile Buttons
         -- ═════════════════════════════════════════════════════════════════
         local casing = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BackdropAlt")
         local borderTop = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 3), Parent = container }, "Outline")
-        -- 3 Tactile Circular Buttons in center with hover & click feedback
         local btnLabels = { "A", "B", "C" }
         for b = 1, 3 do
             local btnHolder = Draw.New("TextButton", { Text = "", AutoButtonColor = false, AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(0.38 + (b - 1) * 0.12, 0, 0.5, 1), Size = UDim2.fromOffset(16, 16), Parent = container })
@@ -8540,7 +10086,6 @@ function Window:RenderGround()
                 Anim.Bump(btnHolder, 2)
             end)
         end
-        -- Speaker acoustic dot matrix on the right
         for d = 1, 6 do
             local dot = Draw.New("Frame", { Position = UDim2.new(0.80 + (d - 1) * 0.025, 0, 0.5, -2), Size = UDim2.fromOffset(3, 3), BackgroundTransparency = 0.4, Parent = container })
             Draw.Corner(dot, 2)
@@ -8549,18 +10094,152 @@ function Window:RenderGround()
 
     elseif theme == "Halloween" then
         -- ═════════════════════════════════════════════════════════════════
-        -- Halloween: Graveyard Cobblestone Wall + Eerie Pumpkin Ground
+        -- Halloween: Graveyard Earth + Tombstones + Jack-o'-Lanterns + Mist
         -- ═════════════════════════════════════════════════════════════════
-        local stone = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "Brick")
-        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, radius), Parent = container }, "Brick")
-        local bricks = Draw.New("Frame", { BackgroundTransparency = 1, Position = UDim2.fromOffset(6, 6), Size = UDim2.new(1, -12, 1, -8), ClipsDescendants = true, Parent = container })
-        Draw.Bricks(bricks, 24, "BrickDark")
-        local purpleMist = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 6), Parent = container }, "Grass")
+        local soil = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BrickDark")
+        local mist = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 6), Parent = container }, "Grass")
+        mist.BackgroundTransparency = 0.3
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 2), Parent = container }, "Outline")
+        -- Embedded Tombstones & Jack-o'-Lanterns along graveyard rim
+        for i = 1, 6 do
+            local spriteKey = (i % 2 == 0) and "tombstone" or "pumpkin"
+            local s = Sprite.New(container, spriteKey, 14)
+            s.Position = UDim2.new((i - 1) / 6 + 0.06, 0, 0, 4)
+            s.ZIndex = 3
+        end
+
+    elseif theme == "Castle" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Castle: Basalt Fortress Foundation + Molten Lava Lake River
+        -- ═════════════════════════════════════════════════════════════════
+        local stone = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BrickDark")
+        local lavaRiver = Draw.Box("Frame", { Position = UDim2.fromOffset(0, 8), Size = UDim2.new(1, 0, 1, -8), Parent = container }, "Accent")
+        local lavaGlow = Draw.New("UIGradient", { Color = ColorSequence.new({ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 140, 20)), ColorSequenceKeypoint.new(1, Color3.fromRGB(220, 40, 20)) }), Parent = lavaRiver })
         Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 3), Parent = container }, "Outline")
+        -- Iron battlements and rivets
+        for r = 0, 16 do
+            local rivet = Draw.New("Frame", { Position = UDim2.new(r / 16 + 0.02, 0, 0, 3), Size = UDim2.fromOffset(4, 3), BackgroundColor3 = Color3.fromRGB(40, 35, 35), Parent = container })
+            Draw.Corner(rivet, 1)
+        end
+        -- Molten lava bubbles rising
+        for b = 1, 5 do
+            local bubble = Draw.New("Frame", { Position = UDim2.new(b / 6 + 0.04, 0, 0, 14), Size = UDim2.fromOffset(5, 5), BackgroundColor3 = Color3.fromRGB(255, 230, 80), ZIndex = 3, Parent = container })
+            Draw.Corner(bubble, 3)
+            Anim.Loop("GroundCastle", bubble, { Position = UDim2.new(b / 6 + 0.04, 0, 0, 10) }, 1.2 + b * 0.3, "Sine", true)
+        end
+
+    elseif theme == "Underground" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Underground: Deep Cavern Bedrock + Raw Cyan/Amethyst Crystals
+        -- ═════════════════════════════════════════════════════════════════
+        local bedrock = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BrickDark")
+        local rockStripe = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 5), Parent = container }, "Brick")
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 2), Parent = container }, "Outline")
+        -- Embedded glowing raw crystals and ores
+        for c = 1, 7 do
+            local gem = Sprite.New(container, "crystal_gem", 14)
+            gem.Position = UDim2.new((c - 1) / 7 + 0.05, 0, 0, 5)
+            gem.ZIndex = 3
+        end
+
+    elseif theme == "Ice Land" or theme == "Snow" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Ice Land: Scalloped Snowdrift + Permafrost + Ice Shards
+        -- ═════════════════════════════════════════════════════════════════
+        local permafrost = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BrickDark")
+        local snowLayer = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 8), Parent = container }, "Grass")
+        local iceRim = Draw.New("Frame", { Position = UDim2.fromOffset(0, 8), Size = UDim2.new(1, 0, 0, 3), BackgroundColor3 = Color3.fromRGB(160, 220, 255), Parent = container })
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 2), Parent = container }, "Outline")
+        -- Sparkling Ice Shards and Holly Berries
+        for s = 1, 7 do
+            local spriteKey = (s % 2 == 0) and "ice_shard" or "holly_berry"
+            local item = Sprite.New(container, spriteKey, 14)
+            item.Position = UDim2.new((s - 1) / 7 + 0.05, 0, 0, 5)
+            item.ZIndex = 3
+        end
+
+    elseif theme == "Desert" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Desert: Golden Sand Dunes + Sandstone Masonry + Cactus
+        -- ═════════════════════════════════════════════════════════════════
+        local sandstone = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BrickDark")
+        local duneTop = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 7), Parent = container }, "Grass")
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 2), Parent = container }, "Outline")
+        -- Embedded desert cacti and ancient pebbles
+        for d = 1, 6 do
+            local cactus = Sprite.New(container, "desert_cactus", 14)
+            cactus.Position = UDim2.new((d - 1) / 6 + 0.06, 0, 0, 4)
+            cactus.ZIndex = 3
+        end
+        for p = 1, 6 do
+            local pebble = Draw.New("Frame", { Position = UDim2.new(p / 7, 0, 0, 16), Size = UDim2.fromOffset(5, 3), BackgroundColor3 = Color3.fromRGB(160, 110, 60), Parent = container })
+            Draw.Corner(pebble, 1)
+        end
+
+    elseif theme == "Ghost House" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Ghost House: Weathered Victorian Floorboards + Green Ectoplasm
+        -- ═════════════════════════════════════════════════════════════════
+        local floor = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BrickDark")
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 3), Parent = container }, "Outline")
+        -- Victorian dark wood plank lines
+        for p = 1, 9 do
+            local seam = Draw.New("Frame", { Position = UDim2.new(p / 10, 0, 0, 3), Size = UDim2.new(0, 2, 1, -3), BackgroundColor3 = Color3.fromRGB(25, 15, 35), Parent = container })
+        end
+        -- Ectoplasm green mist seepage
+        for m = 1, 5 do
+            local wisp = Sprite.New(container, "spirit_mist", 14)
+            wisp.Position = UDim2.new((m - 1) / 5 + 0.08, 0, 0, 4)
+            wisp.ZIndex = 3
+        end
+
+    elseif theme == "Star Road" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Star Road: Synthwave Arcade Neon Vector Grid Horizon
+        -- ═════════════════════════════════════════════════════════════════
+        local space = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BrickDark")
+        local neonLine = Draw.New("Frame", { Size = UDim2.new(1, 0, 0, 3), BackgroundColor3 = Color3.fromRGB(0, 229, 255), Parent = container })
+        -- Perspective grid lines
+        for g = 1, 15 do
+            local line = Draw.New("Frame", { Position = UDim2.new(g / 16, 0, 0, 3), Size = UDim2.new(0, 1, 1, -3), BackgroundColor3 = Color3.fromRGB(180, 60, 220), BackgroundTransparency = 0.3, Parent = container })
+        end
+        -- Embedded Cosmic Stars
+        for s = 1, 6 do
+            local star = Sprite.New(container, "cosmic_star", 14)
+            star.Position = UDim2.new((s - 1) / 6 + 0.06, 0, 0, 5)
+            star.ZIndex = 3
+        end
+
+    elseif theme == "Jungle" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Jungle: Overgrown Ancient Mayan Stone Ruins + Creeping Vines
+        -- ═════════════════════════════════════════════════════════════════
+        local mossStone = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BrickDark")
+        local canopyGrass = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 6), Parent = container }, "Grass")
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 2), Parent = container }, "Outline")
+        for v = 1, 7 do
+            local spriteKey = (v % 2 == 0) and "jungle_fruit" or "tribal_mask"
+            local item = Sprite.New(container, spriteKey, 14)
+            item.Position = UDim2.new((v - 1) / 7 + 0.05, 0, 0, 4)
+            item.ZIndex = 3
+        end
+
+    elseif theme == "Sky World" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Sky World: Heavenly Cumulus Cloud Sea + Golden Sunlight Horizon
+        -- ═════════════════════════════════════════════════════════════════
+        local skyBed = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "Backdrop")
+        local goldRim = Draw.New("Frame", { Size = UDim2.new(1, 0, 0, 3), BackgroundColor3 = Color3.fromRGB(255, 215, 0), Parent = container })
+        local cloudBed = Draw.Box("Frame", { Position = UDim2.fromOffset(0, 3), Size = UDim2.new(1, 0, 1, -3), Parent = container }, "PanelHeader")
+        for f = 1, 6 do
+            local feather = Sprite.New(container, "feather_bow", 14)
+            feather.Position = UDim2.new((f - 1) / 6 + 0.06, 0, 0, 4)
+            feather.ZIndex = 3
+        end
 
     else
         -- ═════════════════════════════════════════════════════════════════
-        -- Classic Mario Overworld / Castle / Underground NES Bricks
+        -- Classic Mario Overworld NES Platformer Bricks + Grass Turf
         -- ═════════════════════════════════════════════════════════════════
         local ground = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "Brick")
         Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, radius), Parent = container }, "Brick")
@@ -9131,6 +10810,17 @@ function Groupbox:SetCollapsed(collapsed)
     Anim.Tween(self.Chevron, { Rotation = collapsed and -90 or 0 }, Config.Tween.Collapse)
 end
 
+-- ═══════════════════════════════════════════════════════════════════════════
+--  PAYOMBOYZ FLOATING TOGGLE WIDGET (Cute 8-Bit Theme-Reactive Capsule)
+-- ═══════════════════════════════════════════════════════════════════════════
+
+Float.State = {
+    Visible = true,
+    IconMode = "Logo", -- "Logo" or "Avatar"
+    SubMode = "FPS",   -- "FPS" or "Time"
+    StartTime = os.time(),
+}
+
 function Float.Clamp()
     local button = Float.Button
     if not button or not State.Gui then
@@ -9143,21 +10833,251 @@ function Float.Clamp()
     local pos = button.Position
     local absX = viewport.X * pos.X.Scale + pos.X.Offset
     local absY = viewport.Y * pos.Y.Scale + pos.Y.Offset
-    local size = Float.Size or 48
-    local clampedX = math.clamp(absX, 6, math.max(6, viewport.X - size - 6))
-    local clampedY = math.clamp(absY, 6, math.max(6, viewport.Y - size - 6))
+    local width = button.AbsoluteSize.X > 0 and button.AbsoluteSize.X or 195
+    local height = button.AbsoluteSize.Y > 0 and button.AbsoluteSize.Y or 46
+    local clampedX = math.clamp(absX, 8, math.max(8, viewport.X - width - 8))
+    local clampedY = math.clamp(absY, 8, math.max(8, viewport.Y - height - 8))
     button.Position = UDim2.fromOffset(math.floor(clampedX + 0.5), math.floor(clampedY + 0.5))
 end
 
 function Float.Build()
-    local size = State.Touch and 56 or 48
-    local button = Draw.New("TextButton", { Name = "Float", Text = "", AutoButtonColor = false, BackgroundTransparency = 1, Position = UDim2.new(0, 18, 0.45, 0), Size = UDim2.fromOffset(size, size), ZIndex = Config.Layer.Float, Visible = State.Touch, Parent = State.Gui })
-    local shadow = Draw.Box("Frame", { Position = UDim2.fromOffset(4, 4), Size = UDim2.fromScale(1, 1), BackgroundTransparency = 0.55, Parent = button }, "Shadow", nil, 4)
-    shadow.ZIndex = 1
-    local slot = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1), ZIndex = 2, Parent = button })
-    Float.Button, Float.Slot, Float.Size = button, slot, size
-    Anim.Tween(slot, { Position = UDim2.fromOffset(0, -3) }, 0.9, "Sine", -1, true)
-    Float.Render()
+    if Float.Button then
+        pcall(function() Float.Button:Destroy() end)
+    end
+
+    local width, height = 195, 46
+    local button = Draw.New("TextButton", {
+        Name = "PayomboyZToggle",
+        Text = "",
+        AutoButtonColor = false,
+        BackgroundTransparency = 1,
+        Position = UDim2.new(0, 18, 0.45, 0),
+        Size = UDim2.fromOffset(width, height),
+        ZIndex = Config.Layer.Float,
+        Visible = Float.State.Visible,
+        Parent = State.Gui,
+    })
+
+    -- 8-Bit Offset Shadow
+    local shadow = Draw.Box("Frame", {
+        Name = "Shadow",
+        Position = UDim2.fromOffset(3, 4),
+        Size = UDim2.fromScale(1, 1),
+        BackgroundTransparency = 0.5,
+        ZIndex = 1,
+        Parent = button,
+    }, "Shadow", nil, 12)
+
+    -- Main Capsule Body
+    local body = Draw.Box("Frame", {
+        Name = "Body",
+        Position = UDim2.fromOffset(0, 0),
+        Size = UDim2.fromScale(1, 1),
+        ClipsDescendants = true,
+        ZIndex = 2,
+        Parent = button,
+    }, "BackdropAlt", "Outline", 12, 2)
+
+    -- Top Gloss Highlight Stripe
+    local gloss = Draw.New("Frame", {
+        Name = "Gloss",
+        Position = UDim2.fromOffset(8, 2),
+        Size = UDim2.new(1, -16, 0, 2),
+        BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+        BackgroundTransparency = 0.75,
+        BorderSizePixel = 0,
+        ZIndex = 3,
+        Parent = body,
+    })
+    Draw.Corner(gloss, 1)
+
+    -- Content Row
+    local content = Draw.New("Frame", {
+        Name = "Content",
+        BackgroundTransparency = 1,
+        Position = UDim2.fromOffset(6, 4),
+        Size = UDim2.new(1, -12, 1, -8),
+        ZIndex = 4,
+        Parent = body,
+    })
+    Draw.List(content, 8, true, Enum.HorizontalAlignment.Left, Enum.VerticalAlignment.Center)
+
+    -- 1. Mascot / Avatar Badge Slot
+    local iconSlot = Draw.Box("Frame", {
+        Name = "IconSlot",
+        Size = UDim2.fromOffset(34, 34),
+        LayoutOrder = 1,
+        Parent = content,
+    }, "Element", "Outline", UDim.new(1, 0), 1.5)
+
+    local iconImg = Draw.New("ImageLabel", {
+        Name = "MascotImage",
+        BackgroundTransparency = 1,
+        AnchorPoint = Vector2.new(0.5, 0.5),
+        Position = UDim2.fromScale(0.5, 0.5),
+        Size = UDim2.fromScale(0.88, 0.88),
+        ScaleType = Enum.ScaleType.Fit,
+        ZIndex = 5,
+        Parent = iconSlot,
+    })
+    Draw.Corner(iconImg, UDim.new(1, 0))
+
+    -- Mascot Cute Bobbing & Breathing Animation
+    Anim.Loop("FloatMascot", iconImg, {
+        Position = UDim2.fromScale(0.5, 0.44),
+        Rotation = 4,
+    }, 1.2, "Sine", true)
+
+    -- 2. Information Column (Title + SubInfo)
+    local infoCol = Draw.New("Frame", {
+        Name = "InfoCol",
+        BackgroundTransparency = 1,
+        Size = UDim2.new(1, -44, 1, 0),
+        LayoutOrder = 2,
+        Parent = content,
+    })
+    Draw.List(infoCol, 1, false, Enum.HorizontalAlignment.Left, Enum.VerticalAlignment.Center)
+
+    -- Top Row: PAYOMBOYZ Hub Name + Online Green Dot
+    local topRow = Draw.New("Frame", {
+        Name = "TopRow",
+        BackgroundTransparency = 1,
+        Size = UDim2.new(1, 0, 0, 18),
+        LayoutOrder = 1,
+        Parent = infoCol,
+    })
+    Draw.List(topRow, 5, true, Enum.HorizontalAlignment.Left, Enum.VerticalAlignment.Center)
+
+    local hubTitle = Draw.Text({
+        Name = "HubTitle",
+        Text = "PAYOMBOYZ",
+        Size = UDim2.fromOffset(88, 18),
+        TextXAlignment = Enum.TextXAlignment.Left,
+        LayoutOrder = 1,
+        Parent = topRow,
+    }, "Logo", 13, "Accent")
+    Draw.Stroke(hubTitle, "Ink", 1)
+
+    local statusDot = Draw.New("Frame", {
+        Name = "StatusDot",
+        Size = UDim2.fromOffset(6, 6),
+        BackgroundColor3 = Color3.fromRGB(80, 230, 120),
+        LayoutOrder = 2,
+        Parent = topRow,
+    })
+    Draw.Corner(statusDot, UDim.new(1, 0))
+    Anim.Loop("FloatStatus", statusDot, { BackgroundTransparency = 0.5 }, 0.9, "Sine", true)
+
+    -- Bottom Row: @Username + Telemetry Pill (FPS / Time)
+    local bottomRow = Draw.New("Frame", {
+        Name = "BottomRow",
+        BackgroundTransparency = 1,
+        Size = UDim2.new(1, 0, 0, 16),
+        LayoutOrder = 2,
+        Parent = infoCol,
+    })
+    Draw.List(bottomRow, 4, true, Enum.HorizontalAlignment.Left, Enum.VerticalAlignment.Center)
+
+    local lp = LocalPlayer or (Players and Players.LocalPlayer)
+    local rawName = lp and ("@" .. (lp.Name or "PayomboyZ")) or "@PayomboyZ"
+    local userLabel = Draw.Text({
+        Name = "UserLabel",
+        Text = rawName,
+        Size = UDim2.fromOffset(68, 14),
+        TextXAlignment = Enum.TextXAlignment.Left,
+        TextTruncate = Enum.TextTruncate.AtEnd,
+        LayoutOrder = 1,
+        Parent = bottomRow,
+    }, "Desc", 10, "SubText")
+
+    local sep = Draw.Text({
+        Name = "Sep",
+        Text = "•",
+        Size = UDim2.fromOffset(6, 14),
+        TextXAlignment = Enum.TextXAlignment.Center,
+        LayoutOrder = 2,
+        Parent = bottomRow,
+    }, "Desc", 9, "SubText")
+
+    local teleBadge = Draw.Box("Frame", {
+        Name = "TeleBadge",
+        Size = UDim2.fromOffset(50, 14),
+        LayoutOrder = 3,
+        Parent = bottomRow,
+    }, "Element", nil, 4)
+    teleBadge.BackgroundTransparency = 0.4
+
+    local teleLabel = Draw.Text({
+        Name = "TeleLabel",
+        Text = "60 FPS",
+        Size = UDim2.fromScale(1, 1),
+        TextXAlignment = Enum.TextXAlignment.Center,
+        Parent = teleBadge,
+    }, "Desc", 9, "Coin")
+
+    Float.Button = button
+    Float.Body = body
+    Float.Shadow = shadow
+    Float.IconImg = iconImg
+    Float.IconSlot = iconSlot
+    Float.HubTitle = hubTitle
+    Float.UserLabel = userLabel
+    Float.TeleLabel = teleLabel
+    Float.Sprite = body
+
+    -- Render Icon Mode
+    function Float.UpdateIcon()
+        if not Float.IconImg then return end
+        if Float.State.IconMode == "Avatar" and lp and lp.UserId then
+            local ok, thumb = pcall(Players.GetUserThumbnailAsync, Players, lp.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)
+            if ok and thumb then
+                Float.IconImg.Image = thumb
+                return
+            end
+        end
+        -- Default: PayomboyZ Hug Mascot Logo (Cute version hugging Discord)
+        Float.IconImg.Image = Assets.Resolve("logo_hug") or Assets.Resolve("float_logo") or "rbxassetid://87106942787227"
+    end
+
+    Float.UpdateIcon()
+
+    -- Real-Time Telemetry Loop
+    local frameCount = 0
+    local lastCheck = tick()
+    local fpsVal = 60
+    local teleConn = RunService.RenderStepped:Connect(function()
+        if not Float.Button or not Float.Button.Parent then
+            return
+        end
+        frameCount = frameCount + 1
+        local now = tick()
+        if now - lastCheck >= 0.5 then
+            fpsVal = math.floor(frameCount / (now - lastCheck) + 0.5)
+            frameCount = 0
+            lastCheck = now
+            if Float.TeleLabel and Float.TeleLabel.Parent then
+                if Float.State.SubMode == "Time" then
+                    local elapsed = os.time() - Float.State.StartTime
+                    local m = math.floor(elapsed / 60)
+                    local s = elapsed % 60
+                    Float.TeleLabel.Text = string.format("%02d:%02d", m, s)
+                else
+                    Float.TeleLabel.Text = tostring(fpsVal) .. " FPS"
+                end
+            end
+        end
+    end)
+    table.insert(State.Connections, teleConn)
+
+    -- Theme Reactivity
+    Theme.OnRender(button, function()
+        if not Float.Body then return end
+        Float.UpdateIcon()
+        hubTitle.TextColor3 = Theme.Colors.Accent or Themes.Shared.White
+        teleLabel.TextColor3 = Theme.Colors.Coin or Themes.Shared.White
+    end)
+
+    -- Dragging & Clamping Logic
     local moved = false
     Gui.Draggable(button, function(begin, delta)
         if not delta then
@@ -9171,37 +11091,30 @@ function Float.Build()
         end
         return begin
     end)
+
+    -- Click / Activation: Toggle Window
     button.Activated:Connect(function()
         if moved or not State.Window then
             return
         end
-        Anim.Bump(Float.Sprite, 10)
-        Anim.CoinPop(button, UDim2.new(0.5, 0, 0, 0), 20)
+        Anim.Bump(Float.Body, 6)
+        Anim.CoinPop(button, UDim2.new(0.5, 0, 0, 0), 16)
         State.Window:Toggle()
+    end)
+
+    -- Hover feedback
+    button.MouseEnter:Connect(function()
+        Anim.Tween(body, { Position = UDim2.fromOffset(0, -2) }, 0.14, "Out")
+        Anim.Tween(iconImg, { Size = UDim2.fromScale(0.96, 0.96) }, 0.14, "Out")
+    end)
+    button.MouseLeave:Connect(function()
+        Anim.Tween(body, { Position = UDim2.fromOffset(0, 0) }, 0.14, "Out")
+        Anim.Tween(iconImg, { Size = UDim2.fromScale(0.88, 0.88) }, 0.14, "Out")
     end)
 end
 
-function Float.Render()
-    if not Float.Slot then
-        return
-    end
-    Float.Slot:ClearAllChildren()
-    local holder = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = Float.Slot }, "Element", "Outline", 10, 2)
-    local img = Draw.New("ImageLabel", {
-        Name = "FloatLogo",
-        BackgroundTransparency = 1,
-        AnchorPoint = Vector2.new(0.5, 0.5),
-        Position = UDim2.fromScale(0.5, 0.5),
-        Size = UDim2.fromScale(0.92, 0.92),
-        Image = Assets.Resolve("float_logo") or Assets.Resolve("logo") or "rbxassetid://87106942787227",
-        ScaleType = Enum.ScaleType.Fit,
-        Parent = holder,
-    })
-    Draw.Corner(img, 8)
-    Float.Sprite = holder
-end
-
 function Float.SetVisible(visible)
+    Float.State.Visible = visible
     if Float.Button then
         Float.Button.Visible = visible
         if visible then
@@ -9209,6 +11122,18 @@ function Float.SetVisible(visible)
         end
     end
 end
+
+function Float.SetIconMode(mode)
+    Float.State.IconMode = mode
+    if Float.UpdateIcon then
+        Float.UpdateIcon()
+    end
+end
+
+function Float.SetSubMode(mode)
+    Float.State.SubMode = mode
+end
+
 
 function Watermark.Build(title)
     local frame = Draw.Box("Frame", { Name = "Watermark", AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.5, 0, 0, 10), AutomaticSize = Enum.AutomaticSize.X, Size = UDim2.fromOffset(0, 30), ZIndex = Config.Layer.Watermark, Parent = State.Gui }, "Shadow", "Outline", 10, 2)
@@ -10893,7 +12818,32 @@ function Window:AddSettingsTab()
     end })
     interface:AddToggle("PayomboyZWatermark", { Text = Lang.Strings.Watermark, Description = Lang.Strings.WatermarkDesc, Default = Watermark.Frame ~= nil and Watermark.Frame.Visible, Callback = Watermark.SetVisible })
     interface:AddToggle("PayomboyZParticles", { Text = Lang.Strings.Particles, Description = Lang.Strings.ParticlesDesc, Default = Particles.Enabled, Callback = Particles.SetEnabled })
-    interface:AddToggle("PayomboyZFloat", { Text = Lang.Strings.FloatButton, Description = Lang.Strings.FloatDesc, Default = Float.Button ~= nil and Float.Button.Visible, Callback = Float.SetVisible })
+    interface:AddToggle("PayomboyZFloat", {
+        Text = (State.Language == "TH" and "ปุ่มเปิด/ปิดหน้าต่าง (Toggle Button)" or "Toggle Button"),
+        Description = (State.Language == "TH" and "แสดงปุ่มลอยสำหรับเปิด/ปิดหน้าต่างหลัก" or "Floating button to open/close main UI"),
+        Default = Float.State and Float.State.Visible or true,
+        Callback = function(val)
+            Float.SetVisible(val)
+        end,
+    })
+    interface:AddDropdown("PayomboyZFloatIcon", {
+        Text = (State.Language == "TH" and "ไอคอนบนปุ่ม Toggle" or "Toggle Icon Mode"),
+        Values = { "Logo (PayomboyZ)", "Avatar (ตัวละคร)" },
+        Default = (Float.State and Float.State.IconMode == "Avatar") and "Avatar (ตัวละคร)" or "Logo (PayomboyZ)",
+        Callback = function(val)
+            local mode = val:find("Avatar") and "Avatar" or "Logo"
+            Float.SetIconMode(mode)
+        end,
+    })
+    interface:AddDropdown("PayomboyZFloatSub", {
+        Text = (State.Language == "TH" and "ข้อมูลแสดงบนปุ่ม Toggle" or "Toggle Telemetry Info"),
+        Values = { "FPS (Real-time)", "เวลาเปิดสคริปต์ (Elapsed Time)" },
+        Default = (Float.State and Float.State.SubMode == "Time") and "เวลาเปิดสคริปต์ (Elapsed Time)" or "FPS (Real-time)",
+        Callback = function(val)
+            local mode = val:find("Time") and "Time" or "FPS"
+            Float.SetSubMode(mode)
+        end,
+    })
     local about = tab:AddLeftGroupbox(Lang.Strings.About, "star")
     about:AddLabel(string.format("%s v%s - %s", self.Title, Library.Version, self.SubTitle ~= "" and self.SubTitle or tostring(game.PlaceId)))
     about:AddLabel(Lang.Format("Device", State.Touch and "Mobile" or "PC"))
