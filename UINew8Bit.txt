@@ -28,7 +28,15 @@ local Config = {
         logo = "https://raw.githubusercontent.com/xDTaraZz/Roblox-Scripts/main/logo.png",
         logo_halloween = "https://raw.githubusercontent.com/xDTaraZz/Roblox-Scripts/main/logo_halloween.png",
     },
-    SeasonTheme = "Halloween",
+    SeasonTheme = (function()
+        local d = os.date("*t")
+        if d and d.month == 10 and d.day >= 15 then
+            return "Halloween"
+        elseif d and d.month == 12 then
+            return "Snow"
+        end
+        return "Overworld"
+    end)(),
     FontDir = "payomboyzhub/fonts",
     HttpTimeout = 8,
     FontTimeout = 20,
@@ -220,7 +228,7 @@ local Themes = {
         SidebarText = "FFFDF7", SidebarMuted = "C4EABC", TabActive = "FFFDE8", TabActiveText = "5C4033",
         Panel = "FFFDF7", PanelHeader = "E4F5D8", Element = "FEFFF8", Hover = "D8F0C8",
         Outline = "3A6230", Shadow = "8EC88A", Text = "5C4033", SubText = "8B7355", Muted = "A08A72", Track = "C4E0B8",
-        Cloud = "FFFFFF", CloudAlpha = 0.2, Accent = "FFB347", AccentDark = "D9731B", Grass = "9ACD7B", GrassDark = "5A9458", Brick = "D4B996", BrickDark = "8E511B", Decor = { "Clouds" },
+        Cloud = "FFFFFF", CloudAlpha = 0.2, Accent = "FFB347", AccentDark = "D9731B", Grass = "9ACD7B", GrassDark = "5A9458", Brick = "D4B996", BrickDark = "8E511B", Decor = { "AnimalCrossing" },
         Particle = { { "✦", "•", "✧", "❀" }, false, "F5D76E" },
     }),
     Kirby = Palette({
@@ -228,7 +236,7 @@ local Themes = {
         SidebarText = "FFFFFF", SidebarMuted = "FBCFE8", TabActive = "FFFFFF", TabActiveText = "D0407A",
         Panel = "FFF0F8", PanelHeader = "FFD8EC", Element = "FFFFFF", Hover = "FFD0E8",
         Outline = "A02060", Shadow = "F0A0C8", Text = "5A1040", SubText = "A03870", Muted = "D08AAA", Track = "F8C0D8",
-        Cloud = "FFFFFF", CloudAlpha = 0.15, Accent = "FF6EB4", AccentDark = "C03E84", Grass = "A8E46A", GrassDark = "78C040", Brick = "FFB0D8", BrickDark = "E070A8", Decor = { "Stars", "★", "FFE680" },
+        Cloud = "FFFFFF", CloudAlpha = 0.15, Accent = "FF6EB4", AccentDark = "C03E84", Grass = "A8E46A", GrassDark = "78C040", Brick = "FFB0D8", BrickDark = "E070A8", Decor = { "Kirby" },
         Particle = { { "★", "✦", "•", "✧" }, false, "FFE680" },
     }),
     ["Pokemon Cafe"] = Palette({
@@ -236,7 +244,7 @@ local Themes = {
         SidebarText = "FFFFFF", SidebarMuted = "F8E0A0", TabActive = "FFFBED", TabActiveText = "8A5A00",
         Panel = "FFFEF6", PanelHeader = "FFF2C8", Element = "FFFFFF", Hover = "FDE8A0",
         Outline = "7A5000", Shadow = "E0C060", Text = "4A3000", SubText = "7A5800", Muted = "B89040", Track = "EED888",
-        Cloud = "FFFFFF", CloudAlpha = 0.25, Accent = "E8563C", AccentDark = "B83020", Grass = "60B840", GrassDark = "408A28", Brick = "E8A830", BrickDark = "B87810", Decor = { "Clouds" },
+        Cloud = "FFFFFF", CloudAlpha = 0.25, Accent = "E8563C", AccentDark = "B83020", Grass = "60B840", GrassDark = "408A28", Brick = "E8A830", BrickDark = "B87810", Decor = { "PokemonCafe" },
         Particle = { { "✦", "★", "•" }, false, "F5D76E" },
     }),
     ["Stardew Valley"] = Palette({
@@ -244,7 +252,7 @@ local Themes = {
         SidebarText = "FFF8E8", SidebarMuted = "D8C090", TabActive = "FFF8E8", TabActiveText = "6A4020",
         Panel = "FFF8E8", PanelHeader = "EEE0C0", Element = "FFFCF2", Hover = "E8D4A0",
         Outline = "4A3018", Shadow = "B0905A", Text = "3A2010", SubText = "6A5030", Muted = "9A7A50", Track = "D8C090",
-        Cloud = "FFFFFF", CloudAlpha = 0.3, Accent = "D4641C", AccentDark = "A04010", Grass = "7AB840", GrassDark = "508A28", Brick = "A8844A", BrickDark = "7A5C30", Decor = { "Stars", "✦", "F5D76E" },
+        Cloud = "FFFFFF", CloudAlpha = 0.3, Accent = "D4641C", AccentDark = "A04010", Grass = "7AB840", GrassDark = "508A28", Brick = "A8844A", BrickDark = "7A5C30", Decor = { "StardewValley" },
         Particle = { { "✦", "•", "✧" }, false, "F5D76E" },
     }),
     Tamagotchi = Palette({
@@ -252,7 +260,7 @@ local Themes = {
         SidebarText = "FFFFFF", SidebarMuted = "A0D8F0", TabActive = "FFFFFF", TabActiveText = "2060A0",
         Panel = "F0FAFF", PanelHeader = "D8F0FC", Element = "FFFFFF", Hover = "C0E8F8",
         Outline = "204870", Shadow = "80C0E0", Text = "102840", SubText = "3868A0", Muted = "70A8D0", Track = "B0D8F0",
-        Cloud = "FFFFFF", CloudAlpha = 0.1, Accent = "FF7EB0", AccentDark = "D04880", Grass = "60D090", GrassDark = "3A9868", Brick = "90C8E8", BrickDark = "5898C0", Decor = { "Clouds" },
+        Cloud = "FFFFFF", CloudAlpha = 0.1, Accent = "FF7EB0", AccentDark = "D04880", Grass = "60D090", GrassDark = "3A9868", Brick = "90C8E8", BrickDark = "5898C0", Decor = { "Tamagotchi" },
         Particle = { { "✦", "♥", "•", "★" }, false, "FFB8D8" },
     }),
     Shared = Palette({
@@ -287,6 +295,33 @@ local ThemeMeta = {
             Particle = "ac_leaf",
         },
         Icons = {
+            -- Mario sprite aliases bridged to theme cartoon mascots
+            mushroom = "sdv_farmer", flower = "sdv_abigail", boo = "sdv_krobus",
+            feather = "sdv_wizard", star = "sdv_can", chest = "sdv_seed",
+            bag = "sdv_seed", shell = "sdv_shield", coin = "sdv_gold",
+            pipe = "sdv_wizard", flag = "sdv_wizard", qblock = "sdv_farmer",
+            brick = "sdv_pickaxe", bomb = "sdv_abigail", oneup = "sdv_farmer",
+            castle = "sdv_farmer", kart = "sdv_wizard", gear = "sdv_farmer",
+            key = "sdv_farmer", heart = "sdv_stardrop", trophy = "sdv_stardrop",
+
+            -- Mario sprite aliases bridged to theme cartoon mascots
+            mushroom = "poke_pikachu", flower = "poke_charmander", boo = "poke_gengar",
+            feather = "poke_running", star = "poke_bulbasaur", chest = "poke_snorlax",
+            bag = "poke_snorlax", shell = "poke_squirtle", coin = "poke_meowth",
+            pipe = "poke_running", flag = "poke_running", qblock = "poke_pikachu",
+            brick = "poke_cup", bomb = "poke_charmander", oneup = "poke_pikachu",
+            castle = "poke_pikachu", kart = "poke_running", gear = "poke_pikachu",
+            key = "poke_pikachu", heart = "poke_potion", trophy = "poke_candy",
+
+            -- Mario sprite aliases bridged to theme cartoon mascots
+            mushroom = "ac_isabelle", flower = "ac_blathers", boo = "ac_fish",
+            feather = "ac_dodo", star = "ac_wateringcan", chest = "ac_timmy",
+            bag = "ac_timmy", shell = "ac_blathers", coin = "ac_tomnook",
+            pipe = "ac_dodo", flag = "ac_kkslider", qblock = "ac_isabelle",
+            brick = "ac_wateringcan", bomb = "ac_blathers", oneup = "ac_isabelle",
+            castle = "ac_isabelle", kart = "ac_dodo", gear = "ac_nookphone",
+            key = "ac_nookphone", heart = "ac_brewster", trophy = "ac_blathers",
+
             afk        = "ac_isabelle", aim        = "ac_slingshot", aimbot     = "ac_slingshot", airdrop    = "ac_timmy",
             alert      = "ac_blathers", animal     = "ac_fish", armor      = "ac_blathers", auto       = "ac_wateringcan",
             backpack   = "ac_timmy", bag        = "ac_timmy", bell       = "ac_tomnook", bolt       = "ac_dodo",
@@ -363,7 +398,16 @@ local ThemeMeta = {
             Particle = "kirby_star",
         },
         Icons = {
-            afk        = "kirby_body", aim        = "kirby_cursor", aimbot     = "kirby_cursor", airdrop    = "kirby_waddledee",
+            
+            -- Mario sprite aliases bridged to theme cartoon mascots
+            mushroom = "kirby_body", flower = "kirby_metaknight", boo = "kirby_cursor",
+            feather = "kirby_star", star = "kirby_rod", chest = "kirby_waddledee",
+            bag = "kirby_waddledee", shell = "kirby_metaknight", coin = "kirby_star",
+            pipe = "kirby_star", flag = "kirby_star", qblock = "kirby_body",
+            brick = "kirby_dedede", bomb = "kirby_metaknight", oneup = "kirby_body",
+            castle = "kirby_body", kart = "kirby_star", gear = "kirby_body",
+            key = "kirby_body", heart = "kirby_tomato", trophy = "kirby_dedede",
+afk        = "kirby_body", aim        = "kirby_cursor", aimbot     = "kirby_cursor", airdrop    = "kirby_waddledee",
             alert      = "kirby_metaknight", animal     = "kirby_waddledee", armor      = "kirby_metaknight", auto       = "kirby_rod",
             backpack   = "kirby_waddledee", bag        = "kirby_waddledee", bell       = "kirby_star", bolt       = "kirby_rod",
             bomb       = "kirby_metaknight", bot        = "kirby_rod", box        = "kirby_waddledee", build      = "kirby_dedede",
@@ -594,7 +638,16 @@ local ThemeMeta = {
             Particle = "tama_heart",
         },
         Icons = {
-            afk        = "tama_sleep", aim        = "tama_game", aimbot     = "tama_game", airdrop    = "tama_kuchipatchi",
+            
+            -- Mario sprite aliases bridged to theme cartoon mascots
+            mushroom = "tama_mametchi", flower = "tama_oyajitchi", boo = "tama_memetchi",
+            feather = "tama_mametchi", star = "tama_kuchipatchi", chest = "tama_kuchipatchi",
+            bag = "tama_kuchipatchi", shell = "tama_heart", coin = "tama_kuchipatchi",
+            pipe = "tama_mametchi", flag = "tama_babytchi", qblock = "tama_mametchi",
+            brick = "tama_game", bomb = "tama_oyajitchi", oneup = "tama_mametchi",
+            castle = "tama_mametchi", kart = "tama_mametchi", gear = "tama_memetchi",
+            key = "tama_memetchi", heart = "tama_heart", trophy = "tama_oyajitchi",
+afk        = "tama_sleep", aim        = "tama_game", aimbot     = "tama_game", airdrop    = "tama_kuchipatchi",
             alert      = "tama_poop", animal     = "tama_mametchi", armor      = "tama_heart", auto       = "tama_game",
             backpack   = "tama_kuchipatchi", bag        = "tama_kuchipatchi", bell       = "tama_kuchipatchi", bolt       = "tama_game",
             bomb       = "tama_poop", bot        = "tama_game", box        = "tama_kuchipatchi", build      = "tama_game",
@@ -684,7 +737,15 @@ local Reactive = {}
 local Tailwind = {}
 local Draw = {}
 local Sprite = {}
-local Assets = { Overrides = {}, Cache = {} }
+local Assets = {
+    Overrides = {
+        logo        = "rbxassetid://81695492880721", -- PayomboyZ Crown Action Logo
+        logo_action = "rbxassetid://81695492880721",
+        logo_hug    = "rbxassetid://87106942787227", -- PayomboyZ Discord Hug Mascot Logo
+        float_logo  = "rbxassetid://87106942787227",
+    },
+    Cache = {},
+}
 local Fonts = { Texts = {}, Thai = nil }
 local Particles = { Pool = {}, Enabled = true }
 local Lang = { Bound = {}, Listeners = setmetatable({}, { __mode = "k" }), InstanceListeners = {} }
@@ -768,7 +829,11 @@ function Reactive.Track(subscribers)
 end
 
 function Reactive.Trigger(subscribers)
+    local list = {}
     for effect in pairs(subscribers) do
+        table.insert(list, effect)
+    end
+    for _, effect in ipairs(list) do
         if Reactive.BatchDepth > 0 then
             Reactive.Pending[effect] = true
         else
@@ -1381,7 +1446,14 @@ function Theme.Apply(name)
             if meta.Font.Body    then Fonts.Latin.Body    = meta.Font.Body    end
             if meta.Font.Logo    then Fonts.Latin.Logo    = meta.Font.Logo    end
         end
-        -- Icon remap: update Sprite.Alias with theme-specific mappings
+        -- Reset sprite aliases from snapshot first to prevent cross-theme leakage
+        if OriginalSpriteAlias then
+            for k, v in pairs(OriginalSpriteAlias) do Sprite.Alias[k] = v end
+            for k in pairs(Sprite.Alias) do
+                if not OriginalSpriteAlias[k] then Sprite.Alias[k] = nil end
+            end
+        end
+        -- Apply this theme's icons
         if meta.Icons then
             for alias, target in pairs(meta.Icons) do
                 Sprite.Alias[alias] = target
@@ -1693,7 +1765,9 @@ end
 
 function Fonts.Disable(reason)
     Fonts.Broken = true
-    SafeFile(writefile, Config.FontDir .. "/disabled", tostring(reason))
+    if tostring(reason):lower():find("timeout") == nil then
+        SafeFile(writefile, Config.FontDir .. "/disabled", tostring(reason))
+    end
     warn("[PayomboyZ Hub] Thai font off: " .. tostring(reason))
 end
 
@@ -1927,24 +2001,60 @@ function Draw.Emblem(parent, size)
 end
 
 function Draw.DrawnEmblem(parent, size)
-    local emblem = Draw.Box("Frame", { Size = UDim2.fromOffset(size, size), Parent = parent }, "Accent", "Outline", UDim.new(1, 0), 2)
-    local ring = Draw.New("Frame", {
-        AnchorPoint = Vector2.new(0.5, 0.5),
-        Position = UDim2.fromScale(0.5, 0.5),
-        Size = UDim2.fromScale(0.7, 0.7),
-        Parent = emblem,
-    })
-    Draw.Corner(ring, UDim.new(1, 0))
-    Theme.Bind(ring, { BackgroundColor3 = "White" })
-    local letter = Draw.Text({
-        Text = "M",
-        Size = UDim2.fromScale(1, 1),
-        TextXAlignment = Enum.TextXAlignment.Center,
-        Position = UDim2.fromOffset(0, 1),
-        Parent = ring,
-    }, "Logo", math.floor(size * 0.5), "Accent")
-    letter.TextScaled = false
-    return emblem
+    local holder = Draw.New("Frame", { Name = "DrawnEmblem", BackgroundTransparency = 1, Size = UDim2.fromOffset(size, size), Parent = parent })
+    local function renderEmblem()
+        holder:ClearAllChildren()
+        local theme = State.ThemeName or "Overworld"
+        local spriteSize = math.floor(size * 0.82)
+        if theme == "Kirby" then
+            -- Dream Land: Golden round emblem with Kirby face
+            local emblem = Draw.Box("Frame", { Size = UDim2.fromOffset(size, size), Parent = holder }, "Accent", "Outline", UDim.new(1, 0), 2)
+            local s = Sprite.New(emblem, "kirby_body", spriteSize)
+            s.AnchorPoint = Vector2.new(0.5, 0.5)
+            s.Position = UDim2.fromScale(0.5, 0.5)
+        elseif theme == "Pokemon Cafe" then
+            -- Pokemon Cafe: Warm amber circle with Pikachu face
+            local emblem = Draw.Box("Frame", { Size = UDim2.fromOffset(size, size), Parent = holder }, "Accent", "Outline", UDim.new(1, 0), 2)
+            local s = Sprite.New(emblem, "poke_pikachu", spriteSize)
+            s.AnchorPoint = Vector2.new(0.5, 0.5)
+            s.Position = UDim2.fromScale(0.5, 0.5)
+        elseif theme == "Animal Crossing" then
+            -- Animal Crossing: Green island circle with Isabelle
+            local emblem = Draw.Box("Frame", { Size = UDim2.fromOffset(size, size), Parent = holder }, "Grass", "Outline", UDim.new(1, 0), 2)
+            local s = Sprite.New(emblem, "ac_isabelle", spriteSize)
+            s.AnchorPoint = Vector2.new(0.5, 0.5)
+            s.Position = UDim2.fromScale(0.5, 0.5)
+        elseif theme == "Stardew Valley" then
+            -- Stardew Valley: Farm wooden plaque with Junimo
+            local emblem = Draw.Box("Frame", { Size = UDim2.fromOffset(size, size), Parent = holder }, "Brick", "Outline", 6, 2)
+            local s = Sprite.New(emblem, "sdv_junimo", spriteSize)
+            s.AnchorPoint = Vector2.new(0.5, 0.5)
+            s.Position = UDim2.fromScale(0.5, 0.5)
+        elseif theme == "Tamagotchi" then
+            -- Tamagotchi: Virtual Pet Egg chassis with Mametchi
+            local emblem = Draw.Box("Frame", { Size = UDim2.fromOffset(size, size), Parent = holder }, "Accent", "Outline", 8, 2)
+            local s = Sprite.New(emblem, "tama_mametchi", spriteSize)
+            s.AnchorPoint = Vector2.new(0.5, 0.5)
+            s.Position = UDim2.fromScale(0.5, 0.5)
+        elseif theme == "Halloween" then
+            -- Halloween: Spooky pumpkin emblem
+            local emblem = Draw.Box("Frame", { Size = UDim2.fromOffset(size, size), Parent = holder }, "Accent", "Outline", UDim.new(1, 0), 2)
+            local s = Sprite.New(emblem, "pumpkin", spriteSize)
+            s.AnchorPoint = Vector2.new(0.5, 0.5)
+            s.Position = UDim2.fromScale(0.5, 0.5)
+        else
+            -- Classic Mario "M" Cap Emblem (Overworld, Castle, Underground)
+            local emblem = Draw.Box("Frame", { Size = UDim2.fromOffset(size, size), Parent = holder }, "Accent", "Outline", UDim.new(1, 0), 2)
+            local ring = Draw.New("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.5), Size = UDim2.fromScale(0.7, 0.7), Parent = emblem })
+            Draw.Corner(ring, UDim.new(1, 0))
+            Theme.Bind(ring, { BackgroundColor3 = "White" })
+            local letter = Draw.Text({ Text = "M", Size = UDim2.fromScale(1, 1), TextXAlignment = Enum.TextXAlignment.Center, Position = UDim2.fromOffset(0, 1), Parent = ring }, "Logo", math.floor(size * 0.5), "Accent")
+            letter.TextScaled = false
+        end
+    end
+    renderEmblem()
+    Theme.OnRender(holder, renderEmblem)
+    return holder
 end
 
 function Draw.Bricks(parent, columns, token)
@@ -1987,6 +2097,10 @@ function Assets.Download(name, url)
     if not Util.Exists(path) then
         local body = Util.HttpGet(url)
         if type(body) ~= "string" or #body < 8 then
+            return nil
+        end
+        local isPng = body:sub(1, 8) == "\137PNG\r\n\26\n"
+        if not isPng then
             return nil
         end
         Util.EnsureFolder(Config.AssetDir)
@@ -3263,36 +3377,36 @@ OriginalConfig = {
 }
 
 Icons.Rules = {
-    { "aimbot|silent|sniper|crosshair|shoot|gun|ยิง|ปืน|เล็ง", "crosshair" },
-    { "combat|sword|weapon|knife|kill|murder|sheriff|hit|attack|fight|ต่อสู้|ฆ่า|อาวุธ|ดาบ", "sword" },
-    { "visual|esp|chams|wallhack|highlight|tracer|fov|camera|see|มอง|แสง|เรดาร์", "boo" },
-    { "teleport|warp|island|location|place|spawn|zone|map|waypoint|วาร์ป|เกาะ|สถานที่|แมพ|จุดวาร์ป", "pipe" },
-    { "pet|animal|mount|ride|สัตว์|ขี่", "paw" },
+    { "aimbot|silent|sniper|crosshair|shoot|gun|ยิง|ปืน|เล็ง", "aimbot" },
+    { "combat|sword|weapon|knife|kill|murder|sheriff|hit|attack|fight|ต่อสู้|ฆ่า|อาวุธ|ดาบ", "combat" },
+    { "visual|esp|chams|wallhack|highlight|tracer|fov|camera|see|มอง|แสง|เรดาร์", "visuals" },
+    { "teleport|warp|island|location|place|spawn|zone|map|waypoint|วาร์ป|เกาะ|สถานที่|แมพ|จุดวาร์ป", "teleport" },
+    { "pet|animal|mount|ride|สัตว์|ขี่", "pet" },
     { "egg|hatch|ไข่|สุ่มไข่", "egg" },
     { "dice|roll|spin|gacha|ลูกเต๋า|ทอย|สุ่ม", "dice" },
-    { "mine|mining|forge|craft|upgrade|dig|quarry|ore|rock|ตีบวก|หลอม|ขุด|อัพเกรด|แร่", "hammer" },
-    { "build|pyramid|brick|สร้าง|พีระมิด", "brick" },
+    { "mine|mining|forge|craft|upgrade|dig|quarry|ore|rock|ตีบวก|หลอม|ขุด|อัพเกรด|แร่", "mine" },
+    { "build|pyramid|brick|สร้าง|พีระมิด", "build" },
     { "car|vehicle|drive|race|drift|รถ|ขับ|แข่ง", "car" },
-    { "shop|buy|sell|merchant|market|store|trade|coin|cash|money|ร้าน|ซื้อ|ขาย|เงิน", "coin" },
-    { "inventory|items|item|storage|bag|backpack|ช่องเก็บของ|กระเป๋า|ของ", "bag" },
-    { "loot|magnet|collect|grab|ดูด|เก็บ", "magnet" },
-    { "airdrop|crate|chest|drop|gift|กล่อง|แอร์ดรอป", "chest" },
-    { "speed|dash|bolt|zap|ความเร็ว|พุ่ง", "lightning" },
-    { "player|movement|walk|jump|fly|noclip|stamina|ผู้เล่น|วิ่ง|กระโดด|บิน", "feather" },
-    { "defense|shield|god|anti|safe|guard|bypass|ป้องกัน|อมตะ|กันแบน", "shell" },
-    { "rank|vip|king|boss|crown|ยศ", "crown" },
-    { "stat|status|leaderboard|score|trophy|สถานะ|อันดับ|คะแนน", "trophy" },
-    { "quest|mission|flag|start|เควส|ภารกิจ", "flag" },
-    { "crops|crop|garden|plant|seeds|seed|watering|farm|auto|grind|loop|bot|ออโต้|ฟาร์ม|บอท|ปลูกผัก|รดน้ำ", "star" },
-    { "fish|fishing|ตกปลา|ปลา", "paw" },
-    { "potion|potions|heal|health|heart|ยา|เลือด|ฟื้นฟู", "heart" },
-    { "candy|sweet|ขนม|ลูกอม", "star" },
-    { "game|minigame|arcade|play|เล่น|เกม", "dice" },
-    { "afk|sleep|idle|rest|หลับ|พัก", "qblock" },
-    { "theme|color|palette|style|ธีม|สี", "flower" },
-    { "setting|config|ui|menu|keybind|language|ตั้งค่า|เมนู|ภาษา", "gear" },
-    { "misc|other|extra|various|จิปาถะ|อื่นๆ", "qblock" },
-    { "main|home|general|hub|หลัก|ทั่วไป", "mushroom" },
+    { "shop|buy|sell|merchant|market|store|trade|coin|cash|money|ร้าน|ซื้อ|ขาย|เงิน", "shop" },
+    { "inventory|items|item|storage|bag|backpack|ช่องเก็บของ|กระเป๋า|ของ", "inventory" },
+    { "loot|magnet|collect|grab|ดูด|เก็บ", "loot" },
+    { "airdrop|crate|chest|drop|gift|กล่อง|แอร์ดรอป", "airdrop" },
+    { "speed|dash|bolt|zap|ความเร็ว|พุ่ง", "speed" },
+    { "player|movement|walk|jump|fly|noclip|stamina|ผู้เล่น|วิ่ง|กระโดด|บิน", "movement" },
+    { "defense|shield|god|anti|safe|guard|bypass|ป้องกัน|อมตะ|กันแบน", "defense" },
+    { "rank|vip|king|boss|crown|ยศ|franchise", "crown" },
+    { "stat|status|leaderboard|score|trophy|chart|system|สถานะ|อันดับ|คะแนน|ระบบ", "stats" },
+    { "quest|mission|flag|start|เควส|ภารกิจ", "quest" },
+    { "crops|crop|garden|plant|seeds|seed|watering|farm|farming|auto|grind|loop|bot|ออโต้|ฟาร์ม|บอท|ปลูกผัก|รดน้ำ", "farm" },
+    { "fish|fishing|ตกปลา|ปลา", "fish" },
+    { "potion|potions|heal|health|heart|ยา|เลือด|ฟื้นฟู", "heal" },
+    { "candy|sweet|ขนม|ลูกอม", "candy" },
+    { "game|minigame|arcade|play|เล่น|เกม", "game" },
+    { "afk|sleep|idle|rest|หลับ|พัก", "afk" },
+    { "theme|color|palette|style|ธีม|สี", "theme" },
+    { "setting|config|ui|menu|keybind|language|ตั้งค่า|เมนู|ภาษา", "settings" },
+    { "misc|other|extra|various|จิปาถะ|อื่นๆ", "misc" },
+    { "main|home|general|hub|overview|หลัก|ทั่วไป|ภาพรวม", "main" },
 }
 
 -- Crisp SVG-style geometric vector primitives for UI chrome (search, close, check, chevrons, plus, minus, grip)
@@ -3384,12 +3498,14 @@ function Icons.FromTitle(titleSpec, defaultSprite)
     local text = Lang.SearchText(titleSpec)
     if text ~= "" then
         for _, rule in ipairs(Icons.Rules) do
-            if text:find(rule[1]) then
-                return rule[2]
+            for keyword in rule[1]:gmatch("[^|]+") do
+                if text:find(keyword, 1, true) then
+                    return rule[2]
+                end
             end
         end
     end
-    return defaultSprite or "qblock"
+    return defaultSprite or "main"
 end
 
 function Icons.Vector(parent, vectorName, size, colorToken)
@@ -3904,7 +4020,8 @@ function Tailwind.BindProp(inst, property, target)
     if property == "Class" or property == "class" then
         if Reactive.IsRef(target) or type(target) == "function" then
             Reactive.Effect(function()
-                Tailwind.Apply(inst, Reactive.IsRef(target) and target.Value or target())
+                local cls = Reactive.IsRef(target) and target.Value or (type(target) == "function" and target() or target)
+            Tailwind.Apply(inst, cls)
             end)
         else
             Tailwind.Apply(inst, target)
@@ -3917,11 +4034,18 @@ function Tailwind.BindProp(inst, property, target)
     end
     if Reactive.IsRef(target) or type(target) == "function" then
         Reactive.Effect(function()
-            local resolved = Reactive.IsRef(target) and target.Value or target()
+            local resolved
+            if Reactive.IsRef(target) then
+                resolved = target.Value
+            elseif type(target) == "function" then
+                resolved = target()
+            else
+                resolved = target
+            end
             if property == "Text" then
                 Lang.Bind(inst, resolved)
-            else
-                inst[property] = resolved
+            elseif property ~= "Height" and property ~= "Width" and property ~= "After" and property ~= "Search" and property ~= "Fill" then
+                pcall(function() inst[property] = resolved end)
             end
         end)
         return
@@ -3980,7 +4104,14 @@ function Tailwind.Show(whenSource, renderTrue, renderFalse)
         for _, child in ipairs(holder:GetChildren()) do
             child:Destroy()
         end
-        local active = Reactive.IsRef(whenSource) and whenSource.Value or (type(whenSource) == "function" and whenSource() or whenSource)
+        local active
+        if Reactive.IsRef(whenSource) then
+            active = whenSource.Value
+        elseif type(whenSource) == "function" then
+            active = whenSource()
+        else
+            active = whenSource
+        end
         local builder = active and renderTrue or renderFalse
         if builder then
             local built = builder()
@@ -4389,7 +4520,7 @@ function Container:Mount(element, spec)
     frame.Parent = self.Host
     return self:Add(frame, {
         Width = spec.Width,
-        Height = spec.Height or frame.Size.Y.Offset or Util.Metric("Row"),
+        Height = (spec.Height and spec.Height > 0 and spec.Height) or (frame.Size.Y.Offset > 0 and frame.Size.Y.Offset) or Util.Metric("Row"),
         After = spec.After,
         Search = spec.Search,
         Fill = spec.Fill,
@@ -4589,10 +4720,14 @@ function Gui.Marquee(container, spec, speed)
         Search = Lang.SearchText(textSpec),
         OnLayout = function(width)
             local textW = Layout.Measure(track.Text, track.TextSize, "Body", 4000).X
+            if track._marqueeTween then
+                track._marqueeTween:Cancel()
+                track._marqueeTween = nil
+            end
             if textW > width - 20 then
                 track.Position = UDim2.fromOffset(width, 0)
                 local duration = math.max(4, (width + textW) / speed)
-                Anim.Tween(track, { Position = UDim2.fromOffset(-textW, 0) }, duration, "Linear", -1, false)
+                track._marqueeTween = Anim.Tween(track, { Position = UDim2.fromOffset(-textW, 0) }, duration, "Linear", -1, false)
             else
                 track.Position = UDim2.fromOffset(10, 0)
             end
@@ -4839,7 +4974,11 @@ local function BindWidgetReactivity(option, spec)
     local boundRef = (spec.Bind and Reactive.IsRef(spec.Bind)) and spec.Bind or Reactive.Ref(option.Value)
     option.Ref = boundRef
     if spec.Bind and Reactive.IsRef(spec.Bind) and spec.Bind:Get() ~= nil then
-        option.Value = spec.Bind:Get()
+        if option.SetValue then
+            option:SetValue(spec.Bind:Get())
+        else
+            option.Value = spec.Bind:Get()
+        end
     end
     Reactive.Watch(boundRef, function(nextVal)
         if not option._syncingRef and option.SetValue and nextVal ~= option.Value then
@@ -4996,9 +5135,15 @@ function Widget:SetBadge(text, colorToken)
     if not self.Row then
         return self
     end
+    local target = self.Row.Right or self.Row.Left or (self.Row.Frame and self.Row.Frame)
+    if not target then
+        return self
+    end
     if not self.BadgePill then
-        self.BadgePill = Gui.Badge(self.Row.Right, { Text = text, Color = colorToken or "Coin" })
-        self.Row:AddRight(self.BadgePill.Frame, self.BadgePill.Width)
+        self.BadgePill = Gui.Badge(target, { Text = text, Color = colorToken or "Coin" })
+        if self.Row.AddRight then
+            self.Row:AddRight(self.BadgePill.Frame, self.BadgePill.Width)
+        end
     else
         self.BadgePill:SetText(text)
         if colorToken then
@@ -5463,8 +5608,10 @@ function Container:AddDropdown(idx, info)
     dropdown.Row = Row.Stack(self, info, Util.Metric("Box"))
     dropdown.Item = dropdown.Row.Item
     dropdown:Build()
+    if not (info.Bind and Reactive.IsRef(info.Bind) and info.Bind:Get() ~= nil) then
+        dropdown:ApplyDefault(info.Default)
+    end
     Widget.Register(dropdown, idx, info)
-    dropdown:ApplyDefault(info.Default)
     dropdown:WatchPlayers()
     Lang.OnChange(dropdown, function()
         dropdown:Render()
@@ -5859,7 +6006,7 @@ Label.AddKeyPicker = Widget.AddKeyPicker
 
 function Container:AddParagraph(info)
     local paragraph = setmetatable({ Type = "Label", Container = self }, Label)
-    paragraph.Row = Row.New(self, { Text = info.Title, Description = info.Content or info.Description or "" })
+    paragraph.Row = Row.New(self, { Text = info.Title, Description = info.Content or info.Description or "", Icon = info.Icon })
     paragraph.Item = paragraph.Row.Item
     function paragraph.SetContent(_, text)
         Lang.Bind(paragraph.Row.Desc, text)
@@ -6375,7 +6522,8 @@ function Segmented:Build(host)
             TextXAlignment = Enum.TextXAlignment.Center,
             ZIndex = 3,
             Parent = bar,
-        }, "Strong", Util.TextSize("Label") - 1, "Text", Dropdown.FormatValue(optionVal))
+        }, "Strong", Util.TextSize("Label") - 1, "Text")
+        Lang.Bind(btn, type(optionVal) == "table" and optionVal or Dropdown.FormatValue(optionVal))
         btn.AutoButtonColor = false
         btn.Activated:Connect(function()
             self:SetValue(optionVal)
@@ -6456,7 +6604,13 @@ function StatWidget:SetValue(nextVal)
     local suf = Lang.Resolve(self.Suffix or "")
     if prevNum and nextNum then
         Fx.CountUp(self, prevNum, nextNum, 0.25, function(cur)
-            self.ValueLabel.Text = pre .. tostring(math.floor(cur + 0.5)) .. suf
+            local formatted
+            if cur == math.floor(cur) then
+                formatted = tostring(math.floor(cur))
+            else
+                formatted = string.format("%.2f", cur):gsub("%.?0+$", "")
+            end
+            self.ValueLabel.Text = pre .. formatted .. suf
         end)
     else
         self.ValueLabel.Text = pre .. tostring(nextVal) .. suf
@@ -6634,6 +6788,12 @@ function Popup.Close()
     State.Popup = nil
     if popup.Tracker then
         popup.Tracker:Disconnect()
+        for i, conn in ipairs(State.Connections) do
+            if conn == popup.Tracker then
+                table.remove(State.Connections, i)
+                break
+            end
+        end
         popup.Tracker = nil
     end
     Util.Try(popup.OnClose)
@@ -7035,7 +7195,7 @@ function ColorPicker:Drag(target, handler)
         if not Util.IsPointer(input) then
             return
         end
-        handler(input.Position)
+        handler(UserInputService:GetMouseLocation())
         State.Drag = {
             Move = function(move)
                 handler(move.Position)
@@ -7189,7 +7349,8 @@ function Sheet.Close()
         cur.Container:Destroy()
     end
     Anim.Tween(cur.Backdrop, { BackgroundTransparency = 1 }, 0.18)
-    local slide = Anim.Tween(cur.Panel, { Position = UDim2.new(1, 20, 0, 8) }, 0.2, "In")
+    local sheetW = cur.Panel and cur.Panel.AbsoluteSize.X or 360
+    local slide = Anim.Tween(cur.Panel, { Position = UDim2.new(1, sheetW + 40, 0, 8) }, 0.2, "In")
     slide.Completed:Once(function()
         Theme.UnbindTree(cur.Backdrop)
         cur.Backdrop:Destroy()
@@ -7252,7 +7413,7 @@ function Gui.ClearPrevious(parent)
         env.PayomboyZHub = Library
     end
     for _, child in ipairs(parent:GetChildren()) do
-        if child:GetAttribute(Config.GuiAttribute) then
+        if child.Name == "PayomboyZVisuals" or child:GetAttribute(Config.GuiAttribute) then
             child:Destroy()
         end
     end
@@ -7352,7 +7513,8 @@ function Gui.Draggable(handle, move, exclude)
             return
         end
         for _, zone in ipairs(exclude or {}) do
-            if zone.Visible and Util.Inside(zone, input.Position) then
+            local pointer = UserInputService:GetMouseLocation()
+        if zone.Visible and Util.Inside(zone, pointer) then
                 return
             end
         end
@@ -7400,6 +7562,7 @@ function Window.New(options)
     self:BuildSidebar()
     self:BuildMain()
     self:BuildGround()
+    self:BuildFrameChrome()
     self:FitViewport()
     Util.Connect(State.Gui:GetPropertyChangedSignal("AbsoluteSize"), function()
         self:FitViewport()
@@ -7425,6 +7588,85 @@ function Window:BuildFrame()
     Theme.OnRender(gradient, function()
         gradient.Color = ColorSequence.new(Theme.Colors.Backdrop, Theme.Colors.BackdropAlt)
     end)
+end
+
+
+-- ═══════════════════════════════════════════════════════════════════════════
+--  WINDOW FRAME CHROME — Franchise-specific structural ornaments
+--  Stardew Valley: Golden ornamental corner brackets on all 4 corners
+--  Kirby: Fluffy cloud-puff corner accents with rainbow sparkles
+--  Animal Crossing: Wooden grain rim & leaf corner badge
+--  Tamagotchi: LCD outer frame bezel with screen inset reflection
+-- ═══════════════════════════════════════════════════════════════════════════
+function Window:BuildFrameChrome()
+    local holder = Draw.New("Frame", { Name = "FrameChrome", BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1), ZIndex = 8, Parent = self.Body })
+    self.FrameChromeHolder = holder
+
+    local function renderChrome()
+        holder:ClearAllChildren()
+        local theme = State.ThemeName or "Overworld"
+
+        if theme == "Stardew Valley" then
+            -- 4 Golden Brass Ornamental Metal Corner Brackets
+            local bracketSize = 16
+            local positions = {
+                { Vector2.new(0, 0), UDim2.fromOffset(2, 2), 0 },
+                { Vector2.new(1, 0), UDim2.new(1, -2, 0, 2), 90 },
+                { Vector2.new(1, 1), UDim2.new(1, -2, 1, -Config.Window.Ground - 2), 180 },
+                { Vector2.new(0, 1), UDim2.new(0, 2, 1, -Config.Window.Ground - 2), 270 },
+            }
+            for _, pos in ipairs(positions) do
+                local b = Draw.New("Frame", {
+                    AnchorPoint = pos[1],
+                    Position = pos[2],
+                    Size = UDim2.fromOffset(bracketSize, bracketSize),
+                    BackgroundTransparency = 1,
+                    Rotation = pos[3],
+                    Parent = holder,
+                })
+                -- L-bracket outer strip
+                local hBar = Draw.New("Frame", { Size = UDim2.new(1, 0, 0, 3), BorderSizePixel = 0, Parent = b })
+                local vBar = Draw.New("Frame", { Size = UDim2.new(0, 3, 1, 0), BorderSizePixel = 0, Parent = b })
+                -- Rivet golden screw dot
+                local rivet = Draw.New("Frame", { Position = UDim2.fromOffset(4, 4), Size = UDim2.fromOffset(4, 4), BorderSizePixel = 0, Parent = b })
+                Draw.Corner(rivet, 2)
+                Theme.Bind(hBar, { BackgroundColor3 = "Coin" })
+                Theme.Bind(vBar, { BackgroundColor3 = "Coin" })
+                Theme.Bind(rivet, { BackgroundColor3 = "CoinDark" })
+            end
+
+        elseif theme == "Kirby" then
+            -- Floating Dream Land star sparkles in top corners
+            for _, spot in ipairs({ { UDim2.fromOffset(6, 6), 0 }, { UDim2.new(1, -22, 0, 6), 15 } }) do
+                local star = Sprite.New(holder, "kirby_star", 16)
+                star.Position = spot[1]
+                star.Rotation = spot[2]
+                Anim.Loop("KirbyCornerStar", star, { Rotation = spot[2] + 45 }, 2.5, "Sine", true)
+            end
+
+        elseif theme == "Animal Crossing" then
+            -- Nook Leaf emblem embossed in bottom-left corner
+            local leafBadge = Sprite.New(holder, "ac_leaf", 18)
+            leafBadge.AnchorPoint = Vector2.new(0, 1)
+            leafBadge.Position = UDim2.new(0, 6, 1, -Config.Window.Ground - 6)
+            Anim.Loop("ACCornerLeaf", leafBadge, { Rotation = 8 }, 2.0, "Sine", true)
+
+        elseif theme == "Tamagotchi" then
+            -- Virtual Pet LCD Screen Inset Glare line (diagonal white sheen across topbar)
+            local glare = Draw.New("Frame", {
+                Position = UDim2.fromOffset(0, 0),
+                Size = UDim2.new(1, 0, 0, 2),
+                BorderSizePixel = 0,
+                BackgroundTransparency = 0.5,
+                ZIndex = 8,
+                Parent = holder,
+            })
+            Theme.Bind(glare, { BackgroundColor3 = "White" })
+        end
+    end
+
+    renderChrome()
+    Theme.OnRender(holder, renderChrome)
 end
 
 function Window:BuildTopbar()
@@ -7462,7 +7704,8 @@ function Window:BuildTopbar()
     end, { right })
 end
 
--- Theme topbar decor: drifting clouds for day themes, twinkling stars/embers for night themes
+-- Theme topbar decor: drifting clouds for day themes, twinkling stars/embers for night themes,
+-- and unique franchise decorations for each game universe theme.
 function Window:BuildDecor(topbar)
     self.Clouds, self.Stars = {}, {}
     for index, spot in ipairs({ { 0.44, 8, 42 }, { 0.6, 22, 30 } }) do
@@ -7489,6 +7732,11 @@ function Window:BuildDecor(topbar)
         table.insert(self.Spooky, item)
     end
     self:BuildSpookyBody()
+    self:BuildKirbyDecor(topbar)
+    self:BuildPokemonDecor(topbar)
+    self:BuildAnimalCrossingDecor(topbar)
+    self:BuildStardewDecor(topbar)
+    self:BuildTamagotchiDecor(topbar)
     Theme.OnRender(self.Stars, function()
         self:RenderDecor()
     end)
@@ -7527,41 +7775,424 @@ function Window:BuildSpookyBody()
     table.insert(self.SpookyBody, hanger)
 end
 
+
+-- ═══════════════════════════════════════════════════════════════════════════
+--  KIRBY THEME DECORATION — Dream Land Warp Stars + Puffball Corner Pip
+--  Floating Warp Star sprites bounce in topbar like Halloween pumpkins.
+--  A soft pink cloud-puff strip hugs the window bottom (matching SpookyFog).
+--  Kirby himself peeks from the right edge, bobbing on a thread of starlight.
+-- ═══════════════════════════════════════════════════════════════════════════
+function Window:BuildKirbyDecor(topbar)
+    -- Floating Warp Stars in topbar — 5 stars at staggered positions
+    self.KirbyStars = {}
+    local starSpots = {
+        { 0.42, 8,  22 }, { 0.50, 20, 20 }, { 0.57, 6, 24 },
+        { 0.64, 22, 18 }, { 0.71, 10, 22 },
+    }
+    for idx, spot in ipairs(starSpots) do
+        local s = Sprite.New(topbar, "kirby_star", 22)
+        s.AnchorPoint  = Vector2.new(0.5, 0)
+        s.Position     = UDim2.new(spot[1], 0, 0, spot[2])
+        s.ZIndex       = 2
+        local rise = idx % 2 == 0 and 6 or -5
+        -- Stars spin and rise, like a Kirby copy-ability burst
+        Anim.Loop("DecorKirby", s, { Position = UDim2.new(spot[1], 0, 0, spot[2] + rise), Rotation = idx % 2 == 0 and 20 or -20 }, 1.0 + idx * 0.28, "Sine", true)
+        table.insert(self.KirbyStars, s)
+    end
+    -- Kirby peeks from right side of topbar — a tiny mascot head bobbing
+    local peekHolder = Draw.New("Frame", { Name = "KirbyPeek", BackgroundTransparency = 1, AnchorPoint = Vector2.new(1, 0), Position = UDim2.new(0.44, 0, 0, 0), Size = UDim2.fromOffset(24, 42), ZIndex = 3, Parent = topbar })
+    local peekKirby = Sprite.New(peekHolder, "kirby_body", 22)
+    peekKirby.AnchorPoint = Vector2.new(0.5, 0)
+    peekKirby.Position    = UDim2.fromOffset(12, 6)
+    Anim.Loop("DecorKirby", peekHolder, { Position = UDim2.new(0.44, 0, 0, 4) }, 1.6, "Sine", true)
+    self.KirbyPeek = peekHolder
+    table.insert(self.KirbyStars, peekHolder)
+
+    -- Bottom accent: pink cloud-puff band (Dream Land horizon)
+    local cloudBand = Draw.New("Frame", { Name = "KirbyCloudBand", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, 48), BorderSizePixel = 0, ZIndex = 1, Parent = self.Body })
+    Draw.Corner(cloudBand, Config.Window.Radius)
+    local bandGrad = Draw.New("UIGradient", { Rotation = 90, Transparency = NumberSequence.new({ NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(1, 0.68) }), Parent = cloudBand })
+    Theme.OnRender(cloudBand, function()
+        cloudBand.BackgroundColor3 = Theme.Colors.Accent or Color3.fromRGB(255, 110, 180)
+    end)
+    Anim.Loop("DecorKirbyBody", bandGrad, { Offset = Vector2.new(0, 0.1) }, 2.8, "Sine", true)
+    self.KirbyBand = cloudBand
+
+    -- Meta Knight floats in from the left — appears briefly then hides again
+    local mkHolder = Draw.New("Frame", { Name = "KirbyMK", BackgroundTransparency = 1, Position = UDim2.new(0.38, 0, 0, 4), Size = UDim2.fromOffset(20, 36), ZIndex = 3, Parent = topbar })
+    local mk = Sprite.New(mkHolder, "kirby_metaknight", 18)
+    mk.AnchorPoint = Vector2.new(0.5, 0)
+    mk.Position    = UDim2.fromOffset(10, 6)
+    Anim.Loop("DecorKirby", mkHolder, { Position = UDim2.new(0.38, 0, 0, 10), Rotation = -6 }, 2.1, "Sine", true)
+    self.KirbyMK = mkHolder
+    table.insert(self.KirbyStars, mkHolder)
+end
+
+-- ═══════════════════════════════════════════════════════════════════════════
+--  POKÉMON CAFÉ DECORATION — Pikachu spark bolts + Steaming Cup + Pokéball
+--  Electric ⚡ bolts flash across topbar like Pikachu charging up.
+--  A steaming coffee cup sits in the decoration zone.
+--  Pikachu ears peek from the right edge; PokéBall rolls through bottom.
+-- ═══════════════════════════════════════════════════════════════════════════
+function Window:BuildPokemonDecor(topbar)
+    -- Pikachu electric bolt text sprites shooting across topbar
+    self.PokeSprites = {}
+    local boltSpots = {
+        { 0.42, 12, "⚡", 14 }, { 0.50, 24, "⚡", 12 }, { 0.58, 8, "⚡", 16 },
+        { 0.65, 22, "⚡", 11 }, { 0.72, 14, "⚡", 13 },
+    }
+    for idx, spot in ipairs(boltSpots) do
+        local bolt = Draw.Text({ AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(spot[4] + 4, spot[4] + 4), TextXAlignment = Enum.TextXAlignment.Center, ZIndex = 3, Parent = topbar }, "Glyph", spot[4], "AccentDark")
+        bolt.Text = spot[3]
+        bolt.TextTransparency = 0.2
+        Anim.Loop("DecorPokemon", bolt, { TextTransparency = 0.9, Position = UDim2.new(spot[1], 6, 0, spot[2] - 4) }, 0.6 + idx * 0.22, "Sine", true)
+        table.insert(self.PokeSprites, bolt)
+    end
+    -- Pikachu mascot peeking in topbar
+    local pikaHolder = Draw.New("Frame", { Name = "PokePika", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.46, 0, 0, 4), Size = UDim2.fromOffset(22, 38), ZIndex = 3, Parent = topbar })
+    local pika = Sprite.New(pikaHolder, "poke_pikachu", 22)
+    pika.AnchorPoint = Vector2.new(0.5, 0)
+    pika.Position    = UDim2.fromOffset(11, 4)
+    Anim.Loop("DecorPokemon", pikaHolder, { Position = UDim2.new(0.46, 0, 0, 10), Rotation = 4 }, 1.4, "Sine", true)
+    self.PikachuPeek = pikaHolder
+    table.insert(self.PokeSprites, pikaHolder)
+    -- Steaming cup on the left side of decoration area
+    local cupHolder = Draw.New("Frame", { Name = "PokeCup", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.39, 0, 0, 6), Size = UDim2.fromOffset(22, 36), ZIndex = 3, Parent = topbar })
+    local cup = Sprite.New(cupHolder, "poke_cup", 20)
+    cup.AnchorPoint = Vector2.new(0.5, 0)
+    cup.Position    = UDim2.fromOffset(11, 4)
+    -- Steam text "˜" rising above cup
+    local steam = Draw.Text({ AnchorPoint = Vector2.new(0.5, 1), Position = UDim2.fromOffset(11, 4), Size = UDim2.fromOffset(20, 16), TextXAlignment = Enum.TextXAlignment.Center, ZIndex = 4, Parent = cupHolder }, "Glyph", 10, "SubText")
+    steam.Text = "〜"
+    steam.TextTransparency = 0.4
+    Anim.Loop("DecorPokemon", steam, { Position = UDim2.fromOffset(11, -2), TextTransparency = 0.9 }, 1.0, "Sine", true)
+    Anim.Loop("DecorPokemon", cup, { Rotation = 4 }, 1.8, "Sine", true)
+    self.PokeCup = cupHolder
+    table.insert(self.PokeSprites, cupHolder)
+    -- Bottom accent: café warm amber gradient band with PokéBall rolling
+    local cafeBand = Draw.New("Frame", { Name = "PokeCafeBand", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, 52), BorderSizePixel = 0, ZIndex = 1, Parent = self.Body })
+    Draw.Corner(cafeBand, Config.Window.Radius)
+    local bandGrad = Draw.New("UIGradient", { Rotation = 90, Transparency = NumberSequence.new({ NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(1, 0.72) }), Parent = cafeBand })
+    Theme.OnRender(cafeBand, function()
+        cafeBand.BackgroundColor3 = Theme.Colors.Accent or Color3.fromRGB(232, 86, 60)
+    end)
+    Anim.Loop("DecorPokemonBody", bandGrad, { Offset = Vector2.new(0, 0.08) }, 3.0, "Sine", true)
+    -- PokéBall rolling along the bottom
+    local ballHolder = Draw.New("Frame", { Name = "PokeBall", BackgroundTransparency = 1, Position = UDim2.new(0.1, 0, 1, -38), Size = UDim2.fromOffset(26, 26), ZIndex = 4, Parent = self.Body })
+    local ball = Sprite.New(ballHolder, "poke_ball", 24)
+    ball.AnchorPoint = Vector2.new(0.5, 0.5)
+    ball.Position    = UDim2.fromOffset(13, 13)
+    Anim.Loop("DecorPokemonBody", ball, { Rotation = 360 }, 2.0, "Linear", false)
+    Anim.Loop("DecorPokemonBody", ballHolder, { Position = UDim2.new(0.85, 0, 1, -38) }, 6.0, "Sine", true)
+    self.PokeBand = cafeBand
+    self.PokeBallRoll = ballHolder
+end
+
+-- ═══════════════════════════════════════════════════════════════════════════
+--  ANIMAL CROSSING DECORATION — Leaf drift + Isabelle + Tom Nook Bell
+--  Cherry blossom / leaf sprites drift lazily across the topbar.
+--  Isabelle waves from her desk area. Tom Nook rings his bell in the corner.
+--  A warm grass-green strip with flower motifs hugs the window bottom.
+-- ═══════════════════════════════════════════════════════════════════════════
+function Window:BuildAnimalCrossingDecor(topbar)
+    self.ACSprites = {}
+    -- Drifting leaf / cherry sprites across topbar — gentle float
+    local leafSpots = {
+        { 0.42, 10, "ac_leaf", 18 }, { 0.49, 24, "ac_cherry", 16 }, { 0.56, 8,  "ac_leaf", 20 },
+        { 0.63, 20, "ac_cherry", 16 }, { 0.70, 12, "ac_leaf", 18 },
+    }
+    for idx, spot in ipairs(leafSpots) do
+        local leaf = Sprite.New(topbar, spot[3], spot[4])
+        leaf.AnchorPoint = Vector2.new(0.5, 0)
+        leaf.Position    = UDim2.new(spot[1], 0, 0, spot[2])
+        leaf.ZIndex      = 2
+        -- Gentle sine drift: leaves sway and float slowly
+        local sway = idx % 2 == 0 and 8 or -6
+        Anim.Loop("DecorAC", leaf, { Position = UDim2.new(spot[1], sway, 0, spot[2] + 4), Rotation = idx % 2 == 0 and 12 or -10 }, 2.4 + idx * 0.45, "Sine", true)
+        table.insert(self.ACSprites, leaf)
+    end
+    -- Isabelle mascot sitting at desk — gentle wave bob
+    local isabelleHolder = Draw.New("Frame", { Name = "ACIsabelle", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.46, 0, 0, 4), Size = UDim2.fromOffset(22, 38), ZIndex = 3, Parent = topbar })
+    local isabelle = Sprite.New(isabelleHolder, "ac_isabelle", 22)
+    isabelle.AnchorPoint = Vector2.new(0.5, 0)
+    isabelle.Position    = UDim2.fromOffset(11, 4)
+    -- Isabelle bobs gently — no sharp bounces (matching AC Motion)
+    Anim.Loop("DecorAC", isabelleHolder, { Position = UDim2.new(0.46, 0, 0, 10) }, 2.0, "Sine", true)
+    self.ACIsabelle = isabelleHolder
+    table.insert(self.ACSprites, isabelleHolder)
+    -- Tom Nook holds a bell — rings in topbar right area
+    local nookHolder = Draw.New("Frame", { Name = "ACNook", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.40, 0, 0, 6), Size = UDim2.fromOffset(20, 36), ZIndex = 3, Parent = topbar })
+    local nook = Sprite.New(nookHolder, "ac_tomnook", 20)
+    nook.AnchorPoint = Vector2.new(0.5, 0)
+    nook.Position    = UDim2.fromOffset(10, 4)
+    Anim.Loop("DecorAC", nook, { Rotation = 8 }, 1.2, "Sine", true)
+    self.ACNook = nookHolder
+    table.insert(self.ACSprites, nookHolder)
+    -- Bottom accent: island grass green band with flower pips
+    local grassBand = Draw.New("Frame", { Name = "ACGrassBand", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, 44), BorderSizePixel = 0, ZIndex = 1, Parent = self.Body })
+    Draw.Corner(grassBand, Config.Window.Radius)
+    local bandGrad = Draw.New("UIGradient", { Rotation = 90, Transparency = NumberSequence.new({ NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(1, 0.70) }), Parent = grassBand })
+    Theme.OnRender(grassBand, function()
+        grassBand.BackgroundColor3 = Theme.Colors.Grass or Color3.fromRGB(154, 205, 123)
+    end)
+    -- Flower / leaf pips along the bottom strip
+    local pipGlyphs = { "❀", "✿", "❀", "✿", "❀", "✿", "❀" }
+    for i, glyph in ipairs(pipGlyphs) do
+        local pip = Draw.Text({ AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.new((i-1)/8, 6, 0.5, 0), Size = UDim2.fromOffset(18, 18), TextXAlignment = Enum.TextXAlignment.Center, ZIndex = 3, Parent = grassBand }, "Glyph", 10, "Grass")
+        pip.Text = glyph
+        pip.TextTransparency = 0.3
+        Anim.Loop("DecorACBody", pip, { TextTransparency = 0.7 }, 1.5 + i * 0.3, "Sine", true)
+    end
+    self.ACBand = grassBand
+end
+
+-- ═══════════════════════════════════════════════════════════════════════════
+--  STARDEW VALLEY DECORATION — Junimo + Stardrop + Golden Star sparkles
+--  Junimos bounce across topbar like seasonal festival sprites.
+--  A stardrop glows on the right. Farm field strip at window bottom.
+--  Wooden-frame aesthetic: brown bottom plank with crop row motifs.
+-- ═══════════════════════════════════════════════════════════════════════════
+function Window:BuildStardewDecor(topbar)
+    self.SDVSprites = {}
+    -- Junimo sprites bouncing across topbar — SDV festival energy
+    local junimoSpots = {
+        { 0.42, 10, "sdv_junimo", 20 }, { 0.50, 22, "sdv_stardrop", 18 }, { 0.57, 8,  "sdv_junimo", 20 },
+        { 0.64, 20, "sdv_gold",   16 }, { 0.71, 12, "sdv_junimo",   20 },
+    }
+    for idx, spot in ipairs(junimoSpots) do
+        local s = Sprite.New(topbar, spot[3], spot[4])
+        s.AnchorPoint = Vector2.new(0.5, 0)
+        s.Position    = UDim2.new(spot[1], 0, 0, spot[2])
+        s.ZIndex      = 2
+        -- Junimos hop up-down with slight tilt — playful but grounded (Out ease feel)
+        local hop = idx % 2 == 0 and 7 or -5
+        Anim.Loop("DecorSDV", s, { Position = UDim2.new(spot[1], 0, 0, spot[2] + hop), Rotation = idx % 2 == 0 and 10 or -8 }, 1.2 + idx * 0.32, "Sine", true)
+        table.insert(self.SDVSprites, s)
+    end
+    -- Farmer stands in topbar — grounded, sturdy (no floaty)
+    local farmerHolder = Draw.New("Frame", { Name = "SDVFarmer", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.46, 0, 0, 4), Size = UDim2.fromOffset(20, 38), ZIndex = 3, Parent = topbar })
+    local farmer = Sprite.New(farmerHolder, "sdv_farmer", 20)
+    farmer.AnchorPoint = Vector2.new(0.5, 0)
+    farmer.Position    = UDim2.fromOffset(10, 4)
+    Anim.Loop("DecorSDV", farmerHolder, { Position = UDim2.new(0.46, 0, 0, 9) }, 1.8, "Sine", true)
+    self.SDVFarmer = farmerHolder
+    table.insert(self.SDVSprites, farmerHolder)
+    -- Wizard floats in left area — magical but restrained
+    local wizardHolder = Draw.New("Frame", { Name = "SDVWizard", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.39, 0, 0, 6), Size = UDim2.fromOffset(20, 36), ZIndex = 3, Parent = topbar })
+    local wizard = Sprite.New(wizardHolder, "sdv_wizard", 20)
+    wizard.AnchorPoint = Vector2.new(0.5, 0)
+    wizard.Position    = UDim2.fromOffset(10, 4)
+    Anim.Loop("DecorSDV", wizardHolder, { Position = UDim2.new(0.39, 0, 0, 12), Rotation = -5 }, 2.2, "Sine", true)
+    self.SDVWizard = wizardHolder
+    table.insert(self.SDVSprites, wizardHolder)
+    -- Bottom accent: wooden plank strip — farm-field rows
+    local plankBand = Draw.New("Frame", { Name = "SDVPlankBand", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, 56), BorderSizePixel = 0, ZIndex = 1, Parent = self.Body })
+    Draw.Corner(plankBand, Config.Window.Radius)
+    local bandGrad = Draw.New("UIGradient", { Rotation = 90, Transparency = NumberSequence.new({ NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(0.5, 0.65), NumberSequenceKeypoint.new(1, 0.55) }), Parent = plankBand })
+    Theme.OnRender(plankBand, function()
+        plankBand.BackgroundColor3 = Theme.Colors.Brick or Color3.fromRGB(168, 132, 74)
+    end)
+    -- Vertical plank dividers — wood grain look
+    for i = 1, 7 do
+        local plank = Draw.New("Frame", { AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(i/8, 0, 0, 0), Size = UDim2.new(0, 2, 1, 0), BackgroundTransparency = 0.7, ZIndex = 2, Parent = plankBand })
+        Theme.OnRender(plank, function()
+            plank.BackgroundColor3 = Theme.Colors.BrickDark or Color3.fromRGB(122, 92, 48)
+        end)
+    end
+    -- Seed / crop icons in the plank band
+    local cropIcons = { "sdv_seed", "sdv_can", "sdv_seed", "sdv_gold", "sdv_seed" }
+    for i, icon in ipairs(cropIcons) do
+        local iconSprite = Sprite.New(plankBand, icon, 16)
+        iconSprite.AnchorPoint = Vector2.new(0, 0.5)
+        iconSprite.Position    = UDim2.new((i-1)/5 + 0.05, 0, 0.5, 0)
+        iconSprite.ZIndex      = 3
+        Anim.Loop("DecorSDVBody", iconSprite, { Position = UDim2.new((i-1)/5 + 0.05, 0, 0.5, -3) }, 1.6 + i * 0.4, "Sine", true)
+    end
+    -- Stardrop corner sparkles on the window frame
+    local starDropGlow = Draw.New("Frame", { Name = "SDVGlow", BackgroundTransparency = 1, Position = UDim2.fromOffset(-3, -3), Size = UDim2.new(1, 6 - Config.Window.Shadow, 1, 6 - Config.Window.Shadow), ZIndex = 0, Parent = self.Pop })
+    Draw.Corner(starDropGlow, Config.Window.Radius + 3)
+    local sdvStroke = Draw.New("UIStroke", { Thickness = 3, Transparency = 0.35, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, Parent = starDropGlow })
+    Theme.OnRender(sdvStroke, function()
+        sdvStroke.Color = Theme.Colors.Accent or Color3.fromRGB(212, 100, 28)
+    end)
+    Anim.Loop("DecorSDVGlow", sdvStroke, { Transparency = 0.80, Thickness = 1 }, 2.4, "Sine", true)
+    self.SDVBand  = plankBand
+    self.SDVGlow  = starDropGlow
+end
+
+-- ═══════════════════════════════════════════════════════════════════════════
+--  TAMAGOTCHI DECORATION — LCD device frame + Egg + Pixel-device border
+--  Device bezel border around the entire window (outer frame, speaker dots).
+--  Mametchi walks across topbar. Egg bounces. LCD scanline effect on panels.
+-- ═══════════════════════════════════════════════════════════════════════════
+function Window:BuildTamagotchiDecor(topbar)
+    self.TamaSprites = {}
+    -- Tamagotchi characters marching across topbar like a mini LCD parade
+    local tamaSpots = {
+        { 0.42, 10, "tama_babytchi", 18 }, { 0.49, 24, "tama_mametchi",   20 }, { 0.56, 8,  "tama_kuchipatchi", 18 },
+        { 0.63, 22, "tama_memetchi", 18 }, { 0.70, 10, "tama_babytchi",   18 },
+    }
+    for idx, spot in ipairs(tamaSpots) do
+        local s = Sprite.New(topbar, spot[3], spot[4])
+        s.AnchorPoint = Vector2.new(0.5, 0)
+        s.Position    = UDim2.new(spot[1], 0, 0, spot[2])
+        s.ZIndex      = 2
+        -- Tamagotchi characters bounce (matching "Bounce" PopEase from ThemeMeta)
+        local hop = idx % 2 == 0 and 8 or -6
+        Anim.Loop("DecorTama", s, { Position = UDim2.new(spot[1], 0, 0, spot[2] + hop) }, 0.8 + idx * 0.25, "Bounce", true)
+        table.insert(self.TamaSprites, s)
+    end
+    -- Tama egg bouncing prominently — the iconic image of Tamagotchi
+    local eggHolder = Draw.New("Frame", { Name = "TamaEgg", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.46, 0, 0, 3), Size = UDim2.fromOffset(22, 38), ZIndex = 3, Parent = topbar })
+    local egg = Sprite.New(eggHolder, "tama_egg", 22)
+    egg.AnchorPoint = Vector2.new(0.5, 0)
+    egg.Position    = UDim2.fromOffset(11, 4)
+    Anim.Loop("DecorTama", eggHolder, { Position = UDim2.new(0.46, 0, 0, 12) }, 0.7, "Bounce", true)
+    self.TamaEgg = eggHolder
+    table.insert(self.TamaSprites, eggHolder)
+    -- Tamagotchi device outer bezel — the iconic egg-shaped border
+    local bezel = Draw.New("Frame", { Name = "TamaBezel", BackgroundTransparency = 1, Position = UDim2.fromOffset(-5, -5), Size = UDim2.new(1, 10 - Config.Window.Shadow, 1, 10 - Config.Window.Shadow), ZIndex = 0, Parent = self.Pop })
+    Draw.Corner(bezel, 8)  -- Tamagotchi has very rounded device
+    local bezelStroke = Draw.New("UIStroke", { Thickness = 5, Transparency = 0.2, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, Parent = bezel })
+    Theme.OnRender(bezelStroke, function()
+        bezelStroke.Color = Theme.Colors.Accent or Color3.fromRGB(255, 126, 176)
+    end)
+    Anim.Loop("DecorTamaGlow", bezelStroke, { Transparency = 0.65, Thickness = 3 }, 1.4, "Sine", true)
+    self.TamaBezel = bezel
+    -- Speaker grill dots — 3 circles at bottom-right of window
+    local grillHolder = Draw.New("Frame", { Name = "TamaGrill", BackgroundTransparency = 1, AnchorPoint = Vector2.new(1, 1), Position = UDim2.new(1, -Config.Window.Shadow - 10, 1, -8), Size = UDim2.fromOffset(36, 10), ZIndex = 5, Parent = self.Body })
+    for d = 1, 5 do
+        local dot = Draw.New("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new((d-1)/5 + 0.1, 0, 0.5, 0), Size = UDim2.fromOffset(5, 5), BorderSizePixel = 0, ZIndex = 5, Parent = grillHolder })
+        Draw.Corner(dot, 3)
+        Theme.OnRender(dot, function()
+            dot.BackgroundColor3 = Theme.Colors.Outline or Color3.fromRGB(32, 72, 112)
+            dot.BackgroundTransparency = 0.6
+        end)
+    end
+    self.TamaGrill = grillHolder
+    -- LCD scanline overlay on window body — horizontal dark lines, low opacity
+    local scanlines = Draw.New("Frame", { Name = "TamaScanlines", BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1), ZIndex = 0, ClipsDescendants = true, Parent = self.Body })
+    for row = 0, 60 do
+        local line = Draw.New("Frame", { Position = UDim2.new(0, 0, 0, row * 10 + 4), Size = UDim2.new(1, 0, 0, 2), BorderSizePixel = 0, BackgroundTransparency = 0.88, ZIndex = 0, Parent = scanlines })
+        Theme.OnRender(line, function()
+            line.BackgroundColor3 = Theme.Colors.Outline or Color3.fromRGB(32, 72, 112)
+        end)
+    end
+    self.TamaScanlines = scanlines
+    -- Bottom accent: LCD beige band
+    local lcdBand = Draw.New("Frame", { Name = "TamaLCDBand", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, 46), BorderSizePixel = 0, ZIndex = 1, Parent = self.Body })
+    Draw.Corner(lcdBand, Config.Window.Radius)
+    local bandGrad = Draw.New("UIGradient", { Rotation = 90, Transparency = NumberSequence.new({ NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(1, 0.65) }), Parent = lcdBand })
+    Theme.OnRender(lcdBand, function()
+        lcdBand.BackgroundColor3 = Theme.Colors.Accent or Color3.fromRGB(255, 126, 176)
+    end)
+    -- Heart icons along the band (Tamagotchi's care meter)
+    local hearts = { "♥", "♥", "♥", "♥", "♥" }
+    for i, h in ipairs(hearts) do
+        local heart = Draw.Text({ AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.new((i-1)/6 + 0.05, 0, 0.5, 0), Size = UDim2.fromOffset(16, 16), TextXAlignment = Enum.TextXAlignment.Center, ZIndex = 3, Parent = lcdBand }, "Glyph", 10, "Accent")
+        heart.Text = h
+        heart.TextTransparency = 0.2 + i * 0.1
+        Anim.Loop("DecorTamaBody", heart, { TextTransparency = 0.8 }, 0.9 + i * 0.28, "Sine", true)
+    end
+    self.TamaLCDBand = lcdBand
+end
+
 function Window:RenderDecor()
     local wide = self.Size and self.Size.X >= 700
     local decor = Theme.Colors.Decor
     local shown = self.Visible ~= false
     local expanded = shown and not self.Minimized
-    local showClouds = shown and wide and decor == "Clouds"
-    local showStars = shown and wide and decor == "Stars"
-    local showSpooky = shown and wide and decor == "Halloween"
-    local showGlow = shown and decor == "Halloween"
+    -- Standard Mario/generic decors
+    local showClouds  = shown and wide and decor == "Clouds"
+    local showStars   = shown and wide and decor == "Stars"
+    -- Halloween
+    local showSpooky     = shown and wide and decor == "Halloween"
+    local showGlow       = shown and decor == "Halloween"
     local showSpookyBody = expanded and decor == "Halloween"
+    -- Franchise themes
+    local showKirby      = shown and wide and decor == "Kirby"
+    local showKirbyBody  = expanded and decor == "Kirby"
+    local showPokemon    = shown and wide and decor == "PokemonCafe"
+    local showPokemonBody = expanded and decor == "PokemonCafe"
+    local showAC         = shown and wide and decor == "AnimalCrossing"
+    local showACBody     = expanded and decor == "AnimalCrossing"
+    local showSDV        = shown and wide and decor == "StardewValley"
+    local showSDVBody    = expanded and decor == "StardewValley"
+    local showTama       = shown and wide and decor == "Tamagotchi"
+    local showTamaBody   = expanded and decor == "Tamagotchi"
+
+    -- Clouds
     for _, cloud in ipairs(self.Clouds) do
         cloud.Visible = showClouds
     end
+    -- Generic stars
     for _, star in ipairs(self.Stars) do
         star.Text = Theme.Colors.DecorGlyph or "✦"
         star.Visible = showStars
     end
+    -- Halloween
     for _, item in ipairs(self.Spooky or {}) do
         item.Visible = showSpooky
     end
-    if self.SpookyGlow then
-        self.SpookyGlow.Visible = showGlow
+    if self.SpookyGlow  then self.SpookyGlow.Visible  = showGlow       end
+    if self.SpookyFog   then self.SpookyFog.Visible   = showSpookyBody  end
+    if self.SpookySpider then self.SpookySpider.Visible = showSpookyBody end
+
+    -- Kirby
+    for _, item in ipairs(self.KirbyStars or {}) do
+        item.Visible = showKirby
     end
-    if self.SpookyFog then
-        self.SpookyFog.Visible = showSpookyBody
+    if self.KirbyBand then self.KirbyBand.Visible = showKirbyBody end
+
+    -- Pokemon Cafe
+    for _, item in ipairs(self.PokeSprites or {}) do
+        item.Visible = showPokemon
     end
-    if self.SpookySpider then
-        self.SpookySpider.Visible = showSpookyBody
+    if self.PokeBand     then self.PokeBand.Visible     = showPokemonBody end
+    if self.PokeBallRoll then self.PokeBallRoll.Visible = showPokemonBody end
+
+    -- Animal Crossing
+    for _, item in ipairs(self.ACSprites or {}) do
+        item.Visible = showAC
     end
-    Anim.SetGroupActive("Emblem", shown)
-    Anim.SetGroupActive("DecorClouds", showClouds)
-    Anim.SetGroupActive("DecorStars", showStars)
-    Anim.SetGroupActive("DecorSpooky", showSpooky)
-    Anim.SetGroupActive("DecorSpookyGlow", showGlow)
-    Anim.SetGroupActive("DecorSpookyBody", showSpookyBody)
+    if self.ACBand then self.ACBand.Visible = showACBody end
+
+    -- Stardew Valley
+    for _, item in ipairs(self.SDVSprites or {}) do
+        item.Visible = showSDV
+    end
+    if self.SDVBand then self.SDVBand.Visible = showSDVBody end
+    if self.SDVGlow then self.SDVGlow.Visible = shown and decor == "StardewValley" end
+
+    -- Tamagotchi
+    for _, item in ipairs(self.TamaSprites or {}) do
+        item.Visible = showTama
+    end
+    if self.TamaEgg      then self.TamaEgg.Visible      = showTama      end
+    if self.TamaBezel    then self.TamaBezel.Visible     = shown and decor == "Tamagotchi" end
+    if self.TamaGrill    then self.TamaGrill.Visible     = showTamaBody  end
+    if self.TamaScanlines then self.TamaScanlines.Visible = showTamaBody end
+    if self.TamaLCDBand  then self.TamaLCDBand.Visible   = showTamaBody  end
+
+    -- Anim group toggles
+    Anim.SetGroupActive("Emblem",         shown)
+    Anim.SetGroupActive("DecorClouds",    showClouds)
+    Anim.SetGroupActive("DecorStars",     showStars)
+    Anim.SetGroupActive("DecorSpooky",    showSpooky)
+    Anim.SetGroupActive("DecorSpookyGlow",showGlow)
+    Anim.SetGroupActive("DecorSpookyBody",showSpookyBody)
+    Anim.SetGroupActive("DecorKirby",     showKirby)
+    Anim.SetGroupActive("DecorKirbyBody", showKirbyBody)
+    Anim.SetGroupActive("DecorPokemon",   showPokemon)
+    Anim.SetGroupActive("DecorPokemonBody",showPokemonBody)
+    Anim.SetGroupActive("DecorAC",        showAC)
+    Anim.SetGroupActive("DecorACBody",    showACBody)
+    Anim.SetGroupActive("DecorSDV",       showSDV)
+    Anim.SetGroupActive("DecorSDVBody",   showSDVBody)
+    Anim.SetGroupActive("DecorSDVGlow",   shown and decor == "StardewValley")
+    Anim.SetGroupActive("DecorTama",      showTama)
+    Anim.SetGroupActive("DecorTamaGlow",  shown and decor == "Tamagotchi")
+    Anim.SetGroupActive("DecorTamaBody",  showTamaBody)
 end
 
 function Window:BuildTitle(parent)
@@ -7570,7 +8201,8 @@ function Window:BuildTitle(parent)
     self.Letters = {}
     local size = Config.Text.Title
     local index = 0
-    for char in self.Title:upper():gmatch(utf8.charpattern) do
+    local rawTitle = tostring(Lang.Resolve(self.Title) or self.Title or "")
+    for char in rawTitle:upper():gmatch(utf8.charpattern) do
         local bounds = Layout.Measure(char, size, "Logo", 200)
         local slot = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.fromOffset(char == " " and size * 0.3 or bounds.X, size + 4), LayoutOrder = #self.Letters + 1, Parent = holder })
         local letter = Draw.Text({ Text = char, Size = UDim2.fromScale(1, 1), TextXAlignment = Enum.TextXAlignment.Center, Parent = slot }, "Logo", size, Config.TitleColors[index % #Config.TitleColors + 1])
@@ -7710,16 +8342,15 @@ end
 
 function Window:BuildGround()
     local height, radius = Config.Window.Ground, Config.Window.Radius
-    local ground = Draw.Box("Frame", { Name = "Ground", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, height), ClipsDescendants = true, ZIndex = 3, Parent = self.Body }, "Brick", nil, "Window")
-    Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, radius), Parent = ground }, "Brick")
-    local bricks = Draw.New("Frame", { BackgroundTransparency = 1, Position = UDim2.fromOffset(6, 6), Size = UDim2.new(1, -12, 1, -8), ClipsDescendants = true, Parent = ground })
-    Draw.Bricks(bricks, 28, "BrickDark")
-    Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 6), Parent = ground }, "Grass")
-    Draw.Box("Frame", { Position = UDim2.fromOffset(0, 6), Size = UDim2.new(1, 0, 0, 2), Parent = ground }, "GrassDark")
-    Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 3), Parent = ground }, "Outline")
+    local ground = Draw.New("Frame", { Name = "Ground", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, height), ClipsDescendants = true, ZIndex = 3, Parent = self.Body })
+    Draw.Corner(ground, radius)
     self.Ground = ground
+
+    local content = Draw.New("Frame", { Name = "GroundContent", BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1), ClipsDescendants = true, Parent = ground })
+    self.GroundContent = content
+
     local gripSize = State.Touch and 34 or 24
-    local grip = Draw.New("TextButton", { Name = "Grip", Text = "", AutoButtonColor = false, BackgroundTransparency = 1, AnchorPoint = Vector2.new(1, 1), Position = UDim2.new(1, -2, 1, -2), Size = UDim2.fromOffset(gripSize, gripSize), ZIndex = 4, Parent = ground })
+    local grip = Draw.New("TextButton", { Name = "Grip", Text = "", AutoButtonColor = false, BackgroundTransparency = 1, AnchorPoint = Vector2.new(1, 1), Position = UDim2.new(1, -2, 1, -2), Size = UDim2.fromOffset(gripSize, gripSize), ZIndex = 7, Parent = ground })
     local gripIcon = Icons.Vector(grip, "grip", 14, "White")
     gripIcon.AnchorPoint = Vector2.new(1, 1)
     gripIcon.Position = UDim2.new(1, -2, 1, -2)
@@ -7731,6 +8362,135 @@ function Window:BuildGround()
         self:ResizeFrom(begin, Vector2.new(delta.X, delta.Y))
         return begin
     end)
+
+    self:RenderGround()
+    Theme.OnRender(ground, function()
+        self:RenderGround()
+    end)
+end
+
+function Window:RenderGround()
+    if not self.GroundContent then return end
+    self.GroundContent:ClearAllChildren()
+    local container = self.GroundContent
+    local theme = State.ThemeName or "Overworld"
+
+    if theme == "Animal Crossing" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Animal Crossing: Island Grass Lawn + Daisy Flowers + Soil Border
+        -- ═════════════════════════════════════════════════════════════════
+        local soil = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BrickDark")
+        local grass = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 8), Parent = container }, "Grass")
+        local grassEdge = Draw.Box("Frame", { Position = UDim2.fromOffset(0, 8), Size = UDim2.new(1, 0, 0, 2), Parent = container }, "GrassDark")
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 2), Parent = container }, "Outline")
+        -- Wild flowers blooming along the lawn edge
+        for i = 1, 12 do
+            local flower = Draw.Text({ Position = UDim2.new((i - 1) / 12 + 0.03, 0, 0, 2), Size = UDim2.fromOffset(12, 12), Parent = container }, "Glyph", 9, "White")
+            flower.Text = (i % 2 == 0) and "✿" or "❀"
+            flower.TextTransparency = 0.15
+        end
+        -- River pebbles in soil
+        for p = 1, 8 do
+            local pebble = Draw.New("Frame", { Position = UDim2.new((p - 1) / 8 + 0.05, 0, 0, 14), Size = UDim2.fromOffset(6, 4), BackgroundTransparency = 0.4, Parent = container })
+            Draw.Corner(pebble, 2)
+            Theme.Bind(pebble, { BackgroundColor3 = "Brick" })
+        end
+
+    elseif theme == "Kirby" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Kirby: Dream Land Pastel Cloud Bank + Golden Warp Star Ribbon
+        -- ═════════════════════════════════════════════════════════════════
+        local sky = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "Backdrop")
+        local pinkBar = Draw.Box("Frame", { Position = UDim2.fromOffset(0, 0), Size = UDim2.new(1, 0, 0, 6), Parent = container }, "Accent")
+        local cloudPuffs = Draw.Box("Frame", { Position = UDim2.fromOffset(0, 6), Size = UDim2.new(1, 0, 1, -6), Parent = container }, "PanelHeader")
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 2), Parent = container }, "Outline")
+        -- Embedded glowing stars along Dream Land ground
+        for i = 1, 14 do
+            local star = Draw.Text({ Position = UDim2.new((i - 1) / 14 + 0.02, 0, 0, 7), Size = UDim2.fromOffset(14, 14), Parent = container }, "Glyph", 10, "Coin")
+            star.Text = "★"
+            star.TextTransparency = 0.1
+        end
+
+    elseif theme == "Pokemon Cafe" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Pokemon Cafe: Cozy Café Parquet Wood Floor + Checkered Tile Strip
+        -- ═════════════════════════════════════════════════════════════════
+        local floor = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "Brick")
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 3), Parent = container }, "Outline")
+        -- Checkered cafe tile runner
+        for c = 0, 24 do
+            local tile = Draw.New("Frame", { Position = UDim2.new(c / 25, 0, 0, 3), Size = UDim2.new(1 / 25, 0, 0, 5), BorderSizePixel = 0, Parent = container })
+            Theme.Bind(tile, { BackgroundColor3 = (c % 2 == 0) and "White" or "BrickDark" })
+        end
+        -- Wood plank vertical joints
+        for j = 1, 10 do
+            local joint = Draw.New("Frame", { Position = UDim2.new(j / 11, 0, 0, 8), Size = UDim2.new(0, 2, 1, -8), BorderSizePixel = 0, BackgroundTransparency = 0.5, Parent = container })
+            Theme.Bind(joint, { BackgroundColor3 = "Outline" })
+        end
+
+    elseif theme == "Stardew Valley" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Stardew Valley: Farm Tilled Rich Soil + Sprouting Green Seedlings
+        -- ═════════════════════════════════════════════════════════════════
+        local tilledSoil = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BrickDark")
+        local rail = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 4), Parent = container }, "Brick")
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 2), Parent = container }, "Outline")
+        -- Farm crop furrows
+        for row = 1, 2 do
+            local furrow = Draw.New("Frame", { Position = UDim2.new(0, 0, 0, 6 + row * 6), Size = UDim2.new(1, 0, 0, 2), BackgroundTransparency = 0.6, Parent = container })
+            Theme.Bind(furrow, { BackgroundColor3 = "Outline" })
+        end
+        -- Tiny green crop sprouts
+        for s = 1, 11 do
+            local sprout = Draw.Text({ Position = UDim2.new((s - 1) / 11 + 0.04, 0, 0, 4), Size = UDim2.fromOffset(12, 12), Parent = container }, "Glyph", 10, "Grass")
+            sprout.Text = "🌱"
+        end
+
+    elseif theme == "Tamagotchi" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Tamagotchi: Virtual Pet Handheld Casing + 3 Tactile Buttons (A, B, C)
+        -- ═════════════════════════════════════════════════════════════════
+        local casing = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BackdropAlt")
+        local borderTop = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 3), Parent = container }, "Outline")
+        -- 3 Tactile Circular Buttons in center
+        local btnLabels = { "A", "B", "C" }
+        for b = 1, 3 do
+            local btnHolder = Draw.New("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(0.38 + (b - 1) * 0.12, 0, 0.5, 1), Size = UDim2.fromOffset(14, 14), Parent = container })
+            Draw.Corner(btnHolder, 7)
+            Theme.Bind(btnHolder, { BackgroundColor3 = "Accent" })
+            Draw.Stroke(btnHolder, "Outline", 1.5)
+            local txt = Draw.Text({ Text = btnLabels[b], Size = UDim2.fromScale(1, 1), TextXAlignment = Enum.TextXAlignment.Center, Parent = btnHolder }, "Logo", 8, "White")
+        end
+        -- Speaker acoustic dot matrix on the right
+        for d = 1, 6 do
+            local dot = Draw.New("Frame", { Position = UDim2.new(0.80 + (d - 1) * 0.025, 0, 0.5, -2), Size = UDim2.fromOffset(3, 3), BackgroundTransparency = 0.4, Parent = container })
+            Draw.Corner(dot, 2)
+            Theme.Bind(dot, { BackgroundColor3 = "Outline" })
+        end
+
+    elseif theme == "Halloween" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Halloween: Graveyard Cobblestone Wall + Eerie Pumpkin Ground
+        -- ═════════════════════════════════════════════════════════════════
+        local stone = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "Brick")
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, radius), Parent = container }, "Brick")
+        local bricks = Draw.New("Frame", { BackgroundTransparency = 1, Position = UDim2.fromOffset(6, 6), Size = UDim2.new(1, -12, 1, -8), ClipsDescendants = true, Parent = container })
+        Draw.Bricks(bricks, 24, "BrickDark")
+        local purpleMist = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 6), Parent = container }, "Grass")
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 3), Parent = container }, "Outline")
+
+    else
+        -- ═════════════════════════════════════════════════════════════════
+        -- Classic Mario Overworld / Castle / Underground NES Bricks
+        -- ═════════════════════════════════════════════════════════════════
+        local ground = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "Brick")
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, radius), Parent = container }, "Brick")
+        local bricks = Draw.New("Frame", { BackgroundTransparency = 1, Position = UDim2.fromOffset(6, 6), Size = UDim2.new(1, -12, 1, -8), ClipsDescendants = true, Parent = container })
+        Draw.Bricks(bricks, 28, "BrickDark")
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 6), Parent = container }, "Grass")
+        Draw.Box("Frame", { Position = UDim2.fromOffset(0, 6), Size = UDim2.new(1, 0, 0, 2), Parent = container }, "GrassDark")
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 3), Parent = container }, "Outline")
+    end
 end
 
 function Window:ResizeFrom(begin, delta)
@@ -8051,8 +8811,8 @@ function Window:SetScale(scale)
 end
 
 function Tab.New(window, name, icon, description)
-    local resolvedIcon = (icon and icon ~= "") and icon or Icons.FromTitle(name, "qblock")
-    local tab = setmetatable({ Window = window, Name = name, Icon = resolvedIcon, Description = description, Groupboxes = {} }, Tab)
+    local resolvedIcon = (icon and icon ~= "") and icon or Icons.FromTitle(name, "main")
+    local tab = setmetatable({ Window = window, Name = name, OriginalIcon = icon, Icon = resolvedIcon, Description = description, Groupboxes = {} }, Tab)
     tab:BuildButton()
     tab:BuildPage()
     return tab
@@ -8067,8 +8827,8 @@ function Tab:BuildButton()
     stroke.Transparency = 1
     self.IconSlot = Draw.New("Frame", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.new(0, 8, 0.5, 0), Size = UDim2.fromOffset(24, 24), Parent = face })
     Icons.Create(self.IconSlot, self.Icon, 24, nil, self.Name)
-    self.Label = Draw.Text({ Position = UDim2.fromOffset(40, 0), Size = UDim2.new(1, -44, 1, 0), TextTruncate = Enum.TextTruncate.AtEnd, Parent = face }, "Body", Util.TextSize("Label") + 1, "SidebarText", self.Name)
-    self.Button, self.Face, self.Shade, self.Stroke = holder, face, shade, stroke
+    self.TabLabel = Draw.Text({ Position = UDim2.fromOffset(40, 0), Size = UDim2.new(1, -44, 1, 0), TextTruncate = Enum.TextTruncate.AtEnd, Parent = face }, "Body", Util.TextSize("Label") + 1, "SidebarText", self.Name)
+    self.TabButton, self.Face, self.Shade, self.Stroke = holder, face, shade, stroke
     holder.MouseEnter:Connect(function()
         self.Hovered = not State.Touch
         self:RenderButton()
@@ -8088,7 +8848,10 @@ function Tab:BuildButton()
         self:RenderButton(true)
         if self.IconSlot then
             self.IconSlot:ClearAllChildren()
-            Icons.Create(self.IconSlot, self.Icon, 24, nil, self.Name)
+            local activeIcon = (self.OriginalIcon and self.OriginalIcon ~= "") and self.OriginalIcon or Icons.FromTitle(self.Name, "main")
+            local ic = Icons.Create(self.IconSlot, activeIcon, 24, nil, self.Name)
+            ic.AnchorPoint = Vector2.new(0.5, 0.5)
+            ic.Position = UDim2.fromScale(0.5, 0.5)
         end
     end)
     if self.Description then
@@ -8103,7 +8866,7 @@ function Tab:RenderButton(instant)
     Anim.Tween(self.Face, { BackgroundTransparency = faceAlpha }, duration)
     Anim.Tween(self.Shade, { BackgroundTransparency = active and 0 or 1 }, duration)
     Anim.Tween(self.Stroke, { Transparency = active and 0 or 1 }, duration)
-    Theme.Bind(self.Label, { TextColor3 = active and "TabActiveText" or "SidebarText" })
+    Theme.Bind(self.TabLabel, { TextColor3 = active and "TabActiveText" or "SidebarText" })
 end
 
 function Tab:Select()
@@ -8122,7 +8885,7 @@ function Tab:ApplyWidth()
 end
 
 function Tab:ApplyCompact(compact)
-    self.Label.Visible = not compact
+    self.TabLabel.Visible = not compact
     self.IconSlot.AnchorPoint = Vector2.new(compact and 0.5 or 0, 0.5)
     self.IconSlot.Position = compact and UDim2.fromScale(0.5, 0.5) or UDim2.new(0, 8, 0.5, 0)
 end
@@ -8248,10 +9011,16 @@ function Groupbox:BuildHeader(card, info)
     local bar = Draw.Box("TextButton", { Name = "Header", Size = UDim2.new(1, 0, 0, height), Parent = card }, "PanelHeader", nil, "Group")
     self.HeaderPatch = Draw.Box("Frame", { Position = UDim2.new(0, 0, 1, -radius), Size = UDim2.new(1, 0, 0, radius), Visible = not collapsed, BackgroundTransparency = collapsed and 1 or 0, Parent = bar }, "PanelHeader")
     self.HeaderDivider = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, 2), ZIndex = 2, Visible = not collapsed, BackgroundTransparency = collapsed and 1 or 0, Parent = bar }, "Outline")
-    local iconSpec = (info.Icon and info.Icon ~= "") and info.Icon or Icons.FromTitle(info.Name, "qblock")
-    local icon = Icons.Create(bar, iconSpec, 20, nil, info.Name)
-    icon.AnchorPoint = Vector2.new(0, 0.5)
-    icon.Position = UDim2.new(0, 10, 0.5, -1)
+    local iconSlot = Draw.New("Frame", { Name = "GroupIconSlot", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.new(0, 10, 0.5, -1), Size = UDim2.fromOffset(20, 20), Parent = bar })
+    local function renderGroupIcon()
+        iconSlot:ClearAllChildren()
+        local iconSpec = (info.Icon and info.Icon ~= "") and info.Icon or Icons.FromTitle(info.Name, "main")
+        local ic = Icons.Create(iconSlot, iconSpec, 20, nil, info.Name)
+        ic.AnchorPoint = Vector2.new(0.5, 0.5)
+        ic.Position = UDim2.fromScale(0.5, 0.5)
+    end
+    renderGroupIcon()
+    Theme.OnRender(iconSlot, renderGroupIcon)
     local offset = 36
     local badgeWidth = 0
     if info.Badge then
@@ -8337,10 +9106,20 @@ function Float.Render()
     if not Float.Slot then
         return
     end
-    if not Float.Sprite then
-        Float.Sprite = Sprite.New(Float.Slot, "qblock", Float.Size)
-        Float.Sprite.Name = "Block"
-    end
+    Float.Slot:ClearAllChildren()
+    local holder = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = Float.Slot }, "Element", "Outline", 10, 2)
+    local img = Draw.New("ImageLabel", {
+        Name = "FloatLogo",
+        BackgroundTransparency = 1,
+        AnchorPoint = Vector2.new(0.5, 0.5),
+        Position = UDim2.fromScale(0.5, 0.5),
+        Size = UDim2.fromScale(0.92, 0.92),
+        Image = Assets.Resolve("float_logo") or Assets.Resolve("logo") or "rbxassetid://87106942787227",
+        ScaleType = Enum.ScaleType.Fit,
+        Parent = holder,
+    })
+    Draw.Corner(img, 8)
+    Float.Sprite = holder
 end
 
 function Float.SetVisible(visible)
@@ -8357,12 +9136,27 @@ function Watermark.Build(title)
     frame.BackgroundTransparency = 0.25
     Draw.Padding(frame, 0, 12, 0, 8)
     Draw.List(frame, 10, true, Enum.HorizontalAlignment.Left, Enum.VerticalAlignment.Center)
-    local slot = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.fromOffset(18, 18), LayoutOrder = 1, Parent = frame })
-    local coin = Sprite.New(slot, "coin", 18)
-    coin.AnchorPoint = Vector2.new(0.5, 0)
-    coin.Position = UDim2.fromScale(0.5, 0)
-    Anim.Loop("Watermark", coin, { Size = UDim2.fromOffset(3, 18) }, 0.45, "Sine", true)
-    local name = Draw.Text({ Text = title:upper(), AutomaticSize = Enum.AutomaticSize.X, Size = UDim2.fromOffset(0, 20), LayoutOrder = 2, Parent = frame }, "Logo", Config.Text.Watermark + 1, "Coin")
+    local slot = Draw.New("Frame", { Name = "WatermarkSlot", BackgroundTransparency = 1, Size = UDim2.fromOffset(18, 18), LayoutOrder = 1, Parent = frame })
+    local function renderWatermarkMascot()
+        slot:ClearAllChildren()
+        local theme = State.ThemeName or "Overworld"
+        local mascotKey = "coin"
+        if theme == "Kirby" then mascotKey = "kirby_star"
+        elseif theme == "Pokemon Cafe" then mascotKey = "poke_ball"
+        elseif theme == "Animal Crossing" then mascotKey = "ac_leaf"
+        elseif theme == "Stardew Valley" then mascotKey = "sdv_stardrop"
+        elseif theme == "Tamagotchi" then mascotKey = "tama_heart"
+        elseif theme == "Halloween" then mascotKey = "pumpkin"
+        end
+        local mascot = Sprite.New(slot, mascotKey, 18)
+        mascot.AnchorPoint = Vector2.new(0.5, 0)
+        mascot.Position = UDim2.fromScale(0.5, 0)
+        Anim.Loop("Watermark", mascot, { Size = UDim2.fromOffset(4, 18) }, 0.45, "Sine", true)
+    end
+    renderWatermarkMascot()
+    Theme.OnRender(slot, renderWatermarkMascot)
+    local resolvedTitle = tostring(Lang.Resolve(title) or title or "")
+    local name = Draw.Text({ Text = resolvedTitle:upper(), AutomaticSize = Enum.AutomaticSize.X, Size = UDim2.fromOffset(0, 20), LayoutOrder = 2, Parent = frame }, "Logo", Config.Text.Watermark + 1, "Coin")
     Draw.Stroke(name, "Ink", 1.5)
     Watermark.Stats = {}
     for index, key in ipairs({ "Fps", "Ping", "Time" }) do
@@ -8779,6 +9573,7 @@ function Visuals.EnsureGui()
         return Visuals.Gui
     end
     Visuals.Gui = Draw.New("ScreenGui", { Name = "PayomboyZVisuals", IgnoreGuiInset = true, ResetOnSpawn = false, DisplayOrder = 5, ZIndexBehavior = Enum.ZIndexBehavior.Sibling, Parent = Util.GuiParent() })
+    Visuals.Gui:SetAttribute(Config.GuiAttribute, Library.Version)
     return Visuals.Gui
 end
 
@@ -9622,6 +10417,7 @@ function Compat.Probes.FileSystem()
     local stamp = tostring(os.clock())
     local wrote = pcall(writefile, "payomboyzhub_probe.txt", stamp)
     local ok, read = pcall(readfile, "payomboyzhub_probe.txt")
+    pcall(delfile, "payomboyzhub_probe.txt")
     return wrote and ok and read == stamp
 end
 
@@ -10035,7 +10831,8 @@ function Library:CreateWindow(options)
     options = options or {}
     local language = options.Language
     if language == "Auto" then
-        language = tostring(LocalPlayer.LocaleId):sub(1, 2) == "th" and "TH" or "EN"
+        local lp = LocalPlayer or (Players and Players.LocalPlayer)
+        language = (lp and lp.LocaleId and tostring(lp.LocaleId):sub(1, 2) == "th") and "TH" or "EN"
     end
     State.Language = language == "TH" and "TH" or "EN"
     State.UserScale = math.clamp(options.Scale or 1, Config.ScaleRange.Min, Config.ScaleRange.Max)
@@ -10152,8 +10949,9 @@ function Library:Notify(info, content, duration, kind)
 end
 
 function Library:Toggle()
-    if self.Window then
-        self.Window:Toggle()
+    local win = self.MainWindow or State.Window
+    if win and type(win.Toggle) == "function" then
+        win:Toggle()
     end
 end
 
@@ -10250,10 +11048,11 @@ Library.IsRef = Reactive.IsRef
 Library.tw = Tailwind.Apply
 Library.h = Tailwind.CreateElement
 Library.Component = function(self, name, renderFn)
-    if type(self) == "string" then
-        return Tailwind.Component(self, name)
+    local fn = type(renderFn) == "function" and renderFn or (type(name) == "function" and name or (type(self) == "function" and self or nil))
+    if not fn then
+        error("[PayomboyZ Hub] Component requires a render function", 2)
     end
-    return Tailwind.Component(name, renderFn)
+    return Tailwind.Component(fn)
 end
 Library.Show = Tailwind.Show
 Library.For = Tailwind.For
@@ -10275,6 +11074,12 @@ Library.Sheet = function(self, spec)
     return Sheet.Show(type(self) == "table" and self ~= Library and self or spec)
 end
 Library.CloseSheet = Sheet.Close
-Library.Window = Library.CreateWindow
+Library.NewWindow = Library.CreateWindow
+function Library:Window(...)
+    if select("#", ...) > 0 then
+        return Library.CreateWindow(self, ...)
+    end
+    return self.MainWindow or State.Window
+end
 
 return Library
