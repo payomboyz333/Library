@@ -299,6 +299,21 @@ local ThemeMeta = {
             PopEase      = "Quad",
         },
         Icons = {
+            account = "oneup",
+            lobby = "castle",
+            progression = "flag",
+            perks = "star",
+            skills = "flower",
+            overview = "qblock",
+
+            visuals = "boo",
+            interface = "mushroom",
+            about = "star",
+            config = "qblock",
+            configs = "qblock",
+            stat = "coin",
+            franchise = "kart",
+            system = "gear",
             mushroom = "mushroom", flower = "flower", boo = "boo",
             feather = "feather", star = "star", chest = "qblock",
             bag = "qblock", shell = "flower", coin = "star",
@@ -366,6 +381,21 @@ local ThemeMeta = {
             PopEase      = "Back",
         },
         Icons = {
+            account = "knight_helm",
+            lobby = "castle",
+            progression = "dungeon_chest",
+            perks = "torch_flame",
+            skills = "dungeon_sword",
+            overview = "knight_helm",
+
+            visuals = "boo",
+            interface = "torch_flame",
+            about = "knight_helm",
+            config = "chest",
+            configs = "chest",
+            stat = "torch_flame",
+            franchise = "knight_helm",
+            system = "gear",
             mushroom = "knight_helm", flower = "dungeon_sword", boo = "flame_skull",
             feather = "winged_boots", star = "dungeon_chest", chest = "dungeon_chest",
             bag = "dungeon_chest", shell = "dungeon_sword", coin = "dungeon_chest",
@@ -433,6 +463,21 @@ local ThemeMeta = {
             PopEase      = "Quad",
         },
         Icons = {
+            account = "cavern_pick",
+            lobby = "cavern_cart",
+            progression = "crystal_gem",
+            perks = "cavern_shroom",
+            skills = "cavern_dynamite",
+            overview = "cavern_cog",
+
+            visuals = "crystal_gem",
+            interface = "crystal_gem",
+            about = "pipe",
+            config = "hammer",
+            configs = "hammer",
+            stat = "crystal_gem",
+            franchise = "hammer",
+            system = "gear",
             mushroom = "cavern_pick", flower = "cavern_dynamite", boo = "crystal_gem",
             feather = "cavern_cart", star = "cavern_shroom", chest = "ore_sack",
             bag = "ore_sack", shell = "cavern_dynamite", coin = "cavern_shroom",
@@ -500,6 +545,21 @@ local ThemeMeta = {
             PopEase      = "Sine",
         },
         Icons = {
+            account = "snowman_face",
+            lobby = "ice_sled",
+            progression = "snowflake_crystal",
+            perks = "holly_berry",
+            skills = "ice_shard",
+            overview = "frozen_gift",
+
+            visuals = "snowflake_crystal",
+            interface = "snowflake_crystal",
+            about = "ice_shard",
+            config = "holly_berry",
+            configs = "holly_berry",
+            stat = "snowflake_crystal",
+            franchise = "ice_shard",
+            system = "gear",
             mushroom = "snowman_face", flower = "ice_shard", boo = "snowflake_crystal",
             feather = "ice_sled", star = "holly_berry", chest = "frozen_gift",
             bag = "frozen_gift", shell = "ice_shard", coin = "holly_berry",
@@ -567,6 +627,21 @@ local ThemeMeta = {
             PopEase      = "Quad",
         },
         Icons = {
+            account = "desert_cactus",
+            lobby = "desert_carpet",
+            progression = "ancient_urn",
+            perks = "desert_sun",
+            skills = "desert_blade",
+            overview = "sundial_gear",
+
+            visuals = "desert_sun",
+            interface = "desert_sun",
+            about = "desert_cactus",
+            config = "coin",
+            configs = "coin",
+            stat = "desert_sun",
+            franchise = "desert_cactus",
+            system = "gear",
             mushroom = "desert_sun", flower = "desert_blade", boo = "desert_mirage",
             feather = "desert_carpet", star = "desert_cactus", chest = "ancient_urn",
             bag = "ancient_urn", shell = "desert_blade", coin = "desert_cactus",
@@ -634,6 +709,21 @@ local ThemeMeta = {
             PopEase      = "Sine",
         },
         Icons = {
+            account = "specter_eye",
+            lobby = "cursed_cauldron",
+            progression = "cursed_book",
+            perks = "spirit_mist",
+            skills = "cursed_scythe",
+            overview = "haunted_clock",
+
+            visuals = "phantom_spook",
+            interface = "phantom_spook",
+            about = "spirit_mist",
+            config = "boo",
+            configs = "boo",
+            stat = "phantom_spook",
+            franchise = "boo",
+            system = "gear",
             mushroom = "phantom_spook", flower = "cursed_scythe", boo = "specter_eye",
             feather = "spirit_mist", star = "cursed_cauldron", chest = "cursed_book",
             bag = "cursed_book", shell = "cursed_scythe", coin = "cursed_cauldron",
@@ -701,6 +791,21 @@ local ThemeMeta = {
             PopEase      = "Linear",
         },
         Icons = {
+            account = "arcade_ship",
+            lobby = "cargo_pod",
+            progression = "cosmic_star",
+            perks = "radar_screen",
+            skills = "laser_blaster",
+            overview = "hyper_thruster",
+
+            visuals = "cosmic_star",
+            interface = "arcade_ship",
+            about = "cosmic_star",
+            config = "laser_beam",
+            configs = "laser_beam",
+            stat = "cosmic_star",
+            franchise = "arcade_ship",
+            system = "gear",
             mushroom = "arcade_ship", flower = "laser_blaster", boo = "radar_screen",
             feather = "hyper_thruster", star = "cosmic_star", chest = "cargo_pod",
             bag = "cargo_pod", shell = "laser_blaster", coin = "cosmic_star",
@@ -768,6 +873,21 @@ local ThemeMeta = {
             PopEase      = "Quad",
         },
         Icons = {
+            account = "tribal_mask",
+            lobby = "bamboo_crate",
+            progression = "jungle_fruit",
+            perks = "jungle_eye",
+            skills = "bamboo_spear",
+            overview = "stone_wheel",
+
+            visuals = "jungle_fruit",
+            interface = "jungle_fruit",
+            about = "tribal_mask",
+            config = "feather_bow",
+            configs = "feather_bow",
+            stat = "jungle_fruit",
+            franchise = "tribal_mask",
+            system = "gear",
             mushroom = "tribal_mask", flower = "bamboo_spear", boo = "jungle_eye",
             feather = "vine_boots", star = "jungle_fruit", chest = "bamboo_crate",
             bag = "bamboo_crate", shell = "bamboo_spear", coin = "jungle_fruit",
@@ -835,6 +955,21 @@ local ThemeMeta = {
             PopEase      = "Sine",
         },
         Icons = {
+            account = "angel_halo",
+            lobby = "airship_prop",
+            progression = "cloud_chest",
+            perks = "sun_flower",
+            skills = "feather_bow",
+            overview = "sky_compass",
+
+            visuals = "halo_ring",
+            interface = "feather_bow",
+            about = "halo_ring",
+            config = "star",
+            configs = "star",
+            stat = "halo_ring",
+            franchise = "feather_bow",
+            system = "gear",
             mushroom = "angel_halo", flower = "feather_bow", boo = "sky_lens",
             feather = "airship_prop", star = "sun_flower", chest = "cloud_chest",
             bag = "cloud_chest", shell = "feather_bow", coin = "sun_flower",
@@ -902,6 +1037,21 @@ local ThemeMeta = {
             PopEase      = "Back",
         },
         Icons = {
+            account = "boo",
+            lobby = "cauldron",
+            progression = "candy",
+            perks = "bat",
+            skills = "broomstick",
+            overview = "pumpkin",
+
+            visuals = "boo",
+            interface = "pumpkin",
+            about = "boo",
+            config = "candy",
+            configs = "candy",
+            stat = "pumpkin",
+            franchise = "bat",
+            system = "gear",
             mushroom = "pumpkin", flower = "bat", boo = "boo",
             feather = "broomstick", star = "candy", chest = "cauldron",
             bag = "cauldron", shell = "bat", coin = "candy",
@@ -969,6 +1119,21 @@ local ThemeMeta = {
             PopEase      = "Sine",
         },
         Icons = {
+            account = "kirby_waddledee",
+            lobby = "kirby_warpstar",
+            progression = "kirby_starrod",
+            perks = "kirby_star",
+            skills = "kirby_meta",
+            overview = "kirby_body",
+
+            visuals = "kirby_cursor",
+            interface = "kirby_star",
+            about = "kirby_body",
+            config = "kirby_waddledee",
+            configs = "kirby_waddledee",
+            stat = "kirby_star",
+            franchise = "kirby_warpstar",
+            system = "kirby_tomato",
             mushroom = "kirby_body", flower = "kirby_meta", boo = "kirby_cursor",
             feather = "kirby_warpstar", star = "kirby_starrod", chest = "kirby_waddledee",
             bag = "kirby_waddledee", shell = "kirby_meta", coin = "kirby_starrod",
@@ -1036,6 +1201,21 @@ local ThemeMeta = {
             PopEase      = "Quad",
         },
         Icons = {
+            account = "poke_pikachu",
+            lobby = "poke_cup",
+            progression = "poke_ball",
+            perks = "poke_bulbasaur",
+            skills = "poke_charmander",
+            overview = "poke_snorlax",
+
+            visuals = "poke_gengar",
+            interface = "poke_ball",
+            about = "poke_pikachu",
+            config = "poke_cup",
+            configs = "poke_cup",
+            stat = "poke_ball",
+            franchise = "poke_pikachu",
+            system = "poke_running",
             mushroom = "poke_pikachu", flower = "poke_charmander", boo = "poke_gengar",
             feather = "poke_running", star = "poke_bulbasaur", chest = "poke_snorlax",
             bag = "poke_snorlax", shell = "poke_charmander", coin = "poke_bulbasaur",
@@ -1103,6 +1283,21 @@ local ThemeMeta = {
             PopEase      = "Sine",
         },
         Icons = {
+            account = "ac_tomnook",
+            lobby = "ac_timmy",
+            progression = "ac_leaf",
+            perks = "ac_wateringcan",
+            skills = "ac_blathers",
+            overview = "ac_nookphone",
+
+            visuals = "ac_fish",
+            interface = "ac_leaf",
+            about = "ac_isabelle",
+            config = "ac_tomnook",
+            configs = "ac_tomnook",
+            stat = "ac_leaf",
+            franchise = "ac_tomnook",
+            system = "ac_dodo",
             mushroom = "ac_isabelle", flower = "ac_blathers", boo = "ac_fish",
             feather = "ac_dodo", star = "ac_wateringcan", chest = "ac_timmy",
             bag = "ac_timmy", shell = "ac_blathers", coin = "ac_wateringcan",
@@ -1170,6 +1365,21 @@ local ThemeMeta = {
             PopEase      = "Quad",
         },
         Icons = {
+            account = "sdv_farmer",
+            lobby = "sdv_stardrop",
+            progression = "sdv_gold",
+            perks = "sdv_junimo",
+            skills = "sdv_pickaxe",
+            overview = "sdv_can",
+
+            visuals = "sdv_krobus",
+            interface = "sdv_junimo",
+            about = "sdv_farmer",
+            config = "sdv_stardrop",
+            configs = "sdv_stardrop",
+            stat = "sdv_gold",
+            franchise = "sdv_junimo",
+            system = "sdv_can",
             mushroom = "sdv_farmer", flower = "sdv_abigail", boo = "sdv_krobus",
             feather = "sdv_wizard", star = "sdv_can", chest = "sdv_seed",
             bag = "sdv_seed", shell = "sdv_abigail", coin = "sdv_can",
@@ -1237,6 +1447,21 @@ local ThemeMeta = {
             PopEase      = "Sine",
         },
         Icons = {
+            account = "tama_mametchi",
+            lobby = "tama_egg",
+            progression = "tama_heart",
+            perks = "tama_kuchipatchi",
+            skills = "tama_oyajitchi",
+            overview = "tama_memetchi",
+
+            visuals = "tama_memetchi",
+            interface = "tama_egg",
+            about = "tama_mametchi",
+            config = "tama_heart",
+            configs = "tama_heart",
+            stat = "tama_egg",
+            franchise = "tama_kuchipatchi",
+            system = "tama_pochitchi",
             mushroom = "tama_mametchi", flower = "tama_oyajitchi", boo = "tama_memetchi",
             feather = "tama_pochitchi", star = "tama_kuchipatchi", chest = "tama_ginjirotchi",
             bag = "tama_ginjirotchi", shell = "tama_oyajitchi", coin = "tama_kuchipatchi",
@@ -1284,7 +1509,106 @@ local ThemeMeta = {
         },
     },
 
+    ["Dark"] = {
+        IntroTitle = "SYSTEM BOOT",
+        IntroSprites = {
+            Block    = "terminal",
+            Runner   = "cyber_pulse",
+            Goal     = "cosmic_star",
+            Particle = "ghost",
+        },
+        Shape = {
+            WindowRadius     = 10,
+            GroupRadius      = 8,
+            SelectableRadius = 6,
+            ButtonDepth      = 3,
+        },
+        Motion = {
+            BumpRise = 2,
+            PopSpeed = 0.16,
+            PopEase  = "Sine",
+        },
+        Icons = {
+            account = "cyber_pulse",
+            lobby = "terminal",
+            progression = "trophy",
+            perks = "cosmic_star",
+            skills = "sword",
+            overview = "terminal",
+            farm = "box",
+            stats = "cyber_pulse",
+
+            main      = "terminal",
+            franchise = "terminal",
+            stat      = "cyber_pulse",
+            combat    = "sword",
+            visuals   = "eye",
+            movement  = "speed",
+            farming   = "box",
+            inventory = "chest",
+            settings  = "gear",
+            interface = "terminal",
+            config    = "box",
+            configs   = "box",
+            about     = "ghost",
+            system    = "gear",
+            crown     = "trophy",
+            chart     = "trophy",
+            camera    = "eye",
+            zap       = "lightning",
+        },
+    },
+    ["Light"] = {
+        IntroTitle = "STUDIO DESK",
+        IntroSprites = {
+            Block    = "box",
+            Runner   = "feather",
+            Goal     = "trophy",
+            Particle = "star",
+        },
+        Shape = {
+            WindowRadius     = 12,
+            GroupRadius      = 9,
+            SelectableRadius = 7,
+            ButtonDepth      = 3,
+        },
+        Motion = {
+            BumpRise = 3,
+            PopSpeed = 0.18,
+            PopEase  = "Sine",
+        },
+        Icons = {
+            account = "crown",
+            lobby = "terminal",
+            progression = "trophy",
+            perks = "star",
+            skills = "sword",
+            overview = "terminal",
+            farm = "box",
+            stats = "trophy",
+
+            main      = "feather",
+            franchise = "trophy",
+            stat      = "star",
+            combat    = "sword",
+            visuals   = "eye",
+            movement  = "speed",
+            farming   = "box",
+            inventory = "chest",
+            settings  = "gear",
+            interface = "terminal",
+            config    = "box",
+            configs   = "box",
+            about     = "star",
+            system    = "gear",
+            crown     = "crown",
+            chart     = "trophy",
+            camera    = "eye",
+            zap       = "lightning",
+        },
+    },
 }
+
 ThemeMeta["Snow"] = ThemeMeta["Ice Land"]
 
 local State = {
@@ -2068,7 +2392,11 @@ function Theme.Apply(name)
             for _, tab in ipairs(State.Window.Tabs) do
                 if tab and tab.IconSlot and type(tab.Icon) == "string" then
                     for _, child in ipairs(tab.IconSlot:GetChildren()) do child:Destroy() end
-                    Icons.Create(tab.IconSlot, tab.Icon, 24, nil, tab.Name)
+                    local ic = Icons.Create(tab.IconSlot, tab.Icon, 24, nil, tab.Name)
+                    if ic then
+                        ic.AnchorPoint = Vector2.new(0.5, 0.5)
+                        ic.Position = UDim2.fromScale(0.5, 0.5)
+                    end
                 end
             end
         end
@@ -2094,7 +2422,11 @@ function Theme.Apply(name)
             for _, tab in ipairs(State.Window.Tabs) do
                 if tab and tab.IconSlot and type(tab.Icon) == "string" then
                     for _, child in ipairs(tab.IconSlot:GetChildren()) do child:Destroy() end
-                    Icons.Create(tab.IconSlot, tab.Icon, 24, nil, tab.Name)
+                    local ic = Icons.Create(tab.IconSlot, tab.Icon, 24, nil, tab.Name)
+                    if ic then
+                        ic.AnchorPoint = Vector2.new(0.5, 0.5)
+                        ic.Position = UDim2.fromScale(0.5, 0.5)
+                    end
                 end
             end
         end
@@ -3692,7 +4024,7 @@ Sprite.Alias = {
     house = "castle", home = "castle", user = "oneup", player = "oneup", globe = "pipe", map = "pipe",
     teleport = "pipe", eye = "boo", visuals = "boo", swords = "flower", combat = "flower", target = "bomb",
     crosshair = "bomb", shield = "shell", zap = "star", settings = "gear", ["sliders-horizontal"] = "gear",
-    bell = "coin", shop = "coin", code = "qblock", info = "qblock", key = "key", play = "flag",
+    bell = "coin", shop = "coin", code = "qblock", info = "qblock", interface = "brick", key = "key", play = "flag",
     quest = "flag", heart = "heart", cookie = "mushroom", ["trash-2"] = "bomb", terminal = "brick",
     ["refresh-cw"] = "pipe", link = "pipe", copy = "brick", check = "star", save = "qblock",
     download = "qblock", upload = "qblock", search = "boo", misc = "qblock", troll = "shell",
@@ -3838,6 +4170,202 @@ end
 
 -- PayomboyZ Hub Native Sprite + Crisp Vector SVG Icon Engine (Zero Emoji)
 local ExtraSprites = {
+    kirby_meta = {
+        "....kkkk....",
+        "..kkNppNkk..",
+        ".kNNppppNNk.",
+        ".kNcwwwwcNk.",
+        "kNNcwwwwcNNk",
+        "kNNNNNNNNNNk",
+        ".kNNyyyyNNk.",
+        ".kNNNNNNNNk.",
+        "..kkNNNNkk..",
+        "..kppppppk..",
+        ".kppk..kppk.",
+        ".kk......kk.",
+    },
+    terminal = {
+        "kkkkkkkkkkkk",
+        "kcccccccccck",
+        "kc.kkkkkk.ck",
+        "kc.kcccck.ck",
+        "kc.kceeck.ck",
+        "kc.kceeck.ck",
+        "kc.kkkkkk.ck",
+        "kcccccccccck",
+        "kkkkkkkkkkkk",
+        "...kcccck...",
+        "..kcccccck..",
+        ".kkkkkkkkkk.",
+    },
+    cyber_pulse = {
+        ".....cc.....",
+        "....cccc....",
+        "...cceecc...",
+        "..cceeeecc..",
+        ".cceeeeeecc.",
+        "cceeeeeeeecc",
+        "cceeeeeeeecc",
+        ".cceeeeeecc.",
+        "..cceeeecc..",
+        "...cceecc...",
+        "....cccc....",
+        ".....cc.....",
+    },
+    eye = {
+        "....kkkk....",
+        "..kkcccckk..",
+        ".kcccccccck.",
+        "kcccctttccck",
+        "kccctkkttcck",
+        "kccctkkttcck",
+        "kcccctttccck",
+        ".kcccccccck.",
+        "..kkcccckk..",
+        "....kkkk....",
+        "............",
+        "............",
+    },
+    box = {
+        "....kkkk....",
+        "..kkNNNNkk..",
+        ".kNNNNNNNNk.",
+        "kNNNNNNNNNNk",
+        "kNNNkcckNNNk",
+        "kNNkcccckNNk",
+        "kNNNkcckNNNk",
+        "kNNNNNNNNNNk",
+        ".kNNNNNNNNk.",
+        "..kkNNNNkk..",
+        "....kkkk....",
+        "............",
+    },
+    ghost = {
+        "....wwww....",
+        "..wwwwwwww..",
+        ".wwwwwwwwww.",
+        ".wwkkwwwwkk.",
+        "wwwkkwwwwkk.",
+        "wwwwwwwwwwww",
+        "wwwwwwwwwwww",
+        "wwwwwwwwwwww",
+        "www.wwww.www",
+        "ww...ww...ww",
+        ".w...ww...w.",
+        "............",
+    },
+    halo_ring = {
+        "....aaaa....",
+        "..aayyyyaa..",
+        ".aayyyyyyaa.",
+        "aayyy..yyyaa",
+        "aayy....yyaa",
+        "aayy....yyaa",
+        "aayyy..yyyaa",
+        ".aayyyyyyaa.",
+        "..aayyyyaa..",
+        "....aaaa....",
+        "............",
+        "............",
+    },
+    laser_beam = {
+        "..........cc",
+        ".........ccc",
+        ".......ccccc",
+        ".....ccccc..",
+        "...ccccc....",
+        "..ccccc.....",
+        ".ccccc......",
+        "ccccc.......",
+        "ccc.........",
+        "cc..........",
+        "............",
+        "............",
+    },
+    kart = {
+        "....rrrr....",
+        "...rrrrrr...",
+        "..rkwwkwwkr.",
+        ".rrkwwkwwkrr",
+        ".rrrrrrrrrr.",
+        "kkkrrrrrrkkk",
+        "kNNkrrrrkNNk",
+        "kNNkrrrrkNNk",
+        "kkkrrrrrrkkk",
+        "...kcccck...",
+        "....kkkk....",
+        "............",
+    },
+    speed = {
+        ".......yyyy.",
+        ".....yyyyy..",
+        "...yyyyyy...",
+        "..yyyyyyy...",
+        ".yyyyyyyy...",
+        "yyyyyyyyyyyy",
+        "....yyyyyyyy",
+        "...yyyyyyyy.",
+        "..yyyyyyy...",
+        ".yyyyyy.....",
+        "yyyy........",
+        "............",
+    },
+    kirby_warpstar = {
+        ".....yy.....",
+        "....yyyy....",
+        "yyyyyykkyyyy",
+        ".yyyyyyyyyy.",
+        "..yyykkyyy..",
+        "...yyyyyy...",
+        "..yyyyyyyy..",
+        ".yyy....yyy.",
+        "yy........yy",
+        "............",
+        "............",
+        "............",
+    },
+    kirby_starrod = {
+        ".....yy.....",
+        "....yyyy....",
+        "...yyyyyy...",
+        "....yyyy....",
+        ".....rr.....",
+        ".....rr.....",
+        ".....ww.....",
+        ".....ww.....",
+        ".....rr.....",
+        ".....rr.....",
+        ".....ww.....",
+        ".....ww.....",
+    },
+    tama_ginjirotchi = {
+        "...bbbbbb...",
+        "..bbbbbbbb..",
+        ".bbkwbbkwbb.",
+        ".bbkwbbkwbb.",
+        "bbbbbbbbbbbb",
+        "bbbbbbbbbbbb",
+        ".bbbbbbbbbb.",
+        "..bbbbbbbb..",
+        "...bbyyyybb.",
+        "....yyyyy...",
+        "....yyyyy...",
+        "............",
+    },
+    tama_pochitchi = {
+        "...yyyyyy...",
+        "..yykwwkyy..",
+        ".yyykwkkyyy.",
+        ".yyyrrrryyy.",
+        "yyyyyyyyyyyy",
+        "yyyyyyyyyyyy",
+        ".yyyyyyyyyy.",
+        "..yyyyyyyy..",
+        "..kkyy..yy..",
+        "..kkyy..yy..",
+        "............",
+        "............",
+    },
     sword = {
         ".........kkk", "........kwwk", ".......kwwwk", "......kwwwk.",
         ".....kwwwk..", ".kk.kwwwk...", "kyykwwwk....", ".kyyyyk.....",
@@ -4772,22 +5300,27 @@ Sprite.Swaps.sdv_heart_sv = { base = "tama_heart", swap = { r = "p" } }
 Sprite.Swaps.kirby_puff   = { base = "tama_egg",   swap = { n = "p", w = "w" } }
 
 local ExtraAliases = {
-    afk = "qblock", aim = "crosshair", aimbot = "crosshair", airdrop = "chest", alert = "bomb",
+    kirby_meta = "kirby_metaknight",
+    kirby_warp = "kirby_warpstar",
+    kirby_star_rod = "kirby_starrod",
+    tama_ginjiro = "tama_ginjirotchi",
+    tama_pochi = "tama_pochitchi",
+    about = "star", afk = "qblock", aim = "crosshair", aimbot = "crosshair", airdrop = "chest", alert = "bomb",
     animal = "paw", armor = "blueshell", auto = "star", backpack = "chest", bag = "chest",
     bell = "coin", bolt = "lightning", bomb = "bomb", bot = "gear", box = "qblock",
     build = "brick", camera = "boo", candy = "star", car = "car", cart = "chest",
     cash = "coin", chart = "trophy", check = "star", chest = "chest", code = "qblock",
     cog = "gear", coin = "coin", collect = "magnet", combat = "sword", compass = "pipe",
-    config = "qblock", craft = "hammer", crate = "chest", crop = "star", crops = "star",
+    config = "qblock", configs = "qblock", craft = "hammer", crate = "chest", crop = "star", crops = "star",
     crosshair = "crosshair", crown = "crown", danger = "bomb", defense = "shell", diamond = "gem",
     dice = "dice", drive = "car", egg = "egg", esp = "boo", eye = "boo",
-    farm = "star", fish = "paw", fishing = "paw", flag = "flag", fly = "feather",
+    farm = "star", franchise = "star", fish = "paw", fishing = "paw", flag = "flag", fly = "feather",
     forge = "hammer", game = "dice", garden = "star", gem = "gem", general = "qblock",
     gift = "chest", globe = "pipe", god = "star", gun = "crosshair", hammer = "hammer",
     hatch = "egg", heal = "oneup", health = "heart", heart = "heart", home = "castle",
-    hub = "star", info = "qblock", inventory = "chest", item = "chest", items = "chest",
+    hub = "star", info = "qblock", interface = "brick", inventory = "chest", item = "chest", items = "chest",
     jump = "feather", key = "key", kill = "skull", knife = "sword", lock = "key",
-    loot = "magnet", luck = "star", magnet = "magnet", main = "mushroom", map = "pipe",
+    loot = "magnet", luck = "star", magnet = "magnet", main = "star", account = "crown", lobby = "castle", progression = "trophy", perks = "star", skills = "sword", overview = "trophy", monitor = "crosshair", map = "pipe",
     mine = "hammer", mining = "hammer", misc = "qblock", money = "coin", mount = "paw",
     movement = "feather", murder = "skull", package = "qblock", palette = "flower", paw = "paw",
     pet = "paw", pickaxe = "hammer", play = "flag", player = "feather", potion = "heart",
@@ -4795,7 +5328,7 @@ local ExtraAliases = {
     refresh = "pipe", roll = "dice", run = "lightning", safe = "shell", save = "qblock",
     search = "boo", seed = "chest", seeds = "chest", settings = "gear", shield = "shell",
     shop = "coin", skull = "skull", sleep = "qblock", sliders = "gear", sniper = "crosshair",
-    sparkles = "star", speed = "lightning", spin = "dice", stats = "trophy", sword = "sword",
+    sparkles = "star", speed = "lightning", spin = "dice", stats = "trophy", sword = "sword", system = "gear",
     swords = "sword", target = "crosshair", teleport = "pipe", terminal = "brick", theme = "flower",
     trash = "bomb", trophy = "trophy", unlock = "key", user = "oneup", users = "oneup",
     vehicle = "car", vip = "crown", visuals = "boo", wand = "star", warning = "bomb",
@@ -4820,6 +5353,12 @@ OriginalConfig = {
 }
 
 Icons.Rules = {
+    { "account|profile|user|player|id|บัญชี|ผู้เล่น|โปรไฟล์", "account" },
+    { "lobby|spawn|room|hub|เซิร์ฟเวอร์|ล็อบบี้|ห้อง", "lobby" },
+    { "progression|progress|prestige|tier|level|rank|exp|เลเวล|ความคืบหน้า|ยศ", "progression" },
+    { "perks|perk|passive|passives|buff|buffs|talent|talents|trait|traits|ความสามารถ|บัฟ", "perks" },
+    { "skill|skills|tree|magic|ability|abilities|สกิล|เวทมนตร์", "skills" },
+    { "overview|monitor|radar|dashboard|map2d|canvas|เรดาร์|ภาพรวม|จอมอนิเตอร์", "overview" },
     { "aimbot|silent|sniper|crosshair|shoot|gun|ยิง|ปืน|เล็ง", "aimbot" },
     { "combat|sword|weapon|knife|kill|murder|sheriff|hit|attack|fight|ต่อสู้|ฆ่า|อาวุธ|ดาบ", "combat" },
     { "visual|esp|chams|wallhack|highlight|tracer|fov|camera|see|มอง|แสง|เรดาร์", "visuals" },
@@ -4838,7 +5377,7 @@ Icons.Rules = {
     { "player|movement|walk|jump|fly|noclip|stamina|ผู้เล่น|วิ่ง|กระโดด|บิน", "movement" },
     { "defense|shield|god|anti|safe|guard|bypass|ป้องกัน|อมตะ|กันแบน", "defense" },
     { "rank|vip|king|boss|crown|ยศ|franchise", "crown" },
-    { "stat|status|leaderboard|score|trophy|chart|system|สถานะ|อันดับ|คะแนน|ระบบ", "stats" },
+    { "fps|ping|ms|stat|status|leaderboard|score|trophy|chart|system|สถานะ|อันดับ|คะแนน|ระบบ", "stats" },
     { "quest|mission|flag|start|เควส|ภารกิจ", "quest" },
     { "crops|crop|garden|plant|seeds|seed|watering|farm|farming|auto|grind|loop|bot|ออโต้|ฟาร์ม|บอท|ปลูกผัก|รดน้ำ", "farm" },
     { "fish|fishing|ตกปลา|ปลา", "fish" },
@@ -8024,7 +8563,7 @@ function Container:AddStat(idx, spec)
     idx, spec = Widget.Normalize(idx, spec)
     local card = Draw.Box("Frame", { Name = "StatCard" }, "Element", "Outline", 10, 2)
     Fx.Spotlight(card)
-    local badge = Icons.Badge(card, spec.Icon, 30, spec.Color or "Accent", spec.Title or spec.Text)
+    local badge = Icons.Badge(card, spec.Icon or "stat", 30, spec.Color or "Accent", spec.Title or spec.Text)
     badge.AnchorPoint = Vector2.new(0, 0.5)
     badge.Position = UDim2.new(0, 10, 0.5, 0)
     local titleLabel = Draw.Text({
@@ -8161,6 +8700,766 @@ function TableWidget:SetRows(nextRows)
     self:Rebuild()
 end
 
+-- ═══════════════════════════════════════════════════════════════════════════
+--  NEW 8-BIT FUNCTIONAL OVERVIEW WIDGETS
+--  1. AddMonitor: 2D Tactical Canvas Radar / Map / Entity Tracker
+--  2. AddStatGrid: Multi-Metric Telemetry Cards Grid
+--  3. AddLiveGraph: 8-Bit Scrolling Performance Stream Strip-Chart
+--  4. AddInventoryGrid: Stardew Valley / RPG Slot Matrix
+-- ═══════════════════════════════════════════════════════════════════════════
+
+local Monitor = {}
+Monitor.__index = Monitor
+
+function Container:AddMonitor(idx, info)
+    idx, info = Widget.Normalize(idx, info)
+    info.Height = info.Height or 230
+    info.Range = info.Range or 250
+    local monitor = setmetatable({
+        Type = "Monitor",
+        Container = self,
+        Info = info,
+        Range = info.Range,
+        Entities = {},
+        ActiveFilters = {},
+        BlipFrames = {},
+    }, Monitor)
+
+    if info.Filters then
+        for _, f in ipairs(info.Filters) do
+            monitor.ActiveFilters[f] = true
+        end
+    end
+
+    local holder = Draw.New("Frame", {
+        Name = "MonitorHolder",
+        BackgroundTransparency = 1,
+        Size = UDim2.new(1, 0, 0, info.Height),
+    })
+
+    local shadow = Draw.Box("Frame", {
+        Position = UDim2.fromOffset(Config.Group.Shadow, Config.Group.Shadow),
+        Size = UDim2.new(1, -Config.Group.Shadow, 1, -Config.Group.Shadow),
+        Parent = holder,
+    }, "Shadow", nil, "Group")
+
+    local card = Draw.Box("Frame", {
+        Size = UDim2.new(1, -Config.Group.Shadow, 1, -Config.Group.Shadow),
+        Parent = holder,
+    }, "Panel", "Outline", "Group", Config.Group.Stroke)
+
+    -- Header bar with Title, Range badge, and Controls
+    local header = Draw.Box("Frame", {
+        Name = "MonitorHeader",
+        Size = UDim2.new(1, 0, 0, 28),
+        Parent = card,
+    }, "PanelHeader", nil, "Group")
+
+    local titleLabel = Draw.Text({
+        Position = UDim2.fromOffset(10, 0),
+        Size = UDim2.new(0.45, 0, 1, 0),
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Parent = header,
+    }, "Body", Util.TextSize("Label"), "Text", info.Title or info.Text or "2D Tactical Radar")
+
+    local headerRight = Draw.New("Frame", {
+        BackgroundTransparency = 1,
+        AnchorPoint = Vector2.new(1, 0.5),
+        Position = UDim2.new(1, -8, 0.5, 0),
+        Size = UDim2.new(0.5, 0, 1, -4),
+        Parent = header,
+    })
+    Draw.List(headerRight, 4, true, Enum.HorizontalAlignment.Right, Enum.VerticalAlignment.Center)
+
+    -- Zoom buttons
+    local zoomOutBtn = Draw.Box("TextButton", {
+        Size = UDim2.fromOffset(20, 20),
+        Text = "",
+        AutoButtonColor = false,
+        LayoutOrder = 10,
+        Parent = headerRight,
+    }, "Element", "Outline", 4, 1)
+    Draw.Text({ Size = UDim2.fromScale(1, 1), TextXAlignment = Enum.TextXAlignment.Center, Parent = zoomOutBtn }, "Strong", 13, "Text", "-")
+
+    local zoomInBtn = Draw.Box("TextButton", {
+        Size = UDim2.fromOffset(20, 20),
+        Text = "",
+        AutoButtonColor = false,
+        LayoutOrder = 11,
+        Parent = headerRight,
+    }, "Element", "Outline", 4, 1)
+    Draw.Text({ Size = UDim2.fromScale(1, 1), TextXAlignment = Enum.TextXAlignment.Center, Parent = zoomInBtn }, "Strong", 13, "Text", "+")
+
+    -- Range Badge
+    local rangeBadge = Draw.Box("Frame", {
+        Size = UDim2.fromOffset(68, 20),
+        LayoutOrder = 9,
+        Parent = headerRight,
+    }, "Element", "Outline", 4, 1)
+    local rangeText = Draw.Text({
+        Size = UDim2.fromScale(1, 1),
+        TextXAlignment = Enum.TextXAlignment.Center,
+        Parent = rangeBadge,
+    }, "Desc", 10, "Coin", tostring(monitor.Range) .. "m")
+
+    -- Radar Screen Canvas
+    local canvas = Draw.New("Frame", {
+        Name = "RadarCanvas",
+        Position = UDim2.fromOffset(0, 28),
+        Size = UDim2.new(1, 0, 1, -28),
+        ClipsDescendants = true,
+        BackgroundTransparency = 1,
+        Parent = card,
+    })
+
+    -- Screen background with dark CRT phosphor tint
+    local screenBg = Draw.Box("Frame", {
+        Size = UDim2.fromScale(1, 1),
+        Parent = canvas,
+    }, "BackdropAlt", nil, 0)
+    screenBg.BackgroundTransparency = 0.2
+
+    -- Concentric Range Rings (50m, 100m, 200m)
+    local ringsHolder = Draw.New("Frame", {
+        Name = "Rings",
+        BackgroundTransparency = 1,
+        Size = UDim2.fromScale(1, 1),
+        Parent = canvas,
+    })
+    for _, frac in ipairs({ 0.28, 0.56, 0.84 }) do
+        local ring = Draw.New("Frame", {
+            AnchorPoint = Vector2.new(0.5, 0.5),
+            Position = UDim2.fromScale(0.5, 0.5),
+            Size = UDim2.fromScale(frac, frac),
+            BackgroundTransparency = 1,
+            Parent = ringsHolder,
+        })
+        Draw.Corner(ring, UDim.new(1, 0))
+        local stroke = Draw.New("UIStroke", {
+            Thickness = 1,
+            Transparency = 0.75,
+            ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+            Parent = ring,
+        })
+        Theme.Bind(stroke, { Color = "Outline" })
+    end
+
+    -- Crosshair Axis lines
+    local hLine = Draw.New("Frame", {
+        AnchorPoint = Vector2.new(0, 0.5),
+        Position = UDim2.fromScale(0, 0.5),
+        Size = UDim2.new(1, 0, 0, 1),
+        BackgroundTransparency = 0.75,
+        BorderSizePixel = 0,
+        Parent = canvas,
+    })
+    Theme.Bind(hLine, { BackgroundColor3 = "Outline" })
+
+    local vLine = Draw.New("Frame", {
+        AnchorPoint = Vector2.new(0.5, 0),
+        Position = UDim2.fromScale(0.5, 0),
+        Size = UDim2.new(0, 1, 1, 0),
+        BackgroundTransparency = 0.75,
+        BorderSizePixel = 0,
+        Parent = canvas,
+    })
+    Theme.Bind(vLine, { BackgroundColor3 = "Outline" })
+
+    -- Center Player Icon (You / Crosshair origin)
+    local centerDot = Draw.New("Frame", {
+        Name = "PlayerCenter",
+        AnchorPoint = Vector2.new(0.5, 0.5),
+        Position = UDim2.fromScale(0.5, 0.5),
+        Size = UDim2.fromOffset(8, 8),
+        ZIndex = 6,
+        Parent = canvas,
+    })
+    Draw.Corner(centerDot, UDim.new(1, 0))
+    Theme.Bind(centerDot, { BackgroundColor3 = "Accent" })
+    local pStroke = Draw.Stroke(centerDot, "White", 1.5, true)
+    pStroke.Transparency = 0.2
+
+    -- Facing Arrow on player
+    local headingArrow = Draw.New("Frame", {
+        AnchorPoint = Vector2.new(0.5, 1),
+        Position = UDim2.fromScale(0.5, 0),
+        Size = UDim2.fromOffset(2, 6),
+        ZIndex = 7,
+        BorderSizePixel = 0,
+        Parent = centerDot,
+    })
+    Theme.Bind(headingArrow, { BackgroundColor3 = "Accent" })
+
+    -- Blip layer
+    local blipLayer = Draw.New("Frame", {
+        Name = "BlipLayer",
+        BackgroundTransparency = 1,
+        Size = UDim2.fromScale(1, 1),
+        ZIndex = 5,
+        Parent = canvas,
+    })
+
+    monitor.Holder = holder
+    monitor.Card = card
+    monitor.Canvas = canvas
+    monitor.BlipLayer = blipLayer
+    monitor.RangeText = rangeText
+    monitor.HeadingArrow = headingArrow
+    monitor.CenterDot = centerDot
+
+    -- Zoom handlers
+    zoomInBtn.Activated:Connect(function()
+        monitor:SetRange(math.max(50, monitor.Range - 50))
+    end)
+    zoomOutBtn.Activated:Connect(function()
+        monitor:SetRange(math.min(1000, monitor.Range + 50))
+    end)
+
+    monitor.Item = self:Add(holder, { Height = info.Height })
+    Widget.Register(monitor, idx, info)
+    return monitor
+end
+
+function Monitor:SetRange(range)
+    self.Range = range
+    if self.RangeText then
+        self.RangeText.Text = tostring(range) .. "m"
+    end
+    self:RenderAllBlips()
+end
+
+function Monitor:GetRange()
+    return self.Range
+end
+
+function Monitor:AddEntity(id, spec)
+    self.Entities[id] = {
+        Id = id,
+        Name = spec.Name or tostring(id),
+        Position = spec.Position or Vector3.new(),
+        Type = spec.Type or "Default",
+        Color = spec.Color or Color3.fromRGB(255, 60, 60),
+        Size = spec.Size or 6,
+    }
+    self:RenderBlip(id)
+end
+
+function Monitor:UpdateEntity(id, spec)
+    local ent = self.Entities[id]
+    if not ent then
+        self:AddEntity(id, spec)
+        return
+    end
+    if spec.Position then ent.Position = spec.Position end
+    if spec.Color then ent.Color = spec.Color end
+    if spec.Name then ent.Name = spec.Name end
+    if spec.Type then ent.Type = spec.Type end
+    self:RenderBlip(id)
+end
+
+function Monitor:RemoveEntity(id)
+    self.Entities[id] = nil
+    if self.BlipFrames[id] then
+        self.BlipFrames[id]:Destroy()
+        self.BlipFrames[id] = nil
+    end
+end
+
+function Monitor:Clear()
+    self.Entities = {}
+    for id, frame in pairs(self.BlipFrames) do
+        frame:Destroy()
+    end
+    self.BlipFrames = {}
+end
+
+function Monitor:RenderBlip(id)
+    local ent = self.Entities[id]
+    if not ent then return end
+
+    local lp = LocalPlayer or (Players and Players.LocalPlayer)
+    local myChar = lp and lp.Character
+    local myRoot = myChar and (myChar:FindFirstChild("HumanoidRootPart") or myChar:FindFirstChild("Torso"))
+    local myPos = myRoot and myRoot.Position or Vector3.new(0, 0, 0)
+    local myCFrame = myRoot and myRoot.CFrame or CFrame.new()
+
+    local entPos = ent.Position
+    if typeof(entPos) == "CFrame" then entPos = entPos.Position end
+
+    -- Relative coordinates in camera / player space
+    local rel = myCFrame:PointToObjectSpace(entPos)
+    local dx = rel.X
+    local dz = rel.Z
+
+    local maxRange = self.Range or 250
+    local normX = math.clamp(dx / (maxRange * 2), -0.46, 0.46)
+    local normY = math.clamp(dz / (maxRange * 2), -0.46, 0.46)
+
+    local frame = self.BlipFrames[id]
+    if not frame then
+        frame = Draw.New("Frame", {
+            Name = "Blip_" .. tostring(id),
+            AnchorPoint = Vector2.new(0.5, 0.5),
+            Size = UDim2.fromOffset(ent.Size or 6, ent.Size or 6),
+            BackgroundColor3 = ent.Color,
+            BorderSizePixel = 0,
+            ZIndex = 5,
+            Parent = self.BlipLayer,
+        })
+        Draw.Corner(frame, UDim.new(1, 0))
+        self.BlipFrames[id] = frame
+    else
+        frame.BackgroundColor3 = ent.Color
+    end
+
+    frame.Position = UDim2.new(0.5 + normX, 0, 0.5 + normY, 0)
+end
+
+function Monitor:RenderAllBlips()
+    for id in pairs(self.Entities) do
+        self:RenderBlip(id)
+    end
+end
+
+function Monitor:TrackWorkspace(options)
+    options = options or {}
+    local folder = options.Folder or workspace
+    local typeFilter = options.Type or "Enemy"
+    local color = options.Color or Color3.fromRGB(255, 60, 60)
+    local getName = options.GetName or function(inst) return inst.Name end
+
+    local conn = RunService.RenderStepped:Connect(function()
+        if not self.Holder or not self.Holder.Parent then return end
+        for _, child in ipairs(folder:GetChildren()) do
+            local root = child:FindFirstChild("HumanoidRootPart") or child:FindFirstChild("Torso") or (child:IsA("BasePart") and child)
+            if root then
+                self:UpdateEntity(child, {
+                    Name = getName(child),
+                    Position = root.Position,
+                    Type = typeFilter,
+                    Color = color,
+                })
+            end
+        end
+    end)
+    table.insert(State.Connections, conn)
+    return conn
+end
+
+-- ═══════════════════════════════════════════════════════════════════════════
+--  2. AddStatGrid: Multi-Metric Telemetry Cards Grid
+-- ═══════════════════════════════════════════════════════════════════════════
+local StatGrid = {}
+StatGrid.__index = StatGrid
+
+function Container:AddStatGrid(idx, info)
+    idx, info = Widget.Normalize(idx, info)
+    local cols = info.Columns or 4
+    local stats = info.Stats or {}
+    local height = info.Height or 68
+
+    local statGrid = setmetatable({
+        Type = "StatGrid",
+        Container = self,
+        Cards = {},
+    }, StatGrid)
+
+    local holder = Draw.New("Frame", {
+        Name = "StatGridHolder",
+        BackgroundTransparency = 1,
+        Size = UDim2.new(1, 0, 0, height),
+    })
+
+    local grid = Draw.New("Frame", {
+        BackgroundTransparency = 1,
+        Size = UDim2.fromScale(1, 1),
+        Parent = holder,
+    })
+    Draw.List(grid, 6, true, Enum.HorizontalAlignment.Left, Enum.VerticalAlignment.Center)
+
+    for i, sSpec in ipairs(stats) do
+        local key = sSpec.Key or sSpec.Id or ("Stat_" .. tostring(i))
+        local cardW = math.floor((1 / cols) * 100) / 100
+
+        local card = Draw.Box("Frame", {
+            Name = "StatCard_" .. key,
+            Size = UDim2.new(cardW, -5, 1, 0),
+            Parent = grid,
+        }, "Panel", "Outline", 6, 1.5)
+
+        local inner = Draw.New("Frame", {
+            BackgroundTransparency = 1,
+            Position = UDim2.fromOffset(8, 6),
+            Size = UDim2.new(1, -16, 1, -12),
+            Parent = card,
+        })
+        Draw.List(inner, 2, false, Enum.HorizontalAlignment.Left, Enum.VerticalAlignment.Center)
+
+        -- Top row: Icon + Title
+        local topRow = Draw.New("Frame", {
+            BackgroundTransparency = 1,
+            Size = UDim2.new(1, 0, 0, 16),
+            Parent = inner,
+        })
+        Draw.List(topRow, 4, true, Enum.HorizontalAlignment.Left, Enum.VerticalAlignment.Center)
+
+        if sSpec.Icon then
+            local icHolder = Draw.New("Frame", {
+                BackgroundTransparency = 1,
+                Size = UDim2.fromOffset(14, 14),
+                Parent = topRow,
+            })
+            local ic = Icons.Create(icHolder, sSpec.Icon, 14, nil, sSpec.Title)
+            if ic then
+                ic.AnchorPoint = Vector2.new(0.5, 0.5)
+                ic.Position = UDim2.fromScale(0.5, 0.5)
+            end
+        end
+
+        local title = Draw.Text({
+            Size = UDim2.new(1, -20, 1, 0),
+            TextTruncate = Enum.TextTruncate.AtEnd,
+            Parent = topRow,
+        }, "Desc", 10, "SubText", sSpec.Title or key)
+
+        -- Middle row: Big Value
+        local valLabel = Draw.Text({
+            Size = UDim2.new(1, 0, 0, 22),
+            TextTruncate = Enum.TextTruncate.AtEnd,
+            Parent = inner,
+        }, "Display", 16, sSpec.Color or "Accent", tostring(sSpec.Value or "0"))
+
+        -- Bottom row: SubText / Delta
+        local subLabel = Draw.Text({
+            Size = UDim2.new(1, 0, 0, 14),
+            TextTruncate = Enum.TextTruncate.AtEnd,
+            Parent = inner,
+        }, "Desc", 9, "Muted", tostring(sSpec.SubText or ""))
+
+        statGrid.Cards[key] = {
+            Card = card,
+            ValLabel = valLabel,
+            SubLabel = subLabel,
+        }
+    end
+
+    statGrid.Holder = holder
+    statGrid.Item = self:Add(holder, { Height = height })
+    Widget.Register(statGrid, idx, info)
+    return statGrid
+end
+
+function StatGrid:SetStat(key, val, sub, col)
+    local card = self.Cards[key]
+    if not card then return end
+    if val ~= nil then
+        card.ValLabel.Text = tostring(val)
+    end
+    if sub ~= nil then
+        card.SubLabel.Text = tostring(sub)
+    end
+    if col ~= nil then
+        Theme.Bind(card.ValLabel, { TextColor3 = col })
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════════════════════
+--  3. AddLiveGraph: 8-Bit Scrolling Performance Stream Strip-Chart
+-- ═══════════════════════════════════════════════════════════════════════════
+local LiveGraph = {}
+LiveGraph.__index = LiveGraph
+
+function Container:AddLiveGraph(idx, info)
+    idx, info = Widget.Normalize(idx, info)
+    local height = info.Height or 110
+    local maxSamples = info.MaxSamples or 30
+    local suffix = info.Suffix or ""
+
+    local graph = setmetatable({
+        Type = "LiveGraph",
+        Container = self,
+        MaxSamples = maxSamples,
+        Samples = {},
+        Suffix = suffix,
+        Color = info.Color or "Accent",
+    }, LiveGraph)
+
+    local holder = Draw.New("Frame", {
+        Name = "LiveGraphHolder",
+        BackgroundTransparency = 1,
+        Size = UDim2.new(1, 0, 0, height),
+    })
+
+    local shadow = Draw.Box("Frame", {
+        Position = UDim2.fromOffset(Config.Group.Shadow, Config.Group.Shadow),
+        Size = UDim2.new(1, -Config.Group.Shadow, 1, -Config.Group.Shadow),
+        Parent = holder,
+    }, "Shadow", nil, "Group")
+
+    local card = Draw.Box("Frame", {
+        Size = UDim2.new(1, -Config.Group.Shadow, 1, -Config.Group.Shadow),
+        Parent = holder,
+    }, "Panel", "Outline", "Group", Config.Group.Stroke)
+
+    -- Header bar: Title, Current Value, Min, Max, Avg
+    local header = Draw.New("Frame", {
+        Name = "GraphHeader",
+        BackgroundTransparency = 1,
+        Position = UDim2.fromOffset(8, 4),
+        Size = UDim2.new(1, -16, 0, 18),
+        Parent = card,
+    })
+
+    local title = Draw.Text({
+        Position = UDim2.fromOffset(0, 0),
+        Size = UDim2.new(0.5, 0, 1, 0),
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Parent = header,
+    }, "Body", Util.TextSize("Label"), "Text", info.Title or info.Text or "Telemetry Stream")
+
+    local statsRow = Draw.New("Frame", {
+        BackgroundTransparency = 1,
+        AnchorPoint = Vector2.new(1, 0),
+        Position = UDim2.fromScale(1, 0),
+        Size = UDim2.new(0.5, 0, 1, 0),
+        Parent = header,
+    })
+    Draw.List(statsRow, 6, true, Enum.HorizontalAlignment.Right, Enum.VerticalAlignment.Center)
+
+    local currLabel = Draw.Text({
+        Size = UDim2.fromOffset(60, 16),
+        TextXAlignment = Enum.TextXAlignment.Right,
+        LayoutOrder = 1,
+        Parent = statsRow,
+    }, "Display", 13, graph.Color, "0" .. suffix)
+
+    -- Graph Display Screen
+    local screen = Draw.New("Frame", {
+        Name = "GraphScreen",
+        Position = UDim2.fromOffset(8, 24),
+        Size = UDim2.new(1, -16, 1, -32),
+        ClipsDescendants = true,
+        Parent = card,
+    })
+    Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = screen }, "BackdropAlt", "Outline", 4, 1)
+
+    -- Historical Bar Columns Container
+    local barsHolder = Draw.New("Frame", {
+        Name = "Bars",
+        BackgroundTransparency = 1,
+        Position = UDim2.fromOffset(4, 4),
+        Size = UDim2.new(1, -8, 1, -8),
+        Parent = screen,
+    })
+    Draw.List(barsHolder, 2, true, Enum.HorizontalAlignment.Right, Enum.VerticalAlignment.Bottom)
+
+    graph.Holder = holder
+    graph.BarsHolder = barsHolder
+    graph.CurrLabel = currLabel
+
+    graph.Item = self:Add(holder, { Height = height })
+    Widget.Register(graph, idx, info)
+    return graph
+end
+
+function LiveGraph:Push(val)
+    val = tonumber(val) or 0
+    table.insert(self.Samples, val)
+    if #self.Samples > self.MaxSamples then
+        table.remove(self.Samples, 1)
+    end
+
+    if self.CurrLabel then
+        self.CurrLabel.Text = tostring(math.floor(val + 0.5)) .. self.Suffix
+    end
+
+    -- Find Min/Max
+    local maxVal = 1
+    for _, s in ipairs(self.Samples) do
+        if s > maxVal then maxVal = s end
+    end
+
+    -- Re-render bars
+    self.BarsHolder:ClearAllChildren()
+    Draw.List(self.BarsHolder, 2, true, Enum.HorizontalAlignment.Right, Enum.VerticalAlignment.Bottom)
+
+    local totalBars = #self.Samples
+    local barW = math.max(3, math.floor((self.BarsHolder.AbsoluteSize.X - (totalBars * 2)) / totalBars))
+
+    for _, s in ipairs(self.Samples) do
+        local heightRatio = math.clamp(s / maxVal, 0.05, 1)
+        local bar = Draw.New("Frame", {
+            Size = UDim2.new(0, barW, heightRatio, 0),
+            BorderSizePixel = 0,
+            Parent = self.BarsHolder,
+        })
+        Draw.Corner(bar, 2)
+        Theme.Bind(bar, { BackgroundColor3 = self.Color })
+    end
+end
+
+function LiveGraph:Clear()
+    self.Samples = {}
+    if self.BarsHolder then
+        self.BarsHolder:ClearAllChildren()
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════════════════════
+--  4. AddInventoryGrid: Stardew Valley / RPG Slot Matrix
+-- ═══════════════════════════════════════════════════════════════════════════
+local InventoryGrid = {}
+InventoryGrid.__index = InventoryGrid
+
+function Container:AddInventoryGrid(idx, info)
+    idx, info = Widget.Normalize(idx, info)
+    local rows = info.Rows or 2
+    local cols = info.Columns or 6
+    local slotSize = info.SlotSize or 38
+    local gap = 4
+    local height = rows * (slotSize + gap) + 38
+
+    local inv = setmetatable({
+        Type = "InventoryGrid",
+        Container = self,
+        Slots = {},
+        Items = info.Items or {},
+        Callback = info.Callback,
+    }, InventoryGrid)
+
+    local holder = Draw.New("Frame", {
+        Name = "InventoryHolder",
+        BackgroundTransparency = 1,
+        Size = UDim2.new(1, 0, 0, height),
+    })
+
+    local shadow = Draw.Box("Frame", {
+        Position = UDim2.fromOffset(Config.Group.Shadow, Config.Group.Shadow),
+        Size = UDim2.new(1, -Config.Group.Shadow, 1, -Config.Group.Shadow),
+        Parent = holder,
+    }, "Shadow", nil, "Group")
+
+    local card = Draw.Box("Frame", {
+        Size = UDim2.new(1, -Config.Group.Shadow, 1, -Config.Group.Shadow),
+        Parent = holder,
+    }, "Panel", "Outline", "Group", Config.Group.Stroke)
+
+    -- Header bar
+    local header = Draw.New("Frame", {
+        Name = "InvHeader",
+        BackgroundTransparency = 1,
+        Position = UDim2.fromOffset(10, 4),
+        Size = UDim2.new(1, -20, 0, 20),
+        Parent = card,
+    })
+    Draw.Text({
+        Size = UDim2.fromScale(1, 1),
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Parent = header,
+    }, "Body", Util.TextSize("Label"), "Text", info.Title or info.Text or "Inventory Grid")
+
+    -- Grid frame
+    local gridHolder = Draw.New("Frame", {
+        Name = "Grid",
+        BackgroundTransparency = 1,
+        Position = UDim2.fromOffset(10, 26),
+        Size = UDim2.new(1, -20, 1, -30),
+        Parent = card,
+    })
+
+    local totalSlots = rows * cols
+    for i = 1, totalSlots do
+        local r = math.floor((i - 1) / cols)
+        local c = (i - 1) % cols
+
+        local slot = Draw.Box("TextButton", {
+            Name = "Slot_" .. tostring(i),
+            Text = "",
+            AutoButtonColor = false,
+            Position = UDim2.fromOffset(c * (slotSize + gap), r * (slotSize + gap)),
+            Size = UDim2.fromOffset(slotSize, slotSize),
+            Parent = gridHolder,
+        }, "BackdropAlt", "Outline", 4, 1.5)
+
+        local iconSlot = Draw.New("Frame", {
+            Name = "IconSlot",
+            BackgroundTransparency = 1,
+            AnchorPoint = Vector2.new(0.5, 0.5),
+            Position = UDim2.fromScale(0.5, 0.5),
+            Size = UDim2.fromOffset(slotSize - 8, slotSize - 8),
+            Parent = slot,
+        })
+
+        local countBadge = Draw.Text({
+            Name = "Count",
+            AnchorPoint = Vector2.new(1, 1),
+            Position = UDim2.new(1, -2, 1, -1),
+            Size = UDim2.fromOffset(24, 12),
+            TextXAlignment = Enum.TextXAlignment.Right,
+            Visible = false,
+            Parent = slot,
+        }, "Desc", 9, "White")
+        Draw.Stroke(countBadge, "Ink", 1)
+
+        slot.Activated:Connect(function()
+            if inv.Callback then
+                inv.Callback(i, inv.Items[i])
+            end
+        end)
+
+        inv.Slots[i] = {
+            Slot = slot,
+            IconSlot = iconSlot,
+            Count = countBadge,
+        }
+
+        if inv.Items[i] then
+            inv:SetSlot(i, inv.Items[i])
+        end
+    end
+
+    inv.Holder = holder
+    inv.Item = self:Add(holder, { Height = height })
+    Widget.Register(inv, idx, info)
+    return inv
+end
+
+function InventoryGrid:SetSlot(index, itemData)
+    local s = self.Slots[index]
+    if not s then return end
+    self.Items[index] = itemData
+
+    s.IconSlot:ClearAllChildren()
+    if not itemData then
+        s.Count.Visible = false
+        return
+    end
+
+    if itemData.Icon then
+        local ic = Icons.Create(s.IconSlot, itemData.Icon, s.IconSlot.AbsoluteSize.X or 24, nil, itemData.Name)
+        if ic then
+            ic.AnchorPoint = Vector2.new(0.5, 0.5)
+            ic.Position = UDim2.fromScale(0.5, 0.5)
+        end
+    end
+
+    if itemData.Count and itemData.Count > 1 then
+        s.Count.Text = tostring(itemData.Count)
+        s.Count.Visible = true
+    else
+        s.Count.Visible = false
+    end
+end
+
+function InventoryGrid:ClearSlot(index)
+    self:SetSlot(index, nil)
+end
+
+function InventoryGrid:GetSlot(index)
+    return self.Items[index]
+end
+
+
 -- WindUI-style shorthand aliases on Container
 Container.Toggle = Container.AddToggle
 Container.Checkbox = Container.AddCheckbox
@@ -8180,6 +9479,10 @@ Container.Segmented = Container.AddSegmented
 Container.Stat = Container.AddStat
 Container.Status = Container.AddStatus
 Container.Table = Container.AddTable
+Container.Monitor = Container.AddMonitor
+Container.StatGrid = Container.AddStatGrid
+Container.LiveGraph = Container.AddLiveGraph
+Container.InventoryGrid = Container.AddInventoryGrid
 
 
 --@return card, face, scale Floating block card with drop shadow
@@ -9210,7 +10513,7 @@ end
 function Window:BuildCastleDecor(topbar)
     self.CastleDecor = {}
     -- 2 Wall Torch Braziers with flickering flame
-    for index, spot in ipairs({ { 0.44, 6 }, { 0.68, 6 } }) do
+    for index, spot in ipairs({ { 0.51, 6 }, { 0.71, 6 } }) do
         local holder = Draw.New("Frame", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(18, 26), ZIndex = 2, Parent = topbar })
         local torch = Sprite.New(holder, "torch_flame", 18)
         torch.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -9233,14 +10536,14 @@ end
 function Window:BuildUndergroundDecor(topbar)
     self.UndergroundDecor = {}
     -- Hanging Cavern Stalactites
-    for index, spot in ipairs({ { 0.44, 0, 8, 16 }, { 0.52, 0, 6, 20 }, { 0.61, 0, 8, 14 }, { 0.69, 0, 6, 18 } }) do
+    for index, spot in ipairs({ { 0.50, 0, 8, 16 }, { 0.57, 0, 6, 20 }, { 0.64, 0, 8, 14 }, { 0.71, 0, 6, 18 } }) do
         local stal = Draw.New("Frame", { BackgroundTransparency = 1, Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(spot[3], spot[4]), ZIndex = 2, Parent = topbar })
         local body = Draw.New("Frame", { Size = UDim2.fromScale(1, 1), BackgroundColor3 = Color3.fromRGB(35, 55, 120), Parent = stal })
         Draw.Corner(body, 2)
         table.insert(self.UndergroundDecor, stal)
     end
     -- Glowing Cyan Crystal Geodes
-    for index, spot in ipairs({ { 0.48, 8 }, { 0.65, 10 } }) do
+    for index, spot in ipairs({ { 0.53, 8 }, { 0.67, 10 } }) do
         local gem = Sprite.New(topbar, "crystal_gem", 16)
         gem.AnchorPoint = Vector2.new(0.5, 0)
         gem.Position = UDim2.new(spot[1], 0, 0, spot[2])
@@ -9253,13 +10556,13 @@ end
 function Window:BuildIceDecor(topbar)
     self.IceDecor = {}
     -- Translucent Hanging Icicles
-    for index, spot in ipairs({ { 0.43, 0, 6, 16 }, { 0.49, 0, 8, 22 }, { 0.56, 0, 6, 14 }, { 0.62, 0, 7, 20 }, { 0.68, 0, 6, 15 } }) do
+    for index, spot in ipairs({ { 0.50, 0, 6, 16 }, { 0.55, 0, 8, 22 }, { 0.61, 0, 6, 14 }, { 0.66, 0, 7, 20 }, { 0.72, 0, 6, 15 } }) do
         local icicle = Draw.New("Frame", { BackgroundTransparency = 0.25, Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(spot[3], spot[4]), BackgroundColor3 = Color3.fromRGB(180, 225, 255), ZIndex = 2, Parent = topbar })
         Draw.Corner(icicle, 2)
         table.insert(self.IceDecor, icicle)
     end
     -- Drifting Snowflakes
-    for index, spot in ipairs({ { 0.46, 14 }, { 0.53, 24 }, { 0.59, 12 }, { 0.66, 22 } }) do
+    for index, spot in ipairs({ { 0.52, 14 }, { 0.58, 24 }, { 0.64, 12 }, { 0.70, 22 } }) do
         local flake = Sprite.New(topbar, "snowflake_crystal", 12)
         flake.AnchorPoint = Vector2.new(0.5, 0)
         flake.Position = UDim2.new(spot[1], 0, 0, spot[2])
@@ -9279,7 +10582,7 @@ function Window:BuildDesertDecor(topbar)
     Anim.Loop("DecorDesert", sun, { Rotation = 30 }, 6.0, "Linear", true)
     table.insert(self.DesertDecor, sun)
     -- Drifting Sand Motes
-    for index, spot in ipairs({ { 0.44, 12 }, { 0.50, 24 }, { 0.56, 14 }, { 0.62, 26 } }) do
+    for index, spot in ipairs({ { 0.51, 12 }, { 0.57, 24 }, { 0.63, 14 }, { 0.68, 26 } }) do
         local mote = Draw.New("Frame", { BackgroundTransparency = 0.3, Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(4, 3), BackgroundColor3 = Color3.fromRGB(250, 210, 120), ZIndex = 2, Parent = topbar })
         Draw.Corner(mote, 1)
         Anim.Loop("DecorDesert", mote, { Position = UDim2.new(spot[1], 14, 0, spot[2] - 2) }, 1.8 + index * 0.4, "Sine", true)
@@ -9290,7 +10593,7 @@ end
 function Window:BuildGhostHouseDecor(topbar)
     self.GhostHouseDecor = {}
     -- Floating Translucent Specters
-    for index, spot in ipairs({ { 0.47, 8 }, { 0.63, 10 } }) do
+    for index, spot in ipairs({ { 0.52, 8 }, { 0.68, 10 } }) do
         local spook = Sprite.New(topbar, "phantom_spook", 20)
         spook.AnchorPoint = Vector2.new(0.5, 0)
         spook.Position = UDim2.new(spot[1], 0, 0, spot[2])
@@ -9319,7 +10622,7 @@ function Window:BuildStarRoadDecor(topbar)
     Anim.Loop("DecorStarRoad", ship, { Position = UDim2.new(0.50, 0, 0.5, -3), Rotation = 6 }, 1.6, "Sine", true)
     table.insert(self.StarRoadDecor, ship)
     -- Twinkling Cosmic Stars
-    for index, spot in ipairs({ { 0.43, 8 }, { 0.55, 22 }, { 0.62, 10 }, { 0.68, 20 } }) do
+    for index, spot in ipairs({ { 0.50, 8 }, { 0.58, 22 }, { 0.65, 10 }, { 0.71, 20 } }) do
         local star = Sprite.New(topbar, "cosmic_star", 14)
         star.AnchorPoint = Vector2.new(0.5, 0.5)
         star.Position = UDim2.new(spot[1], 0, 0, spot[2])
@@ -9332,7 +10635,7 @@ end
 function Window:BuildJungleDecor(topbar)
     self.JungleDecor = {}
     -- Hanging Jungle Vines and Tendrils
-    for index, spot in ipairs({ { 0.44, 0, 4, 18 }, { 0.51, 0, 5, 24 }, { 0.58, 0, 4, 16 }, { 0.65, 0, 5, 20 } }) do
+    for index, spot in ipairs({ { 0.50, 0, 4, 18 }, { 0.57, 0, 5, 24 }, { 0.64, 0, 4, 16 }, { 0.71, 0, 5, 20 } }) do
         local vine = Draw.New("Frame", { BackgroundColor3 = Color3.fromRGB(45, 130, 45), Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(spot[3], spot[4]), ZIndex = 2, Parent = topbar })
         Draw.Corner(vine, 2)
         Anim.Loop("DecorJungle", vine, { Rotation = (index % 2 == 0) and 5 or -5 }, 2.2 + index * 0.3, "Sine", true)
@@ -9351,7 +10654,7 @@ end
 function Window:BuildSkyWorldDecor(topbar)
     self.SkyWorldDecor = {}
     -- Floating Angel Feathers
-    for index, spot in ipairs({ { 0.45, 8 }, { 0.52, 22 }, { 0.60, 10 }, { 0.67, 24 } }) do
+    for index, spot in ipairs({ { 0.51, 8 }, { 0.58, 22 }, { 0.65, 10 }, { 0.71, 24 } }) do
         local feather = Sprite.New(topbar, "feather_bow", 14)
         feather.AnchorPoint = Vector2.new(0.5, 0)
         feather.Position = UDim2.new(spot[1], 0, 0, spot[2])
@@ -9363,14 +10666,14 @@ end
 
 function Window:BuildDecor(topbar)
     self.Clouds, self.Stars = {}, {}
-    for index, spot in ipairs({ { 0.44, 8, 42 }, { 0.6, 22, 30 } }) do
+    for index, spot in ipairs({ { 0.52, 8, 42 }, { 0.68, 22, 30 } }) do
         local cloud = Draw.Cloud(topbar, spot[3])
         cloud.Position = UDim2.new(spot[1], 0, 0, spot[2])
         cloud.ZIndex = 2
         Anim.Loop("DecorClouds", cloud, { Position = UDim2.new(spot[1], 14, 0, spot[2] + 2) }, 4 + index, "Sine", true)
         table.insert(self.Clouds, cloud)
     end
-    for index, spot in ipairs({ { 0.42, 10, 12 }, { 0.48, 30, 9 }, { 0.54, 14, 14 }, { 0.6, 32, 10 }, { 0.66, 8, 11 }, { 0.71, 26, 8 } }) do
+    for index, spot in ipairs({ { 0.51, 10, 12 }, { 0.55, 30, 9 }, { 0.60, 14, 14 }, { 0.64, 32, 10 }, { 0.68, 8, 11 }, { 0.72, 26, 8 } }) do
         local star = Draw.Text({ AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(spot[3] + 4, spot[3] + 4), TextXAlignment = Enum.TextXAlignment.Center, ZIndex = 2, Parent = topbar }, "Glyph", spot[3], "DecorColor")
         star.TextTransparency = 0.15
         Anim.Loop("DecorStars", star, { TextTransparency = 0.8 }, 0.9 + index * 0.37, "Sine", true)
@@ -9403,6 +10706,7 @@ function Window:BuildDecor(topbar)
     Theme.OnRender(self.Stars, function()
         self:RenderDecor()
     end)
+    self:RenderDecor()
 end
 
 -- Halloween window accents: orange glow border, purple bottom fog, hanging spider
@@ -9446,11 +10750,11 @@ end
 --  Kirby himself peeks from the right edge, bobbing on a thread of starlight.
 -- ═══════════════════════════════════════════════════════════════════════════
 function Window:BuildKirbyDecor(topbar)
-    -- Floating Warp Stars in topbar — 5 stars at staggered positions
-    self.KirbyStars = {}
+    self.KirbyDecor = {}
+    self.KirbyBody = {}
     local starSpots = {
-        { 0.42, 8,  22 }, { 0.50, 20, 20 }, { 0.57, 6, 24 },
-        { 0.64, 22, 18 }, { 0.71, 10, 22 },
+        { 0.52, 8,  22 }, { 0.57, 20, 20 }, { 0.62, 6, 24 },
+        { 0.67, 22, 18 }, { 0.72, 10, 22 },
     }
     for idx, spot in ipairs(starSpots) do
         local s = Sprite.New(topbar, "kirby_star", 22)
@@ -9458,18 +10762,17 @@ function Window:BuildKirbyDecor(topbar)
         s.Position     = UDim2.new(spot[1], 0, 0, spot[2])
         s.ZIndex       = 2
         local rise = idx % 2 == 0 and 6 or -5
-        -- Stars spin and rise, like a Kirby copy-ability burst
         Anim.Loop("DecorKirby", s, { Position = UDim2.new(spot[1], 0, 0, spot[2] + rise), Rotation = idx % 2 == 0 and 20 or -20 }, 1.0 + idx * 0.28, "Sine", true)
-        table.insert(self.KirbyStars, s)
+        table.insert(self.KirbyDecor, s)
     end
-    -- Kirby peeks from right side of topbar — a tiny mascot head bobbing
-    local peekHolder = Draw.New("Frame", { Name = "KirbyPeek", BackgroundTransparency = 1, AnchorPoint = Vector2.new(1, 0), Position = UDim2.new(0.44, 0, 0, 0), Size = UDim2.fromOffset(24, 42), ZIndex = 3, Parent = topbar })
+    -- Kirby peeks from right side of topbar
+    local peekHolder = Draw.New("Frame", { Name = "KirbyPeek", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.74, 0, 0, 0), Size = UDim2.fromOffset(24, 42), ZIndex = 3, Parent = topbar })
     local peekKirby = Sprite.New(peekHolder, "kirby_body", 22)
     peekKirby.AnchorPoint = Vector2.new(0.5, 0)
     peekKirby.Position    = UDim2.fromOffset(12, 6)
-    Anim.Loop("DecorKirby", peekHolder, { Position = UDim2.new(0.44, 0, 0, 4) }, 1.6, "Sine", true)
+    Anim.Loop("DecorKirby", peekHolder, { Position = UDim2.new(0.74, 0, 0, 4) }, 1.6, "Sine", true)
     self.KirbyPeek = peekHolder
-    table.insert(self.KirbyStars, peekHolder)
+    table.insert(self.KirbyDecor, peekHolder)
 
     -- Bottom accent: pink cloud-puff band (Dream Land horizon)
     local cloudBand = Draw.New("Frame", { Name = "KirbyCloudBand", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, 48), BorderSizePixel = 0, ZIndex = 1, Parent = self.Body })
@@ -9480,61 +10783,54 @@ function Window:BuildKirbyDecor(topbar)
     end)
     Anim.Loop("DecorKirbyBody", bandGrad, { Offset = Vector2.new(0, 0.1) }, 2.8, "Sine", true)
     self.KirbyBand = cloudBand
+    table.insert(self.KirbyBody, cloudBand)
 
-    -- Meta Knight floats in from the left — appears briefly then hides again
-    local mkHolder = Draw.New("Frame", { Name = "KirbyMK", BackgroundTransparency = 1, Position = UDim2.new(0.38, 0, 0, 4), Size = UDim2.fromOffset(20, 36), ZIndex = 3, Parent = topbar })
+    -- Meta Knight floats on safe left edge
+    local mkHolder = Draw.New("Frame", { Name = "KirbyMK", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.50, 0, 0, 4), Size = UDim2.fromOffset(20, 36), ZIndex = 3, Parent = topbar })
     local mk = Sprite.New(mkHolder, "kirby_metaknight", 18)
     mk.AnchorPoint = Vector2.new(0.5, 0)
     mk.Position    = UDim2.fromOffset(10, 6)
-    Anim.Loop("DecorKirby", mkHolder, { Position = UDim2.new(0.38, 0, 0, 10), Rotation = -6 }, 2.1, "Sine", true)
+    Anim.Loop("DecorKirby", mkHolder, { Position = UDim2.new(0.50, 0, 0, 10), Rotation = -6 }, 2.1, "Sine", true)
     self.KirbyMK = mkHolder
-    table.insert(self.KirbyStars, mkHolder)
+    table.insert(self.KirbyDecor, mkHolder)
 end
 
--- ═══════════════════════════════════════════════════════════════════════════
---  POKÉMON CAFÉ DECORATION — Pikachu spark bolts + Steaming Cup + Pokéball
---  Electric ⚡ bolts flash across topbar like Pikachu charging up.
---  A steaming coffee cup sits in the decoration zone.
---  Pikachu ears peek from the right edge; PokéBall rolls through bottom.
--- ═══════════════════════════════════════════════════════════════════════════
 function Window:BuildPokemonDecor(topbar)
-    -- Pikachu electric bolt text sprites shooting across topbar
-    self.PokeSprites = {}
+    self.PokemonDecor = {}
+    self.PokemonBody = {}
     local boltSpots = {
-        { 0.42, 12, 14 }, { 0.50, 24, 12 }, { 0.58, 8, 16 },
-        { 0.65, 22, 12 }, { 0.72, 14, 14 },
+        { 0.53, 12, 14 }, { 0.58, 24, 12 }, { 0.63, 8, 16 },
+        { 0.68, 22, 12 }, { 0.73, 14, 14 },
     }
     for idx, spot in ipairs(boltSpots) do
         local boltHolder = Draw.New("Frame", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(spot[3], spot[3]), ZIndex = 3, Parent = topbar })
-        -- Draw crisp vector lightning spark
         local b1 = Draw.New("Frame", { Position = UDim2.fromScale(0.2, 0), Size = UDim2.new(0, 3, 0.6, 0), Rotation = -25, BorderSizePixel = 0, Parent = boltHolder })
         local b2 = Draw.New("Frame", { Position = UDim2.fromScale(0.4, 0.4), Size = UDim2.new(0, 3, 0.6, 0), Rotation = -25, BorderSizePixel = 0, Parent = boltHolder })
         Theme.Bind(b1, { BackgroundColor3 = "Coin" })
         Theme.Bind(b2, { BackgroundColor3 = "Accent" })
         Anim.Loop("DecorPokemon", boltHolder, { Position = UDim2.new(spot[1], 6, 0, spot[2] - 4), Rotation = 15 }, 0.5 + idx * 0.2, "Sine", true)
-        table.insert(self.PokeSprites, boltHolder)
+        table.insert(self.PokemonDecor, boltHolder)
     end
     -- Pikachu mascot peeking in topbar
-    local pikaHolder = Draw.New("Frame", { Name = "PokePika", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.46, 0, 0, 4), Size = UDim2.fromOffset(22, 38), ZIndex = 3, Parent = topbar })
+    local pikaHolder = Draw.New("Frame", { Name = "PokePika", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.74, 0, 0, 4), Size = UDim2.fromOffset(22, 38), ZIndex = 3, Parent = topbar })
     local pika = Sprite.New(pikaHolder, "poke_pikachu", 22)
     pika.AnchorPoint = Vector2.new(0.5, 0)
     pika.Position    = UDim2.fromOffset(11, 4)
-    Anim.Loop("DecorPokemon", pikaHolder, { Position = UDim2.new(0.46, 0, 0, 10), Rotation = 4 }, 1.4, "Sine", true)
+    Anim.Loop("DecorPokemon", pikaHolder, { Position = UDim2.new(0.74, 0, 0, 10), Rotation = 4 }, 1.4, "Sine", true)
     self.PikachuPeek = pikaHolder
-    table.insert(self.PokeSprites, pikaHolder)
-    -- Steaming cup on the left side of decoration area
-    local cupHolder = Draw.New("Frame", { Name = "PokeCup", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.39, 0, 0, 6), Size = UDim2.fromOffset(22, 36), ZIndex = 3, Parent = topbar })
+    table.insert(self.PokemonDecor, pikaHolder)
+    -- Steaming cup on safe left edge
+    local cupHolder = Draw.New("Frame", { Name = "PokeCup", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.50, 0, 0, 6), Size = UDim2.fromOffset(22, 36), ZIndex = 3, Parent = topbar })
     local cup = Sprite.New(cupHolder, "poke_cup", 20)
     cup.AnchorPoint = Vector2.new(0.5, 0)
     cup.Position    = UDim2.fromOffset(11, 4)
-    -- Steam text "˜" rising above cup
     local steam = Draw.New("Frame", { AnchorPoint = Vector2.new(0.5, 1), Position = UDim2.fromOffset(11, 2), Size = UDim2.fromOffset(4, 12), BackgroundTransparency = 0.4, ZIndex = 4, Parent = cupHolder })
     Draw.Corner(steam, 2)
     Theme.Bind(steam, { BackgroundColor3 = "White" })
     Anim.Loop("DecorPokemon", steam, { Position = UDim2.fromOffset(11, -6), BackgroundTransparency = 0.95 }, 1.2, "Sine", true)
     Anim.Loop("DecorPokemon", cup, { Rotation = 4 }, 1.8, "Sine", true)
     self.PokeCup = cupHolder
-    table.insert(self.PokeSprites, cupHolder)
+    table.insert(self.PokemonDecor, cupHolder)
     -- Bottom accent: café warm amber gradient band with PokéBall rolling
     local cafeBand = Draw.New("Frame", { Name = "PokeCafeBand", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, 52), BorderSizePixel = 0, ZIndex = 1, Parent = self.Body })
     Draw.Corner(cafeBand, Config.Window.Radius)
@@ -9552,48 +10848,42 @@ function Window:BuildPokemonDecor(topbar)
     Anim.Loop("DecorPokemonBody", ballHolder, { Position = UDim2.new(0.85, 0, 1, -38) }, 6.0, "Sine", true)
     self.PokeBand = cafeBand
     self.PokeBallRoll = ballHolder
+    table.insert(self.PokemonBody, cafeBand)
+    table.insert(self.PokemonBody, ballHolder)
 end
 
--- ═══════════════════════════════════════════════════════════════════════════
---  ANIMAL CROSSING DECORATION — Leaf drift + Isabelle + Tom Nook Bell
---  Cherry blossom / leaf sprites drift lazily across the topbar.
---  Isabelle waves from her desk area. Tom Nook rings his bell in the corner.
---  A warm grass-green strip with flower motifs hugs the window bottom.
--- ═══════════════════════════════════════════════════════════════════════════
 function Window:BuildAnimalCrossingDecor(topbar)
-    self.ACSprites = {}
-    -- Drifting leaf / cherry sprites across topbar — gentle float
+    self.AnimalCrossingDecor = {}
+    self.AnimalCrossingBody = {}
     local leafSpots = {
-        { 0.42, 10, "ac_leaf", 18 }, { 0.49, 24, "ac_cherry", 16 }, { 0.56, 8,  "ac_leaf", 20 },
-        { 0.63, 20, "ac_cherry", 16 }, { 0.70, 12, "ac_leaf", 18 },
+        { 0.52, 10, "ac_leaf", 18 }, { 0.57, 24, "ac_cherry", 16 }, { 0.62, 8,  "ac_leaf", 20 },
+        { 0.67, 20, "ac_cherry", 16 }, { 0.72, 12, "ac_leaf", 18 },
     }
     for idx, spot in ipairs(leafSpots) do
         local leaf = Sprite.New(topbar, spot[3], spot[4])
         leaf.AnchorPoint = Vector2.new(0.5, 0)
         leaf.Position    = UDim2.new(spot[1], 0, 0, spot[2])
         leaf.ZIndex      = 2
-        -- Gentle sine drift: leaves sway and float slowly
         local sway = idx % 2 == 0 and 8 or -6
         Anim.Loop("DecorAC", leaf, { Position = UDim2.new(spot[1], sway, 0, spot[2] + 4), Rotation = idx % 2 == 0 and 12 or -10 }, 2.4 + idx * 0.45, "Sine", true)
-        table.insert(self.ACSprites, leaf)
+        table.insert(self.AnimalCrossingDecor, leaf)
     end
-    -- Isabelle mascot sitting at desk — gentle wave bob
-    local isabelleHolder = Draw.New("Frame", { Name = "ACIsabelle", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.46, 0, 0, 4), Size = UDim2.fromOffset(22, 38), ZIndex = 3, Parent = topbar })
+    -- Isabelle mascot sitting at desk
+    local isabelleHolder = Draw.New("Frame", { Name = "ACIsabelle", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.74, 0, 0, 4), Size = UDim2.fromOffset(22, 38), ZIndex = 3, Parent = topbar })
     local isabelle = Sprite.New(isabelleHolder, "ac_isabelle", 22)
     isabelle.AnchorPoint = Vector2.new(0.5, 0)
     isabelle.Position    = UDim2.fromOffset(11, 4)
-    -- Isabelle bobs gently — no sharp bounces (matching AC Motion)
-    Anim.Loop("DecorAC", isabelleHolder, { Position = UDim2.new(0.46, 0, 0, 10) }, 2.0, "Sine", true)
+    Anim.Loop("DecorAC", isabelleHolder, { Position = UDim2.new(0.74, 0, 0, 10) }, 2.0, "Sine", true)
     self.ACIsabelle = isabelleHolder
-    table.insert(self.ACSprites, isabelleHolder)
-    -- Tom Nook holds a bell — rings in topbar right area
-    local nookHolder = Draw.New("Frame", { Name = "ACNook", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.40, 0, 0, 6), Size = UDim2.fromOffset(20, 36), ZIndex = 3, Parent = topbar })
+    table.insert(self.AnimalCrossingDecor, isabelleHolder)
+    -- Tom Nook holds a bell on safe left edge
+    local nookHolder = Draw.New("Frame", { Name = "ACNook", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.50, 0, 0, 6), Size = UDim2.fromOffset(20, 36), ZIndex = 3, Parent = topbar })
     local nook = Sprite.New(nookHolder, "ac_tomnook", 20)
     nook.AnchorPoint = Vector2.new(0.5, 0)
     nook.Position    = UDim2.fromOffset(10, 4)
-    Anim.Loop("DecorAC", nook, { Rotation = 8 }, 1.2, "Sine", true)
+    Anim.Loop("DecorAC", nookHolder, { Rotation = 8 }, 1.2, "Sine", true)
     self.ACNook = nookHolder
-    table.insert(self.ACSprites, nookHolder)
+    table.insert(self.AnimalCrossingDecor, nookHolder)
     -- Bottom accent: island grass green band with flower pips
     local grassBand = Draw.New("Frame", { Name = "ACGrassBand", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, 44), BorderSizePixel = 0, ZIndex = 1, Parent = self.Body })
     Draw.Corner(grassBand, Config.Window.Radius)
@@ -9601,7 +10891,6 @@ function Window:BuildAnimalCrossingDecor(topbar)
     Theme.OnRender(grassBand, function()
         grassBand.BackgroundColor3 = Theme.Colors.Grass or Color3.fromRGB(154, 205, 123)
     end)
-    -- Flower / leaf pips along the bottom strip
     for i = 1, 7 do
         local spriteKey = (i % 2 == 0) and "ac_leaf" or "ac_cherry"
         local pip = Sprite.New(grassBand, spriteKey, 14)
@@ -9611,47 +10900,41 @@ function Window:BuildAnimalCrossingDecor(topbar)
         Anim.Loop("DecorACBody", pip, { Position = UDim2.new((i-1)/8, 6, 0.5, -2) }, 1.5 + i * 0.3, "Sine", true)
     end
     self.ACBand = grassBand
+    table.insert(self.AnimalCrossingBody, grassBand)
 end
 
--- ═══════════════════════════════════════════════════════════════════════════
---  STARDEW VALLEY DECORATION — Junimo + Stardrop + Golden Star sparkles
---  Junimos bounce across topbar like seasonal festival sprites.
---  A stardrop glows on the right. Farm field strip at window bottom.
---  Wooden-frame aesthetic: brown bottom plank with crop row motifs.
--- ═══════════════════════════════════════════════════════════════════════════
 function Window:BuildStardewDecor(topbar)
-    self.SDVSprites = {}
-    -- Junimo sprites bouncing across topbar — SDV festival energy
+    self.StardewDecor = {}
+    self.StardewBody = {}
     local junimoSpots = {
-        { 0.42, 10, "sdv_junimo", 20 }, { 0.50, 22, "sdv_stardrop", 18 }, { 0.57, 8,  "sdv_junimo", 20 },
-        { 0.64, 20, "sdv_gold",   16 }, { 0.71, 12, "sdv_junimo",   20 },
+        { 0.52, 10, "sdv_junimo", 20 }, { 0.57, 22, "sdv_stardrop", 18 }, { 0.62, 8,  "sdv_junimo", 20 },
+        { 0.67, 20, "sdv_gold",   16 }, { 0.72, 12, "sdv_junimo",   20 },
     }
     for idx, spot in ipairs(junimoSpots) do
         local s = Sprite.New(topbar, spot[3], spot[4])
         s.AnchorPoint = Vector2.new(0.5, 0)
         s.Position    = UDim2.new(spot[1], 0, 0, spot[2])
         s.ZIndex      = 2
-        -- Junimos hop up-down with slight tilt — playful but grounded (Out ease feel)
         local hop = idx % 2 == 0 and 7 or -5
         Anim.Loop("DecorSDV", s, { Position = UDim2.new(spot[1], 0, 0, spot[2] + hop), Rotation = idx % 2 == 0 and 10 or -8 }, 1.2 + idx * 0.32, "Sine", true)
-        table.insert(self.SDVSprites, s)
+        table.insert(self.StardewDecor, s)
     end
-    -- Farmer stands in topbar — grounded, sturdy (no floaty)
-    local farmerHolder = Draw.New("Frame", { Name = "SDVFarmer", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.46, 0, 0, 4), Size = UDim2.fromOffset(20, 38), ZIndex = 3, Parent = topbar })
+    -- Farmer stands on safe right edge
+    local farmerHolder = Draw.New("Frame", { Name = "SDVFarmer", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.74, 0, 0, 4), Size = UDim2.fromOffset(20, 38), ZIndex = 3, Parent = topbar })
     local farmer = Sprite.New(farmerHolder, "sdv_farmer", 20)
     farmer.AnchorPoint = Vector2.new(0.5, 0)
     farmer.Position    = UDim2.fromOffset(10, 4)
-    Anim.Loop("DecorSDV", farmerHolder, { Position = UDim2.new(0.46, 0, 0, 9) }, 1.8, "Sine", true)
+    Anim.Loop("DecorSDV", farmerHolder, { Position = UDim2.new(0.74, 0, 0, 9) }, 1.8, "Sine", true)
     self.SDVFarmer = farmerHolder
-    table.insert(self.SDVSprites, farmerHolder)
-    -- Wizard floats in left area — magical but restrained
-    local wizardHolder = Draw.New("Frame", { Name = "SDVWizard", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.39, 0, 0, 6), Size = UDim2.fromOffset(20, 36), ZIndex = 3, Parent = topbar })
+    table.insert(self.StardewDecor, farmerHolder)
+    -- Wizard floats on safe left edge
+    local wizardHolder = Draw.New("Frame", { Name = "SDVWizard", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.50, 0, 0, 6), Size = UDim2.fromOffset(20, 36), ZIndex = 3, Parent = topbar })
     local wizard = Sprite.New(wizardHolder, "sdv_wizard", 20)
     wizard.AnchorPoint = Vector2.new(0.5, 0)
     wizard.Position    = UDim2.fromOffset(10, 4)
-    Anim.Loop("DecorSDV", wizardHolder, { Position = UDim2.new(0.39, 0, 0, 12), Rotation = -5 }, 2.2, "Sine", true)
+    Anim.Loop("DecorSDV", wizardHolder, { Position = UDim2.new(0.50, 0, 0, 12), Rotation = -5 }, 2.2, "Sine", true)
     self.SDVWizard = wizardHolder
-    table.insert(self.SDVSprites, wizardHolder)
+    table.insert(self.StardewDecor, wizardHolder)
     -- Bottom accent: wooden plank strip — farm-field rows
     local plankBand = Draw.New("Frame", { Name = "SDVPlankBand", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, 56), BorderSizePixel = 0, ZIndex = 1, Parent = self.Body })
     Draw.Corner(plankBand, Config.Window.Radius)
@@ -9659,14 +10942,12 @@ function Window:BuildStardewDecor(topbar)
     Theme.OnRender(plankBand, function()
         plankBand.BackgroundColor3 = Theme.Colors.Brick or Color3.fromRGB(168, 132, 74)
     end)
-    -- Vertical plank dividers — wood grain look
     for i = 1, 7 do
         local plank = Draw.New("Frame", { AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(i/8, 0, 0, 0), Size = UDim2.new(0, 2, 1, 0), BackgroundTransparency = 0.7, ZIndex = 2, Parent = plankBand })
         Theme.OnRender(plank, function()
             plank.BackgroundColor3 = Theme.Colors.BrickDark or Color3.fromRGB(122, 92, 48)
         end)
     end
-    -- Seed / crop icons in the plank band
     local cropIcons = { "sdv_seed", "sdv_can", "sdv_seed", "sdv_gold", "sdv_seed" }
     for i, icon in ipairs(cropIcons) do
         local iconSprite = Sprite.New(plankBand, icon, 16)
@@ -9685,48 +10966,45 @@ function Window:BuildStardewDecor(topbar)
     Anim.Loop("DecorSDVGlow", sdvStroke, { Transparency = 0.80, Thickness = 1 }, 2.4, "Sine", true)
     self.SDVBand  = plankBand
     self.SDVGlow  = starDropGlow
+    table.insert(self.StardewBody, plankBand)
+    table.insert(self.StardewBody, starDropGlow)
 end
 
--- ═══════════════════════════════════════════════════════════════════════════
---  TAMAGOTCHI DECORATION — LCD device frame + Egg + Pixel-device border
---  Device bezel border around the entire window (outer frame, speaker dots).
---  Mametchi walks across topbar. Egg bounces. LCD scanline effect on panels.
--- ═══════════════════════════════════════════════════════════════════════════
 function Window:BuildTamagotchiDecor(topbar)
-    self.TamaSprites = {}
-    -- Tamagotchi characters marching across topbar like a mini LCD parade
+    self.TamagotchiDecor = {}
+    self.TamagotchiBody = {}
     local tamaSpots = {
-        { 0.42, 10, "tama_babytchi", 18 }, { 0.49, 24, "tama_mametchi",   20 }, { 0.56, 8,  "tama_kuchipatchi", 18 },
-        { 0.63, 22, "tama_memetchi", 18 }, { 0.70, 10, "tama_babytchi",   18 },
+        { 0.52, 10, "tama_babytchi", 18 }, { 0.57, 24, "tama_mametchi",   20 }, { 0.62, 8,  "tama_kuchipatchi", 18 },
+        { 0.67, 22, "tama_memetchi", 18 }, { 0.72, 10, "tama_babytchi",   18 },
     }
     for idx, spot in ipairs(tamaSpots) do
         local s = Sprite.New(topbar, spot[3], spot[4])
         s.AnchorPoint = Vector2.new(0.5, 0)
         s.Position    = UDim2.new(spot[1], 0, 0, spot[2])
         s.ZIndex      = 2
-        -- Tamagotchi characters bounce (matching "Bounce" PopEase from ThemeMeta)
         local hop = idx % 2 == 0 and 8 or -6
         Anim.Loop("DecorTama", s, { Position = UDim2.new(spot[1], 0, 0, spot[2] + hop) }, 0.8 + idx * 0.25, "Bounce", true)
-        table.insert(self.TamaSprites, s)
+        table.insert(self.TamagotchiDecor, s)
     end
-    -- Tama egg bouncing prominently — the iconic image of Tamagotchi
-    local eggHolder = Draw.New("Frame", { Name = "TamaEgg", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.46, 0, 0, 3), Size = UDim2.fromOffset(22, 38), ZIndex = 3, Parent = topbar })
+    -- Tama egg bouncing prominently
+    local eggHolder = Draw.New("Frame", { Name = "TamaEgg", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.74, 0, 0, 3), Size = UDim2.fromOffset(22, 38), ZIndex = 3, Parent = topbar })
     local egg = Sprite.New(eggHolder, "tama_egg", 22)
     egg.AnchorPoint = Vector2.new(0.5, 0)
     egg.Position    = UDim2.fromOffset(11, 4)
-    Anim.Loop("DecorTama", eggHolder, { Position = UDim2.new(0.46, 0, 0, 12) }, 0.7, "Bounce", true)
+    Anim.Loop("DecorTama", eggHolder, { Position = UDim2.new(0.74, 0, 0, 12) }, 0.7, "Bounce", true)
     self.TamaEgg = eggHolder
-    table.insert(self.TamaSprites, eggHolder)
-    -- Tamagotchi device outer bezel — the iconic egg-shaped border
+    table.insert(self.TamagotchiDecor, eggHolder)
+    -- Tamagotchi device outer bezel
     local bezel = Draw.New("Frame", { Name = "TamaBezel", BackgroundTransparency = 1, Position = UDim2.fromOffset(-5, -5), Size = UDim2.new(1, 10 - Config.Window.Shadow, 1, 10 - Config.Window.Shadow), ZIndex = 0, Parent = self.Pop })
-    Draw.Corner(bezel, 8)  -- Tamagotchi has very rounded device
+    Draw.Corner(bezel, 8)
     local bezelStroke = Draw.New("UIStroke", { Thickness = 5, Transparency = 0.2, ApplyStrokeMode = Enum.ApplyStrokeMode.Border, Parent = bezel })
     Theme.OnRender(bezelStroke, function()
         bezelStroke.Color = Theme.Colors.Accent or Color3.fromRGB(255, 126, 176)
     end)
     Anim.Loop("DecorTamaGlow", bezelStroke, { Transparency = 0.65, Thickness = 3 }, 1.4, "Sine", true)
     self.TamaBezel = bezel
-    -- Speaker grill dots — 3 circles at bottom-right of window
+    table.insert(self.TamagotchiBody, bezel)
+    -- Speaker grill dots
     local grillHolder = Draw.New("Frame", { Name = "TamaGrill", BackgroundTransparency = 1, AnchorPoint = Vector2.new(1, 1), Position = UDim2.new(1, -Config.Window.Shadow - 10, 1, -8), Size = UDim2.fromOffset(36, 10), ZIndex = 5, Parent = self.Body })
     for d = 1, 5 do
         local dot = Draw.New("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new((d-1)/5 + 0.1, 0, 0.5, 0), Size = UDim2.fromOffset(5, 5), BorderSizePixel = 0, ZIndex = 5, Parent = grillHolder })
@@ -9737,7 +11015,8 @@ function Window:BuildTamagotchiDecor(topbar)
         end)
     end
     self.TamaGrill = grillHolder
-    -- LCD scanline overlay on window body — horizontal dark lines, low opacity
+    table.insert(self.TamagotchiBody, grillHolder)
+    -- LCD scanline overlay
     local scanlines = Draw.New("Frame", { Name = "TamaScanlines", BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1), ZIndex = 0, ClipsDescendants = true, Parent = self.Body })
     for row = 0, 60 do
         local line = Draw.New("Frame", { Position = UDim2.new(0, 0, 0, row * 10 + 4), Size = UDim2.new(1, 0, 0, 2), BorderSizePixel = 0, BackgroundTransparency = 0.88, ZIndex = 0, Parent = scanlines })
@@ -9746,6 +11025,7 @@ function Window:BuildTamagotchiDecor(topbar)
         end)
     end
     self.TamaScanlines = scanlines
+    table.insert(self.TamagotchiBody, scanlines)
     -- Bottom accent: LCD beige band
     local lcdBand = Draw.New("Frame", { Name = "TamaLCDBand", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, 46), BorderSizePixel = 0, ZIndex = 1, Parent = self.Body })
     Draw.Corner(lcdBand, Config.Window.Radius)
@@ -9753,7 +11033,6 @@ function Window:BuildTamagotchiDecor(topbar)
     Theme.OnRender(lcdBand, function()
         lcdBand.BackgroundColor3 = Theme.Colors.Accent or Color3.fromRGB(255, 126, 176)
     end)
-    -- Heart icons along the band (Tamagotchi's care meter)
     for i = 1, 5 do
         local heart = Sprite.New(lcdBand, "tama_heart", 14)
         heart.AnchorPoint = Vector2.new(0, 0.5)
@@ -9762,6 +11041,7 @@ function Window:BuildTamagotchiDecor(topbar)
         Anim.Loop("DecorTamaBody", heart, { Position = UDim2.new((i-1)/6 + 0.05, 0, 0.5, -3) }, 0.9 + i * 0.25, "Sine", true)
     end
     self.TamaLCDBand = lcdBand
+    table.insert(self.TamagotchiBody, lcdBand)
 end
 
 function Window:RenderDecor()
@@ -9801,10 +11081,15 @@ function Window:RenderDecor()
     for _, item in ipairs(self.Spooky or {}) do item.Visible = showHalloween end
     for _, part in ipairs(self.SpookyBody or {}) do part.Visible = showSpookyBody end
     for _, item in ipairs(self.KirbyDecor or {}) do item.Visible = showKirby end
+    for _, part in ipairs(self.KirbyBody or {}) do part.Visible = showKirbyBody end
     for _, item in ipairs(self.PokemonDecor or {}) do item.Visible = showPokemon end
+    for _, part in ipairs(self.PokemonBody or {}) do part.Visible = showPokemonBody end
     for _, item in ipairs(self.AnimalCrossingDecor or {}) do item.Visible = showAC end
+    for _, part in ipairs(self.AnimalCrossingBody or {}) do part.Visible = showACBody end
     for _, item in ipairs(self.StardewDecor or {}) do item.Visible = showSDV end
+    for _, part in ipairs(self.StardewBody or {}) do part.Visible = showSDVBody end
     for _, item in ipairs(self.TamagotchiDecor or {}) do item.Visible = showTama end
+    for _, part in ipairs(self.TamagotchiBody or {}) do part.Visible = showTamaBody end
     for _, item in ipairs(self.CastleDecor or {}) do item.Visible = showCastle end
     for _, item in ipairs(self.UndergroundDecor or {}) do item.Visible = showUnderground end
     for _, item in ipairs(self.IceDecor or {}) do item.Visible = showIce end
@@ -9819,10 +11104,17 @@ function Window:RenderDecor()
     Anim.SetGroupActive("DecorSpooky", showHalloween)
     Anim.SetGroupActive("DecorSpookyBody", showSpookyBody)
     Anim.SetGroupActive("DecorKirby", showKirby)
+    Anim.SetGroupActive("DecorKirbyBody", showKirbyBody)
     Anim.SetGroupActive("DecorPokemon", showPokemon)
+    Anim.SetGroupActive("DecorPokemonBody", showPokemonBody)
     Anim.SetGroupActive("DecorAC", showAC)
+    Anim.SetGroupActive("DecorACBody", showACBody)
     Anim.SetGroupActive("DecorSDV", showSDV)
+    Anim.SetGroupActive("DecorSDVBody", showSDVBody)
+    Anim.SetGroupActive("DecorSDVGlow", showSDVBody)
     Anim.SetGroupActive("DecorTama", showTama)
+    Anim.SetGroupActive("DecorTamaBody", showTamaBody)
+    Anim.SetGroupActive("DecorTamaGlow", showTamaBody)
     Anim.SetGroupActive("DecorCastle", showCastle)
     Anim.SetGroupActive("DecorUnderground", showUnderground)
     Anim.SetGroupActive("DecorIce", showIce)
@@ -10252,6 +11544,35 @@ function Window:RenderGround()
             feather.ZIndex = 3
         end
 
+    elseif theme == "Dark" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Dark: Sleek Obsidian Carbon Tech Chassis + Amber/Cyan Status LEDs
+        -- ═════════════════════════════════════════════════════════════════
+        local base = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BrickDark")
+        local neonTrim = Draw.New("Frame", { Size = UDim2.new(1, 0, 0, 2), BackgroundColor3 = Color3.fromRGB(255, 110, 50), Parent = container })
+        local subTrim = Draw.New("Frame", { Position = UDim2.fromOffset(0, 2), Size = UDim2.new(1, 0, 0, 1), BackgroundColor3 = Color3.fromRGB(35, 35, 42), BorderSizePixel = 0, Parent = container })
+        for p = 1, 12 do
+            local panelLine = Draw.New("Frame", { Position = UDim2.new((p - 1) / 12, 0, 0, 3), Size = UDim2.new(0, 1, 1, -3), BackgroundColor3 = Color3.fromRGB(45, 45, 55), BorderSizePixel = 0, Parent = container })
+        end
+        for d = 1, 6 do
+            local led = Draw.New("Frame", { Position = UDim2.new((d - 1) / 6 + 0.08, 0, 0.5, 0), Size = UDim2.fromOffset(5, 5), BorderSizePixel = 0, Parent = container })
+            Draw.Corner(led, 2)
+            led.BackgroundColor3 = (d % 2 == 0) and Color3.fromRGB(0, 230, 180) or Color3.fromRGB(255, 140, 40)
+            Anim.Loop("GroundDark", led, { BackgroundTransparency = 0.6 }, 0.9 + d * 0.2, "Sine", true)
+        end
+
+    elseif theme == "Light" then
+        -- ═════════════════════════════════════════════════════════════════
+        -- Light: Studio Porcelain Slab + Warm Brass Accent Inset
+        -- ═════════════════════════════════════════════════════════════════
+        local base = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), Parent = container }, "BackdropAlt")
+        local brassBar = Draw.New("Frame", { Size = UDim2.new(1, 0, 0, 3), BackgroundColor3 = Color3.fromRGB(215, 175, 95), Parent = container })
+        Draw.Box("Frame", { Position = UDim2.fromOffset(0, 3), Size = UDim2.new(1, 0, 0, 1), Parent = container }, "Outline")
+        for s = 1, 8 do
+            local stud = Draw.New("Frame", { Position = UDim2.new((s - 1) / 8 + 0.06, 0, 0.5, 0), Size = UDim2.fromOffset(6, 4), BorderSizePixel = 0, BackgroundColor3 = Color3.fromRGB(195, 160, 90), Parent = container })
+            Draw.Corner(stud, 2)
+        end
+
     else
         -- ═════════════════════════════════════════════════════════════════
         -- Classic Mario Overworld NES Platformer Bricks + Grass Turf
@@ -10603,7 +11924,11 @@ function Tab:BuildButton()
     local stroke = Draw.Stroke(face, "Outline", 2, true)
     stroke.Transparency = 1
     self.IconSlot = Draw.New("Frame", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.new(0, 8, 0.5, 0), Size = UDim2.fromOffset(24, 24), Parent = face })
-    Icons.Create(self.IconSlot, self.Icon, 24, nil, self.Name)
+    local ic = Icons.Create(self.IconSlot, self.Icon, 24, nil, self.Name)
+    if ic then
+        ic.AnchorPoint = Vector2.new(0.5, 0.5)
+        ic.Position = UDim2.fromScale(0.5, 0.5)
+    end
     self.TabLabel = Draw.Text({ Position = UDim2.fromOffset(40, 0), Size = UDim2.new(1, -44, 1, 0), TextTruncate = Enum.TextTruncate.AtEnd, Parent = face }, "Body", Util.TextSize("Label") + 1, "SidebarText", self.Name)
     self.TabButton, self.Face, self.Shade, self.Stroke = holder, face, shade, stroke
     holder.MouseEnter:Connect(function()
@@ -10806,7 +12131,7 @@ Tab.Section = Tab.AddGroupbox
 Tab.AddSection = Tab.AddGroupbox
 Tab.LeftGroupbox = Tab.AddLeftGroupbox
 Tab.RightGroupbox = Tab.AddRightGroupbox
-for _, method in ipairs({ "AddToggle", "AddCheckbox", "AddSlider", "AddDropdown", "AddInput", "AddButton", "AddKeybind", "AddColorPicker", "AddLabel", "AddParagraph", "AddStepper", "AddRangeSlider", "AddSegmented", "AddStat", "AddStatus", "AddTable", "Toggle", "Checkbox", "Slider", "Dropdown", "Input", "Button", "Keybind", "Colorpicker", "Label", "Paragraph" }) do
+for _, method in ipairs({ "AddToggle", "AddCheckbox", "AddSlider", "AddDropdown", "AddInput", "AddButton", "AddKeybind", "AddColorPicker", "AddLabel", "AddParagraph", "AddStepper", "AddRangeSlider", "AddSegmented", "AddStat", "AddStatus", "AddTable", "AddMonitor", "AddStatGrid", "AddLiveGraph", "AddInventoryGrid", "Toggle", "Checkbox", "Slider", "Dropdown", "Input", "Button", "Keybind", "Colorpicker", "Label", "Paragraph", "Monitor", "StatGrid", "LiveGraph", "InventoryGrid" }) do
     Tab[method] = function(tabSelf, ...)
         local grp = tabSelf:EnsureGroup()
         return grp[method](grp, ...)
@@ -10837,7 +12162,25 @@ function Groupbox:BuildHeader(card, info)
         Draw.Text({ Size = UDim2.fromScale(1, 1), TextXAlignment = Enum.TextXAlignment.Center, Parent = pill }, "Body", 12, "OnAccent", tostring(info.Badge))
         badgeWidth += 6
     end
-    Draw.Text({ Position = UDim2.fromOffset(offset, 0), Size = UDim2.new(1, -(offset + 34 + badgeWidth), 1, -2), TextTruncate = Enum.TextTruncate.AtEnd, Parent = bar }, "Body", Util.TextSize("Group"), "Text", info.Name or "")
+    local displayTitle = info.Name or ""
+    if type(displayTitle) == "string" and utf8 and utf8.codes then
+        local cutLen = 0
+        local hasCut = false
+        for _, cp in utf8.codes(displayTitle) do
+            if (cp >= 0x2000 and not (cp >= 0x0E00 and cp <= 0x0E7F)) or cp == 0xFE0F or cp == 0x200D then
+                cutLen = cutLen + #utf8.char(cp)
+                hasCut = true
+            elseif hasCut and cp == 0x20 then
+                cutLen = cutLen + 1
+            else
+                break
+            end
+        end
+        if cutLen > 0 then
+            displayTitle = displayTitle:sub(cutLen + 1)
+        end
+    end
+    Draw.Text({ Position = UDim2.fromOffset(offset, 0), Size = UDim2.new(1, -(offset + 34 + badgeWidth), 1, -2), TextTruncate = Enum.TextTruncate.AtEnd, Parent = bar }, "Body", Util.TextSize("Group"), "Text", displayTitle)
     self.Chevron = Icons.Vector(bar, "chevron_down", 14, "Muted")
     self.Chevron.AnchorPoint = Vector2.new(1, 0.5)
     self.Chevron.Position = UDim2.new(1, -12, 0.5, 0)
@@ -11440,26 +12783,110 @@ end
 
 function Intro.BuildScenery(scene)
     local ground = Intro.Ground
-    local sky = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, -ground), ClipsDescendants = true, ZIndex = 1, Parent = scene })
-    for _, hill in ipairs({ { 0.14, 150, "GrassDark" }, { 0.3, 90, "Grass" }, { 0.8, 120, "GrassDark" } }) do
-        local mound = Draw.Box("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(hill[1], 0, 1, 0), Size = UDim2.fromOffset(hill[2], hill[2]), BackgroundTransparency = 0.35, Parent = sky }, hill[3], nil, UDim.new(1, 0))
-        mound.ZIndex = 1
+    local theme = State.ThemeName or "Overworld"
+
+    if theme == "Stardew Valley" then
+        -- Stardew Valley: Farm tilled soil, rustic fence posts, drifting flower petals
+        local sky = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, -ground), ClipsDescendants = true, ZIndex = 1, Parent = scene })
+        for _, tree in ipairs({ { 0.1, 80 }, { 0.25, 60 }, { 0.5, 90 }, { 0.75, 70 }, { 0.9, 85 } }) do
+            local pine = Draw.Box("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(tree[1], 0, 1, 0), Size = UDim2.fromOffset(tree[2], tree[2]), BackgroundTransparency = 0.4, Parent = sky }, "GrassDark", nil, UDim.new(1, 0))
+            pine.ZIndex = 1
+        end
+        for i = 1, 6 do
+            local petal = Draw.New("Frame", {
+                AnchorPoint = Vector2.new(0.5, 0.5),
+                Position = UDim2.new(0.1 + i * 0.14, 0, 0.2 + (i % 3) * 0.2, 0),
+                Size = UDim2.fromOffset(6, 6),
+                BackgroundColor3 = Color3.fromRGB(255, 185, 215),
+                Rotation = i * 40,
+                ZIndex = 2,
+                Parent = sky,
+            })
+            Draw.Corner(petal, 2)
+            Anim.Loop("IntroPetals", petal, { Position = UDim2.new(0.1 + i * 0.14 + 0.08, 0, 0.9, 0), Rotation = i * 40 + 180 }, 2.5 + i * 0.4, "Linear", true)
+        end
+        local floor = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, ground), ClipsDescendants = true, ZIndex = 3, Parent = scene }, "Brick", nil, 14)
+        local fence = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 0, 14), Position = UDim2.fromOffset(0, -10), ZIndex = 4, Parent = floor })
+        for x = 1, 16 do
+            Draw.Box("Frame", { Position = UDim2.new((x - 1) / 16, 4, 0, 0), Size = UDim2.fromOffset(6, 14), Parent = fence }, "BrickDark", nil, 2)
+        end
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 4), ZIndex = 5, Parent = floor }, "Grass")
+    elseif theme == "Pokemon Cafe" then
+        -- Pokemon Cafe: Café warm parquet wood floor, warm hanging lights
+        local sky = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, -ground), ClipsDescendants = true, ZIndex = 1, Parent = scene })
+        for _, lx in ipairs({ 0.2, 0.5, 0.8 }) do
+            local cord = Draw.New("Frame", { Position = UDim2.new(lx, 0, 0, 0), Size = UDim2.new(0, 1, 0, 32), BackgroundColor3 = Color3.fromRGB(120, 90, 40), Parent = sky })
+            local lamp = Draw.Box("Frame", { AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.5, 0, 1, 0), Size = UDim2.fromOffset(12, 10), Parent = cord }, "Coin", nil, 4)
+            Anim.Loop("IntroLamps", lamp, { BackgroundTransparency = 0.4 }, 1.4, "Sine", true)
+        end
+        local floor = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, ground), ClipsDescendants = true, ZIndex = 3, Parent = scene }, "PanelHeader", nil, 14)
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 4), ZIndex = 4, Parent = floor }, "Accent")
+    elseif theme == "Tamagotchi" then
+        -- Tamagotchi: Retro LCD screen pixel dot matrix
+        local sky = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, -ground), ClipsDescendants = true, ZIndex = 1, Parent = scene })
+        for y = 1, 4 do
+            for x = 1, 12 do
+                local dot = Draw.New("Frame", { Position = UDim2.new(x / 13, 0, y / 5, 0), Size = UDim2.fromOffset(3, 3), BackgroundColor3 = Color3.fromRGB(80, 150, 200), BackgroundTransparency = 0.7, Parent = sky })
+                Draw.Corner(dot, 1)
+            end
+        end
+        local floor = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, ground), ClipsDescendants = true, ZIndex = 3, Parent = scene }, "Sidebar", nil, 12)
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 3), ZIndex = 4, Parent = floor }, "Accent")
+    elseif theme == "Kirby" then
+        -- Kirby: Dream Land puffy cumulus cloud mounds and twinkling stars
+        local sky = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, -ground), ClipsDescendants = true, ZIndex = 1, Parent = scene })
+        for _, hill in ipairs({ { 0.15, 120 }, { 0.45, 90 }, { 0.8, 140 } }) do
+            local puff = Draw.Box("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(hill[1], 0, 1, 0), Size = UDim2.fromOffset(hill[2], hill[2]), BackgroundTransparency = 0.25, Parent = sky }, "PanelHeader", nil, UDim.new(1, 0))
+            puff.ZIndex = 1
+        end
+        for _, spot in ipairs({ { 0.2, 20 }, { 0.7, 35 }, { 0.85, 15 } }) do
+            local st = Draw.Text({ Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(14, 14), Parent = sky }, "Glyph", 12, "Coin", "★")
+            Anim.Loop("IntroStars", st, { TextTransparency = 0.6 }, 1.0, "Sine", true)
+        end
+        local floor = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, ground), ClipsDescendants = true, ZIndex = 3, Parent = scene }, "TabActive", nil, 16)
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 4), ZIndex = 4, Parent = floor }, "Accent")
+    elseif theme == "Dark" or theme == "Light" then
+        -- Dark / Light: Obsidian / Studio clean grid floor with pulsing data line
+        local sky = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, -ground), ClipsDescendants = true, ZIndex = 1, Parent = scene })
+        for lx = 0.1, 0.9, 0.2 do
+            local wire = Draw.New("Frame", { Position = UDim2.new(lx, 0, 0, 0), Size = UDim2.new(0, 1, 1, 0), BackgroundTransparency = 0.85, Parent = sky })
+            Theme.Bind(wire, { BackgroundColor3 = "Outline" })
+        end
+        local floor = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, ground), ClipsDescendants = true, ZIndex = 3, Parent = scene }, "Sidebar", nil, 12)
+        local pulse = Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 3), ZIndex = 4, Parent = floor }, "Accent")
+        Anim.Loop("IntroDarkPulse", pulse, { BackgroundTransparency = 0.5 }, 1.2, "Sine", true)
+    elseif theme == "Halloween" then
+        -- Halloween: Graveyard silhouette, tombstone mounds, purple mist
+        local sky = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, -ground), ClipsDescendants = true, ZIndex = 1, Parent = scene })
+        for _, hill in ipairs({ { 0.2, 110 }, { 0.6, 90 }, { 0.85, 120 } }) do
+            local mound = Draw.Box("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(hill[1], 0, 1, 0), Size = UDim2.fromOffset(hill[2], hill[2]), BackgroundTransparency = 0.4, Parent = sky }, "GrassDark", nil, UDim.new(1, 0))
+            mound.ZIndex = 1
+        end
+        local floor = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, ground), ClipsDescendants = true, ZIndex = 3, Parent = scene }, "BrickDark", nil, 16)
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 4), ZIndex = 4, Parent = floor }, "Accent")
+    else
+        -- Classic Mario Hub / Overworld / Castle / Underground
+        local sky = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, -ground), ClipsDescendants = true, ZIndex = 1, Parent = scene })
+        for _, hill in ipairs({ { 0.14, 150, "GrassDark" }, { 0.3, 90, "Grass" }, { 0.8, 120, "GrassDark" } }) do
+            local mound = Draw.Box("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(hill[1], 0, 1, 0), Size = UDim2.fromOffset(hill[2], hill[2]), BackgroundTransparency = 0.35, Parent = sky }, hill[3], nil, UDim.new(1, 0))
+            mound.ZIndex = 1
+        end
+        for index, spot in ipairs({ { 0.12, 30, 64 }, { 0.62, 18, 50 }, { 0.84, 64, 40 } }) do
+            local cloud = Draw.Cloud(sky, spot[3])
+            cloud.Position = UDim2.new(spot[1], 0, 0, spot[2])
+            cloud.ZIndex = 1
+            Anim.Tween(cloud, { Position = UDim2.new(spot[1], 36, 0, spot[2]) }, 5 + index, "Sine", -1, true)
+        end
+        local floor = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, ground), ClipsDescendants = true, ZIndex = 3, Parent = scene }, "Brick", nil, 18)
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 18), ZIndex = 3, Parent = floor }, "Brick")
+        local bricks = Draw.New("Frame", { BackgroundTransparency = 1, Position = UDim2.fromOffset(6, 10), Size = UDim2.new(1, -12, 1, -14), ClipsDescendants = true, ZIndex = 3, Parent = floor })
+        Draw.Bricks(bricks, 18, "BrickDark")
+        for _, line in ipairs(bricks:GetChildren()) do
+            line.ZIndex = 3
+        end
+        Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 8), ZIndex = 4, Parent = floor }, "Grass")
+        Draw.Box("Frame", { Position = UDim2.fromOffset(0, 8), Size = UDim2.new(1, 0, 0, 2), ZIndex = 4, Parent = floor }, "GrassDark")
     end
-    for index, spot in ipairs({ { 0.12, 30, 64 }, { 0.62, 18, 50 }, { 0.84, 64, 40 } }) do
-        local cloud = Draw.Cloud(sky, spot[3])
-        cloud.Position = UDim2.new(spot[1], 0, 0, spot[2])
-        cloud.ZIndex = 1
-        Anim.Tween(cloud, { Position = UDim2.new(spot[1], 36, 0, spot[2]) }, 5 + index, "Sine", -1, true)
-    end
-    local floor = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, ground), ClipsDescendants = true, ZIndex = 3, Parent = scene }, "Brick", nil, 18)
-    Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 18), ZIndex = 3, Parent = floor }, "Brick")
-    local bricks = Draw.New("Frame", { BackgroundTransparency = 1, Position = UDim2.fromOffset(6, 10), Size = UDim2.new(1, -12, 1, -14), ClipsDescendants = true, ZIndex = 3, Parent = floor })
-    Draw.Bricks(bricks, 18, "BrickDark")
-    for _, line in ipairs(bricks:GetChildren()) do
-        line.ZIndex = 3
-    end
-    Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 8), ZIndex = 4, Parent = floor }, "Grass")
-    Draw.Box("Frame", { Position = UDim2.fromOffset(0, 8), Size = UDim2.new(1, 0, 0, 2), ZIndex = 4, Parent = floor }, "GrassDark")
 end
 
 function Intro.Letters(scene, title)
@@ -12857,7 +14284,7 @@ end
 
 function Window:AddSettingsTab()
     local tab = self:AddTab(Lang.Strings.Settings, "gear", Lang.Strings.SettingsDesc)
-    local interface = tab:AddLeftGroupbox(Lang.Strings.Interface, "mushroom")
+    local interface = tab:AddLeftGroupbox(Lang.Strings.Interface, "interface")
     interface:AddDropdown("PayomboyZLanguage", {
         Text = Lang.Strings.Language,
         Values = { "English", "ไทย" },
@@ -12903,7 +14330,7 @@ function Window:AddSettingsTab()
             Float.SetSubMode(mode)
         end,
     })
-    local about = tab:AddLeftGroupbox(Lang.Strings.About, "star")
+    local about = tab:AddLeftGroupbox(Lang.Strings.About, "about")
     about:AddLabel(string.format("%s v%s - %s", self.Title, Library.Version, self.SubTitle ~= "" and self.SubTitle or tostring(game.PlaceId)))
     about:AddLabel(Lang.Format("Device", State.Touch and "Mobile" or "PC"))
     about:AddButton({ Text = Lang.Strings.Rejoin, Func = function()
@@ -12911,7 +14338,7 @@ function Window:AddSettingsTab()
     end }):AddButton({ Text = Lang.Strings.Unload, Style = "Danger", DoubleClick = true, Func = function()
         Library:Unload()
     end })
-    Configs.BuildSection(tab:AddRightGroupbox(Lang.Strings.Configs, "qblock"))
+    Configs.BuildSection(tab:AddRightGroupbox(Lang.Strings.Configs, "config"))
     return tab
 end
 
