@@ -5463,8 +5463,15 @@ function Tailwind.BindProp(inst, property, target)
     if property == "Class" or property == "class" then
         if Reactive.IsRef(target) or type(target) == "function" then
             Reactive.Effect(function()
-                local cls = Reactive.IsRef(target) and target.Value or (type(target) == "function" and target() or target)
-            Tailwind.Apply(inst, cls)
+                local cls
+                if Reactive.IsRef(target) then
+                    cls = target.Value
+                elseif type(target) == "function" then
+                    cls = target()
+                else
+                    cls = target
+                end
+                Tailwind.Apply(inst, cls)
             end)
         else
             Tailwind.Apply(inst, target)
@@ -5487,7 +5494,7 @@ function Tailwind.BindProp(inst, property, target)
             end
             if property == "Text" then
                 Lang.Bind(inst, resolved)
-            elseif property ~= "Height" and property ~= "Width" and property ~= "After" and property ~= "Search" and property ~= "Fill" then
+            elseif property ~= "Height" and property ~= "Width" and property ~= "After" and property ~= "Search" and property ~= "Fill" and property ~= "Class" and property ~= "class" then
                 pcall(function() inst[property] = resolved end)
             end
         end)
@@ -5495,8 +5502,8 @@ function Tailwind.BindProp(inst, property, target)
     end
     if property == "Text" then
         Lang.Bind(inst, target)
-    elseif property ~= "Parent" and property ~= "Children" then
-        inst[property] = target
+    elseif property ~= "Parent" and property ~= "Children" and property ~= "Height" and property ~= "Width" and property ~= "After" and property ~= "Search" and property ~= "Fill" and property ~= "Class" and property ~= "class" then
+        pcall(function() inst[property] = target end)
     end
 end
 
@@ -5575,7 +5582,15 @@ function Tailwind.For(listSource, renderEntry)
                 child:Destroy()
             end
         end
-        local entries = Reactive.IsRef(listSource) and listSource.Value or (type(listSource) == "function" and listSource() or listSource or {})
+        local entries
+        if Reactive.IsRef(listSource) then
+            entries = listSource.Value
+        elseif type(listSource) == "function" then
+            entries = listSource()
+        else
+            entries = listSource
+        end
+        entries = type(entries) == "table" and entries or {}
         for index, entry in ipairs(entries) do
             local node = renderEntry(entry, index)
             if typeof(node) == "Instance" then
@@ -6265,7 +6280,7 @@ function Gui.BindButtonInput(handle)
         if handle.Disabled then
             return
         end
-        local pos = inputObject and inputObject.Position or UserInputService:GetMouseLocation()
+        local pos = UserInputService:GetMouseLocation()
         Fx.Ripple(face, Vector2.new(pos.X, pos.Y), style.Text)
         Fx.Squash(handle.Holder, 1.4)
         if handle.OnActivate then
@@ -8641,7 +8656,7 @@ function ColorPicker:Drag(target, handler)
         handler(UserInputService:GetMouseLocation())
         State.Drag = {
             Move = function(move)
-                handler(move.Position)
+                handler(UserInputService:GetMouseLocation())
             end,
         }
     end)
@@ -10400,7 +10415,9 @@ function Window:AddTab(name, icon, description)
 end
 
 function Window:SelectTab(tab)
-    if type(tab) == "string" then
+    if type(tab) == "number" then
+        tab = self.Tabs[tab]
+    elseif type(tab) == "string" then
         for _, candidate in ipairs(self.Tabs) do
             if Lang.Resolve(candidate.Name) == tab or candidate.Name == tab then
                 tab = candidate
@@ -10734,10 +10751,20 @@ function Tab:AddGroupbox(info, side)
 end
 
 function Tab:AddLeftGroupbox(name, icon, badge)
+    if type(name) == "table" and not name.EN and not name.TH then
+        icon = name.Icon or icon
+        badge = name.Badge or badge
+        name = name.Title or name.Name or name.Text or ""
+    end
     return self:AddGroupbox({ Name = name, Side = "Left", Icon = icon, Badge = badge })
 end
 
 function Tab:AddRightGroupbox(name, icon, badge)
+    if type(name) == "table" and not name.EN and not name.TH then
+        icon = name.Icon or icon
+        badge = name.Badge or badge
+        name = name.Title or name.Name or name.Text or ""
+    end
     return self:AddGroupbox({ Name = name, Side = "Right", Icon = icon, Badge = badge })
 end
 
@@ -10756,8 +10783,29 @@ end
 function Window:Sheet(spec)
     return Sheet.Show(spec)
 end
+function Window:Notify(...)
+    return Library:Notify(...)
+end
+function Window:SetTheme(...)
+    return Library:SetTheme(...)
+end
+function Window:SetLanguage(...)
+    return Library:SetLanguage(...)
+end
+function Window:GetLanguage(...)
+    return Library:GetLanguage(...)
+end
+function Window:Destroy()
+    return Library:Unload()
+end
+function Window:Unload()
+    return Library:Unload()
+end
 
 Tab.Section = Tab.AddGroupbox
+Tab.AddSection = Tab.AddGroupbox
+Tab.LeftGroupbox = Tab.AddLeftGroupbox
+Tab.RightGroupbox = Tab.AddRightGroupbox
 for _, method in ipairs({ "AddToggle", "AddCheckbox", "AddSlider", "AddDropdown", "AddInput", "AddButton", "AddKeybind", "AddColorPicker", "AddLabel", "AddParagraph", "AddStepper", "AddRangeSlider", "AddSegmented", "AddStat", "AddStatus", "AddTable", "Toggle", "Checkbox", "Slider", "Dropdown", "Input", "Button", "Keybind", "Colorpicker", "Label", "Paragraph" }) do
     Tab[method] = function(tabSelf, ...)
         local grp = tabSelf:EnsureGroup()
@@ -12887,7 +12935,8 @@ function Library:CreateWindow(options)
         Fonts.LoadThaiAsync()
     end
     local window = Window.New(options)
-    self.Window = window
+    self.MainWindow = window
+    State.Window = window
     Float.Build()
     Watermark.Build(options.WatermarkTitle or window.Title)
     Watermark.SetVisible(options.Watermark ~= false)
