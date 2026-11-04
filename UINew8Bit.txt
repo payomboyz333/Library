@@ -1125,6 +1125,7 @@ local ThemeMeta = {
             perks = "kirby_star",
             skills = "kirby_meta",
             overview = "kirby_body",
+            quest = "kirby_warpstar",
 
             visuals = "kirby_cursor",
             interface = "kirby_star",
@@ -1646,24 +1647,6 @@ local Assets = {
         logo_action     = "rbxassetid://81695492880721",
         logo_hug        = "rbxassetid://87106942787227", -- PayomboyZ Discord Hug Mascot Logo
         float_logo      = "rbxassetid://87106942787227",
-
-        -- Official Pokémon Café Sprites (Converted to rbxassetid)
-        poke_pikachu    = "rbxassetid://125098915684378",
-        poke_charmander = "rbxassetid://86114697598274",
-        poke_squirtle   = "rbxassetid://130535835119790",
-        poke_bulbasaur  = "rbxassetid://76019777480380",
-        poke_gengar     = "rbxassetid://70846346171434",
-        poke_eevee      = "rbxassetid://83011097852008",
-        poke_snorlax    = "rbxassetid://72579057927908",
-        poke_ball       = "rbxassetid://134749850572865",
-
-        -- Official Kirby Dream Land Sprites (Converted to rbxassetid)
-        kirby_body      = "rbxassetid://136859376134992",
-        kirby_official  = "rbxassetid://136859376134992",
-        kirby_cursor    = "rbxassetid://138245594673597",
-
-        -- Official Stardew Valley UI Sprites (Converted to rbxassetid)
-        sdv_inventory   = "rbxassetid://105289778439545",
     },
     Cache = {},
 }
@@ -4637,18 +4620,18 @@ local ExtraSprites = {
     -- Pikachu — Pokémon mascot
     -- Black ear-tips, bright yellow body, signature red cheek-pouches, black eyes, tiny smile
     poke_pikachu = {
-        ".kk......kk.",
-        ".kyk....kyk.",
-        "..kyk..kyk..",
+        "kk........kk",
+        "kyk......kyk",
+        "kyyk....kyyk",
+        "kkyykkkkyykk",
+        "kkyyyyyyyykk",
+        "kykkwyywkkyk",
+        "kykkwyywkkyk",
+        "krrrkyykkrrk",
+        "krrrkyykkrrk",
+        "kyyykyykyyyk",
+        ".kyyyyyyyyk.",
         "..kkkkkkkk..",
-        ".kyyyyyyyyk.",
-        "kyykyyyykyyk",
-        "kyyryyyyryyk",
-        "kyyyyrryyyyk",
-        "kyyyyyyyyyyk",
-        ".kyyyyyyyyk.",
-        "..kyk..kyk..",
-        "...kk..kk...",
     },
     -- Kirby — Kirby's Dream Land mascot
     -- Authentic Pink body (K), deep blue eyes with gleam (wb), cheek blush (d), open smile, red feet (r)
@@ -4656,14 +4639,14 @@ local ExtraSprites = {
         "....kkkk....",
         "..kkKKKKkk..",
         ".kKKKKKKKKk.",
-        ".kKbKKKbKKk.",
-        "kKKwbKKwbKKk",
-        "kKKdKKKKdKKk",
-        ".kKKrrrrKKk.",
+        ".kKkwKKwkKk.",
+        "kKKkbKKbkKKk",
+        "kKKddKKddKKk",
+        "kKKKkrrkKKKk",
         ".kKKKKKKKKk.",
         "..kkKKKKkk..",
-        "..krrrrrrk..",
-        ".krrk..krrk.",
+        ".krrrrrrrrk.",
+        "krrk....krrk",
         ".kk......kk.",
     },
     -- Isabelle — Animal Crossing: New Horizons / Leaf mascot
@@ -10692,9 +10675,13 @@ function Window:BuildTopbar()
     end)
     self.ExpandBar = Draw.Box("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.5), Size = UDim2.new(0, 3, 0, 0), Parent = minimizeFace }, "Ink", nil, 2)
     self:BuildTopButton(right, "Close", "Accent", "AccentDark", "White", function()
-        self:SetVisible(false)
-        if not State.Touch then
-            Library:Notify(self.Title, Lang.Format("Hidden", Keybinds.Short(State.MenuKey)), 3, "Info")
+        if self.Options and (self.Options.CloseAction == "Unload" or self.Options.CloseAction == "Destroy") then
+            Library:Unload()
+        else
+            self:SetVisible(false)
+            if not State.Touch then
+                Library:Notify(self.Title, Lang.Format("Hidden", Keybinds.Short(State.MenuKey)), 3, "Info")
+            end
         end
     end)
     Gui.Draggable(topbar, function(begin, delta)
@@ -14725,6 +14712,11 @@ function Library:Unload()
         return
     end
     self.Unloaded = true
+    for _, toggle in pairs(Library.Toggles or {}) do
+        if type(toggle) == "table" and toggle.Value == true and type(toggle.SetValue) == "function" then
+            pcall(toggle.SetValue, toggle, false)
+        end
+    end
     for _, callback in ipairs(State.UnloadHooks) do
         Util.Try(callback)
     end
