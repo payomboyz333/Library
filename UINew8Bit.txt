@@ -2329,12 +2329,71 @@ function Anim.CoinPop(parent, origin, size)
     end)
 end
 
-function Theme.Apply(name)
+function Theme.Save(name)
+    if type(name) ~= "string" or not Themes[name] then
+        return
+    end
+    if not Util.FileApi() or type(writefile) ~= "function" then
+        return
+    end
+    pcall(function()
+        Util.EnsureFolder("payomboyzhub")
+        writefile("payomboyzhub/theme.txt", name)
+    end)
+    pcall(function()
+        Util.EnsureFolder("PayomboyZHub")
+        local hs = game:GetService("HttpService")
+        local currentData = {}
+        if type(readfile) == "function" and isfile and isfile("PayomboyZHub/ui.json") then
+            local raw = readfile("PayomboyZHub/ui.json")
+            local ok, dec = pcall(hs.JSONDecode, hs, raw)
+            if ok and type(dec) == "table" then
+                currentData = dec
+            end
+        end
+        currentData.Theme = name
+        writefile("PayomboyZHub/ui.json", hs:JSONEncode(currentData))
+    end)
+end
+
+function Theme.GetSaved()
+    if not Util.FileApi() or type(readfile) ~= "function" then
+        return nil
+    end
+    local saved = nil
+    pcall(function()
+        if isfile and isfile("payomboyzhub/theme.txt") then
+            local text = readfile("payomboyzhub/theme.txt"):gsub("%s+", "")
+            if Themes[text] then
+                saved = text
+            end
+        end
+    end)
+    if saved then
+        return saved
+    end
+    pcall(function()
+        if isfile and isfile("PayomboyZHub/ui.json") then
+            local hs = game:GetService("HttpService")
+            local raw = readfile("PayomboyZHub/ui.json")
+            local ok, data = pcall(hs.JSONDecode, hs, raw)
+            if ok and type(data) == "table" and data.Theme and Themes[data.Theme] then
+                saved = data.Theme
+            end
+        end
+    end)
+    return saved
+end
+
+function Theme.Apply(name, skipSave)
     if name == "Order" or name == "Shared" or not Themes[name] then
         name = "Overworld"
     end
-    local palette = Themes[name]
     State.ThemeName = name
+    if not skipSave then
+        Theme.Save(name)
+    end
+    local palette = Themes[name]
     Theme.Colors.Logo, Theme.Colors.Glow, Theme.Colors.Fog, Theme.Colors.ParticleGlyphs = nil, nil, nil, nil
     Theme.Colors.TopbarText = Themes.Shared.White
     for token, color in pairs(Themes.Shared) do
@@ -2601,11 +2660,68 @@ function Lang.OnChange(owner, callback)
     registry[owner] = callback
 end
 
+function Lang.Save(code)
+    if code ~= "EN" and code ~= "TH" then
+        return
+    end
+    if not Util.FileApi() or type(writefile) ~= "function" then
+        return
+    end
+    pcall(function()
+        Util.EnsureFolder("payomboyzhub")
+        writefile("payomboyzhub/language.txt", code)
+    end)
+    pcall(function()
+        Util.EnsureFolder("PayomboyZHub")
+        local hs = game:GetService("HttpService")
+        local currentData = {}
+        if type(readfile) == "function" and isfile and isfile("PayomboyZHub/ui.json") then
+            local raw = readfile("PayomboyZHub/ui.json")
+            local ok, dec = pcall(hs.JSONDecode, hs, raw)
+            if ok and type(dec) == "table" then
+                currentData = dec
+            end
+        end
+        currentData.Language = code
+        writefile("PayomboyZHub/ui.json", hs:JSONEncode(currentData))
+    end)
+end
+
+function Lang.GetSaved()
+    if not Util.FileApi() or type(readfile) ~= "function" then
+        return nil
+    end
+    local saved = nil
+    pcall(function()
+        if isfile and isfile("payomboyzhub/language.txt") then
+            local text = readfile("payomboyzhub/language.txt"):gsub("%s+", "")
+            if text == "EN" or text == "TH" then
+                saved = text
+            end
+        end
+    end)
+    if saved then
+        return saved
+    end
+    pcall(function()
+        if isfile and isfile("PayomboyZHub/ui.json") then
+            local hs = game:GetService("HttpService")
+            local raw = readfile("PayomboyZHub/ui.json")
+            local ok, data = pcall(hs.JSONDecode, hs, raw)
+            if ok and type(data) == "table" and (data.Language == "EN" or data.Language == "TH") then
+                saved = data.Language
+            end
+        end
+    end)
+    return saved
+end
+
 function Lang.Set(code)
     if code ~= "EN" and code ~= "TH" then
         return
     end
     State.Language = code
+    Lang.Save(code)
     if code == "TH" then
         Fonts.LoadThaiAsync()
     end
@@ -2630,19 +2746,24 @@ Fonts.ThaiWeights = { Display = Enum.FontWeight.SemiBold, Body = Enum.FontWeight
 Fonts.ThaiFallback = { Display = Enum.Font.BuilderSansBold, Body = Enum.Font.BuilderSansBold, Desc = Enum.Font.BuilderSansMedium, Strong = Enum.Font.BuilderSansBold }
 Fonts.Faces = {}
 
---@return Font face for role and active language (Kanit when Thai font loaded)
-function Fonts.Face(kind)
-    local thai = State.Language == "TH" and Fonts.ThaiWeights[kind] ~= nil
-    local key = (thai and (Fonts.Thai and "TH" or "THF") or "EN") .. kind
+--@return Font face for role and language (Kanit when Thai font loaded, safe fallback to BuilderSansBold)
+function Fonts.Face(kind, forceThai)
+    local isThai = (forceThai == true) or (State.Language == "TH" and Fonts.ThaiWeights[kind] ~= nil)
+    local key = (isThai and (Fonts.Thai and "TH" or "THF") or "EN") .. tostring(kind)
     local cached = Fonts.Faces[key]
     if cached then
         return cached
     end
     local face
-    if thai and Fonts.Thai then
-        face = Font.new(Fonts.Thai, Fonts.ThaiWeights[kind])
-    elseif thai then
-        face = Font.fromEnum(Fonts.ThaiFallback[kind])
+    if isThai and Fonts.Thai then
+        local ok, customFace = pcall(Font.new, Fonts.Thai, Fonts.ThaiWeights[kind] or Enum.FontWeight.Medium)
+        if ok and customFace then
+            face = customFace
+        else
+            face = Font.fromEnum(Fonts.ThaiFallback[kind] or Enum.Font.BuilderSansBold)
+        end
+    elseif isThai then
+        face = Font.fromEnum(Fonts.ThaiFallback[kind] or Enum.Font.BuilderSansBold)
     else
         face = Font.fromEnum(Fonts.Latin[kind] or Fonts.Latin.Body)
     end
@@ -2650,22 +2771,33 @@ function Fonts.Face(kind)
     return face
 end
 
-function Fonts.Size(kind, base)
-    return base + (State.Language == "TH" and Config.ThaiSizeBonus[kind] or 0)
+function Fonts.Size(kind, base, isThai)
+    return base + (((isThai == true) or State.Language == "TH") and (Config.ThaiSizeBonus[kind] or 0) or 0)
 end
 
 function Fonts.Style(label, kind, base)
     Fonts.Texts[label] = { Kind = kind, Base = base }
-    label.FontFace = Fonts.Face(kind)
-    label.TextSize = Fonts.Size(kind, base)
+    local function applyStyle()
+        if not label.Parent then return end
+        local text = label.Text or ""
+        local hasThai = (text ~= "" and Lang.HasThai(text)) or (State.Language == "TH")
+        label.FontFace = Fonts.Face(kind, hasThai)
+        label.TextSize = Fonts.Size(kind, base, hasThai)
+    end
+    applyStyle()
+    label:GetPropertyChangedSignal("Text"):Connect(applyStyle)
 end
 
 function Fonts.ApplyAll()
     table.clear(Layout.Measured)
     Layout.MeasuredCount = 0
     for label, style in pairs(Fonts.Texts) do
-        label.FontFace = Fonts.Face(style.Kind)
-        label.TextSize = Fonts.Size(style.Kind, style.Base)
+        if label.Parent then
+            local text = label.Text or ""
+            local hasThai = (text ~= "" and Lang.HasThai(text)) or (State.Language == "TH")
+            label.FontFace = Fonts.Face(style.Kind, hasThai)
+            label.TextSize = Fonts.Size(style.Kind, style.Base, hasThai)
+        end
     end
 end
 
@@ -2731,7 +2863,7 @@ function Fonts.LoadThai()
     end
     Fonts.Thai = family
     table.clear(Fonts.Faces)
-    if State.Language == "TH" and State.Gui then
+    if State.Gui then
         Fonts.ApplyAll()
         Layout.MarkAll()
     end
@@ -5359,6 +5491,13 @@ Icons.Rules = {
     { "perks|perk|passive|passives|buff|buffs|talent|talents|trait|traits|ความสามารถ|บัฟ", "perks" },
     { "skill|skills|tree|magic|ability|abilities|สกิล|เวทมนตร์", "skills" },
     { "overview|monitor|radar|dashboard|map2d|canvas|เรดาร์|ภาพรวม|จอมอนิเตอร์", "overview" },
+    { "wave|waves|wavemode|เวฟ|โหมดเวฟ|คลื่น", "speed" },
+    { "raid|raids|โหมดเรด|เรด", "combat" },
+    { "webhook|webhookurl|discord|notify|แจ้งเตือน|เว็บฮุก|เว็บฮุค", "terminal" },
+    { "window|windows|interface|gui|layout|หน้าต่าง|เอฟเฟกต์", "settings" },
+    { "cursor|mouse|เคอร์เซอร์|เมาส์|pointer", "aimbot" },
+    { "server|servers|เซิร์ฟเวอร์|เครื่องบริการ|host|jobid|hop|rejoin", "lobby" },
+    { "advance|advanced|ขั้นสูง|ออฟชั่นเสริม|detail", "settings" },
     { "aimbot|silent|sniper|crosshair|shoot|gun|ยิง|ปืน|เล็ง", "aimbot" },
     { "combat|sword|weapon|knife|kill|murder|sheriff|hit|attack|fight|ต่อสู้|ฆ่า|อาวุธ|ดาบ", "combat" },
     { "visual|esp|chams|wallhack|highlight|tracer|fov|camera|see|มอง|แสง|เรดาร์", "visuals" },
@@ -5768,7 +5907,11 @@ function Fx.Ripple(parent, screenPos, token)
     if not parent or not parent.Parent then
         return
     end
-    local pointer = screenPos or UserInputService:GetMouseLocation()
+    local guiInset = Vector2.zero
+    pcall(function()
+        guiInset = game:GetService("GuiService"):GetGuiInset()
+    end)
+    local pointer = screenPos or (UserInputService:GetMouseLocation() - guiInset)
     local localPos = pointer - parent.AbsolutePosition
     local maxDim = math.max(parent.AbsoluteSize.X, parent.AbsoluteSize.Y) * 2.1
     local circle = Draw.Box("Frame", {
@@ -7193,6 +7336,15 @@ function Row.New(container, spec, options)
     Draw.List(row.Right, 6, true, Enum.HorizontalAlignment.Right, Enum.VerticalAlignment.Center)
     if options.Clickable then
         row.Hit = Draw.New("TextButton", { Text = "", BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1), ZIndex = 2, Parent = holder })
+        local hoverBg = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), BackgroundTransparency = 1, ZIndex = 1, Parent = holder }, "Hover", nil, 6)
+        row.Hit.MouseEnter:Connect(function()
+            if not State.Touch then
+                Anim.Tween(hoverBg, { BackgroundTransparency = 0.9 }, Config.Tween.Fast)
+            end
+        end)
+        row.Hit.MouseLeave:Connect(function()
+            Anim.Tween(hoverBg, { BackgroundTransparency = 1 }, Config.Tween.Fast)
+        end)
     end
     row.Item = container:Add(holder, {
         Height = function(width)
@@ -7910,30 +8062,50 @@ end
 function Button:BindPress()
     local face, hit = self.Face, self.Hit
     local faceColor = function()
-        return Theme.Colors[self.Style.Face]
+        return Theme.Colors[self.Style.Face] or Color3.new(1, 1, 1)
     end
     hit.MouseEnter:Connect(function()
-        if not State.Touch then
+        if not State.Touch and not self.Disabled then
             Anim.Tween(face, { BackgroundColor3 = Util.Lighten(faceColor(), 0.14) }, Config.Tween.Fast)
         end
     end)
     hit.MouseLeave:Connect(function()
-        Anim.Tween(face, { BackgroundColor3 = faceColor() }, Config.Tween.Fast)
+        if not self.Disabled then
+            Anim.Tween(face, { BackgroundColor3 = faceColor() }, Config.Tween.Fast)
+        end
         Motion.Spring(face, "Position", UDim2.new(), "Fast")
     end)
     hit.MouseButton1Down:Connect(function()
-        Motion.Spring(face, "Position", UDim2.fromOffset(0, self.Depth - 1), "Fast")
+        if not self.Disabled then
+            Motion.Spring(face, "Position", UDim2.fromOffset(0, self.Depth - 1), "Fast")
+        end
     end)
     hit.MouseButton1Up:Connect(function()
         Motion.Spring(face, "Position", UDim2.new(), "Fast", { Damping = 0.56 })
     end)
+    hit.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            Motion.Spring(face, "Position", UDim2.new(), "Fast", { Damping = 0.56 })
+        end
+    end)
     hit.Activated:Connect(function()
+        if self.Disabled then
+            return
+        end
         Fx.Ripple(face, nil, "White")
+        Fx.Squash(self.Holder, 1.25)
         self:Click()
     end)
 end
 
 function Button:Click()
+    if self.Disabled then
+        return
+    end
+    if self.LastClick and (os.clock() - self.LastClick < 0.22) and not self.Info.NoDebounce then
+        return
+    end
+    self.LastClick = os.clock()
     if self.Info.DoubleClick and not self.Armed then
         self.Armed = true
         local token = {}
@@ -7958,6 +8130,34 @@ function Button:Disarm()
     self.Armed = false
     Lang.Bind(self.Label, self.Info.Text or "")
 end
+
+function Button:SetDisabled(disabled)
+    self.Disabled = disabled == true
+    self.Hit.AutoButtonColor = not self.Disabled
+    if self.Disabled then
+        Anim.Tween(self.Face, { BackgroundTransparency = 0.45 }, Config.Tween.Fast)
+        Anim.Tween(self.Label, { TextTransparency = 0.45 }, Config.Tween.Fast)
+    else
+        Anim.Tween(self.Face, { BackgroundTransparency = 0 }, Config.Tween.Fast)
+        Anim.Tween(self.Label, { TextTransparency = 0 }, Config.Tween.Fast)
+    end
+end
+
+function Button:Disable()
+    self:SetDisabled(true)
+end
+
+function Button:Enable()
+    self:SetDisabled(false)
+end
+
+function Button:SetCallback(func)
+    self.Func = func
+    self.Info.Func = func
+    self.Info.Callback = func
+end
+Button.SetFunc = Button.SetCallback
+Button.Fire = Button.Click
 
 function Button:AddButton(info, callback)
     local last = self.Group[#self.Group]
@@ -11199,10 +11399,21 @@ function Window:BuildTopButton(parent, kind, face, shade, ink, callback)
     hit.MouseButton1Up:Connect(function()
         Anim.Tween(top, { Position = UDim2.new() }, Config.Tween.Normal, "Back")
     end)
+    hit.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            Anim.Tween(top, { Position = UDim2.new() }, Config.Tween.Normal, "Back")
+        end
+    end)
     hit.MouseLeave:Connect(function()
         Anim.Tween(top, { Position = UDim2.new() }, Config.Tween.Fast)
     end)
-    hit.Activated:Connect(callback)
+    hit.Activated:Connect(function()
+        Fx.Ripple(top, nil, ink)
+        Fx.Squash(holder, 1.2)
+        if callback then
+            callback()
+        end
+    end)
     return holder, top
 end
 
@@ -11930,6 +12141,7 @@ function Tab:BuildButton()
         ic.Position = UDim2.fromScale(0.5, 0.5)
     end
     self.TabLabel = Draw.Text({ Position = UDim2.fromOffset(40, 0), Size = UDim2.new(1, -44, 1, 0), TextTruncate = Enum.TextTruncate.AtEnd, Parent = face }, "Body", Util.TextSize("Label") + 1, "SidebarText", self.Name)
+    self.Label = self.TabLabel
     self.TabButton, self.Face, self.Shade, self.Stroke = holder, face, shade, stroke
     holder.MouseEnter:Connect(function()
         self.Hovered = not State.Touch
@@ -11973,6 +12185,13 @@ end
 
 function Tab:Select()
     self.Window:SelectTab(self)
+end
+
+function Tab:SetTitle(title)
+    self.Name = title
+    if self.TabLabel then
+        self.TabLabel.Text = Lang.Resolve(title)
+    end
 end
 
 -- Defer layout calculation for inactive tabs until selected
@@ -14344,14 +14563,18 @@ end
 
 function Library:CreateWindow(options)
     options = options or {}
-    local language = options.Language
-    if language == "Auto" then
+    local savedLanguage = Lang.GetSaved()
+    local language = savedLanguage or options.Language
+    if language == "Auto" or not language then
         local lp = LocalPlayer or (Players and Players.LocalPlayer)
         language = (lp and lp.LocaleId and tostring(lp.LocaleId):sub(1, 2) == "th") and "TH" or "EN"
     end
     State.Language = language == "TH" and "TH" or "EN"
     State.UserScale = math.clamp(options.Scale or 1, Config.ScaleRange.Min, Config.ScaleRange.Max)
-    Theme.Apply(options.Theme or Config.SeasonTheme or "Overworld")
+    local savedTheme = Theme.GetSaved()
+    local targetTheme = savedTheme or options.Theme or Config.SeasonTheme or "Overworld"
+    options.Theme = targetTheme
+    Theme.Apply(targetTheme, true)
     Assets.Configure(Config.DefaultAssets)
     Assets.Configure(options.Assets)
     Window.DetectTouch(options.Layout)
