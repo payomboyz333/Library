@@ -10498,7 +10498,9 @@ function Window:SetVisible(visible)
     end
     Tooltip.Token = nil
     Tooltip.Frame.Visible = false
-    Float.Render()
+    if Float.Render then
+        Float.Render()
+    end
     self:RenderDecor()
     if visible then
         self.Root.Visible = true
@@ -10508,7 +10510,7 @@ function Window:SetVisible(visible)
         Particles.Resume()
         return
     end
-    if State.Touch and Float.Button and not Float.Button.Visible then
+    if Float.Button and not Float.Button.Visible and Float.State.Visible then
         Float.SetVisible(true)
     end
     local shrink = Anim.Tween(self.PopScale, { Scale = 0.82 }, 0.14, "In")
@@ -11132,6 +11134,15 @@ end
 
 function Float.SetSubMode(mode)
     Float.State.SubMode = mode
+end
+
+function Float.Render()
+    if Float.UpdateIcon then
+        Float.UpdateIcon()
+    end
+    if Float.Button and Float.Button.Parent then
+        Float.Button.Visible = Float.State.Visible
+    end
 end
 
 
