@@ -2892,16 +2892,22 @@ function Fonts.LoadThaiAsync()
     end)
 end
 
+local function _runFontPreload()
+    pcall(function()
+        local provider = game:GetService("ContentProvider")
+        local probes = {}
+        for _, weight in pairs(Fonts.ThaiWeights) do
+            table.insert(probes, Draw.New("TextLabel", { Text = "ก", FontFace = Font.new(Fonts.Thai, weight) }))
+        end
+        Util.Await(Config.PreloadTimeout, provider.PreloadAsync, provider, probes)
+        for _, probe in ipairs(probes) do
+            probe:Destroy()
+        end
+    end)
+end
+
 function Fonts.Preload()
-    local provider = game:GetService("ContentProvider")
-    local probes = {}
-    for _, weight in pairs(Fonts.ThaiWeights) do
-        table.insert(probes, Draw.New("TextLabel", { Text = "ก", FontFace = Font.new(Fonts.Thai, weight) }))
-    end
-    Util.Await(Config.PreloadTimeout, provider.PreloadAsync, provider, probes)
-    for _, probe in ipairs(probes) do
-        probe:Destroy()
-    end
+    _runFontPreload()
 end
 
 function Draw.New(className, props)
@@ -14830,7 +14836,7 @@ function Compat.Probes.Upvalues()
 end
 
 ---ESP sets these on Text objects every frame; a shim that only knows Line would throw per entry.
-function Compat.Probes.Drawing()
+local function _probeDrawingSupported()
     if type(Drawing) ~= "table" and type(Drawing) ~= "userdata" then
         return false
     end
@@ -14846,6 +14852,10 @@ function Compat.Probes.Drawing()
         pcall(object.Remove or object.Destroy, object)
     end
     return ok
+end
+
+function Compat.Probes.Drawing()
+    return _probeDrawingSupported()
 end
 
 function Compat.Probes.Signals()
