@@ -2514,6 +2514,14 @@ function Theme.Apply(name, skipSave)
             Theme.InstanceRenderers[inst] = nil
         end
     end
+    if State.ThemeDropdowns then
+        for _, dd in ipairs(State.ThemeDropdowns) do
+            if dd and dd.Value ~= name and not dd.Multi and table.find(dd.Values, name) then
+                dd.Value = name
+                pcall(function() dd:Render() end)
+            end
+        end
+    end
 end
 
 -- O(1) parent check to prune destroyed Instance keys from registries
@@ -7765,8 +7773,26 @@ end
 
 function Container:AddDropdown(idx, info)
     idx, info = Widget.Normalize(idx, info)
+    local isTheme = false
+    if type(idx) == "string" and idx:lower():find("theme") then
+        isTheme = true
+    elseif type(info.Text) == "string" and (info.Text:lower():find("theme") or info.Text:find("\xe0\xb8\x98\xe0\xb8\xb5\xe0\xb8\xa1")) then
+        isTheme = true
+    elseif info.Values and type(info.Values) == "table" then
+        local matchCount = 0
+        for _, v in ipairs(info.Values) do
+            if type(v) == "string" and Themes[v] then
+                matchCount = matchCount + 1
+            end
+        end
+        if matchCount >= 3 then
+            isTheme = true
+        end
+    end
+
     local dropdown = setmetatable({
         Type = "Dropdown",
+        IsTheme = isTheme,
         Multi = info.Multi == true,
         AllowNull = info.AllowNull == true,
         Searchable = info.Searchable,
@@ -7784,6 +7810,14 @@ function Container:AddDropdown(idx, info)
     dropdown.Row = Row.Stack(self, info, Util.Metric("Box"))
     dropdown.Item = dropdown.Row.Item
     dropdown:Build()
+    if isTheme then
+        State.ThemeDropdowns = State.ThemeDropdowns or {}
+        table.insert(State.ThemeDropdowns, dropdown)
+        local cur = State.ThemeName or Config.SeasonTheme or "Overworld"
+        if not dropdown.Multi and table.find(dropdown.Values, cur) then
+            info.Default = cur
+        end
+    end
     if not (info.Bind and Reactive.IsRef(info.Bind) and info.Bind:Get() ~= nil) then
         dropdown:ApplyDefault(info.Default)
     end
@@ -15342,6 +15376,8 @@ function Library:CreateWindow(options)
     local targetTheme = savedTheme or options.Theme or Config.SeasonTheme or "Overworld"
     options.Theme = targetTheme
     Theme.Apply(targetTheme, true)
+    self.CurrentTheme = targetTheme
+    self.Theme = targetTheme
     Assets.Configure(Config.DefaultAssets)
     Assets.Configure(options.Assets)
     Window.DetectTouch(options.Layout)
@@ -15441,10 +15477,17 @@ end
 
 function Library:SetTheme(name)
     Theme.Apply(name)
-    local option = self.Options.PayomboyZTheme
-    if option and option.Value ~= State.ThemeName then
-        option.Value = State.ThemeName
-        option:Render()
+    self.CurrentTheme = State.ThemeName
+    self.Theme = State.ThemeName
+    if self.Options then
+        for optKey, option in pairs(self.Options) do
+            if option and (option.IsTheme or (type(optKey) == "string" and optKey:lower():find("theme"))) then
+                if option.Value ~= State.ThemeName and not option.Multi and table.find(option.Values or {}, State.ThemeName) then
+                    option.Value = State.ThemeName
+                    pcall(function() option:Render() end)
+                end
+            end
+        end
     end
 end
 
