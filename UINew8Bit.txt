@@ -259,12 +259,12 @@ local Themes = {
         Particle = { { "✦", "★", "•" }, false, "F5D76E" },
     }),
     ["Stardew Valley"] = Palette({
-        Backdrop = "E8D8B0", BackdropAlt = "F4E8C8", Topbar = "8A6840", Sidebar = "7A5C34", SidebarAlt = "684E28",
-        SidebarText = "FFF8E8", SidebarMuted = "D8C090", TabActive = "FFF8E8", TabActiveText = "6A4020",
-        Panel = "FFF8E8", PanelHeader = "EEE0C0", Element = "FFFCF2", Hover = "E8D4A0",
-        Outline = "4A3018", Shadow = "B0905A", Text = "3A2010", SubText = "6A5030", Muted = "9A7A50", Track = "D8C090",
-        Cloud = "FFFFFF", CloudAlpha = 0.3, Accent = "D4641C", AccentDark = "A04010", Grass = "7AB840", GrassDark = "508A28", Brick = "A8844A", BrickDark = "7A5C30", Decor = { "StardewValley" },
-        Particle = { { "✦", "•", "✧" }, false, "F5D76E" },
+        Backdrop = "C89E62", BackdropAlt = "B88C52", Topbar = "5C3A21", Sidebar = "4A2E1A", SidebarAlt = "3C2414",
+        SidebarText = "FFF6DC", SidebarMuted = "C4A87C", TabActive = "FFE8A8", TabActiveText = "3A2010",
+        Panel = "FFE8A8", PanelHeader = "E6C884", Element = "FFF4CC", Hover = "F5DC94",
+        Outline = "3A2010", Shadow = "2A1608", Text = "2E1A0C", SubText = "5C3A21", Muted = "8C643C", Track = "C8A26A",
+        Cloud = "FFFFFF", CloudAlpha = 0.25, Accent = "D9681E", AccentDark = "9C3E08", Grass = "5C9E32", GrassDark = "3E721E", Brick = "8C5E32", BrickDark = "5C3A21", Decor = { "StardewValley" },
+        Particle = { { "✦", "•", "✿" }, false, "FFD54F" },
     }),
     Tamagotchi = Palette({
         Backdrop = "B8E8F8", BackdropAlt = "D0F0FC", Topbar = "4898C8", Sidebar = "3480B0", SidebarAlt = "286898",
@@ -1363,10 +1363,10 @@ local ThemeMeta = {
             Particle = "sdv_stardrop",
         },
         Shape = {
-            WindowRadius     = 12,
-            GroupRadius      = 8,
-            SelectableRadius = 6,
-            ButtonDepth      = 3,
+            WindowRadius     = 0,
+            GroupRadius      = 0,
+            SelectableRadius = 0,
+            ButtonDepth      = 2,
         },
         Motion = {
             BumpRise     = 2,
@@ -1656,6 +1656,20 @@ local Assets = {
         logo_action     = "rbxassetid://81695492880721",
         logo_hug        = "rbxassetid://87106942787227", -- PayomboyZ Discord Hug Mascot Logo
         float_logo      = "rbxassetid://87106942787227",
+
+        -- Official Pokemon / PokeAPI High-Res Authentic Sprites
+        poke_pikachu    = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+        poke_ball       = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png",
+        poke_bulbasaur  = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+        poke_charmander = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
+        poke_squirtle   = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png",
+        poke_eevee      = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+        poke_snorlax    = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/143.png",
+        poke_gengar     = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png",
+
+        -- Official Kirby High-Res Authentic Sprites
+        kirby_body      = "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Winking%20Face.png",
+        kirby_star      = "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Glowing%20Star.png",
     },
     Cache = {},
 }
@@ -4606,9 +4620,18 @@ local ExtraSprites = {
     },
     -- ──────────────────── Pokémon Café ────────────────────
     poke_ball = {
-        "....kkkk....", "..kkrrrrkk..", ".krrrrrrrrk.", "krrrrrrrrrrk",
-        "kkkkkwwkkkkk", "kwwwwwwwwwwk", ".kwwwwwwwwk.", "..kwwwwwwk..",
-        "....kkkk....", "............", "............", "............",
+        "....kkkk....",
+        "..kkrrrrkk..",
+        ".krrrrrrrrk.",
+        "krrrrrrrrrrk",
+        "kkkkkwwkkkkk",
+        "kkkkkwwkkkkk",
+        "kwwwwwwwwwwk",
+        "kwwwwwwwwwwk",
+        ".kwwwwwwwwk.",
+        "..kkwwwwkk..",
+        "....kkkk....",
+        "............",
     },
     poke_cup = {
         "............", "...kkkkkk...", "..knnnnnnk..", "..knnnnnnk..",
@@ -4633,13 +4656,13 @@ local ExtraSprites = {
         "kk........kk",
         "kyk......kyk",
         "kyyk....kyyk",
-        "kkyykkkkyykk",
-        "kkyyyyyyyykk",
+        ".kyykkkkyyk.",
+        ".kyyyyyyyyk.",
         "kykkwyywkkyk",
         "kykkwyywkkyk",
         "krrrkyykkrrk",
         "krrrkyykkrrk",
-        "kyyykyykyyyk",
+        "kyyyyykyyyyk",
         ".kyyyyyyyyk.",
         "..kkkkkkkk..",
     },
@@ -4655,8 +4678,8 @@ local ExtraSprites = {
         "kKKKkrrkKKKk",
         ".kKKKKKKKKk.",
         "..kkKKKKkk..",
-        ".krrrrrrrrk.",
-        "krrk....krrk",
+        ".krrk..krrk.",
+        "krrr....rrrk",
         ".kk......kk.",
     },
     -- Isabelle — Animal Crossing: New Horizons / Leaf mascot
@@ -5459,6 +5482,11 @@ local ExtraAliases = {
     vehicle = "car", vip = "crown", visuals = "boo", wand = "star", warning = "bomb",
     warp = "pipe", watering = "star", waypoint = "pipe", waypoints = "pipe", weapon = "sword",
     zap = "lightning",
+    wave = "speed", waves = "speed", wavemode = "speed",
+    raid = "combat", raids = "combat",
+    webhook = "terminal", webhookurl = "terminal",
+    window = "settings", windows = "settings",
+    cursor = "aimbot", server = "lobby", servers = "lobby", advance = "settings",
 }
 
 for aliasKey, targetSprite in pairs(ExtraAliases) do
@@ -12189,8 +12217,9 @@ function Tab:BuildButton()
         ic.AnchorPoint = Vector2.new(0.5, 0.5)
         ic.Position = UDim2.fromScale(0.5, 0.5)
     end
-    self.TabLabel = Draw.Text({ Position = UDim2.fromOffset(40, 0), Size = UDim2.new(1, -44, 1, 0), TextTruncate = Enum.TextTruncate.AtEnd, Parent = face }, "Body", Util.TextSize("Label") + 1, "SidebarText", self.Name)
+    self.TabLabel = Draw.Text({ Position = UDim2.fromOffset(40, 0), Size = UDim2.new(1, -44, 1, 0), TextTruncate = Enum.TextTruncate.AtEnd, Parent = face }, "Body", Util.TextSize("Label") + 1, "SidebarText")
     self.Label = self.TabLabel
+    Lang.Bind(self.TabLabel, self.Name)
     self.TabButton, self.Face, self.Shade, self.Stroke = holder, face, shade, stroke
     holder.MouseEnter:Connect(function()
         self.Hovered = not State.Touch
@@ -12239,7 +12268,7 @@ end
 function Tab:SetTitle(title)
     self.Name = title
     if self.TabLabel then
-        self.TabLabel.Text = Lang.Resolve(title)
+        Lang.Bind(self.TabLabel, title)
     end
 end
 
@@ -12686,18 +12715,76 @@ function Float.Build()
     Float.TeleLabel = teleLabel
     Float.Sprite = body
 
+    -- Per-Theme Float Mascot Mapping (17+ Themes)
+    local ThemeMascots = {
+        ["Overworld"] = "mushroom",
+        ["Castle"] = "knight_helm",
+        ["Underground"] = "cavern_pick",
+        ["Ice Land"] = "snowflake_crystal",
+        ["Snow"] = "snowflake_crystal",
+        ["Desert"] = "desert_sun",
+        ["Ghost House"] = "boo",
+        ["Star Road"] = "cosmic_star",
+        ["Jungle"] = "bamboo_crate",
+        ["Sky World"] = "angel_halo",
+        ["Halloween"] = "pumpkin",
+        ["Kirby"] = "kirby_star",
+        ["Pokemon Cafe"] = "poke_ball",
+        ["Animal Crossing"] = "ac_leaf",
+        ["Stardew Valley"] = "sdv_stardrop",
+        ["Tamagotchi"] = "tama_heart",
+        ["Dark"] = "terminal",
+        ["Light"] = "feather",
+    }
+
     -- Render Icon Mode
     function Float.UpdateIcon()
-        if not Float.IconImg then return end
+        if not Float.IconSlot then return end
         if Float.State.IconMode == "Avatar" and lp and lp.UserId then
+            if Float.MascotSprite then
+                pcall(function() Float.MascotSprite:Destroy() end)
+                Float.MascotSprite = nil
+            end
+            if not Float.IconImg then
+                Float.IconImg = Draw.New("ImageLabel", {
+                    Name = "MascotImage",
+                    BackgroundTransparency = 1,
+                    AnchorPoint = Vector2.new(0.5, 0.5),
+                    Position = UDim2.fromScale(0.5, 0.5),
+                    Size = UDim2.fromScale(0.88, 0.88),
+                    ScaleType = Enum.ScaleType.Fit,
+                    ZIndex = 5,
+                    Parent = Float.IconSlot,
+                })
+                Draw.Corner(Float.IconImg, UDim.new(1, 0))
+            end
+            Float.IconImg.Visible = true
             local ok, thumb = pcall(Players.GetUserThumbnailAsync, Players, lp.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)
             if ok and thumb then
                 Float.IconImg.Image = thumb
                 return
             end
+            Float.IconImg.Image = Assets.Resolve("logo_hug") or Assets.Resolve("float_logo") or "rbxassetid://87106942787227"
+            return
         end
-        -- Default: PayomboyZ Hug Mascot Logo (Cute version hugging Discord)
-        Float.IconImg.Image = Assets.Resolve("logo_hug") or Assets.Resolve("float_logo") or "rbxassetid://87106942787227"
+
+        -- Theme Mascot Sprite Mode
+        if Float.IconImg then
+            Float.IconImg.Visible = false
+        end
+        if Float.MascotSprite then
+            pcall(function() Float.MascotSprite:Destroy() end)
+            Float.MascotSprite = nil
+        end
+        local theme = State.ThemeName or "Overworld"
+        local mascotKey = ThemeMascots[theme] or "coin"
+        local sprite = Sprite.New(Float.IconSlot, mascotKey, 24)
+        if sprite then
+            sprite.AnchorPoint = Vector2.new(0.5, 0.5)
+            sprite.Position = UDim2.fromScale(0.5, 0.5)
+            sprite.ZIndex = 5
+            Float.MascotSprite = sprite
+        end
     end
 
     Float.UpdateIcon()
@@ -13517,7 +13604,29 @@ function Notify.Push(title, content, duration, kind)
     local card = Draw.New("TextButton", { Text = "", AutoButtonColor = false, BackgroundTransparency = 1, Position = UDim2.fromOffset(width + 60, 0), Size = UDim2.fromOffset(width, height), Parent = holder })
     Draw.Box("Frame", { Position = UDim2.fromOffset(4, 4), Size = UDim2.fromScale(1, 1), Parent = card }, "Shadow", nil, 12)
     local face = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), ClipsDescendants = true, Parent = card }, "Panel", "Outline", 12, 2)
-    local icon = Sprite.New(face, Notify.Icons[kind or "Coin"] or "coin", 36)
+    local resolvedNotifySprite = Notify.Icons[kind or "Coin"] or "coin"
+    if kind == "Info" or not kind then
+        local th = State.ThemeName or "Overworld"
+        if th == "Kirby" then resolvedNotifySprite = "kirby_star"
+        elseif th == "Pokemon Cafe" then resolvedNotifySprite = "poke_ball"
+        elseif th == "Animal Crossing" then resolvedNotifySprite = "ac_leaf"
+        elseif th == "Stardew Valley" then resolvedNotifySprite = "sdv_stardrop"
+        elseif th == "Tamagotchi" then resolvedNotifySprite = "tama_heart"
+        elseif th == "Halloween" then resolvedNotifySprite = "pumpkin"
+        elseif th == "Dark" then resolvedNotifySprite = "terminal"
+        elseif th == "Light" then resolvedNotifySprite = "feather"
+        elseif th == "Castle" then resolvedNotifySprite = "knight_helm"
+        elseif th == "Underground" then resolvedNotifySprite = "cavern_pick"
+        elseif th == "Ice Land" or th == "Snow" then resolvedNotifySprite = "snowflake_crystal"
+        elseif th == "Desert" then resolvedNotifySprite = "desert_sun"
+        elseif th == "Ghost House" then resolvedNotifySprite = "boo"
+        elseif th == "Star Road" then resolvedNotifySprite = "cosmic_star"
+        elseif th == "Jungle" then resolvedNotifySprite = "bamboo_crate"
+        elseif th == "Sky World" then resolvedNotifySprite = "angel_halo"
+        else resolvedNotifySprite = "mushroom"
+        end
+    end
+    local icon = Sprite.New(face, resolvedNotifySprite, 36)
     icon.Position = UDim2.fromOffset(12, 11)
     Draw.Text({ Position = UDim2.fromOffset(58, 9), Size = UDim2.new(1, -68, 0, 18), TextTruncate = Enum.TextTruncate.AtEnd, Parent = face }, "Body", Util.TextSize("Group"), "Text", title or "PayomboyZ Hub")
     Draw.Text({ Text = text, TextWrapped = true, TextYAlignment = Enum.TextYAlignment.Top, Position = UDim2.fromOffset(58, 29), Size = UDim2.new(1, -68, 0, textHeight), Parent = face }, "Desc", Util.TextSize("Desc") + 1, "SubText")
@@ -13767,13 +13876,53 @@ function Intro.Track(scene)
 end
 
 function Intro.HitBlock(scene, block)
-    Anim.Bump(block, 14)
-    Anim.CoinPop(scene, UDim2.new(0.5, 0, 0, 22), 30)
-    task.delay(0.1, function()
-        local used = Sprite.New(scene, "used", 48)
-        used.AnchorPoint, used.Position, used.ZIndex = block.AnchorPoint, UDim2.new(0.5, 0, 0, 22), block.ZIndex
-        block:Destroy()
-    end)
+    local th = State.ThemeName or "Overworld"
+    if th == "Stardew Valley" then
+        -- Stardew: Golden Stardrop pop with warm sparkle shimmer
+        Anim.Bump(block, 16)
+        local starParticle = Sprite.New(scene, "sdv_stardrop", 32)
+        starParticle.AnchorPoint = Vector2.new(0.5, 0.5)
+        starParticle.Position = UDim2.new(0.5, 0, 0, 36)
+        starParticle.ZIndex = 8
+        Anim.Tween(starParticle, { Position = UDim2.new(0.5, 0, 0, 8), Size = UDim2.fromOffset(40, 40) }, 0.35, "Out")
+        task.delay(0.4, function()
+            Anim.Tween(starParticle, { Size = UDim2.fromOffset(0, 0) }, 0.2, "In")
+            task.delay(0.2, function() starParticle:Destroy() end)
+        end)
+    elseif th == "Pokemon Cafe" then
+        -- Pokemon Cafe: Master Pokeball snap opening flash
+        Anim.Bump(block, 16)
+        local ballGleam = Sprite.New(scene, "poke_ball", 36)
+        ballGleam.AnchorPoint = Vector2.new(0.5, 0.5)
+        ballGleam.Position = UDim2.new(0.5, 0, 0, 32)
+        ballGleam.ZIndex = 8
+        Anim.Tween(ballGleam, { Rotation = 360, Size = UDim2.fromOffset(48, 48) }, 0.4, "Out")
+        task.delay(0.45, function()
+            Anim.Tween(ballGleam, { Size = UDim2.fromOffset(0, 0) }, 0.2, "In")
+            task.delay(0.2, function() ballGleam:Destroy() end)
+        end)
+    elseif th == "Kirby" then
+        -- Kirby: Warpstar sparkle burst
+        Anim.Bump(block, 16)
+        local warpStar = Sprite.New(scene, "kirby_star", 36)
+        warpStar.AnchorPoint = Vector2.new(0.5, 0.5)
+        warpStar.Position = UDim2.new(0.5, 0, 0, 32)
+        warpStar.ZIndex = 8
+        Anim.Tween(warpStar, { Rotation = 180, Size = UDim2.fromOffset(44, 44) }, 0.35, "Back")
+        task.delay(0.4, function()
+            Anim.Tween(warpStar, { Size = UDim2.fromOffset(0, 0) }, 0.2, "In")
+            task.delay(0.2, function() warpStar:Destroy() end)
+        end)
+    else
+        -- Classic Mario Overworld ? Block Hit
+        Anim.Bump(block, 14)
+        Anim.CoinPop(scene, UDim2.new(0.5, 0, 0, 22), 30)
+        task.delay(0.1, function()
+            local used = Sprite.New(scene, "used", 48)
+            used.AnchorPoint, used.Position, used.ZIndex = block.AnchorPoint, UDim2.new(0.5, 0, 0, 22), block.ZIndex
+            block:Destroy()
+        end)
+    end
 end
 
 function Intro.DropLetters(letters, pill)
