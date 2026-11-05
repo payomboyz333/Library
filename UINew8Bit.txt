@@ -210,6 +210,14 @@ local Themes = {
         Cloud = "FFFFFF", CloudAlpha = 0.2, Accent = "3A8AC8", AccentDark = "2A6698", Grass = "FFFFFF", GrassDark = "CFE3F2", Brick = "7FA8CC", BrickDark = "4F7699", Decor = { "IceLand" },
         Particle = { "❄", true, "FFFFFF" },
     }),
+    ["Snow"] = Palette({
+        Backdrop = "D8E8F4", BackdropAlt = "EDF4FA", Topbar = "86B0D2", Sidebar = "6A96BA", SidebarAlt = "5A82A4",
+        SidebarText = "F4FAFF", SidebarMuted = "CFE3F2", TabActive = "F6FBFF", TabActiveText = "3A78A8",
+        Panel = "F8FCFF", PanelHeader = "E6F0F8", Element = "FFFFFF", Hover = "DCEAF5",
+        Outline = "3E4F63", Shadow = "A6BACE", Text = "2E3D4D", SubText = "62788E", Muted = "95A8BA", Track = "D4E1EC",
+        Cloud = "FFFFFF", CloudAlpha = 0.2, Accent = "3A8AC8", AccentDark = "2A6698", Grass = "FFFFFF", GrassDark = "CFE3F2", Brick = "7FA8CC", BrickDark = "4F7699", Decor = { "IceLand" },
+        Particle = { "❄", true, "FFFFFF" },
+    }),
     Jungle = Palette({
         Backdrop = "1F2E23", BackdropAlt = "293C2D", Topbar = "17231A", Sidebar = "2F4A33", SidebarAlt = "253B29",
         SidebarText = "EEF7EA", SidebarMuted = "A3C29C", TabActive = "F0C84A", TabActiveText = "1F2A1F",
@@ -1630,6 +1638,7 @@ local State = {
     UnloadHooks = {},
     Fps = 60,
     StartTime = os.clock(),
+    Monitors = {},
 }
 
 local Util = {}
@@ -1686,6 +1695,7 @@ local Button = {}
 Button.__index = Button
 local KeyPicker = setmetatable({}, { __index = Widget })
 KeyPicker.__index = KeyPicker
+local Keybind = KeyPicker
 local ColorPicker = setmetatable({}, { __index = Widget })
 ColorPicker.__index = ColorPicker
 local Label = {}
@@ -3354,7 +3364,7 @@ Sprite.Art = {
         "ppwwccwwccpp",
         "ppwccccwccpp",
         "ppppccccpppp",
-        " pppppppppp ",
+        ".pppppppppp.",
         "....nnnn....",
         "...nnnnnn...",
         "...nnnnnn...",
@@ -8439,6 +8449,15 @@ function Progress:SetText(text)
     self.Row:SetTitle(text)
 end
 
+function Progress:SetMax(max)
+    self.Max = math.max(1e-6, tonumber(max) or 1)
+    self:SetValue(self.Value)
+end
+
+function Progress:SetProgress(fraction)
+    self:SetValue((tonumber(fraction) or 0) * self.Max)
+end
+
 Progress.SetVisible = Widget.SetVisible
 
 --@param info { Height = px (nil = auto-fit content), Border = true }
@@ -8880,6 +8899,16 @@ end
 
 function TableWidget:SetRows(nextRows)
     self.Rows = nextRows or {}
+    self:Rebuild()
+end
+
+function TableWidget:AddRow(row)
+    table.insert(self.Rows, row)
+    self:Rebuild()
+end
+
+function TableWidget:Clear()
+    self.Rows = {}
     self:Rebuild()
 end
 
@@ -9487,6 +9516,7 @@ function LiveGraph:Clear()
         self.BarsHolder:ClearAllChildren()
     end
 end
+LiveGraph.AddPoint = LiveGraph.Push
 
 -- ═══════════════════════════════════════════════════════════════════════════
 --  4. AddInventoryGrid: Stardew Valley / RPG Slot Matrix
@@ -9636,6 +9666,12 @@ end
 
 function InventoryGrid:ClearSlot(index)
     self:SetSlot(index, nil)
+end
+
+function InventoryGrid:Clear()
+    for i = 1, #self.Slots do
+        self:SetSlot(i, nil)
+    end
 end
 
 function InventoryGrid:GetSlot(index)
@@ -10012,6 +10048,8 @@ end
 function KeyPicker:Deserialize(saved)
     self:SetValue(saved)
 end
+KeyPicker.SetKeybind = KeyPicker.SetValue
+KeyPicker.Set = KeyPicker.SetValue
 
 -- Reset active state on mode change and sync linked toggle
 function KeyPicker:SetMode(mode)
@@ -10139,10 +10177,12 @@ function ColorPicker:Drag(target, handler)
         if not Util.IsPointer(input) then
             return
         end
-        handler(UserInputService:GetMouseLocation())
+        local startPos = input.Position and Vector2.new(input.Position.X, input.Position.Y) or UserInputService:GetMouseLocation()
+        handler(startPos)
         State.Drag = {
             Move = function(move)
-                handler(UserInputService:GetMouseLocation())
+                local movePos = move and move.Position and Vector2.new(move.Position.X, move.Position.Y) or UserInputService:GetMouseLocation()
+                handler(movePos)
             end,
         }
     end)
@@ -10487,6 +10527,7 @@ function Window.New(options)
         size = Vector2.new(size.X.Offset, size.Y.Offset)
     end
     local self = setmetatable({
+        Options = options,
         Title = options.Title or "PayomboyZ Hub",
         SubTitle = options.SubTitle or "",
         Desired = size,
@@ -10675,13 +10716,34 @@ function Window:BuildTopbar()
     end)
     self.ExpandBar = Draw.Box("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.5), Size = UDim2.new(0, 3, 0, 0), Parent = minimizeFace }, "Ink", nil, 2)
     self:BuildTopButton(right, "Close", "Accent", "AccentDark", "White", function()
-        if self.Options and (self.Options.CloseAction == "Unload" or self.Options.CloseAction == "Destroy") then
-            Library:Unload()
-        else
+        if self.Options and self.Options.CloseAction == "Hide" then
             self:SetVisible(false)
             if not State.Touch then
                 Library:Notify(self.Title, Lang.Format("Hidden", Keybinds.Short(State.MenuKey)), 3, "Info")
             end
+        elseif self.Options and type(self.Options.OnClose) == "function" then
+            self.Options.OnClose()
+        elseif self.Options and (self.Options.CloseAction == "Unload" or self.Options.CloseAction == "Destroy") then
+            Library:Unload()
+        else
+            Dialog.Show({
+                Title = Lang.Strings.Unload,
+                Content = {
+                    EN = "Are you sure you want to unload PayomboyZ HUB?\nAll running automations and features will stop.",
+                    TH = "คุณต้องการปิดสคริปต์ PayomboyZ HUB หรือไม่?\nระบบฟาร์มและฟังก์ชันที่เปิดอยู่ทั้งหมดจะหยุดทำงานทันที"
+                },
+                Buttons = {
+                    { Text = { EN = "Hide Only", TH = "ซ่อนเมนู" }, Style = "Default", Callback = function()
+                        self:SetVisible(false)
+                        if not State.Touch then
+                            Library:Notify(self.Title, Lang.Format("Hidden", Keybinds.Short(State.MenuKey)), 3, "Info")
+                        end
+                    end },
+                    { Text = { EN = "Unload", TH = "ปิดสคริปต์" }, Style = "Danger", Callback = function()
+                        Library:Unload()
+                    end },
+                }
+            })
         end
     end)
     Gui.Draggable(topbar, function(begin, delta)
@@ -12807,6 +12869,565 @@ function Watermark.SetVisible(visible)
     end
 end
 
+
+-- ═══════════════════════════════════════════════════════════════════════════
+--  STANDALONE FLOATING MONITOR HUD OVERLAY
+--  Draggable, collapsible, theme-reactive HUD for stats, live bars & telemetry
+-- ═══════════════════════════════════════════════════════════════════════════
+
+local MonitorHUD = {}
+MonitorHUD.__index = MonitorHUD
+
+function MonitorHUD.New(options)
+    options = options or {}
+    local width = options.Width or 350
+    if State.Touch then
+        width = math.min(width, 310)
+    end
+    local initialPos = options.Position or UDim2.new(1, -math.min(width + 24, 380), 0, 48)
+
+    if not State.Gui then
+        Gui.Setup()
+    end
+
+    local self = setmetatable({
+        Options = options,
+        Visible = options.Visible ~= false,
+        Collapsed = false,
+        Items = {},
+        Connections = {},
+        Loops = {},
+    }, MonitorHUD)
+
+    -- Root Container
+    local shadow = 4
+    local root = Draw.New("Frame", {
+        Name = "MonitorHUD",
+        AnchorPoint = Vector2.new(0, 0),
+        Position = initialPos,
+        Size = UDim2.fromOffset(width, 0),
+        AutomaticSize = Enum.AutomaticSize.Y,
+        BackgroundTransparency = 1,
+        ZIndex = Config.Layer.Watermark,
+        Visible = self.Visible,
+        Parent = State.Gui,
+    })
+    self.Root = root
+
+    -- Outer Shadow
+    local shadowFrame = Draw.Box("Frame", {
+        Name = "MonitorShadow",
+        Position = UDim2.fromOffset(shadow, shadow),
+        Size = UDim2.new(1, 0, 1, 0),
+        Parent = root,
+    }, "Shadow", nil, 12)
+    self.ShadowFrame = shadowFrame
+
+    -- Body Card (Themed retro panel with responsive border)
+    local card = Draw.Box("Frame", {
+        Name = "MonitorCard",
+        Size = UDim2.fromScale(1, 1),
+        ClipsDescendants = true,
+        Parent = root,
+    }, "BackdropAlt", "Outline", 12, 2)
+    card.BackgroundTransparency = 0.05
+    self.Card = card
+
+    -- Topbar Header (Draggable)
+    local headerHeight = 36
+    local header = Draw.Box("Frame", {
+        Name = "MonitorHeader",
+        Size = UDim2.new(1, 0, 0, headerHeight),
+        Parent = card,
+    }, "PanelHeader", nil, 10)
+    self.Header = header
+
+    -- Header Left (Icon + Title)
+    local headerLeft = Draw.New("Frame", {
+        BackgroundTransparency = 1,
+        Position = UDim2.fromOffset(10, 0),
+        Size = UDim2.new(1, -116, 1, 0),
+        Parent = header,
+    })
+    Draw.List(headerLeft, 6, true, Enum.HorizontalAlignment.Left, Enum.VerticalAlignment.Center)
+
+    -- Icon slot
+    local iconName = options.Icon or "lightning"
+    local iconSlot = Draw.New("Frame", {
+        Name = "IconSlot",
+        BackgroundTransparency = 1,
+        Size = UDim2.fromOffset(18, 18),
+        LayoutOrder = 1,
+        Parent = headerLeft,
+    })
+    local function renderIcon()
+        iconSlot:ClearAllChildren()
+        local activeIcon = (options.Icon and options.Icon ~= "") and options.Icon or "lightning"
+        local ic = Icons.Create(iconSlot, activeIcon, 18, nil, "main")
+        if ic then
+            ic.AnchorPoint = Vector2.new(0.5, 0.5)
+            ic.Position = UDim2.fromScale(0.5, 0.5)
+        end
+    end
+    renderIcon()
+    Theme.OnRender(iconSlot, renderIcon)
+
+    -- Title
+    local titleText = options.Title or "MONITOR"
+    local titleLabel = Draw.Text({
+        Text = tostring(Lang.Resolve(titleText)):upper(),
+        AutomaticSize = Enum.AutomaticSize.X,
+        Size = UDim2.fromScale(0, 1),
+        LayoutOrder = 2,
+        Parent = headerLeft,
+    }, "Display", 14, "Accent")
+    self.TitleLabel = titleLabel
+
+    -- Header Right (LIVE Badge + Collapse Button)
+    local headerRight = Draw.New("Frame", {
+        BackgroundTransparency = 1,
+        AnchorPoint = Vector2.new(1, 0.5),
+        Position = UDim2.new(1, -8, 0.5, 0),
+        Size = UDim2.fromOffset(100, 24),
+        Parent = header,
+    })
+    Draw.List(headerRight, 6, true, Enum.HorizontalAlignment.Right, Enum.VerticalAlignment.Center)
+
+    -- LIVE / Status Badge
+    local statusText = options.Status or "LIVE"
+    local liveBadge = Draw.Box("Frame", {
+        Name = "LiveBadge",
+        Size = UDim2.fromOffset(58, 20),
+        LayoutOrder = 1,
+        Parent = headerRight,
+    }, nil, "Outline", 6, 1)
+    liveBadge.BackgroundColor3 = Color3.fromRGB(16, 34, 22)
+    Draw.List(liveBadge, 4, true, Enum.HorizontalAlignment.Center, Enum.VerticalAlignment.Center)
+
+    local liveDot = Draw.New("Frame", {
+        Name = "LiveDot",
+        Size = UDim2.fromOffset(6, 6),
+        BackgroundColor3 = Color3.fromRGB(46, 213, 115),
+        Parent = liveBadge,
+    })
+    Draw.Corner(liveDot, 3)
+
+    local liveLabel = Draw.Text({
+        Text = tostring(statusText),
+        Size = UDim2.fromOffset(34, 16),
+        TextXAlignment = Enum.TextXAlignment.Center,
+        Parent = liveBadge,
+    }, "Strong", 10, options.StatusColor or "Good")
+    self.StatusDot = liveDot
+    self.StatusLabel = liveLabel
+
+    -- Collapse / Minimize Button ("—")
+    local collapseBtn = Draw.Box("TextButton", {
+        Name = "CollapseBtn",
+        Size = UDim2.fromOffset(22, 20),
+        Text = "",
+        AutoButtonColor = false,
+        LayoutOrder = 2,
+        Parent = headerRight,
+    }, "Element", "Outline", 4, 1)
+    local collapseLabel = Draw.Text({
+        Text = "—",
+        Size = UDim2.fromScale(1, 1),
+        TextXAlignment = Enum.TextXAlignment.Center,
+        Parent = collapseBtn,
+    }, "Strong", 13, "Text")
+    self.CollapseLabel = collapseLabel
+
+    -- Content Body
+    local content = Draw.New("Frame", {
+        Name = "Content",
+        BackgroundTransparency = 1,
+        Position = UDim2.fromOffset(0, headerHeight),
+        Size = UDim2.new(1, 0, 0, 0),
+        AutomaticSize = Enum.AutomaticSize.Y,
+        Parent = card,
+    })
+    Draw.Padding(content, 10, 12, 10, 12)
+    Draw.List(content, 8, false, Enum.HorizontalAlignment.Left, Enum.VerticalAlignment.Top)
+    self.Content = content
+
+    -- Collapse Toggle
+    collapseBtn.Activated:Connect(function()
+        self:SetCollapsed(not self.Collapsed)
+    end)
+
+    -- Draggable Topbar
+    Gui.Draggable(header, function(begin, delta)
+        if not delta then return root.Position end
+        root.Position = begin + UDim2.fromOffset(delta.X, delta.Y)
+        return begin
+    end, { headerRight })
+
+    -- Banner (if provided)
+    if options.Banner then
+        self:SetBanner(options.Banner, options.BannerColor or "Coin")
+    end
+
+    table.insert(State.Monitors, self)
+    return self
+end
+
+function MonitorHUD:SetTitle(title, colorToken)
+    if self.TitleLabel then
+        self.TitleLabel.Text = tostring(Lang.Resolve(title) or title):upper()
+        if colorToken then
+            Theme.Bind(self.TitleLabel, { TextColor3 = colorToken })
+        end
+    end
+end
+
+function MonitorHUD:SetStatus(text, colorToken, dotColor)
+    if self.StatusLabel then
+        self.StatusLabel.Text = tostring(text)
+        if colorToken then
+            Theme.Bind(self.StatusLabel, { TextColor3 = colorToken })
+        end
+    end
+    if self.StatusDot and dotColor then
+        if typeof(dotColor) == "Color3" then
+            self.StatusDot.BackgroundColor3 = dotColor
+        elseif type(dotColor) == "string" and Theme.Colors[dotColor] then
+            self.StatusDot.BackgroundColor3 = Theme.Colors[dotColor]
+        end
+    end
+end
+
+function MonitorHUD:SetBanner(text, colorToken)
+    if not text or text == "" then
+        if self.BannerFrame then
+            self.BannerFrame.Visible = false
+        end
+        return
+    end
+    colorToken = colorToken or "Coin"
+    if not self.BannerFrame then
+        local banner = Draw.Box("Frame", {
+            Name = "MonitorBanner",
+            Size = UDim2.new(1, 0, 0, 26),
+            LayoutOrder = 0,
+            Parent = self.Content,
+        }, "Element", "Outline", 6, 1)
+        local lbl = Draw.Text({
+            Text = tostring(text),
+            Size = UDim2.fromScale(1, 1),
+            TextXAlignment = Enum.TextXAlignment.Center,
+            RichText = true,
+            Parent = banner,
+        }, "Body", Util.TextSize("Label") - 1, colorToken)
+        self.BannerFrame = banner
+        self.BannerLabel = lbl
+    else
+        self.BannerFrame.Visible = true
+        self.BannerLabel.Text = tostring(text)
+        Theme.Bind(self.BannerLabel, { TextColor3 = colorToken })
+    end
+end
+
+function MonitorHUD:AddProgressBar(id, spec)
+    if type(id) == "table" and spec == nil then
+        spec = id
+        id = spec.Id or spec.Name or tostring(math.random(100000, 999999))
+    end
+    spec = spec or {}
+
+    local holder = Draw.New("Frame", {
+        Name = "ProgressHolder_" .. tostring(id),
+        BackgroundTransparency = 1,
+        Size = UDim2.new(1, 0, 0, 0),
+        AutomaticSize = Enum.AutomaticSize.Y,
+        Parent = self.Content,
+    })
+    Draw.List(holder, 3, false, Enum.HorizontalAlignment.Left, Enum.VerticalAlignment.Top)
+
+    -- Title above bar
+    local titleLabel = nil
+    if spec.Title then
+        titleLabel = Draw.Text({
+            Text = tostring(spec.Title),
+            Size = UDim2.new(1, 0, 0, 18),
+            RichText = true,
+            Parent = holder,
+        }, "Body", Util.TextSize("Label") - 1, "Text")
+    end
+
+    -- Track Frame
+    local trackHeight = spec.Height or 20
+    local track = Draw.Box("Frame", {
+        Name = "Track",
+        Size = UDim2.new(1, 0, 0, trackHeight),
+        ClipsDescendants = true,
+        Parent = holder,
+    }, nil, "Outline", 6, 1)
+    track.BackgroundColor3 = Color3.fromRGB(22, 24, 30)
+
+    -- Color resolution for Fill Bar
+    local fillBarColor = Color3.fromRGB(255, 45, 85) -- default red
+    if spec.Color then
+        if typeof(spec.Color) == "Color3" then
+            fillBarColor = spec.Color
+        elseif type(spec.Color) == "string" and Theme.Colors[spec.Color] then
+            fillBarColor = Theme.Colors[spec.Color]
+        end
+    end
+
+    local initVal = tonumber(spec.Value) or 0
+    local initMax = math.max(1e-6, tonumber(spec.Max) or 100)
+    local initRatio = math.clamp(initVal / initMax, 0, 1)
+
+    local fill = Draw.New("Frame", {
+        Name = "Fill",
+        Size = UDim2.new(initRatio, 0, 1, 0),
+        BackgroundColor3 = fillBarColor,
+        Parent = track,
+    })
+    Draw.Corner(fill, 5)
+
+    -- Centered text inside bar
+    local centerText = spec.CenterText or spec.Text or ""
+    local centerLabel = Draw.Text({
+        Name = "CenterText",
+        Text = tostring(centerText),
+        Size = UDim2.fromScale(1, 1),
+        TextXAlignment = Enum.TextXAlignment.Center,
+        RichText = true,
+        Parent = track,
+    }, "Body", 11, "White")
+    Draw.Stroke(centerLabel, "Ink", 1)
+
+    -- Subtitle / meta row below bar
+    local subLabel = nil
+    if spec.Subtitle or spec.SubText then
+        subLabel = Draw.Text({
+            Text = tostring(spec.Subtitle or spec.SubText),
+            Size = UDim2.new(1, 0, 0, 16),
+            RichText = true,
+            Parent = holder,
+        }, "Desc", 11, "Muted")
+    end
+
+    local itemObj = {
+        Holder = holder,
+        Track = track,
+        Fill = fill,
+        CenterLabel = centerLabel,
+        TitleLabel = titleLabel,
+        SubLabel = subLabel,
+        CurrentValue = initVal,
+        CurrentMax = initMax,
+    }
+
+    function itemObj:Set(fraction, newCenterText, newSubtext)
+        local ratio = math.clamp(tonumber(fraction) or 0, 0, 1)
+        self.CurrentValue = ratio * self.CurrentMax
+        Anim.Tween(self.Fill, { Size = UDim2.new(ratio, 0, 1, 0) }, Config.Tween.Fast)
+        if newCenterText ~= nil and self.CenterLabel then
+            self.CenterLabel.Text = tostring(newCenterText)
+        end
+        if newSubtext ~= nil and self.SubLabel then
+            self.SubLabel.Text = tostring(newSubtext)
+            self.SubLabel.Visible = tostring(newSubtext) ~= ""
+        end
+    end
+
+    function itemObj:SetValue(cur, maxVal, newCenterText, newSubtext)
+        self.CurrentMax = math.max(1e-6, tonumber(maxVal) or self.CurrentMax)
+        self.CurrentValue = tonumber(cur) or 0
+        local ratio = math.clamp(self.CurrentValue / self.CurrentMax, 0, 1)
+        Anim.Tween(self.Fill, { Size = UDim2.new(ratio, 0, 1, 0) }, Config.Tween.Fast)
+        if newCenterText ~= nil and self.CenterLabel then
+            self.CenterLabel.Text = tostring(newCenterText)
+        end
+        if newSubtext ~= nil and self.SubLabel then
+            self.SubLabel.Text = tostring(newSubtext)
+            self.SubLabel.Visible = tostring(newSubtext) ~= ""
+        end
+    end
+
+    function itemObj:SetTitle(title)
+        if self.TitleLabel then
+            self.TitleLabel.Text = tostring(title)
+            self.TitleLabel.Visible = tostring(title) ~= ""
+        end
+    end
+
+    function itemObj:SetSubtitle(subtext)
+        if self.SubLabel then
+            self.SubLabel.Text = tostring(subtext)
+            self.SubLabel.Visible = tostring(subtext) ~= ""
+        end
+    end
+
+    function itemObj:SetColor(color)
+        if typeof(color) == "Color3" then
+            self.Fill.BackgroundColor3 = color
+        elseif type(color) == "string" and Theme.Colors[color] then
+            self.Fill.BackgroundColor3 = Theme.Colors[color]
+        end
+    end
+
+    function itemObj:SetVisible(vis)
+        self.Holder.Visible = vis == true
+    end
+
+    self.Items[id] = itemObj
+    return itemObj
+end
+
+function MonitorHUD:AddRow(id, text)
+    if type(id) == "string" and text == nil then
+        text = id
+        id = tostring(math.random(100000, 999999))
+    end
+    text = text or ""
+
+    local label = Draw.Text({
+        Name = "Row_" .. tostring(id),
+        Text = tostring(text),
+        Size = UDim2.new(1, 0, 0, 0),
+        AutomaticSize = Enum.AutomaticSize.Y,
+        RichText = true,
+        Parent = self.Content,
+    }, "Body", Util.TextSize("Label") - 1, "Text")
+
+    local rowObj = {
+        Label = label,
+    }
+
+    function rowObj:Set(newText)
+        self.Label.Text = tostring(newText)
+    end
+    rowObj.SetText = rowObj.Set
+
+    function rowObj:SetColor(tokenOrColor)
+        if typeof(tokenOrColor) == "Color3" then
+            self.Label.TextColor3 = tokenOrColor
+        elseif type(tokenOrColor) == "string" then
+            Theme.Bind(self.Label, { TextColor3 = tokenOrColor })
+        end
+    end
+
+    function rowObj:SetVisible(vis)
+        self.Label.Visible = vis == true
+    end
+
+    self.Items[id] = rowObj
+    return rowObj
+end
+MonitorHUD.AddText = MonitorHUD.AddRow
+
+function MonitorHUD:AddTelemetry(spec)
+    spec = spec or {}
+    local id = spec.Id or "Telemetry"
+    local row = self:AddRow(id, "⚡ FPS: -- | 📶 Ping: -- ms | ⏱️ Uptime: 00:00:00")
+
+    local loopConn = Util.Every(0.5, function()
+        if not self.Root or not self.Root.Parent or not self.Visible then return end
+        local ok, ping = pcall(function()
+            return Stats.Network.ServerStatsItem["Data Ping"]:GetValue()
+        end)
+        local elapsed = math.floor(os.clock() - State.StartTime)
+        local h = math.floor(elapsed / 3600)
+        local m = math.floor((elapsed % 3600) / 60)
+        local s = elapsed % 60
+        local pingStr = ok and string.format("%d ms", math.floor(ping + 0.5)) or "-- ms"
+        row:Set(string.format("⚡ FPS: %d | 📶 Ping: %s | ⏱️ Uptime: %02d:%02d:%02d", math.floor(State.Fps + 0.5), pingStr, h, m, s))
+    end)
+    table.insert(self.Loops, loopConn)
+    return row
+end
+
+function MonitorHUD:AddLog(id, spec)
+    spec = spec or {}
+    local prefix = spec.Prefix or "📜 "
+    local row = self:AddRow(id or "Log", prefix .. (spec.Default or "Ready"))
+    
+    local logObj = {
+        Row = row,
+        Prefix = prefix,
+    }
+    function logObj:Push(msg)
+        local timeStr = os.date("%X")
+        self.Row:Set(string.format("%s[%s] %s", self.Prefix, timeStr, tostring(msg)))
+    end
+    function logObj:Set(msg)
+        self.Row:Set(tostring(msg))
+    end
+    return logObj
+end
+
+function MonitorHUD:AddButton(text, callback)
+    local btn = Draw.Box("TextButton", {
+        Name = "MonitorBtn",
+        Size = UDim2.new(1, 0, 0, 26),
+        Text = "",
+        AutoButtonColor = false,
+        Parent = self.Content,
+    }, "Element", "Outline", 6, 1)
+    Draw.Text({
+        Text = tostring(text),
+        Size = UDim2.fromScale(1, 1),
+        TextXAlignment = Enum.TextXAlignment.Center,
+        RichText = true,
+        Parent = btn,
+    }, "Body", Util.TextSize("Label") - 1, "Text")
+
+    if callback then
+        btn.Activated:Connect(function()
+            Util.Try(callback)
+        end)
+    end
+    return btn
+end
+
+function MonitorHUD:SetCollapsed(collapsed)
+    self.Collapsed = collapsed == true
+    self.Content.Visible = not self.Collapsed
+    if self.CollapseLabel then
+        self.CollapseLabel.Text = self.Collapsed and "+" or "—"
+    end
+end
+
+function MonitorHUD:SetVisible(vis)
+    self.Visible = vis == true
+    self.Root.Visible = self.Visible
+end
+
+function MonitorHUD:Toggle()
+    self:SetVisible(not self.Visible)
+end
+
+function MonitorHUD:Destroy()
+    for _, loop in ipairs(self.Loops) do
+        if type(loop) == "function" then
+            pcall(loop)
+        elseif typeof(loop) == "RBXScriptConnection" then
+            pcall(loop.Disconnect, loop)
+        end
+    end
+    table.clear(self.Loops)
+    for _, conn in ipairs(self.Connections) do
+        pcall(conn.Disconnect, conn)
+    end
+    table.clear(self.Connections)
+    Theme.UnbindTree(self.Root)
+    if self.Root then
+        self.Root:Destroy()
+        self.Root = nil
+    end
+    for i, mon in ipairs(State.Monitors) do
+        if mon == self then
+            table.remove(State.Monitors, i)
+            break
+        end
+    end
+end
+
+
 -- Ambient particle pool: reuses labels with a single tween per cycle; pauses when hidden
 function Particles.Build(parent)
     local layer = Draw.New("Frame", { Name = "Particles", BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1), ClipsDescendants = true, ZIndex = 1, Parent = parent })
@@ -14631,6 +15252,14 @@ function Library:CreateWindow(options)
     return window
 end
 
+function Library:SetScale(scale)
+    if State.Window and State.Window.SetScale then
+        State.Window:SetScale(scale)
+    else
+        State.UserScale = math.clamp(tonumber(scale) or 1, Config.ScaleRange.Min, Config.ScaleRange.Max)
+    end
+end
+
 function Library:SetLanguage(code)
     if code ~= "EN" and code ~= "TH" then
         return
@@ -14659,6 +15288,17 @@ function Library:SetTheme(name)
         option:Render()
     end
 end
+
+function Library:CreateMonitor(options)
+    return MonitorHUD.New(options)
+end
+Library.Monitor = Library.CreateMonitor
+Library.CreateHUD = Library.CreateMonitor
+
+function Window:CreateMonitor(options)
+    return Library:CreateMonitor(options)
+end
+Window.Monitor = Window.CreateMonitor
 
 function Library:SetAssets(map)
     Assets.Configure(map)
@@ -14717,6 +15357,14 @@ function Library:Unload()
             pcall(toggle.SetValue, toggle, false)
         end
     end
+    if State.Monitors then
+        for _, mon in ipairs(State.Monitors) do
+            if mon and type(mon.Destroy) == "function" then
+                pcall(mon.Destroy, mon)
+            end
+        end
+        table.clear(State.Monitors)
+    end
     for _, callback in ipairs(State.UnloadHooks) do
         Util.Try(callback)
     end
@@ -14768,6 +15416,7 @@ function Library:Unload()
     end
 end
 
+Library.MonitorHUD = MonitorHUD
 Library.Themes = Themes.Order
 Library.Ref = Reactive.Ref
 Library.Computed = Reactive.Computed
