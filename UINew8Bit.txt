@@ -13696,7 +13696,7 @@ end
 
 -- Stage loader screen: mini level progress bar synced to font loading and window build
 Intro.Width, Intro.Height, Intro.Ground = 600, 320, 44
-Intro.MinStep = 0.22
+Intro.MinStep = 0.32 -- Paced for smooth retro reading (+0.4s total)
 Intro.StepTimeout = 15
 
 --@param settings { Title, SubTitle, Steps = { { Label, Run } }, OnDone }
@@ -13735,17 +13735,19 @@ function Intro.Show(settings, screen)
         return
     end
     Intro.Finale(scene, track)
-    task.wait(0.3)
-    Anim.Tween(scale, { Scale = State.UserScale * 1.06 }, 0.2, "In")
-    Anim.Tween(card, { GroupTransparency = 1 }, 0.2)
-    Anim.Tween(screen, { BackgroundTransparency = 1 }, 0.2)
-    task.wait(0.2)
+    task.wait(0.45)
+    Anim.Tween(scale, { Scale = 0 }, 0.25, "In")
+    if card:IsA("CanvasGroup") then
+        Anim.Tween(card, { GroupTransparency = 1 }, 0.2)
+    end
+    Anim.Tween(screen, { BackgroundTransparency = 1 }, 0.25)
+    task.wait(0.25)
 end
 
 function Intro.BuildCard(screen)
     local width, height = Intro.Width, Intro.Height
     local pad, shadow = 4, 6
-    local card = Draw.New("CanvasGroup", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.5), Size = UDim2.fromOffset(width + pad + shadow, height + pad + shadow), BackgroundTransparency = 1, Parent = screen })
+    local card = Draw.New("Frame", { Name = "IntroCard", AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.5), Size = UDim2.fromOffset(width + pad + shadow, height + pad + shadow), BackgroundTransparency = 1, ClipsDescendants = true, Parent = screen })
     local scale = Draw.New("UIScale", { Scale = State.UserScale * 0.6, Parent = card })
     Draw.Box("Frame", { Position = UDim2.fromOffset(pad + shadow, pad + shadow), Size = UDim2.fromOffset(width, height), Parent = card }, "Shadow", nil, 18)
     local scene = Draw.Box("Frame", { Position = UDim2.fromOffset(pad, pad), Size = UDim2.fromOffset(width, height), BackgroundColor3 = Color3.new(1, 1, 1), BackgroundTransparency = 0, ClipsDescendants = true, Parent = card }, nil, nil, 18)
@@ -14844,18 +14846,7 @@ function Compat.Probes.Connections()
 end
 
 function Compat.Probes.Gc()
-    if not Compat.Api.GetGc then
-        return false
-    end
-    local function Marker()
-        return "gc"
-    end
-    for _, value in ipairs(Compat.Api.GetGc(false)) do
-        if value == Marker then
-            return true
-        end
-    end
-    return false
+    return type(Compat.Api.GetGc) == "function"
 end
 
 function Compat.Probes.Upvalues()
@@ -14909,15 +14900,11 @@ end
 
 function Compat.Probes.Identity()
     local api = Compat.Api
-    if not (api.SetIdentity and api.GetIdentity) then
+    if not api.GetIdentity then
         return false
     end
-    local before = api.GetIdentity()
-    local target = before == 2 and 8 or 2
-    api.SetIdentity(target)
-    local after = api.GetIdentity()
-    api.SetIdentity(before)
-    return after == target
+    local ok, id = pcall(api.GetIdentity)
+    return ok and type(id) == "number"
 end
 
 function Compat.Probes.FileSystem()
@@ -15383,7 +15370,7 @@ function Library:CreateWindow(options)
     Window.DetectTouch(options.Layout)
     Gui.Setup()
     Library:OnUnload(Compat.RestoreAll)
-    task.delay(3, Compat.Warm)
+    -- task.delay(3, Compat.Warm) -- Disarmed: proactive background probing triggers game anticheats & memory spikes
     if State.Language == "TH" then
         Fonts.LoadThaiAsync()
     end
