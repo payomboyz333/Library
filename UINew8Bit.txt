@@ -85,6 +85,13 @@ local Config = {
         Sine = { Enum.EasingStyle.Sine, Enum.EasingDirection.InOut },
         Linear = { Enum.EasingStyle.Linear, Enum.EasingDirection.InOut },
         Bounce = { Enum.EasingStyle.Bounce, Enum.EasingDirection.Out },
+        Quad = { Enum.EasingStyle.Quad, Enum.EasingDirection.Out },
+        Cubic = { Enum.EasingStyle.Cubic, Enum.EasingDirection.Out },
+        Quart = { Enum.EasingStyle.Quart, Enum.EasingDirection.Out },
+        Quint = { Enum.EasingStyle.Quint, Enum.EasingDirection.Out },
+        Exponential = { Enum.EasingStyle.Exponential, Enum.EasingDirection.Out },
+        Circular = { Enum.EasingStyle.Circular, Enum.EasingDirection.Out },
+        Elastic = { Enum.EasingStyle.Elastic, Enum.EasingDirection.Out },
     },
     Layer = { Window = 10, Watermark = 30, Float = 40, Overlay = 50, Modal = 52, Tooltip = 55, Notify = 60, Intro = 70 },
     LayoutPasses = 12,
@@ -2204,7 +2211,7 @@ Anim.NoopSignal = {
 Anim.NoopTween = { Completed = Anim.NoopSignal, Cancel = function() end, Pause = function() end, Play = function() end }
 
 function Anim.Info(duration, ease, repeatCount, reverses, delay)
-    local style = Config.Ease[ease or "Out"]
+    local style = Config.Ease[ease or "Out"] or Config.Ease["Out"] or { Enum.EasingStyle.Quad, Enum.EasingDirection.Out }
     return TweenInfo.new(duration or Config.Tween.Normal, style[1], style[2], repeatCount or 0, reverses or false, delay or 0)
 end
 
